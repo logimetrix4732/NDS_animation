@@ -3,7 +3,7 @@ import React from "react";
 const AboutSection = () => {
   return (
     <div
-      className="about-area position-relative overflow-hidden"
+      className="about-area position-relative overflow-hidden space-bottom"
       id="about-sec"
     >
       <div className="container">
@@ -73,24 +73,41 @@ const AboutSection = () => {
         </div>
         <div
           className="shape-mockup shape1 d-none d-xl-block"
-          data-top="12%"
-          data-right="-16%"
+          style={{
+            position: "absolute",
+            bottom: "80%",
+            right: "10%",
+            zIndex: 1,
+          }}
         >
           <img src="assets/img/shape/ab-1-shape-1.png" alt="shape" />
         </div>
         <div
           className="shape-mockup shape3 d-none d-xl-block"
-          data-bottom="2%"
-          data-left="-20%"
+          style={{
+            position: "absolute",
+            bottom: "18%",
+            left: "0%",
+            zIndex: 1,
+          }}
         >
           <img src="assets/img/shape/ab-1-shape-2.png" alt="shape" />
         </div>
         <div
-          className="shape-mockup about-shape movingX d-none d-xxl-block"
-          data-bottom="20%"
-          data-right="-11%"
+          className="shape-mockup about-shape movingX"
+          style={{
+            position: "absolute",
+            bottom: "30%",
+            right: "10%",
+            zIndex: 1,
+            display: window.innerWidth < 768 ? "none" : "block",
+          }}
         >
-          <img src="assets/img/normal/about-right-img.jpg" alt="shape" />
+          <img
+            src="assets/img/normal/about-right-img.jpg"
+            alt="shape"
+            style={{ maxWidth: "100%", height: "auto" }}
+          />
         </div>
       </div>
     </div>

@@ -2,13 +2,13 @@ import React from "react";
 
 const AboutSection3 = () => {
   return (
-    <section className="choose-6-area space-bottom space-bottom">
-      <div className="container">
-        <div className="row gy-4 align-items-start">
-          <div className="col-xl-5 order-1 order-xl-0">
-            <div className="title-area mt-40 mb-20 pe-xl-5">
-              <span className="sub-title text-anime-style-2">Why Choose Us</span>
-              <h2 className="sec-title text-anime-style-3">
+    <section class="choose-6-area space-bottom">
+      <div class="container">
+        <div class="row gy-4 align-items-start">
+          <div class="col-xl-5 order-1 order-xl-0">
+            <div class="title-area mt-40 mb-20 pe-xl-5">
+              <span class="sub-title text-anime-style-2">Why Choose Us</span>
+              <h2 class="sec-title text-anime-style-3">
                 The Art of Web & Mobile Development
               </h2>
             </div>
