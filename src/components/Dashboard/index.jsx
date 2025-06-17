@@ -5,32 +5,24 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+
+import hero_bg_1_1 from "../../assets/img/hero/hero_bg_1_1.jpg";
+import hero_bg_1_2 from "../../assets/img/hero/hero_bg_1_2.jpg";
+import hero_bg_1_3 from "../../assets/img/hero/hero_bg_1_3.jpg";
 import hero1shape from "../../assets/img/shape/hero-1-shape.png";
 import dashboard from "../../Images/dashboard.jpg";
-import dashboard1 from "../../Images/dashboard1.jpg";
-import dashboard2 from "../../Images/dashboard2.jpg";
-import dashboard3 from "../../Images/dashboard3.jpg";
-import dashboard4 from "../../Images/dashboard4.jpeg";
 const slideData = [
   {
-    image: dashboard1,
+    image: hero_bg_1_1,
+    title: "Precision IT Solutions, Tailored for You",
+  },
+  {
+    image: hero_bg_1_2,
     title: "Smart IT Consulting for Modern Businesses",
   },
   {
-    image: dashboard2,
+    image: hero_bg_1_3,
     title: "Your Trusted Partner in Tech & Strategy",
-  },
-  {
-    image: dashboard3,
-    title: "Your Trusted Partner in Tech & Strategy",
-  },
-  {
-    image: dashboard4,
-    title: "Your Trusted Partner in Tech & Strategy",
-  },
-  {
-    image: dashboard,
-    title: "Precision IT Solutions, Tailored for You",
   },
 ];
 
@@ -60,7 +52,6 @@ const Dashboard = () => {
                   backgroundPosition: "center",
                 }}
               />
-              <div className="hero-overlay" />
               <div
                 className="hero-1-shape d-none d-lg-block"
                 data-ani="slideinleft"
