@@ -7,6 +7,8 @@ import AboutSection1 from "../components/AboutUs/AboutSection1";
 import AboutSection2 from "../components/AboutUs/AboutSection2";
 import AboutSection3 from "../components/AboutUs/AboutSection3";
 import CountNumber from "../components/CountNumber";
+import OurFeatures1 from "../components/Sliders/OurFeatures1";
+import SocialContainer from "../components/SocialContainer";
 const Home = () => {
   return (
     <React.Fragment>
@@ -71,170 +73,124 @@ const Home = () => {
         <div className="preloader-inner">
           <img src="assets/img/logo-icon3.svg" alt="img" />
           <span className="loader">
-            Atek <span className="loading-text">Atek</span>
+            NDDB <span className="loading-text">NDDB</span>
           </span>
         </div>
       </div>
-      <div className="sidemenu-wrapper sidemenu-info">
-        <div className="sidemenu-content">
-          <button className="closeButton sideMenuCls">
-            <i className="far fa-times" />
-          </button>
-          <div className="widget">
-            <div className="th-widget-about">
-              <div className="about-logo">
-                <a href="index.html">
-                  <img src="assets/img/logo2.svg" alt="Atek" />
-                </a>
-              </div>
-              <p className="about-text">
-                Quick access to essential system features, including the
-                dashboard for an overview of operations, network settings for
-                managing connectivity, system logs for tracking activities.
-              </p>
-              <div className="th-social">
-                <a href="https://www.facebook.com/">
-                  <i className="fab fa-facebook-f" />
-                </a>
-                <a href="https://www.twitter.com/">
-                  <i className="fab fa-twitter" />
-                </a>
-                <a href="https://www.linkedin.com/">
-                  <i className="fab fa-linkedin-in" />
-                </a>
-                <a href="https://www.whatsapp.com/">
-                  <i className="fab fa-whatsapp" />
-                </a>
-                <a href="https://instagram.com/">
-                  <i className="fab fa-instagram" />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="widget">
-            <h3 className="widget_title">Recent Posts</h3>
-            <div className="recent-post-wrap">
-              <div className="recent-post d-flex align-items-center">
-                <div className="media-img">
-                  <a href="blog-details.html">
-                    <img
-                      src="assets/img/blog/recent-post-1-1.jpg"
-                      alt="Blog Image"
-                    />
-                  </a>
-                </div>
-                <div className="media-body">
-                  <div className="recent-post-meta">
-                    <a href="blog.html">
-                      <i className="far fa-calendar" />
-                      24 Jun , 2025
-                    </a>
-                  </div>
-                  <h4 className="post-title">
-                    <a className="text-inherit" href="blog-details.html">
-                      Where Vision Meets Concrete Reality
-                    </a>
-                  </h4>
-                </div>
-              </div>
-              <div className="recent-post d-flex align-items-center">
-                <div className="media-img">
-                  <a href="blog-details.html">
-                    <img
-                      src="assets/img/blog/recent-post-1-2.jpg"
-                      alt="Blog Image"
-                    />
-                  </a>
-                </div>
-                <div className="media-body">
-                  <div className="recent-post-meta">
-                    <a href="blog.html">
-                      <i className="far fa-calendar" />
-                      22 Jun , 2025
-                    </a>
-                  </div>
-                  <h4 className="post-title">
-                    <a className="text-inherit" href="blog-details.html">
-                      Raising the Bar in Construction.
-                    </a>
-                  </h4>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="widget">
-            <h3 className="widget_title">Get In Touch</h3>
-            <div className="th-widget-contact">
-              <div className="info-box_text">
-                <div className="icon">
-                  <img src="assets/img/icon/phone.svg" alt="img" />
-                </div>
-                <div className="details">
-                  <p>
-                    <a href="tel:+01234567890" className="info-box_link">
-                      +01 234 567 890
-                    </a>
-                  </p>
-                  <p>
-                    <a href="tel:+09876543210" className="info-box_link">
-                      +09 876 543 210
-                    </a>
-                  </p>
-                </div>
-              </div>
-              <div className="info-box_text">
-                <div className="icon">
-                  <img src="assets/img/icon/envelope.svg" alt="img" />
-                </div>
-                <div className="details">
-                  <p>
-                    <a
-                      href="mailto:mailinfo00@atek.com"
-                      className="info-box_link"
-                    >
-                      mailinfo00@atek.com
-                    </a>
-                  </p>
-                  <p>
-                    <a
-                      href="mailto:support24@atek.com"
-                      className="info-box_link"
-                    >
-                      support24@atek.com
-                    </a>
-                  </p>
-                </div>
-              </div>
-              <div className="info-box_text">
-                <div className="icon">
-                  <img src="assets/img/icon/location-dot.svg" alt="img" />
-                </div>
-                <div className="details">
-                  <p>789 Inner Lane, Holy park, California, USA</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="popup-search-box">
-        <button className="searchClose">
-          <i className="fal fa-times" />
-        </button>
-        <form action="#">
-          <input type="text" placeholder="What are you looking for?" />
-          <button type="submit">
-            <i className="fal fa-search" />
-          </button>
-        </form>
-      </div>
-
       <Header />
       <Dashboard />
       <AboutSection />
       <AboutSection2 />
       <AboutSection3 />
       <CountNumber />
+      <OurFeatures1 />
+      <SocialContainer />
+      <section class="bg-smoke overflow-hidden space">
+        <div class="container">
+          <div class="row justify-content-lg-between justify-content-center align-items-end">
+            <div class="col-lg">
+              <div class="title-area text-center text-lg-start">
+                <span class="sub-title text-anime-style-2">
+                  Blog and Article
+                </span>
+                <h2 class="sec-title text-anime-style-3">
+                  News & Articles From Atek
+                </h2>
+              </div>
+            </div>
+            <div class="col-lg-auto d-none d-lg-block">
+              <div class="sec-btn wow fadeInUp" data-wow-delay=".2s">
+                <a href="blog.html" class="th-btn style4 th-icon">
+                  See More Articles <i class="fa-light fa-arrow-right-long"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="row gx-24 gy-30">
+            <div class="col-xl-4">
+              <div class="blog-grid th-ani">
+                <div class="blog-img global-img">
+                  <img src="assets/img/blog/blog_3_1.jpg" alt="blog image" />
+                </div>
+                <div class="blog-grid_content">
+                  <div class="blog-meta">
+                    <a class="author" href="blog.html">
+                      July 05, 2025
+                    </a>
+                    <a href="blog.html">6 min read</a>
+                  </div>
+                  <h3 class="box-title">
+                    <a href="blog-details.html">
+                      What is Data Analytics? Everything You Need to Know
+                    </a>
+                  </h3>
+                  <a href="blog-details.html" class="th-btn style4 th-icon">
+                    Read More <i class="fa-light fa-arrow-right-long"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-8">
+              <div class="blog-grid style2 th-ani">
+                <div class="blog-img global-img">
+                  <img src="assets/img/blog/blog_3_2.jpg" alt="blog image" />
+                </div>
+                <div class="blog-grid_content">
+                  <div class="blog-meta">
+                    <a class="author" href="blog.html">
+                      July 07, 2024
+                    </a>
+                    <a href="blog.html">7 min read</a>
+                  </div>
+                  <h3 class="box-title">
+                    <a href="blog-details.html">
+                      Top 10 Real-World Applications of Machine Learning
+                    </a>
+                  </h3>
+                  <a href="blog-details.html" class="th-btn style4 th-icon">
+                    Read More <i class="fa-light fa-arrow-right-long"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="blog-grid th-ani style2 mt-24">
+                <div class="blog-img global-img">
+                  <img src="assets/img/blog/blog_3_3.jpg" alt="blog image" />
+                </div>
+                <div class="blog-grid_content">
+                  <div class="blog-meta">
+                    <a class="author" href="blog.html">
+                      July 05, 2025
+                    </a>
+                    <a href="blog.html">8 min read</a>
+                  </div>
+                  <h3 class="box-title">
+                    <a href="blog-details.html">
+                      How Machine Learning Algorithms Learn: A Deep Dive
+                    </a>
+                  </h3>
+                  <a href="blog-details.html" class="th-btn style4 th-icon">
+                    Read More <i class="fa-light fa-arrow-right-long"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="shape-mockup shape2 d-none d-xl-block"
+            data-top="5%"
+            data-right="-12%"
+          >
+            <img src="assets/img/shape/ab-1-shape-1.png" alt="shape" />
+          </div>
+          <div
+            class="shape-mockup shape3 d-none d-xxl-block"
+            data-bottom="0%"
+            data-left="-18%"
+          >
+            <img src="assets/img/shape/blog-1-shape.png" alt="shape" />
+          </div>
+        </div>
+      </section>
       <Footer />
       <div className="scroll-top">
         <svg

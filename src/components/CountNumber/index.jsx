@@ -2,7 +2,7 @@ import React from "react";
 
 const CountNumber = () => {
   return (
-    <div className="counter-area space space-extra3-bottom overflow-hidden">
+    <div className="counter-area space space-extra3-bottom overflow-hidden ">
       <div className="container">
         <div className="counter-wrap1">
           <div className="row">

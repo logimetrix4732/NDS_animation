@@ -1,5 +1,4 @@
 import React from "react";
-
 const Header = () => {
   return (
     <header class="th-header header-layout1 header-layout2">

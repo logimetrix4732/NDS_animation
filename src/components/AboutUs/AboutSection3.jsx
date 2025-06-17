@@ -2,7 +2,7 @@ import React from "react";
 
 const AboutSection3 = () => {
   return (
-    <section class="choose-6-area space-bottom space-bottom">
+    <section class="choose-6-area space-bottom">
       <div class="container">
         <div class="row gy-4 align-items-start">
           <div class="col-xl-5 order-1 order-xl-0">
