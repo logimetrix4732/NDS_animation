@@ -28,7 +28,7 @@ const slideData = [
 
 const Dashboard = () => {
   return (
-    <div className="th-hero-wrapper hero-1" id="hero">
+    <div className="th-hero-wrapper hero-1 space-bottom" id="hero">
       <Swiper
         modules={[EffectFade, Navigation, Pagination, Autoplay]}
         effect="fade"
