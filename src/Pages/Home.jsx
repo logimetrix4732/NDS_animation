@@ -82,9 +82,9 @@ const Home = () => {
       <AboutSection />
       <AboutSection2 />
       <AboutSection3 />
-      <CountNumber />
       <OurFeatures1 />
       <SocialContainer />
+      <CountNumber />
       <section class="bg-smoke overflow-hidden space">
         <div class="container">
           <div class="row justify-content-lg-between justify-content-center align-items-end">

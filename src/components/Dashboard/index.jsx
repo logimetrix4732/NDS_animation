@@ -10,7 +10,10 @@ import hero_bg_1_1 from "../../assets/img/hero/hero_bg_1_1.jpg";
 import hero_bg_1_2 from "../../assets/img/hero/hero_bg_1_2.jpg";
 import hero_bg_1_3 from "../../assets/img/hero/hero_bg_1_3.jpg";
 import hero1shape from "../../assets/img/shape/hero-1-shape.png";
-import dashboard from "../../Images/dashboard.jpg";
+import dashboard1 from "../../Images/dashboard1.jpg";
+import dashboard2 from "../../Images/dashboard2.jpg";
+import dashboard3 from "../../Images/dashboard3.jpg";
+import dashboard4 from "../../Images/dashboard4.jpeg";
 const slideData = [
   {
     image: hero_bg_1_1,

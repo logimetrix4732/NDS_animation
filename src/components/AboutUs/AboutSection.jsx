@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import AnimatedText from "../AnimatedText";
 
 const AboutSection = () => {
+  const [isTabletOrMobile, setIsTabletOrMobile] = useState(
+    window.innerWidth <= 1024
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsTabletOrMobile(window.innerWidth <= 1024);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div
       className="about-area position-relative overflow-hidden space-bottom"
@@ -27,9 +41,11 @@ const AboutSection = () => {
                 <span className="sub-title style1 text-anime-style-2">
                   About Us Our Company
                 </span>
-                <h2 className="sec-title mb-20 heading text-anime-style-3">
-                  Solutions That Evolve with Your Business
-                </h2>
+                <AnimatedText
+                  text="Solutions That Evolve with Your Business"
+                  tag="h2"
+                  className="sec-title mb-20 heading text-anime-style-3"
+                />
                 <p className="sec-text mb-30 wow fadeInUp" data-wow-delay=".1s">
                   IT solutions refer to a broad range of services and
                   technologies designed to address specific business needs,
@@ -93,22 +109,23 @@ const AboutSection = () => {
         >
           <img src="assets/img/shape/ab-1-shape-2.png" alt="shape" />
         </div>
-        <div
-          className="shape-mockup about-shape movingX"
-          style={{
-            position: "absolute",
-            bottom: "30%",
-            right: "10%",
-            zIndex: 1,
-            display: window.innerWidth < 768 ? "none" : "block",
-          }}
-        >
-          <img
-            src="assets/img/normal/about-right-img.jpg"
-            alt="shape"
-            style={{ maxWidth: "100%", height: "auto" }}
-          />
-        </div>
+        {!isTabletOrMobile && (
+          <div
+            className="shape-mockup about-shape movingX"
+            style={{
+              position: "absolute",
+              bottom: "30%",
+              right: "10%",
+              zIndex: 1,
+            }}
+          >
+            <img
+              src="assets/img/normal/about-right-img.jpg"
+              alt="shape"
+              style={{ maxWidth: "100%", height: "auto" }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
