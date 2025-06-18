@@ -2,19 +2,6 @@ import React, { useEffect, useState } from "react";
 import AnimatedText from "../AnimatedText";
 
 const AboutSection = () => {
-  const [isTabletOrMobile, setIsTabletOrMobile] = useState(
-    window.innerWidth <= 1024
-  );
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsTabletOrMobile(window.innerWidth <= 1024);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
     <div
       className="about-area position-relative overflow-hidden space-bottom"
@@ -91,8 +78,8 @@ const AboutSection = () => {
           className="shape-mockup shape1 d-none d-xl-block"
           style={{
             position: "absolute",
-            bottom: "80%",
-            right: "10%",
+            bottom: "46%",
+            right: "18%",
             zIndex: 1,
           }}
         >
@@ -109,23 +96,6 @@ const AboutSection = () => {
         >
           <img src="assets/img/shape/ab-1-shape-2.png" alt="shape" />
         </div>
-        {!isTabletOrMobile && (
-          <div
-            className="shape-mockup about-shape movingX"
-            style={{
-              position: "absolute",
-              bottom: "30%",
-              right: "10%",
-              zIndex: 1,
-            }}
-          >
-            <img
-              src="assets/img/normal/about-right-img.jpg"
-              alt="shape"
-              style={{ maxWidth: "100%", height: "auto" }}
-            />
-          </div>
-        )}
       </div>
     </div>
   );

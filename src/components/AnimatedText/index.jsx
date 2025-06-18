@@ -6,21 +6,23 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      delayChildren: 0.2,
-      staggerChildren: 0.1,
+      delayChildren: 0.3,
+      staggerChildren: 0.15,
     },
   },
 };
 
 const wordVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, x: 40, scale: 0.95 }, // Right se aayega
   visible: {
     opacity: 1,
-    y: 0,
+    x: 0,
+    scale: 1,
     transition: {
       type: "spring",
-      damping: 15,
-      stiffness: 120,
+      damping: 12,
+      stiffness: 80,
+      mass: 0.6,
     },
   },
 };
@@ -34,7 +36,8 @@ const AnimatedText = ({ text = "", className = "", tag = "h2" }) => {
       className={className}
       variants={containerVariants}
       initial="hidden"
-      animate="visible"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.5 }}
       style={{
         display: "flex",
         flexWrap: "wrap",

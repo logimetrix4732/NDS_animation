@@ -1,8 +1,8 @@
 @use "sass:math";
 :root {
-  --theme-color: #0b59db;
-  --primary-color: #0b59db;
-  --title-color: #0b1422;
+  --theme-color: #5b8c51;
+  --primary-color: #5b8c51;
+  --title-color: #404a3d;
   --body-color: #6e7070;
   --smoke-color: #f2f5fa;
   --smoke-color2: #f3f4f6;
@@ -11374,7 +11374,7 @@ ul.comment-list:has(> .th-comment-item ~ .th-comment-item):first-child
     rgba(11, 20, 34, 0.56) 44.27%,
     rgba(11, 20, 34, 0.72) 54.37%,
     rgba(11, 20, 34, 0.87) 67.71%,
-    #0b1422 84.64%
+    #404a3d 84.64%
   );
   background: linear-gradient(
     90deg,
@@ -11383,7 +11383,7 @@ ul.comment-list:has(> .th-comment-item ~ .th-comment-item):first-child
     rgba(11, 20, 34, 0.56) 44.27%,
     rgba(11, 20, 34, 0.72) 54.37%,
     rgba(11, 20, 34, 0.87) 67.71%,
-    #0b1422 84.64%
+    #404a3d 84.64%
   );
   -webkit-transform: rotate(-180deg);
   -ms-transform: rotate(-180deg);
@@ -12177,10 +12177,10 @@ ul.comment-list:has(> .th-comment-item ~ .th-comment-item):first-child
 .overlay-5::after {
   background: -webkit-linear-gradient(
     right,
-    #0b59db 0%,
+    #5b8c51 0%,
     rgba(6, 48, 117, 0) 100%
   );
-  background: linear-gradient(270deg, #0b59db 0%, rgba(6, 48, 117, 0) 100%);
+  background: linear-gradient(270deg, #5b8c51 0%, rgba(6, 48, 117, 0) 100%);
 }
 .title2 {
   position: relative;
@@ -13611,8 +13611,8 @@ ul.comment-list:has(> .th-comment-item ~ .th-comment-item):first-child
   height: 726px;
   border-radius: 100%;
   content: "";
-  background: -webkit-linear-gradient(219deg, #0b59db 37.5%, red 100%);
-  background: linear-gradient(231deg, #0b59db 37.5%, red 100%);
+  background: -webkit-linear-gradient(219deg, #5b8c51 37.5%, red 100%);
+  background: linear-gradient(231deg, #5b8c51 37.5%, red 100%);
   mix-blend-mode: color;
   z-index: 2;
 }
@@ -22244,9 +22244,9 @@ span.select2-selection.select2-selection--single:focus {
   background: -webkit-linear-gradient(
     top,
     rgba(11, 20, 34, 0) 0%,
-    #0b1422 100%
+    #404a3d 100%
   );
-  background: linear-gradient(180deg, rgba(11, 20, 34, 0) 0%, #0b1422 100%);
+  background: linear-gradient(180deg, rgba(11, 20, 34, 0) 0%, #404a3d 100%);
   border-radius: 250px 250px 0px 0px;
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
@@ -30542,9 +30542,9 @@ span.select2-selection.select2-selection--single:focus {
   content: "";
   position: absolute;
   inset: 0;
-  background: -webkit-linear-gradient(top, rgba(11, 20, 34, 0) 0%, #0b1422 100%),
+  background: -webkit-linear-gradient(top, rgba(11, 20, 34, 0) 0%, #404a3d 100%),
     url("path_to_image.html");
-  background: linear-gradient(180deg, rgba(11, 20, 34, 0) 0%, #0b1422 100%),
+  background: linear-gradient(180deg, rgba(11, 20, 34, 0) 0%, #404a3d 100%),
     url("path_to_image.html");
   border-radius: 24px;
   z-index: -1;
@@ -31691,9 +31691,9 @@ span.select2-selection.select2-selection--single:focus {
   background: -webkit-linear-gradient(
     top,
     rgba(11, 20, 34, 0) 0%,
-    #0b1422 100%
+    #404a3d 100%
   );
-  background: linear-gradient(180deg, rgba(11, 20, 34, 0) 0%, #0b1422 100%);
+  background: linear-gradient(180deg, rgba(11, 20, 34, 0) 0%, #404a3d 100%);
   border-radius: 24px;
   z-index: 10;
 }
@@ -31758,10 +31758,10 @@ span.select2-selection.select2-selection--single:focus {
   content: "";
   background: -webkit-linear-gradient(
     top,
-    #0b1422 0%,
+    #404a3d 0%,
     rgba(11, 20, 34, 0) 50.5%
   );
-  background: linear-gradient(180deg, #0b1422 0%, rgba(11, 20, 34, 0) 50.5%);
+  background: linear-gradient(180deg, #404a3d 0%, rgba(11, 20, 34, 0) 50.5%);
   z-index: 2;
   -webkit-transition: 0.4s;
   transition: 0.4s;
@@ -31824,9 +31824,9 @@ span.select2-selection.select2-selection--single:focus {
   background: -webkit-linear-gradient(
     top,
     rgba(11, 20, 34, 0) 0%,
-    #0b1422 100%
+    #404a3d 100%
   );
-  background: linear-gradient(180deg, rgba(11, 20, 34, 0) 0%, #0b1422 100%);
+  background: linear-gradient(180deg, rgba(11, 20, 34, 0) 0%, #404a3d 100%);
   border-radius: 24px;
 }
 .project-item2.style2 .project-content {
