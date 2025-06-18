@@ -5,6 +5,7 @@ import service_2_3 from "../../assets/img/service/service_2_3.jpg";
 import sv61 from "../../assets/img/icon/sv-6-1.svg";
 import sv62 from "../../assets/img/icon/sv-6-2.svg";
 import sv63 from "../../assets/img/icon/sv-6-3.svg";
+import AnimatedText from "../AnimatedText";
 const OurFeatures1 = () => {
   return (
     <div class="service-area space-bottom" id="service-sec">
@@ -13,9 +14,13 @@ const OurFeatures1 = () => {
           <div class="col-xl-8">
             <div class="title-area text-center">
               <span class="sub-title text-anime-style-2">Our Services</span>
-              <h2 class="sec-title text-anime-style-3">
-                Our Solution for your business
-              </h2>
+              <h2 class="sec-title text-anime-style-3"></h2>
+              <AnimatedText
+                text=" Our Solution for your business"
+                tag="h2"
+                className="sec-title mb-20 heading text-anime-style-3"
+                width="100%"
+              />
             </div>
           </div>
         </div>

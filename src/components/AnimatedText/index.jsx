@@ -27,7 +27,12 @@ const wordVariants = {
   },
 };
 
-const AnimatedText = ({ text = "", className = "", tag = "h2" }) => {
+const AnimatedText = ({
+  text = "",
+  className = "",
+  tag = "h2",
+  width = "",
+}) => {
   const words = text.split(" ");
   const MotionTag = motion[tag];
 
@@ -41,7 +46,7 @@ const AnimatedText = ({ text = "", className = "", tag = "h2" }) => {
       style={{
         display: "flex",
         flexWrap: "wrap",
-        width: "570px",
+        width: width,
         maxWidth: "1200px",
       }}
     >

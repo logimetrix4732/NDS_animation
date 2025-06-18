@@ -1,4 +1,5 @@
 import React from "react";
+import AnimatedText from "../AnimatedText";
 
 const AboutSection2 = () => {
   return (
@@ -13,9 +14,12 @@ const AboutSection2 = () => {
               <span className="sub-title style1 text-anime-style-2">
                 Who We Are
               </span>
-              <h2 className="sec-title mb-20 text-anime-style-3">
-                We Build Software That Builds Businesses.
-              </h2>
+              <AnimatedText
+                text="We Build Software That Builds Businesses."
+                tag="h2"
+                className="sec-title mb-20 heading text-anime-style-3"
+                width="100%"
+              />
               <p className="sec-text mb-60 wow fadeInUp" data-wow-delay=".2s">
                 A software development company specializes in designing,
                 developing, and deploying software applications tailored to meet
@@ -73,7 +77,10 @@ const AboutSection2 = () => {
                 </div>
               </div>
               <div className="mt-35 wow fadeInUp" data-wow-delay=".5s">
-                <a href="about.html" className="th-btn black-btn th-radius th-icon">
+                <a
+                  href="about.html"
+                  className="th-btn black-btn th-radius th-icon"
+                >
                   Learn More <i className="fa-light fa-arrow-right-long"></i>
                 </a>
               </div>

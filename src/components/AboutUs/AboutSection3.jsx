@@ -1,4 +1,5 @@
 import React from "react";
+import AnimatedText from "../AnimatedText";
 
 const AboutSection3 = () => {
   return (
@@ -8,9 +9,12 @@ const AboutSection3 = () => {
           <div class="col-xl-5 order-1 order-xl-0">
             <div class="title-area mt-40 mb-20 pe-xl-5">
               <span class="sub-title text-anime-style-2">Why Choose Us</span>
-              <h2 class="sec-title text-anime-style-3">
-                The Art of Web & Mobile Development
-              </h2>
+              <AnimatedText
+                text="The Art of Web & Mobile Development."
+                tag="h2"
+                className="sec-title mb-20 heading text-anime-style-3"
+                width="100%"
+              />
             </div>
             <div className="about-item style-16">
               <div className="about-content">
@@ -45,9 +49,13 @@ const AboutSection3 = () => {
                     </ul>
                   </div>
                 </div>
-                <div className="about-btn mt-30 wow fadeInUp" data-wow-delay=".4s">
+                <div
+                  className="about-btn mt-30 wow fadeInUp"
+                  data-wow-delay=".4s"
+                >
                   <a href="contact.html" className="th-btn th-icon">
-                    Get Started Now <i className="fa-light fa-arrow-right-long"></i>
+                    Get Started Now{" "}
+                    <i className="fa-light fa-arrow-right-long"></i>
                   </a>
                 </div>
               </div>

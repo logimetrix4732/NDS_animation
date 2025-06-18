@@ -32,6 +32,7 @@ const AboutSection = () => {
                   text="Solutions That Evolve with Your Business"
                   tag="h2"
                   className="sec-title mb-20 heading text-anime-style-3"
+                  width="100%"
                 />
                 <p className="sec-text mb-30 wow fadeInUp" data-wow-delay=".1s">
                   IT solutions refer to a broad range of services and
