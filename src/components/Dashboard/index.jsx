@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -6,122 +6,133 @@ import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import hero_bg_1_1 from "../../assets/img/hero/hero_bg_1_1.jpg";
-import hero_bg_1_2 from "../../assets/img/hero/hero_bg_1_2.jpg";
-import hero_bg_1_3 from "../../assets/img/hero/hero_bg_1_3.jpg";
-import hero1shape from "../../assets/img/shape/hero-1-shape.png";
-import dashboard1 from "../../Images/dashboard1.jpg";
-import dashboard2 from "../../Images/dashboard2.jpg";
-import dashboard3 from "../../Images/dashboard3.jpg";
-import dashboard4 from "../../Images/dashboard4.jpeg";
-const slideData = [
+import hero_bg_2_1 from "../../assets/img/hero/hero_bg_2_1.jpg";
+import hero_bg_2_2 from "../../assets/img/hero/hero_bg_2_2.jpg";
+import heroarrowleft from "../../assets/img/icon/hero-arrow-left.svg";
+import heroarrowright from "../../assets/img/icon/hero-arrow-right.svg";
+import "./dashboard.css";
+const heroSlides = [
   {
-    image: hero_bg_1_1,
-    title: "Precision IT Solutions, Tailored for You",
+    bg: hero_bg_2_1,
+    title: "Elevate Your Business to the Cloud",
+    desc: "Welcome to Atek where we specialize in delivering tailored technology and Cloud Computing solutions.",
+    thumbs: [
+      {
+        img: hero_bg_2_1,
+        title: "Private Cloud",
+        desc: "Combines private and public cloud environment",
+      },
+    ],
   },
   {
-    image: hero_bg_1_2,
-    title: "Smart IT Consulting for Modern Businesses",
-  },
-  {
-    image: hero_bg_1_3,
-    title: "Your Trusted Partner in Tech & Strategy",
+    bg: hero_bg_2_2,
+    title: "Elevate Your Business to the Cloud",
+    desc: "Welcome to Atek where we specialize in delivering tailored technology and Cloud Computing solutions.",
+    thumbs: [
+      {
+        img: hero_bg_2_2,
+        title: "Hybrid Cloud",
+        desc: "Combines private and public cloud environment",
+      },
+    ],
   },
 ];
 
 const Dashboard = () => {
+  const [animateThumbs, setAnimateThumbs] = useState(false);
+
+  useEffect(() => {
+    setAnimateThumbs(true);
+  }, []);
+
   return (
-    <div className="th-hero-wrapper hero-1 space-bottom" id="hero">
+    <div className="hero-2 " id="hero">
       <Swiper
+        className="hero-slider-2"
         modules={[EffectFade, Navigation, Pagination, Autoplay]}
         effect="fade"
+        loop
+        autoplay={{ delay: 5000 }}
         navigation={{
           nextEl: ".slider-next",
           prevEl: ".slider-prev",
         }}
-        pagination={{ el: ".slider-pagination", clickable: true }}
-        autoplay={{ delay: 5000 }}
-        loop={true}
-        className="hero-slider-1"
+        pagination={{ el: ".swiper-pagination", clickable: true }}
       >
-        {slideData.map((slide, index) => (
+        {heroSlides.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className="hero-inner">
               <div
                 className="th-hero-bg"
                 style={{
-                  backgroundImage: `url(${slide.image})`,
+                  backgroundImage: `url(${slide.bg})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
               />
-              <div
-                className="hero-1-shape d-none d-lg-block"
-                data-ani="slideinleft"
-                data-ani-delay="0.4s"
-              >
-                <img src={hero1shape} alt="hero-shape" />
-              </div>
               <div className="container">
-                <div className="row">
-                  <div className="col-xl-9 col-lg-8">
-                    <div className="hero-style1">
-                      <span className="sub-title style1">
-                        Dynamic IT, Dynamic Results.
-                      </span>
-                      <h1
-                        className="hero-title"
-                        data-ani="slideinup"
-                        data-ani-delay="0.4s"
-                      >
-                        {slide.title}
-                      </h1>
-                      <p
-                        className="hero-text text-white"
-                        data-ani="slideinup"
-                        data-ani-delay="0.6s"
-                      >
-                        Welcome to Atek where we specialize in delivering
-                        tailored technology and IT solutions.
-                      </p>
-                      <div
-                        className="btn-group"
-                        data-ani="slideinup"
-                        data-ani-delay="0.8s"
-                      >
-                        <a
-                          href="contact.html"
-                          className="th-btn style7 th-icon"
-                        >
-                          Discover More
-                          <i className="fa-light fa-arrow-right-long" />
-                        </a>
-                        <a
-                          href="service.html"
-                          className="th-btn style2 th-icon"
-                        >
-                          Our Services
-                          <i className="fa-light fa-arrow-right-long" />
-                        </a>
+                <div className="hero-style2 text-center text-md-start">
+                  <h1 className="hero-title mb-20">{slide.title}</h1>
+                  <p className="hero-desc">{slide.desc}</p>
+                </div>
+
+                <div
+                  className={`swiper heroThumbs style2 mt-5 ${
+                    animateThumbs ? "animate-in" : ""
+                  }`}
+                >
+                  <div className="swiper-wrapper d-flex gap-4 flex-wrap">
+                    {slide.thumbs.map((thumb, thumbIndex) => (
+                      <div className="swiper-slide" key={thumbIndex}>
+                        <div className="hero-card">
+                          <div className="hero-img">
+                            <img src={thumb.img} alt={thumb.title} />
+                          </div>
+                          <div className="hero-card_content">
+                            <h3 className="box-title">{thumb.title}</h3>
+                            <p className="sec-text text-white">{thumb.desc}</p>
+                            <a
+                              href="service-details.html"
+                              className="th-btn style2"
+                            >
+                              Read More
+                            </a>
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
               </div>
             </div>
           </SwiperSlide>
         ))}
+      </Swiper>
 
-        <div className="th-swiper-custom">
-          <button className="slider-arrow slider-prev">
-            <img src="/assets/img/icon/right-arrow.svg" alt="Prev" />
+      <div className="th-swiper-custom">
+        <div className="swiper-pagination" />
+        <div className="hero-icon">
+          <button className="hero-arrow slider-prev">
+            <img src={heroarrowleft} alt="Previous" />
           </button>
-          <div className="slider-pagination" />
-          <button className="slider-arrow slider-next">
-            <img src="/assets/img/icon/left-arrow.svg" alt="Next" />
+          <button className="hero-arrow slider-next">
+            <img src={heroarrowright} alt="Next" />
           </button>
         </div>
-      </Swiper>
+      </div>
+
+      <div className="scroll-down">
+        <div
+          className="scroll-wrap"
+          style={{ cursor: "pointer" }}
+          onClick={() => window.scrollBy({ top: 740, behavior: "smooth" })}
+        >
+          <span>
+            <img src="assets/img/icon/down-arrow.svg" alt="Scroll down" />
+          </span>
+          Scroll Down
+        </div>
+      </div>
     </div>
   );
 };

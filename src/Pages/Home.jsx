@@ -9,6 +9,7 @@ import AboutSection3 from "../components/AboutUs/AboutSection3";
 import CountNumber from "../components/CountNumber";
 import OurFeatures1 from "../components/Sliders/OurFeatures1";
 import SocialContainer from "../components/SocialContainer";
+import gai from "../Images/gai.gif";
 const Home = () => {
   return (
     <React.Fragment>
@@ -71,7 +72,8 @@ const Home = () => {
       <div className="preloader">
         <button className="th-btn preloaderCls">Cancel Preloader</button>
         <div className="preloader-inner">
-          <img src="assets/img/logo-icon3.svg" alt="img" />
+          <img src={gai} alt="img" style={{ width: "auto", height: "180px" }} />
+
           <span className="loader">
             NDDB <span className="loading-text">NDDB</span>
           </span>
@@ -81,10 +83,9 @@ const Home = () => {
       <Dashboard />
       <AboutSection />
       <AboutSection2 />
-      <AboutSection3 />
       <OurFeatures1 />
-      <SocialContainer />
       <CountNumber />
+      <SocialContainer />
       <Footer />
       <div className="scroll-top">
         <svg

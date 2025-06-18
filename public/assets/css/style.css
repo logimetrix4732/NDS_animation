@@ -8718,6 +8718,7 @@ ol.wp-block-rss {
 }
 .info-box_text .details {
   margin-top: -0.3em;
+  padding-top :8px
 }
 .info-box_text .details p {
   color: #b1b8c3;
@@ -30767,7 +30768,7 @@ span.select2-selection.select2-selection--single:focus {
   text-align: center;
   line-height: 100px;
   display: inline-block;
-  background-color: var(--white-color);
+  background-color: var(--primary-color);
   border-radius: 50%;
   -webkit-transition: all 0.8s ease-in-out;
   transition: all 0.8s ease-in-out;

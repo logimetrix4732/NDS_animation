@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import AnimatedText from "../AnimatedText";
-
+import bgCow from "../../Images/bg-cow.png";
 const AboutSection = () => {
   return (
     <div
-      className="about-area position-relative overflow-hidden space-bottom"
+      className="about-area position-relative overflow-hidden space"
       id="about-sec"
     >
       <div className="container">
@@ -29,16 +29,18 @@ const AboutSection = () => {
                   About Us Our Company
                 </span>
                 <AnimatedText
-                  text="Solutions That Evolve with Your Business"
+                  text="NDDB Dairy Services"
                   tag="h2"
-                  className="sec-title mb-20 heading text-anime-style-3"
+                  className="sec-title mb-10 heading text-anime-style-3"
                   width="100%"
                 />
                 <p className="sec-text mb-30 wow fadeInUp" data-wow-delay=".1s">
-                  IT solutions refer to a broad range of services and
-                  technologies designed to address specific business needs,
-                  streamline operations, and drive growth. These solutions
-                  encompass hardware.
+                  NDDB Dairy Services (NDS) is a not-for-profit Section 8
+                  company, fully owned by the National Dairy Development Board
+                  (NDDB). Acting as NDDB's field-level implementation arm, NDS
+                  supports the formation and strengthening of Farmer Producer
+                  Companies (PCs) and drives productivity enhancement
+                  initiatives for dairy animals across India.
                 </p>
               </div>
               <div className="about-item-wrap">
@@ -47,10 +49,11 @@ const AboutSection = () => {
                     <img src="assets/img/icon/map3.svg" alt="" />
                   </div>
                   <div className="about-item_centent">
-                    <h5 className="box-title">Manage Tech Services</h5>
+                    <h5 className="box-title">Our Mission</h5>
                     <p className="about-item_text">
-                      There are many variations of passages of available but the
-                      majority.
+                      Empowering dairy farmers by building efficient,
+                      transparent, and sustainable milk production and
+                      procurement systems.
                     </p>
                   </div>
                 </div>
@@ -59,10 +62,11 @@ const AboutSection = () => {
                     <img src="assets/img/icon/guide.svg" alt="" />
                   </div>
                   <div className="about-item_centent">
-                    <h5 className="box-title">Internal Networking</h5>
+                    <h5 className="box-title">Our Vision</h5>
                     <p className="about-item_text">
-                      There are many variations of passages of available but the
-                      majority.
+                      To be the leading enabler of farmer-owned institutions
+                      delivering end-to-end dairy solutions for long-term rural
+                      prosperity.
                     </p>
                   </div>
                 </div>
@@ -76,26 +80,20 @@ const AboutSection = () => {
           </div>
         </div>
         <div
-          className="shape-mockup shape1 d-none d-xl-block"
+          className=""
           style={{
             position: "absolute",
-            bottom: "46%",
-            right: "18%",
+            bottom: "16%",
+            right: "-8%",
             zIndex: 1,
+            backgroundSize: "contain",
+            backgroundPosition: "right center",
+            backgroundRepeat: "no-repeat",
+            opacity: 0.1,
+            pointerEvents: "none",
           }}
         >
-          <img src="assets/img/shape/ab-1-shape-1.png" alt="shape" />
-        </div>
-        <div
-          className="shape-mockup shape3 d-none d-xl-block"
-          style={{
-            position: "absolute",
-            bottom: "18%",
-            left: "0%",
-            zIndex: 1,
-          }}
-        >
-          <img src="assets/img/shape/ab-1-shape-2.png" alt="shape" />
+          <img src={bgCow} alt="shape" />
         </div>
       </div>
     </div>

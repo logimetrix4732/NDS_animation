@@ -1,42 +1,17 @@
 import React from "react";
-
+import nds_logo from "../../assets/img/nds_logo.png";
 const Footer = () => {
   return (
     <footer className="footer-wrapper footer-layout1 black-bg space-top">
       <div className="widget-area">
         <div className="container">
-          <div className="newsletter-area">
-            <div className="newsletter-top">
-              <div className="row gy-4 align-items-center">
-                <div className="col-lg-5">
-                  <h2 className="newsletter-title text-white text-capitalize mb-0">
-                    get updated the latest newsletter
-                  </h2>
-                </div>
-                <div className="col-lg-7">
-                  <form className="newsletter-form">
-                    <input
-                      className="form-control"
-                      type="email"
-                      placeholder="Enter Email"
-                      required=""
-                    />
-                    <button type="submit" className="th-btn style3">
-                      Subscribe Now
-                      <img src="assets/img/icon/plane.svg" alt="" />
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
           <div className="row justify-content-between">
             <div className="col-md-6 col-xl-3">
               <div className="widget footer-widget">
                 <div className="th-widget-about">
                   <div className="about-logo">
                     <a href="index.html">
-                      <img src="assets/img/logo3.svg" alt="Atek" />
+                      <img src={nds_logo} alt="Atek" width="168" height="46" />
                     </a>
                   </div>
                   <p className="about-text">
@@ -65,23 +40,27 @@ const Footer = () => {
             </div>
             <div className="col-md-6 col-xl-auto">
               <div className="widget widget_nav_menu footer-widget">
-                <h3 className="widget_title">Useful Link</h3>
+                <h3 className="widget_title">About Us</h3>
                 <div className="menu-all-pages-container">
                   <ul className="menu">
                     <li>
-                      <a href="index.html">Home</a>
+                      <a href="index.html">Annual Reports</a>
                     </li>
                     <li>
-                      <a href="about.html">About us</a>
+                      <a href="about.html">Gallery (Photos and Videos)</a>
+                    </li>
+                  </ul>
+                </div>
+                <h3 className="widget_title" style={{ marginTop: "30px" }}>
+                  Producer Companies
+                </h3>
+                <div className="menu-all-pages-container">
+                  <ul className="menu">
+                    <li>
+                      <a href="index.html">MPCs Operationalized</a>
                     </li>
                     <li>
-                      <a href="service.html">Our Service</a>
-                    </li>
-                    <li>
-                      <a href="contact.html">Terms of Service</a>
-                    </li>
-                    <li>
-                      <a href="service.html">News &amp; Media</a>
+                      <a href="about.html">Setting up MPCs</a>
                     </li>
                   </ul>
                 </div>
@@ -97,13 +76,8 @@ const Footer = () => {
                     </div>
                     <div className="details">
                       <p>
-                        <a href="tel:+01234567890" className="info-box_link">
-                          +01 234 567 890
-                        </a>
-                      </p>
-                      <p>
-                        <a href="tel:+09876543210" className="info-box_link">
-                          +09 876 543 210
+                        <a href="tel:+9170929224210" className="info-box_link">
+                          +91 7092922421
                         </a>
                       </p>
                     </div>
@@ -115,18 +89,10 @@ const Footer = () => {
                     <div className="details">
                       <p>
                         <a
-                          href="mailto:mailinfo00@atek.com"
+                          href="mailto:enquiry@nddbdairyservices.com"
                           className="info-box_link"
                         >
-                          mailinfo00@atek.com
-                        </a>
-                      </p>
-                      <p>
-                        <a
-                          href="mailto:support24@atek.com"
-                          className="info-box_link"
-                        >
-                          support24@atek.com
+                          enquiry@nddbdairyservices.com
                         </a>
                       </p>
                     </div>
@@ -141,7 +107,8 @@ const Footer = () => {
                           href="https://maps.app.goo.gl/QyH2fFoJ9fii93mt7"
                           target="_blank"
                         >
-                          789 Inner Lane, Holy park, California, USA
+                          NDDB House, Safdarjung Enclave, New Delhi, Southwest
+                          Delhi, Delhi 110029
                         </a>
                       </p>
                     </div>
@@ -150,86 +117,47 @@ const Footer = () => {
               </div>
             </div>
             <div className="col-md-6 col-xl-auto">
+              <div className="col-md-6 col-xl-auto">
+                <div className="widget widget_nav_menu footer-widget">
+                  <h3 className="widget_title">Productivity Services</h3>
+                  <div className="menu-all-pages-container">
+                    <ul className="menu">
+                      <li>
+                        <a href="index.html">Animal Nutrition Services</a>
+                      </li>
+                      <li>
+                        <a href="about.html">AI Delivery Services</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
               <div className="widget footer-widget">
-                <h3 className="widget_title">Instagram Post</h3>
-                <div className="sidebar-gallery">
-                  <div className="gallery-thumb">
-                    <img
-                      src="assets/img/widget/gallery_1_1.jpg"
-                      alt="Gallery Image"
-                    />
-                    <a
-                      target="_blank"
-                      href="https://www.instagram.com/"
-                      className="gallery-btn"
-                    >
-                      <i className="fab fa-instagram" />
-                    </a>
-                  </div>
-                  <div className="gallery-thumb">
-                    <img
-                      src="assets/img/widget/gallery_1_2.jpg"
-                      alt="Gallery Image"
-                    />
-                    <a
-                      target="_blank"
-                      href="https://www.instagram.com/"
-                      className="gallery-btn"
-                    >
-                      <i className="fab fa-instagram" />
-                    </a>
-                  </div>
-                  <div className="gallery-thumb">
-                    <img
-                      src="assets/img/widget/gallery_1_3.jpg"
-                      alt="Gallery Image"
-                    />
-                    <a
-                      target="_blank"
-                      href="https://www.instagram.com/"
-                      className="gallery-btn"
-                    >
-                      <i className="fab fa-instagram" />
-                    </a>
-                  </div>
-                  <div className="gallery-thumb">
-                    <img
-                      src="assets/img/widget/gallery_1_4.jpg"
-                      alt="Gallery Image"
-                    />
-                    <a
-                      target="_blank"
-                      href="https://www.instagram.com/"
-                      className="gallery-btn"
-                    >
-                      <i className="fab fa-instagram" />
-                    </a>
-                  </div>
-                  <div className="gallery-thumb">
-                    <img
-                      src="assets/img/widget/gallery_1_5.jpg"
-                      alt="Gallery Image"
-                    />
-                    <a
-                      target="_blank"
-                      href="https://www.instagram.com/"
-                      className="gallery-btn"
-                    >
-                      <i className="fab fa-instagram" />
-                    </a>
-                  </div>
-                  <div className="gallery-thumb">
-                    <img
-                      src="assets/img/widget/gallery_1_6.jpg"
-                      alt="Gallery Image"
-                    />
-                    <a
-                      target="_blank"
-                      href="https://www.instagram.com/"
-                      className="gallery-btn"
-                    >
-                      <i className="fab fa-instagram" />
-                    </a>
+                <h3 className="widget_title">Email Address</h3>
+                <div className="row gy-4 align-items-center">
+                  <div className="col-lg-12">
+                    <form className="newsletter-form">
+                      <input
+                        className="form-control"
+                        type="email"
+                        placeholder="Enter Email"
+                        required=""
+                      />
+                      <button
+                        type="submit"
+                        className="th-btn style3"
+                        style={{
+                          padding: "8px 16px",
+                          fontSize: "14px",
+                          minWidth: "auto",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <img src="assets/img/icon/plane.svg" alt="" />
+                      </button>
+                    </form>
                   </div>
                 </div>
               </div>

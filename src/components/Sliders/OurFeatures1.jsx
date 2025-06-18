@@ -1,111 +1,74 @@
 import React from "react";
-import service_6_1 from "../../assets/img/service/service_6_1.jpg";
-import service_2_2 from "../../assets/img/service/service_2_2.jpg";
-import service_2_3 from "../../assets/img/service/service_2_3.jpg";
-import sv61 from "../../assets/img/icon/sv-6-1.svg";
-import sv62 from "../../assets/img/icon/sv-6-2.svg";
-import sv63 from "../../assets/img/icon/sv-6-3.svg";
-import AnimatedText from "../AnimatedText";
+import SuccessStoriesImg from "../../Images/SuccessStoriesImg.jpg";
+import SuccessStoriesImg1 from "../../Images/SuccessStoriesImg1.jpg";
+import SuccessStoriesImg2 from "../../Images/SuccessStoriesImg2.jpg";
+import icon from "../../Images/icon/1.png";
+import icon1 from "../../Images/icon/2.png";
+import icon2 from "../../Images/icon/3.png";
+import { Link } from "react-router-dom";
+import "./OurFeatures.css";
+const featuresData = [
+  {
+    image: SuccessStoriesImg,
+    icon: icon,
+    title: "Premium Cattle Feed",
+    subtitle:
+      "Nutritionally balanced feed for dairy cattle, enhancing milk production and animal health.",
+    link: "/",
+  },
+  {
+    image: SuccessStoriesImg1,
+    icon: icon1,
+    title: "Dairy Mineral Mixture",
+    subtitle:
+      "Essential mineral supplement for dairy animals to improve overall health and productivity.",
+    link: "/",
+  },
+  {
+    image: SuccessStoriesImg2,
+    icon: icon2,
+    title: "Calf Starter Feed",
+    subtitle:
+      "Specially formulated feed for calves to ensure proper growth and development.",
+    link: "/",
+  },
+];
+
 const OurFeatures1 = () => {
   return (
-    <div class="service-area space-bottom" id="service-sec">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-xl-8">
-            <div class="title-area text-center">
-              <span class="sub-title text-anime-style-2">Our Services</span>
-              <h2 class="sec-title text-anime-style-3"></h2>
-              <AnimatedText
-                text=" Our Solution for your business"
-                tag="h2"
-                className="sec-title mb-20 heading text-anime-style-3"
-                width="100%"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="service-list-area">
-            <div class="service-list-wrap sv-list2 service7-list active">
+    <div className="service-area space-bottom" id="service-sec">
+      <div className="container">
+        <div className="row">
+          <div className="service-list-area">
+            {featuresData.map((item, index) => (
               <div
-                class="service-list"
-                style={{
-                  backgroundImage: `url(${service_6_1})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
+                className={`service-list-wrap sv-list2 service7-list ${
+                  index === 0 ? "active" : ""
+                }`}
+                key={index}
               >
-                <span class="service-icon">
-                  <img src={sv61} alt="" />
-                </span>
-                <div class="service-content">
-                  <h4 class="box-title">
-                    <a href="service-details.html">Finance Security</a>
-                  </h4>
-                  <span class="service-subtitle">
-                    Party we years to order allow asked of. We so opinion
-                    friends me message as delight.
+                <div
+                  className="service-list"
+                  style={{
+                    backgroundImage: `url(${item.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                >
+                  <span className="service-icon">
+                    <img src={item.icon} alt="" />
                   </span>
+                  <div className="service-content">
+                    <h4 className="box-title">{item.title}</h4>
+                    <span className="service-subtitle">{item.subtitle}</span>
+                  </div>
+                  <Link to={item.link} className="th-btn style2">
+                    View Details{" "}
+                    <i className="fa-light fa-arrow-right-long"></i>
+                  </Link>
                 </div>
-                <a href="service-details.html" class="th-btn style2">
-                  View Details <i class="fa-light fa-arrow-right-long"></i>
-                </a>
               </div>
-            </div>
-            <div class="service-list-wrap sv-list2 service7-list">
-              <div
-                class="service-list"
-                data-bg-src="assets/img/service/service_2_2.jpg"
-                style={{
-                  backgroundImage: `url(${service_2_2})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              >
-                <span class="service-icon">
-                  <img src={sv62} alt="" />
-                </span>
-                <div class="service-content">
-                  <h4 class="box-title">
-                    <a href="service-details.html">Synchronization</a>
-                  </h4>
-                  <span class="service-subtitle">
-                    His defective nor convinced residence own. Connection has
-                    put
-                  </span>
-                </div>
-                <a href="service-details.html" class="th-btn style2">
-                  View Details <i class="fa-light fa-arrow-right-long"></i>
-                </a>
-              </div>
-            </div>
-            <div class="service-list-wrap sv-list2 service7-list">
-              <div
-                class="service-list"
-                data-bg-src="assets/img/service/service_2_3.jpg"
-                style={{
-                  backgroundImage: `url(${service_2_3})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              >
-                <span class="service-icon">
-                  <img src={sv63} alt="" />
-                </span>
-                <div class="service-content">
-                  <h4 class="box-title">
-                    <a href="service-details.html">Cloud Drive</a>
-                  </h4>
-                  <span class="service-subtitle">
-                    From they fine john he give of rich he. They age and draw
-                    mrs like.
-                  </span>
-                </div>
-                <a href="service-details.html" class="th-btn style2">
-                  View Details <i class="fa-light fa-arrow-right-long"></i>
-                </a>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
