@@ -43,6 +43,18 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
+.contactUsHover:hover{
+    background: #5b8c51 !important;
+    color: #fff !important;
+}
+.socialIcons:hover{
+  background: #5b8c51 !important;
+  color: #fff !important;
+  
+}
+a{
+    text-decoration: none !important;
+}
 iframe {
   border: none;
   width: 100%;

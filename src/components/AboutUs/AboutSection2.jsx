@@ -4,7 +4,7 @@ import AnimatedText from "../AnimatedText";
 const AboutSection2 = () => {
   return (
     <div
-      class="about-area position-relative overflow-hidden space-bottom"
+      className="about-area position-relative overflow-hidden space-bottom"
       id="about-sec"
     >
       <div className="container">
