@@ -29,12 +29,7 @@ const Home = () => {
         </span>
       </div>
       {/* Color Switcher Drawer */}
-      <ColorSwitcher isOpen={isDrawerOpen} toggle={toggleDrawer} />
-      <div class="color-scheme-wrap active" onClick={toggleDrawer}>
-        <button class="switchIcon">
-          <i class="fa-solid fa-palette"></i>
-        </button>
-      </div>
+
       <div className="preloader">
         <button className="th-btn preloaderCls">Cancel Preloader</button>
         <div className="preloader-inner">
