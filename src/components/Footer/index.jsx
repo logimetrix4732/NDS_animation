@@ -15,24 +15,37 @@ const Footer = () => {
                     </a>
                   </div>
                   <p className="about-text">
-                    Rapidiously myocardinate cross-platform intellectual capital
-                    model. Appropriately create interactive infrastructures
+                    Empowering India’s dairy sector with sustainable solutions
+                    and farmer-focused services to enhance rural livelihoods.
                   </p>
                   <div className="th-social">
-                    <a href="https://www.facebook.com/">
+                    <a
+                      href="https://www.facebook.com/people/NDDB-Dairy-Services/61557086137103/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <i className="fab fa-facebook-f" />
                     </a>
-                    <a href="https://www.twitter.com/">
+                    <a
+                      href="https://mobile.twitter.com/NDDBDairyServ"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <i className="fab fa-twitter" />
                     </a>
-                    <a href="https://www.linkedin.com/">
+                    <a
+                      href="https://www.linkedin.com/company/nddb-dairy-services/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <i className="fab fa-linkedin-in" />
                     </a>
-                    <a href="https://www.whatsapp.com/">
-                      <i className="fab fa-whatsapp" />
-                    </a>
-                    <a href="https://instagram.com/">
-                      <i className="fab fa-instagram" />
+                    <a
+                      href="https://www.youtube.com/@nddbdairyservices6754"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="fab fa-youtube" />
                     </a>
                   </div>
                 </div>
@@ -147,7 +160,7 @@ const Footer = () => {
                         type="submit"
                         className="th-btn style3"
                         style={{
-                          padding: "8px 16px",
+                          padding: "6px 26px",
                           fontSize: "14px",
                           minWidth: "auto",
                           display: "flex",
@@ -170,21 +183,21 @@ const Footer = () => {
           <div className="row justify-content-lg-between align-items-center">
             <div className="col-lg-6">
               <p className="copyright-text">
-                Copyright © 2025 <a href="index.html">Atek</a>. All Rights
-                Reserved.
+                © 2025 – <a href="index.html">NDDB Dairy Services</a>. All
+                rights reserved.
               </p>
             </div>
             <div className="col-lg-6 text-center text-lg-end">
               <div className="footer-links">
                 <ul>
                   <li>
-                    <a href="about.html">Terms &amp; Conditions</a>
-                  </li>
-                  <li>
-                    <a href="about.html">Careers</a>
-                  </li>
-                  <li>
                     <a href="about.html">Privacy Policy</a>
+                  </li>
+                  <li>
+                    <a href="about.html">Return Policy</a>
+                  </li>
+                  <li>
+                    <a href="about.html">Terms &amp; Conditions</a>
                   </li>
                 </ul>
               </div>

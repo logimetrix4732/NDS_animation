@@ -1,0 +1,11 @@
+.color-scheme-wrap {
+  right: -250px;
+  transition: right 0.3s ease;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.color-scheme-wrap.active {
+  right: 0;
+}

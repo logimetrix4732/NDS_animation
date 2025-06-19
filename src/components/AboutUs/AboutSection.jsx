@@ -1,6 +1,11 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
 import bgCow from "../../Images/bg-cow.png";
+import video4 from "../../Images/Videos/video4.mp4";
+import aboutImg from "../../Images/aboutImg.jpg";
+import aboutImg1 from "../../Images/aboutImg1.jpg";
+import aboutImg2 from "../../Images/aboutImg2.jpg";
+import { Link } from "react-router-dom";
 const AboutSection = () => {
   return (
     <div
@@ -12,13 +17,37 @@ const AboutSection = () => {
           <div className="col-xl-6">
             <div className="img-box1">
               <div className="img1">
-                <img src="assets/img/normal/about_1_1.jpg" alt="About" />
+                <img
+                  src={aboutImg2}
+                  alt="About"
+                  style={{
+                    width: "325px",
+                    height: "630px",
+                    objectFit: "cover",
+                  }}
+                />
               </div>
               <div className="img2">
-                <img src="assets/img/normal/about_1_2.jpg" alt="About" />
+                <img
+                  src={aboutImg1}
+                  alt="About"
+                  style={{
+                    width: "312px",
+                    height: "315px",
+                    objectFit: "cover",
+                  }}
+                />
               </div>
               <div className="img3">
-                <img src="assets/img/normal/about_1_3.jpg" alt="About" />
+                <img
+                  src={aboutImg}
+                  alt="About"
+                  style={{
+                    width: "312px",
+                    height: "315px",
+                    objectFit: "cover",
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -72,9 +101,9 @@ const AboutSection = () => {
                 </div>
               </div>
               <div className="mt-35 wow fadeInUp">
-                <a href="about.html" className="th-btn th-icon">
+                <Link to="/" className="th-btn th-icon">
                   Learn More <i className="fa-light fa-arrow-right-long" />
-                </a>
+                </Link>
               </div>
             </div>
           </div>

@@ -1,0 +1,19 @@
+.titleFontSize {
+  font-size: 15px;
+}
+.paraFontSize {
+  font-size: 14px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 215px;
+  margin-left: 15px;
+}
+@media (max-width: 576px) {
+  .paraFontSize {
+    margin-left: 0;
+  }
+}

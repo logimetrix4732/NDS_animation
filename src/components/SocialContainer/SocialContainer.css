@@ -1,0 +1,152 @@
+.section-container {
+  overflow-x: unset;
+}
+
+@media only screen and (max-width: 767px) {
+  .section-container {
+    overflow-x: hidden;
+  }
+}
+/* ------------------------------------------------------------- major highlight */
+.card-box {
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+.card-box:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 12px 20px 25px 0px rgba(0, 0, 0, 0.15);
+}
+.card-content {
+  height: 160px;
+}
+.card-title-container {
+  height: 60px;
+}
+.card-title {
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 17px;
+  font-weight: 800;
+  color: #404a3d;
+}
+
+.card-desc-container {
+  height: 100%;
+  margin-top: 50px !important;
+}
+.card-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 17px;
+  line-height: 1.4;
+  color: #6c757d;
+}
+.smallCards h6 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 60px;
+}
+.smallCards p {
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 10px;
+}
+/* Hover background color based on class (light versions) */
+.hover-blue:hover {
+  background-color: #e0f4ff !important;
+  color: #000;
+}
+.hover-green:hover {
+  background-color: #d4f5e3 !important;
+  color: #000;
+}
+.hover-yellow:hover {
+  background-color: #fff3cd !important;
+  color: #000;
+}
+.hover-teal:hover {
+  background-color: #e6e0ff !important;
+  color: #000;
+}
+.hover-pink:hover {
+  background-color: #ffe0e0 !important;
+  color: #000;
+}
+.hover-number-box {
+  background-color: inherit !important;
+  transition: background-color 0.3s ease;
+}
+.card-box:hover .card-title,
+.card-box:hover .card-desc,
+.card-box:hover .stat-number {
+  color: inherit !important;
+}
+
+@media (min-width: 576px) and (max-width: 1191px) {
+  .smallCards {
+    margin-top: 100px !important;
+  }
+}
+
+@media (max-width: 575px) {
+  .smallCards p {
+    min-height: 30px !important;
+  }
+}
+@media (max-width: 556px) {
+  .majorHighlitIcon {
+    margin-top: -55px !important;
+  }
+}
+
+@media (max-width: 580px) {
+  .majorHighlitIcon {
+    margin-top: -55px !important;
+  }
+}
+/* ------------------------------------------------------------- major highlight */
+.LeftSideContent {
+  position: absolute;
+  top: 28%;
+  left: 15%;
+  z-index: 10;
+  color: white;
+}
+
+/* SocialContainer.css */
+@media (max-width: 600px) {
+  .LeftSideContent {
+    display: none !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .LeftSideContent {
+    position: relative;
+    top: unset;
+    left: unset;
+    padding: 40px 15px;
+    width: 100%;
+  }
+
+  .LeftSideContent .title-area {
+    padding-right: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .LeftSideContent .sec-title {
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  .LeftSideContent .sub-title {
+    font-size: 14px;
+  }
+
+  .LeftSideContent p {
+    font-size: 14px;
+  }
+}
