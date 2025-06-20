@@ -25244,7 +25244,7 @@ span.select2-selection.select2-selection--single:focus {
   font-size: 34px;
   line-height: 48px;
   text-transform: capitalize;
-  color: var(--black-color2);
+  color: var(--theme-color);
   margin-bottom: 7px;
 }
 .counter-card .counter-title {

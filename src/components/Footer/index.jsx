@@ -1,5 +1,8 @@
 import React from "react";
 import nds_logo from "../../assets/img/nds_logo.png";
+import phone_icon from "../../assets/img/icon/phone_icon.svg";
+import email_icon from "../../assets/img/icon/email_icon.svg";
+import location_icon from "../../assets/img/icon/location_icon.svg";
 const Footer = () => {
   return (
     <footer className="footer-wrapper footer-layout1 black-bg space-top">
@@ -85,7 +88,7 @@ const Footer = () => {
                 <div className="th-widget-contact">
                   <div className="info-box_text">
                     <div className="icon">
-                      <img src="assets/img/icon/phone.svg" alt="img" />
+                      <img src={phone_icon} alt="img" />
                     </div>
                     <div className="details">
                       <p>
@@ -97,7 +100,7 @@ const Footer = () => {
                   </div>
                   <div className="info-box_text">
                     <div className="icon">
-                      <img src="assets/img/icon/envelope.svg" alt="img" />
+                      <img src={email_icon} alt="img" />
                     </div>
                     <div className="details">
                       <p>
@@ -112,7 +115,7 @@ const Footer = () => {
                   </div>
                   <div className="info-box_text">
                     <div className="icon">
-                      <img src="assets/img/icon/location-dot.svg" alt="img" />
+                      <img src={location_icon} alt="img" />
                     </div>
                     <div className="details">
                       <p>

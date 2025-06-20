@@ -91,12 +91,6 @@ const Dashboard = () => {
                           <div className="hero-card_content">
                             <h3 className="box-title">{thumb.title}</h3>
                             <p className="sec-text text-white">{thumb.desc}</p>
-                            <a
-                              href="service-details.html"
-                              className="th-btn style2"
-                            >
-                              Read More
-                            </a>
                           </div>
                         </div>
                       </div>
