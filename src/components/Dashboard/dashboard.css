@@ -37,7 +37,10 @@
 
 .hero-img img {
   width: 100px;
+  height: 100px; /* ADD this line */
+  object-fit: cover; /* Crop properly without stretching */
   border-radius: 8px;
+  display: block;
 }
 
 @keyframes slideInRight {

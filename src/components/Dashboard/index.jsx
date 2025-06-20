@@ -6,33 +6,59 @@ import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import hero_bg_2_1 from "../../assets/img/hero/hero_bg_2_1.jpg";
-import hero_bg_2_2 from "../../assets/img/hero/hero_bg_2_2.jpg";
 import heroarrowleft from "../../assets/img/icon/hero-arrow-left.svg";
 import heroarrowright from "../../assets/img/icon/hero-arrow-right.svg";
+import dashboard1 from "../../Images/dashboard1.jpg";
+import dashboard2 from "../../Images/dashboard2.jpg";
+import dashboard3 from "../../Images/dashboard3.jpg";
+import dashboard4 from "../../Images/dashboard4.jpeg";
 import "./dashboard.css";
 const heroSlides = [
   {
-    bg: hero_bg_2_1,
-    title: "Elevate Your Business to the Cloud",
-    desc: "Welcome to Atek where we specialize in delivering tailored technology and Cloud Computing solutions.",
+    bg: dashboard1,
+    title: "Empowering India's Dairy Sector",
+    desc: "NDDB Dairy Services is committed to building a robust producer-owned dairy cooperative network across the country.",
     thumbs: [
       {
-        img: hero_bg_2_1,
-        title: "Private Cloud",
-        desc: "Combines private and public cloud environment",
+        img: dashboard1,
+        title: "Producer Organizations",
+        desc: "Strengthening farmer institutions through sustainable dairy cooperatives.",
       },
     ],
   },
   {
-    bg: hero_bg_2_2,
-    title: "Elevate Your Business to the Cloud",
-    desc: "Welcome to Atek where we specialize in delivering tailored technology and Cloud Computing solutions.",
+    bg: dashboard2,
+    title: "Sustainable Dairy Development",
+    desc: "We promote animal husbandry practices, productivity enhancement, and rural livelihood through innovative solutions.",
     thumbs: [
       {
-        img: hero_bg_2_2,
-        title: "Hybrid Cloud",
-        desc: "Combines private and public cloud environment",
+        img: dashboard2,
+        title: "Productivity Initiatives",
+        desc: "Focusing on breed improvement, nutrition, and animal health services.",
+      },
+    ],
+  },
+  {
+    bg: dashboard3,
+    title: "Creating Livelihood Opportunities",
+    desc: "Our programs benefit lakhs of dairy farmers, especially women, by ensuring regular income through organized dairying.",
+    thumbs: [
+      {
+        img: dashboard3,
+        title: "Women Empowerment",
+        desc: "Enabling women to lead and participate in dairy-based livelihoods.",
+      },
+    ],
+  },
+  {
+    bg: dashboard4,
+    title: "Innovation in Dairy Services",
+    desc: "From digital solutions to cold chain infrastructure, NDS integrates modern tools to transform dairy systems.",
+    thumbs: [
+      {
+        img: dashboard4,
+        title: "Technology & Infrastructure",
+        desc: "Driving efficiency with digital platforms, automation, cold-chain systems, and robust logistics.",
       },
     ],
   },

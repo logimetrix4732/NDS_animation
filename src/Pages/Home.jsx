@@ -1,22 +1,15 @@
-import React, { useState } from "react";
-import Dashboard from "../components/Dashboard";
+import React from "react";
+import gai from "../Images/gai.gif";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import AboutSection from "../components/AboutUs/AboutSection";
-import AboutSection1 from "../components/AboutUs/AboutSection1";
-import AboutSection2 from "../components/AboutUs/AboutSection2";
-import AboutSection3 from "../components/AboutUs/AboutSection3";
+import Dashboard from "../components/Dashboard";
 import CountNumber from "../components/CountNumber";
-import OurFeatures1 from "../components/Sliders/OurFeatures1";
-import SocialContainer from "../components/SocialContainer";
-import gai from "../Images/gai.gif";
 import ColorSwitcher from "../components/ColorSwitcher";
+import SocialContainer from "../components/SocialContainer";
+import OurFeatures1 from "../components/Sliders/OurFeatures1";
+import AboutSection from "../components/AboutUs/AboutSection";
+import AboutSection2 from "../components/AboutUs/AboutSection2";
 const Home = () => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
-  const toggleDrawer = () => {
-    setIsDrawerOpen((prev) => !prev);
-  };
   return (
     <React.Fragment>
       <div className="slider-drag-cursor d-flex align-items-center justify-content-between">
@@ -28,8 +21,6 @@ const Home = () => {
           <img src="assets/img/icon/drag-arrow-right.svg" alt="" />
         </span>
       </div>
-      {/* Color Switcher Drawer */}
-
       <div className="preloader">
         <button className="th-btn preloaderCls">Cancel Preloader</button>
         <div className="preloader-inner">

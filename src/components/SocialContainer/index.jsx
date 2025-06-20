@@ -167,11 +167,6 @@ const SocialContainer = () => {
                   the innovations, stories, and progress shaping India's dairy
                   future.
                 </p>
-                <div class="wow fadeInUp" data-wow-delay=".4s">
-                  <Link to="/" class="th-btn style7 th-radius th-icon">
-                    Contact Us <i class="fa-light fa-arrow-right-long"></i>
-                  </Link>
-                </div>
               </div>
             </div>
           </div>
