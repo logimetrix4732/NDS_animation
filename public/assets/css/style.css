@@ -7826,7 +7826,8 @@ ol.wp-block-rss {
   }
 }
 .header-layout2 .main-menu > ul > li > a {
-  padding: 38.5px 0px;
+  padding: 30.5px 0px !important;
+  /* padding: 38.5px 0px; */
 }
 .header-layout2 .sticky-wrapper.sticky .menu-area {
   padding-top: 0;
