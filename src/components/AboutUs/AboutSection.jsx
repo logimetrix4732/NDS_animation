@@ -16,7 +16,7 @@ const AboutSection = () => {
         <div className="row">
           <div className="col-xl-6">
             <div className="img-box1">
-              <div className="img1">
+              <div className="img1 wow fadeInUp" data-wow-delay=".4s">
                 <img
                   src={aboutImg2}
                   alt="About"
@@ -27,7 +27,7 @@ const AboutSection = () => {
                   }}
                 />
               </div>
-              <div className="img2">
+              <div className="img2 wow fadeInLeft" data-wow-delay=".4s">
                 <img
                   src={aboutImg1}
                   alt="About"
@@ -38,7 +38,7 @@ const AboutSection = () => {
                   }}
                 />
               </div>
-              <div className="img3">
+              <div className="img3 wow fadeInLeft" data-wow-delay=".4s">
                 <img
                   src={aboutImg}
                   alt="About"
@@ -54,7 +54,10 @@ const AboutSection = () => {
           <div className="col-xl-6">
             <div className="ps-xl-4 ms-xxl-4">
               <div className="title-area about1-title-box mb-20 pe-xxl-5 me-xxl-5">
-                <span className="sub-title style1 text-anime-style-2">
+                <span
+                  className="sub-title style1 text-anime-style-2 wow fadeInUp"
+                  data-wow-delay=".4s"
+                >
                   About Us Our Company
                 </span>
                 <AnimatedText

@@ -11,7 +11,10 @@ const AboutSection2 = () => {
         <div className="row">
           <div className="col-xl-6 col-lg-6">
             <div className="title-area mb-20">
-              <span className="sub-title style1 text-anime-style-2">
+              <span
+                className="sub-title style1 text-anime-style-2 wow fadeInUp"
+                data-wow-delay=".4s"
+              >
                 Who We Are
               </span>
               <AnimatedText
@@ -67,7 +70,10 @@ const AboutSection2 = () => {
             </div>
             <div className="img-box8">
               <div className="row">
-                <div className="col-xl-6 col-md-6 col-sm-6 col-12 d-flex justify-content-center">
+                <div
+                  className="col-xl-6 col-md-6 col-sm-6 col-12 d-flex justify-content-center wow fadeInUp"
+                  data-wow-delay=".4s"
+                >
                   <div className="img1 reveal">
                     <img
                       src={empoweringWomen}
@@ -80,7 +86,10 @@ const AboutSection2 = () => {
                     />
                   </div>
                 </div>
-                <div className="col-xl-6 col-md-6 col-sm-6 col-12 d-flex justify-content-center">
+                <div
+                  className="col-xl-6 col-md-6 col-sm-6 col-12 d-flex justify-content-center wow fadeInUp"
+                  data-wow-delay=".4s"
+                >
                   <div className="img2 reveal">
                     <img
                       src={empoweringWomen1}
@@ -108,7 +117,7 @@ const AboutSection2 = () => {
                   style={{
                     width: "100%",
                     height: "auto",
-                    borderRadius: "12px",
+                    borderRadius: "40px",
                   }}
                 ></video>
               </div>

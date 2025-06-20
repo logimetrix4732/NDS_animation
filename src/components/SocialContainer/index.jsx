@@ -85,11 +85,79 @@ const SocialContainer = () => {
           <div className="col-lg-6 col-xl-6">
             <div className="text-center text-lg-start">
               <div className="title-area contact6-title pe-xl-5 me-xl-5">
-                <span className="sub-title text-white text-anime-style-2">
+                <span
+                  className="sub-title text-white text-anime-style-2 wow fadeInUp"
+                  data-wow-delay=".4s"
+                >
                   Connect With Us
                 </span>
-                <h2 className="sec-title text-white text-anime-style-2">
-                  Join the Journey of Dairy Excellence <br /> with NDDB Services
+                <h2
+                  className="sec-title text-white text-anime-style-2"
+                  style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}
+                >
+                  <span
+                    className="wow fadeInUp"
+                    data-wow-delay="0s"
+                    style={{ display: "inline-block", fontWeight: "bold" }}
+                  >
+                    Join
+                  </span>
+                  <span
+                    className="wow fadeInUp"
+                    data-wow-delay="0.2s"
+                    style={{ display: "inline-block", fontWeight: "bold" }}
+                  >
+                    the
+                  </span>
+                  <span
+                    className="wow fadeInUp"
+                    data-wow-delay="0.4s"
+                    style={{ display: "inline-block", fontWeight: "bold" }}
+                  >
+                    Journey
+                  </span>
+                  <span
+                    className="wow fadeInUp"
+                    data-wow-delay="0.6s"
+                    style={{ display: "inline-block", fontWeight: "bold" }}
+                  >
+                    of
+                  </span>
+                  <span
+                    className="wow fadeInUp"
+                    data-wow-delay="0.8s"
+                    style={{ display: "inline-block", fontWeight: "bold" }}
+                  >
+                    Dairy
+                  </span>
+                  <span
+                    className="wow fadeInUp"
+                    data-wow-delay="1s"
+                    style={{ display: "inline-block", fontWeight: "bold" }}
+                  >
+                    Excellence
+                  </span>
+                  <span
+                    className="wow fadeInUp"
+                    data-wow-delay="1.2s"
+                    style={{ display: "inline-block", fontWeight: "bold" }}
+                  >
+                    with
+                  </span>
+                  <span
+                    className="wow fadeInUp"
+                    data-wow-delay="1.4s"
+                    style={{ display: "inline-block", fontWeight: "bold" }}
+                  >
+                    NDDB
+                  </span>
+                  <span
+                    className="wow fadeInUp"
+                    data-wow-delay="1.6s"
+                    style={{ display: "inline-block", fontWeight: "bold" }}
+                  >
+                    Services
+                  </span>
                 </h2>
                 <p
                   className="contact-text2 text-white wow fadeInUp"
@@ -174,6 +242,7 @@ const SocialContainer = () => {
             href={icon.url}
             target="_blank"
             rel="noopener noreferrer"
+            className="social-icon-link visible"
             style={{
               background: "transparent",
               color: "white",
@@ -182,9 +251,9 @@ const SocialContainer = () => {
               alignItems: "center",
               justifyContent: "center",
               fontSize: "35px",
-              transition: "all 0.4s ease",
               textDecoration: "none",
               zIndex: 5,
+              transitionDelay: `${index * 0.1}s`, // stagger effect
               ...getPositionStyle(index),
             }}
           >

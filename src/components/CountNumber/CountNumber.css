@@ -17,3 +17,22 @@
     margin-left: 0;
   }
 }
+.background-wrapper::before {
+  content: "";
+  background-image: url("../../Images/bg-structure.png");
+  background-size: 100% auto; /* 100% width, height auto adjust hoga */
+  background-repeat: no-repeat;
+  background-position: center top; /* ya center center */
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+.background-wrapper {
+  position: relative;
+  z-index: 1;
+}
