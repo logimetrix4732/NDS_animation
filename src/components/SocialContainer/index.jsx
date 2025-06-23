@@ -181,7 +181,7 @@ const SocialContainer = () => {
           right: 0,
           width: isOpen ? "380px" : "0px",
           height: isOpen ? "380px" : "0px",
-          backgroundColor: "rgba(0, 78, 28, 0.5)",
+          backgroundColor: "rgba(91, 140, 81, 68%)",
           transition: "all 0.4s ease",
           borderRadius: "80% 0 0 0",
           pointerEvents: "none",
@@ -195,7 +195,7 @@ const SocialContainer = () => {
           right: 0,
           width: isOpen ? "320px" : "0px",
           height: isOpen ? "320px" : "0px",
-          backgroundColor: "rgba(0, 78, 28, 0.54)",
+          backgroundColor: "rgba(64, 74, 61, 60%)",
           transition: "all 0.4s ease",
           borderRadius: "80% 0 0 0",
           pointerEvents: "none",
@@ -259,7 +259,7 @@ const SocialContainer = () => {
         <div
           className={`share-toggle ${isOpen ? "bounce" : ""}`}
           style={{
-            backgroundColor: "rgba(0, 78, 28, 0.54)",
+            backgroundColor: "rgba(64, 74, 61, 85%)",
             borderRadius: "50%",
             width: "85px",
             height: "85px",
