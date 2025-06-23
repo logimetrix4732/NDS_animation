@@ -3118,7 +3118,6 @@ hr.title-line {
   margin-bottom: -0.26em;
 }
 
-
 /* @media (min-width: 1199px) and (max-width: 1300px) {
     .header-layout1 .main-menu > ul > li
  {
@@ -7873,7 +7872,7 @@ ol.wp-block-rss {
   -webkit-box-pack: end;
   -webkit-justify-content: end;
   -ms-flex-pack: end;
-  justify-content: end;
+  justify-content: center !important;
 }
 .header-layout3 .header-button {
   position: absolute;
@@ -8719,7 +8718,7 @@ ol.wp-block-rss {
 }
 .info-box_text .details {
   margin-top: -0.3em;
-  padding-top :8px
+  padding-top: 8px;
 }
 .info-box_text .details p {
   color: #b1b8c3;

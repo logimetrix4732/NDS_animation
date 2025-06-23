@@ -14,7 +14,7 @@ const Footer = () => {
                 <div className="th-widget-about">
                   <div className="about-logo">
                     <a href="index.html">
-                      <img src={nds_logo} alt="Atek" width="168" height="46" />
+                      <img src={nds_logo} alt="NDDB" width="168" height="46" />
                     </a>
                   </div>
                   <p className="about-text">

@@ -98,8 +98,15 @@ const Dashboard = () => {
               />
               <div className="container">
                 <div className="hero-style2 text-center text-md-start">
-                  <h1 className="hero-title mb-20">{slide.title}</h1>
-                  <p className="hero-desc">{slide.desc}</p>
+                  <h1
+                    className="hero-title mb-20 wow fadeInUp"
+                    data-wow-delay=".4s"
+                  >
+                    {slide.title}
+                  </h1>
+                  <p className="hero-desc wow fadeInUp" data-wow-delay=".4s">
+                    {slide.desc}
+                  </p>
                 </div>
 
                 <div
@@ -115,8 +122,18 @@ const Dashboard = () => {
                             <img src={thumb.img} alt={thumb.title} />
                           </div>
                           <div className="hero-card_content">
-                            <h3 className="box-title">{thumb.title}</h3>
-                            <p className="sec-text text-white">{thumb.desc}</p>
+                            <h3
+                              className="box-title wow fadeInUp"
+                              data-wow-delay=".4s"
+                            >
+                              {thumb.title}
+                            </h3>
+                            <p
+                              className="sec-text text-white wow fadeInUp"
+                              data-wow-delay=".4s"
+                            >
+                              {thumb.desc}
+                            </p>
                           </div>
                         </div>
                       </div>
