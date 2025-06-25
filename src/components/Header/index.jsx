@@ -37,12 +37,12 @@ const Header = () => {
                   <nav className="main-menu d-none d-xl-inline-block">
                     <ul>
                       <li className="">
-                        <a className="active" href="index.html">
+                        <a className="active" href="/">
                           Home
                         </a>
                       </li>
                       <li className="">
-                        <a href="#">About Us</a>
+                        <a href="/">About Us</a>
                       </li>
                       <li className="">
                         <a href="#">Our Experties</a>

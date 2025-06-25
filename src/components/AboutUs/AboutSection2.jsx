@@ -150,10 +150,7 @@ const AboutSection2 = () => {
                 </div>
               </div>
               <div className="mt-35 wow fadeInUp" data-wow-delay=".5s">
-                <a
-                  href="about.html"
-                  className="th-btn black-btn th-radius th-icon"
-                >
+                <a href="/" className="th-btn black-btn th-radius th-icon">
                   Learn More <i className="fa-light fa-arrow-right-long"></i>
                 </a>
               </div>

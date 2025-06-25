@@ -4,13 +4,19 @@ import Home from "./Pages/Home";
 // import 'bootstrap/dist/js/bootstrap.bundle.min';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import "remixicon/fonts/remixicon.css";
+import AboutUs from "./Pages/AboutUs";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
     <Router>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/aboutUs" element={<AboutUs />} />
       </Routes>
+      <Footer />
       <div className="scroll-top">
         <svg
           className="progress-circle svg-content"

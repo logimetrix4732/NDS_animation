@@ -21,24 +21,12 @@ const Home = () => {
           <img src="assets/img/icon/drag-arrow-right.svg" alt="" />
         </span>
       </div>
-      <div className="preloader">
-        <button className="th-btn preloaderCls">Cancel Preloader</button>
-        <div className="preloader-inner">
-          <img src={gai} alt="img" style={{ width: "auto", height: "180px" }} />
-
-          <span className="loader">
-            NDDB <span className="loading-text">NDDB</span>
-          </span>
-        </div>
-      </div>
-      <Header />
       <Dashboard />
       <AboutSection />
       <AboutSection2 />
       <OurFeatures1 />
       <CountNumber />
       <SocialContainer />
-      <Footer />
     </React.Fragment>
   );
 };
