@@ -6,7 +6,10 @@ import empoweringWomen1 from "../../Images/empoweringWomen1.jpg";
 import checkMarkIcon from "../../Images/checkMarkIcon.jpg";
 const AboutSection2 = () => {
   return (
-    <div class="about-area position-relative overflow-hidden " id="about-sec">
+    <div
+      className="about-area position-relative overflow-hidden "
+      id="about-sec"
+    >
       <div className="container">
         <div className="row">
           <div className="col-xl-6 col-lg-6">

@@ -32,6 +32,7 @@ const AnimatedText = ({
   className = "",
   tag = "h2",
   width = "",
+  style = {},
 }) => {
   const words = text.split(" ");
   const MotionTag = motion[tag];
@@ -48,6 +49,7 @@ const AnimatedText = ({
         flexWrap: "wrap",
         width: width,
         maxWidth: "1200px",
+        ...style,
       }}
     >
       {words.map((word, index) => (

@@ -6973,6 +6973,9 @@ ol.wp-block-rss {
   position: relative;
   z-index: 41;
 }
+.no-horizontal-gutter {
+  --bs-gutter-x: 0 !important;
+}
 .th-header .icon-btn {
   border-radius: 99px;
 }
@@ -7504,6 +7507,8 @@ ol.wp-block-rss {
 @media (max-width: 1199px) {
   .header-layout1 .th-container {
     max-width: 100%;
+        margin: 0 5px 0px 0px !important; 
+
   }
 }
 .header-layout1 .header-top {
@@ -7829,7 +7834,7 @@ ol.wp-block-rss {
   /* padding: 38.5px 0px; */
 }
 .header-layout2 .sticky-wrapper.sticky .menu-area {
-  padding-top: 0;
+  padding-top: 5px;
 }
 @media (max-width: 1199px) {
   .header-layout2 .sticky-wrapper.sticky .menu-area {

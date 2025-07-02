@@ -1,5 +1,5 @@
-a{
-    text-decoration: none !important;
+a {
+  text-decoration: none !important;
 }
 
 .customCloseBtn {
@@ -11,13 +11,13 @@ a{
 }
 
 .customCloseBtn:hover {
-  background-color: #5b8c51;  
-  transform: rotate(90deg);   
+  background-color: #5b8c51;
+  transform: rotate(90deg);
   color: white;
 }
 
 .customCloseBtn {
-  background-color: #f8f9fa; 
+  background-color: #f8f9fa;
   border: 1px solid gray;
   padding: 15px;
   border-radius: 50%;
@@ -25,31 +25,31 @@ a{
 }
 
 .customCloseBtn:hover {
-  background-color: #5b8c51;  
-  transform: rotate(180deg);   
+  background-color: #5b8c51;
+  transform: rotate(180deg);
   color: white !important;
 }
 
-.contactHead{
+.contactHead {
   color: #5b8c51 !important;
   font-weight: 900 !important;
   font-size: 22px !important;
 }
 
 .contactUsHover {
-  transition: background 1s cubic-bezier(0.075, 0.82, 0.165, 1), 
-              color 1s cubic-bezier(0.075, 0.82, 0.165, 1) !important;
+  transition: background 1s cubic-bezier(0.075, 0.82, 0.165, 1),
+    color 1s cubic-bezier(0.075, 0.82, 0.165, 1) !important;
 }
 
 .contactUsHover:hover {
   background: #5b8c51 !important;
   color: #fff !important;
 }
-.contactInfo span{
+.contactInfo span {
   font-weight: 500 !important;
 }
 
-.addressLink:hover{
+.addressLink:hover {
   /* text-decoration: underline !important; */
   color: #5b8c51 !important;
 }
@@ -57,8 +57,6 @@ a{
 @media (max-width: 1199px) {
   .small-screen-padding {
     /* margin-top: 2px !important;  */
-    margin-left: 5px !important; 
+    margin-left: 5px !important;
   }
 }
-
-

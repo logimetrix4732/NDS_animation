@@ -11,6 +11,7 @@ import service_4_3 from "../../assets/img/service/service_4_3.jpg";
 import service_4_1Icon from "../../assets/img/icon/service_4_1.svg";
 import service_4_2Icon from "../../assets/img/icon/service_4_2.svg";
 import service_4_3Icon from "../../assets/img/icon/service_4_3.svg";
+import AnimatedText from "../AnimatedText";
 
 const serviceItems = [
   {
@@ -69,21 +70,23 @@ const OurFeatures2 = () => {
       className="service-area4 space"
       id="service-sec"
       style={{
-        backgroundImage: `url(${service_bg_4})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        backgroundColor: "#f2f5fa",
       }}
     >
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-8">
             <div className="title-area text-center">
-              <span className="sub-title text-anime-style-2">
+              <span className="sub-title text-anime-style-2 wow fadeInUp">
                 Services We’re Offering
               </span>
-              <h2 className="sec-title text-anime-style-3">
-                Key Services Offered by a Startup Tech Agency
-              </h2>
+              <AnimatedText
+                text="Key Services Offered by a Startup Tech Agency"
+                tag="h2"
+                className="sec-title mb-10 heading"
+                width="100%"
+                style={{ justifyContent: "center" }}
+              />
             </div>
           </div>
         </div>
@@ -108,7 +111,7 @@ const OurFeatures2 = () => {
             {serviceItems.map((item, index) => (
               <SwiperSlide key={index}>
                 <div className="service-item style4 th-ani">
-                  <div className="service-img position-relative">
+                  <div className="service-img position-relative wow fadeInUp">
                     <a href="service-details.html">
                       <img src={item.img} alt="service" />
                     </a>
@@ -116,7 +119,7 @@ const OurFeatures2 = () => {
                       <img src={item.icon} alt="" />
                     </span>
                   </div>
-                  <div className="service-content text-start">
+                  <div className="service-content text-start wow fadeInUp">
                     <h3 className="box-title">
                       <a href="service-details.html">{item.title}</a>
                     </h3>

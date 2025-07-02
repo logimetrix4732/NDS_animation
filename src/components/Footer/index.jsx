@@ -163,7 +163,7 @@ const Footer = () => {
                         type="submit"
                         className="th-btn style3"
                         style={{
-                          padding: "6px 26px",
+                          padding: "24px 26px",
                           fontSize: "14px",
                           minWidth: "auto",
                           display: "flex",

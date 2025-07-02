@@ -1,27 +1,30 @@
-import React from "react";
-import nds_logo from "../../assets/img/nds_logo.png";
-import gall1 from "../../assets/img/gallery/gall-3.jpg";
-import gall2 from "../../assets/img/gallery/gall-4.jpg";
-import gall3 from "../../assets/img/gallery/gall-5.jpg";
-import gall4 from "../../assets/img/gallery/gall-6.webp";
-import gall5 from "../../assets/img/gallery/gall-7.jpg";
-import gall6 from "../../assets/img/gallery/gall-8.jpg";
-import "./Header.css";
+import { useState } from "react";
 import SideMenu from "../SideMenu";
+import nds_logo from "../../assets/img/nds_logo.png";
+import { Link, useLocation } from "react-router-dom";
+import "./Header.css";
 
 const Header = () => {
-  const gallary = [gall1, gall2, gall3, gall4, gall5, gall6];
-
+  const [openRight, setOpenRight] = useState(false);
+  const [openLeft, setOpenLeft] = useState(false);
+  const location = useLocation();
+  const currentPath = location.pathname;
   return (
     <>
       <header className="th-header header-layout1 header-layout2">
+        <SideMenu
+          openRight={openRight}
+          openLeft={openLeft}
+          setOpenLeft={setOpenLeft}
+          setOpenRight={setOpenRight}
+        />
         <div className="sticky-wrapper">
           <div
             className="menu-area"
             data-bg-src="assets/img/bg/line-pattern.png"
           >
             <div className="th-container">
-              <div className="row align-items-center justify-content-between small-screen-padding">
+              <div className="row no-horizontal-gutter align-items-center justify-content-between small-screen-padding">
                 <div className="col-xl-2 col-xxl-2 col-auto text-center">
                   <div className="header-logo">
                     <a href="/">
@@ -37,12 +40,17 @@ const Header = () => {
                   <nav className="main-menu d-none d-xl-inline-block">
                     <ul>
                       <li className="">
-                        <a className="active" href="/">
+                        <Link
+                          className={currentPath === "/" ? "active" : ""}
+                          to="/"
+                        >
                           Home
-                        </a>
+                        </Link>
                       </li>
-                      <li className="">
-                        <a href="/">About Us</a>
+                      <li
+                        className={currentPath === "/aboutUs" ? "active" : ""}
+                      >
+                        <Link to="/aboutUs">About Us</Link>
                       </li>
                       <li className="">
                         <a href="#">Our Experties</a>
@@ -81,8 +89,9 @@ const Header = () => {
                     data-bs-toggle="offcanvas"
                     data-bs-target="#mobileMenu"
                     aria-controls="mobileMenu"
+                    onClick={() => setOpenLeft(true)}
                   >
-                    <i className="far fa-bars"></i>
+                    <i className="fa-solid fa-bars"></i>
                   </button>
                 </div>
                 <div className="col-xl-2 col-xxl-3 col-auto d-none d-xl-block text-center">
@@ -93,7 +102,8 @@ const Header = () => {
                     }}
                   >
                     <a href="/" className="th-btn th-icon d-none d-xxl-block">
-                      Contact Us <i class="fa-light fa-arrow-right-long"></i>
+                      Contact Us{" "}
+                      <i className="fa-light fa-arrow-right-long"></i>
                     </a>
                     <button
                       type="button"
@@ -104,6 +114,7 @@ const Header = () => {
                       style={{
                         borderRadius: "8px",
                       }}
+                      onClick={() => setOpenRight(true)}
                     >
                       <i className="fa-solid fa-bars"></i>
                     </button>

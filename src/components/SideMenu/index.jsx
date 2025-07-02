@@ -1,156 +1,241 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  Drawer,
-  IconButton,
   Box,
-  Typography,
-  Divider,
   List,
+  Drawer,
   ListItem,
+  IconButton,
+  Typography,
   ListItemText,
-  Link,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import MenuIcon from "@mui/icons-material/Menu";
-import FacebookIcon from "@mui/icons-material/Facebook";
+import PhoneIcon from "@mui/icons-material/Phone";
+import EmailIcon from "@mui/icons-material/Email";
+import nds_logo from "../../assets/img/nds_logo.png";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import FacebookIcon from "@mui/icons-material/Facebook";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import PhoneIcon from "@mui/icons-material/Phone";
-import EmailIcon from "@mui/icons-material/Email";
-import nds_logo from "../../assets/img/nds_logo.png"; // update the path
+import { Link } from "react-router-dom";
 
-const gallary = [];
-
-const SideMenu = () => {
-  const [openRight, setOpenRight] = useState(false);
-  const [openLeft, setOpenLeft] = useState(false);
+const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
+  const menuItems = [
+    { text: "Home", to: "/" },
+    { text: "About Us", to: "/aboutUs" },
+    { text: "Our Experties", to: "/experties" },
+    { text: "Milk Producer Org.", to: "/milk-producer-org" },
+    { text: "Semen Station", to: "/semen-station" },
+    { text: "New Initiative", to: "/new-initiative" },
+    { text: "Publications", to: "/publications" },
+    { text: "Careers", to: "/careers" },
+    { text: "Tenders", to: "/tenders" },
+    { text: "Contact Us", to: "/contact" },
+  ];
 
   const contactInfo = (
-    <Box p={2}>
-      <Box display="flex" justifyContent="space-between" alignItems="center">
+    <Box
+      sx={{
+        width: "360px",
+        bgcolor: "#fff",
+        height: "100%",
+        p: 3,
+        display: "flex",
+        flexDirection: "column",
+        overflowY: "auto",
+      }}
+    >
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        mb={2}
+      >
         <img
           src={nds_logo}
-          alt="NDDB"
-          style={{ width: "150px", height: "70px" }}
+          alt="Atek"
+          style={{ width: "120px", objectFit: "contain" }}
         />
-        <IconButton onClick={() => setOpenRight(false)}>
+        <IconButton
+          onClick={() => setOpenRight(false)}
+          sx={{ color: "#333", border: "2px solid #0b1422" }}
+        >
           <CloseIcon />
         </IconButton>
       </Box>
-      <Divider sx={{ my: 2 }} />
 
-      <Box display="flex" flexWrap="wrap" gap={1} mb={2}>
-        {gallary.map((img, index) => (
-          <Box key={index} sx={{ width: "30%" }}>
-            <img
-              src={img}
-              alt={`Gallery ${index + 1}`}
-              style={{ width: "100%", borderRadius: 8 }}
+      <p className="about-text">
+        Quick access to essential system features, including the dashboard for
+        an overview of operations, network settings for managing connectivity,
+        system logs for tracking activities.
+      </p>
+
+      <Box display="flex" gap={1.5} mb={3}>
+        {[FacebookIcon, TwitterIcon, WhatsAppIcon, LinkedInIcon, EmailIcon].map(
+          (Icon, idx) => (
+            <Box
+              key={idx}
+              sx={{
+                border: "1px solid #ccc",
+                borderRadius: "50%",
+                p: "6px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "0.3s",
+                "&:hover": {
+                  bgcolor: "#5b8c51",
+                  color: "#fff",
+                  borderColor: "#5b8c51",
+                },
+                cursor: "pointer",
+                color: "#0b1422",
+              }}
+              className="th-social"
+            >
+              <Icon sx={{ fontSize: "20px" }} />
+            </Box>
+          )
+        )}
+      </Box>
+
+      <Box mb={3}>
+        <Typography variant="h6" fontWeight={600} mb={2}>
+          Recent Posts
+        </Typography>
+        {[1, 2].map((item) => (
+          <Box key={item} display="flex" mb={2}>
+            <Box
+              component="img"
+              src={`/assets/img/blog/recent-post-1-${item}.jpg`}
+              alt={`Post ${item}`}
+              sx={{
+                width: 85,
+                borderRadius: 2,
+                objectFit: "cover",
+                mr: 2,
+              }}
             />
+            <Box>
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                display="flex"
+                alignItems="center"
+                mb={0.5}
+              >
+                <i className="far fa-calendar" style={{ marginRight: 5 }}></i>
+                {item === 1 ? "24 Jun , 2025" : "22 Jun , 2025"}
+              </Typography>
+              <h6>
+                {item === 1
+                  ? "Where Vision Meets Concrete Reality"
+                  : "Raising The Bar In Construction."}
+              </h6>
+            </Box>
           </Box>
         ))}
       </Box>
 
-      <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-        CONTACT INFO
-      </Typography>
+      <Box>
+        <Typography variant="h6" fontWeight={600} mb={2}>
+          Get In Touch
+        </Typography>
 
-      <Box display="flex" alignItems="flex-start" mb={2}>
-        <LocationOnIcon sx={{ mr: 1, color: "#555" }} />
-        <Link
-          href="https://www.google.com/maps/place/NDDB+Dairy+Services/"
-          target="_blank"
-          underline="none"
-          color="inherit"
-        >
-          NDDB House, Safdarjung Enclave,
-          <br />
-          New Delhi, Southwest Delhi, Delhi 110029
-        </Link>
-      </Box>
+        <Box display="flex" alignItems="flex-start" mb={2}>
+          <PhoneIcon sx={{ color: "#5b8c51", mr: 1 }} />
+          <Box>
+            <Typography className="about-text">+01 234 567 890</Typography>
+            <Typography variant="body2">+09 876 543 210</Typography>
+          </Box>
+        </Box>
 
-      <Box display="flex" alignItems="center" mb={2}>
-        <PhoneIcon sx={{ mr: 1, color: "#555" }} />
-        <Typography>+91 7092922421</Typography>
-      </Box>
+        <Box display="flex" alignItems="flex-start" mb={2}>
+          <EmailIcon sx={{ color: "#5b8c51", mr: 1 }} />
+          <Box>
+            <Typography variant="body2">mailinfo00@atek.com</Typography>
+            <Typography variant="body2">support24@atek.com</Typography>
+          </Box>
+        </Box>
 
-      <Box display="flex" alignItems="center">
-        <EmailIcon sx={{ mr: 1, color: "#555" }} />
-        <Typography>enquiry@nddbdairyservices.com</Typography>
-      </Box>
-
-      <Box display="flex" gap={2} mt={3}>
-        <FacebookIcon sx={iconStyle} />
-        <TwitterIcon sx={iconStyle} />
-        <WhatsAppIcon sx={iconStyle} />
-        <LinkedInIcon sx={iconStyle} />
+        <Box display="flex" alignItems="flex-start">
+          <LocationOnIcon sx={{ color: "#5b8c51", mr: 1 }} />
+          <Typography variant="body2">
+            789 Inner Lane, Holy park, <br />
+            California, USA
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );
-
   const mobileMenu = (
-    <Box p={2} textAlign="center">
-      <Box display="flex" justifyContent="space-between" alignItems="center">
+    <Box
+      sx={{
+        p: 3,
+        width: "280px",
+        bgcolor: "#fff",
+        height: "100%",
+      }}
+    >
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        mb={2}
+      >
         <img
           src={nds_logo}
           alt="NDDB"
-          style={{ width: "170px", height: "76px" }}
+          style={{ width: "150px", height: "60px" }}
         />
-        <IconButton onClick={() => setOpenLeft(false)}>
+        <IconButton
+          onClick={() => setOpenLeft(false)}
+          sx={{ color: "#333", border: "2px solid #0b1422" }}
+        >
           <CloseIcon />
         </IconButton>
       </Box>
-      <Divider sx={{ my: 2 }} />
+
       <List>
-        {[
-          "Home",
-          "About Us",
-          "Our Experties",
-          "Milk Producer Org.",
-          "Semen Station",
-          "New Initiative",
-          "Publications",
-          "Careers",
-          "Tenders",
-          "Contact Us",
-        ].map((text, index) => (
-          <ListItem button key={index}>
-            <ListItemText primary={text} />
+        {menuItems.map((item, index) => (
+          <ListItem
+            button
+            key={index}
+            sx={{
+              borderBottom: "1px solid #eee",
+              "&:hover": { bgcolor: "#f0f0f0" },
+              p: 0,
+            }}
+          >
+            <Link
+              to={item.to}
+              onClick={() => setOpenLeft(false)}
+              style={{
+                display: "block",
+                width: "100%",
+                padding: "6px 16px",
+                textDecoration: "none",
+              }}
+            >
+              <ListItemText
+                primary={item.text}
+                primaryTypographyProps={{
+                  fontWeight: 500,
+                  fontSize: "16px",
+                  color: "#222",
+                }}
+              />
+            </Link>
           </ListItem>
         ))}
       </List>
     </Box>
   );
-
-  const iconStyle = {
-    border: "1px solid #e3e1e1",
-    borderRadius: "50%",
-    padding: "5px",
-    fontSize: "30px",
-    color: "#555",
-    cursor: "pointer",
-  };
-
   return (
-    <>
-      {/* Trigger buttons (for demonstration) */}
-      <Box display="flex" gap={2} p={2}>
-        <IconButton onClick={() => setOpenLeft(true)}>
-          <MenuIcon />
-        </IconButton>
-        <IconButton onClick={() => setOpenRight(true)}>
-          <MenuIcon />
-        </IconButton>
-      </Box>
-
-      {/* Mobile Menu - Drawer Left */}
+    <React.Fragment>
       <Drawer anchor="left" open={openLeft} onClose={() => setOpenLeft(false)}>
         {mobileMenu}
       </Drawer>
-
-      {/* Desktop Menu - Drawer Right */}
       <Drawer
         anchor="right"
         open={openRight}
@@ -158,7 +243,7 @@ const SideMenu = () => {
       >
         {contactInfo}
       </Drawer>
-    </>
+    </React.Fragment>
   );
 };
 
