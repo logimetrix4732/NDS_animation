@@ -52,12 +52,12 @@ const AboutSection = () => {
                   width="100%"
                 />
                 <p className="sec-text mb-30 wow fadeInUp" data-wow-delay=".1s">
-                  NDDB Dairy Services (NDS) is a not-for-profit Section 8
-                  company, fully owned by the National Dairy Development Board
-                  (NDDB). Acting as NDDB's field-level implementation arm, NDS
-                  supports the formation and strengthening of Farmer Producer
-                  Companies (PCs) and drives productivity enhancement
-                  initiatives for dairy animals across India.
+                  NDDB Dairy Services (NDS), a Section 8 company registered
+                  under the Companies Act, is a wholly owned subsidiary of the
+                  National Dairy Development Board (NDDB). It functions as the
+                  delivery arm of NDDB for field operations relating to
+                  promoting Milk Producer Organisations (MPOs) and Productivity
+                  Enhancement Services for milch animals.
                 </p>
               </div>
 

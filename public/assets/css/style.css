@@ -8532,7 +8532,7 @@ ol.wp-block-rss {
   width: 100%;
 }
 .copyright-wrap {
-  padding: 22px 0;
+  padding: 12px 0;
   background-color: #5b8c51;
 }
 .copyright-wrap .copyright-text {
@@ -9526,7 +9526,7 @@ blockquote.has-very-dark-gray-color {
 .blog-meta span,
 .blog-meta a {
   display: inline-block;
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 400;
   line-height: 24px;
   color: var(--body-color);
@@ -30449,6 +30449,81 @@ span.select2-selection.select2-selection--single:focus {
   font-weight: 400;
   color: var(--gray-color);
   margin-bottom: -0.3em;
+}
+.bd-news__border {
+  border-top: 1px solid var(--theme-color);
+  padding-top: 15px;
+}
+.bd-news__meta {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+@media (max-width: 575px) {
+  .bd-news__meta {
+    gap: 30px;
+  }
+}
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+  .bd-news__meta {
+    gap: 25px;
+  }
+}
+.bd-news__meta-item:last-child span::before {
+  display: none;
+}
+.bd-news__meta-item span {
+  position: relative;
+  font-size: 14px;
+  display: flex;
+  align-items: flex-start; 
+  gap: 6px;
+}
+
+.bd-news__meta-item span i {
+  margin-right: 5px;
+  color: var(--clr-theme-1);
+}
+.bd-news__meta-item span:before {
+  position: absolute;
+  content: "";
+  height: 2px;
+  width: 5px;
+  background: #e6e6e6;
+  right: -18px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.bd-news__meta-item:last-child span::before {
+  display: none;
+}
+.bd-news__meta-item span {
+  position: relative;
+  font-size: 14px;
+  display: flex;
+  align-items: flex-start; 
+  gap: 6px;
+}
+
+.bd-news__meta-item span i {
+  margin-right: 5px;
+  color: var(--clr-theme-1);
+}
+.bd-news__meta-item span:before {
+  position: absolute;
+  content: "";
+  height: 2px;
+  width: 5px;
+  background: #e6e6e6;
+  right: -18px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .service-title-box .sec-title {
   margin-bottom: 15px;

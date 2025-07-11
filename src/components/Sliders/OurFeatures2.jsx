@@ -3,8 +3,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-
-import service_bg_4 from "../../assets/img/bg/service_bg_4.jpg";
 import service_4_1 from "../../assets/img/service/service_4_1.jpg";
 import service_4_2 from "../../assets/img/service/service_4_2.jpg";
 import service_4_3 from "../../assets/img/service/service_4_3.jpg";
@@ -17,49 +15,71 @@ const serviceItems = [
   {
     img: service_4_1,
     icon: service_4_1Icon,
-    title: "Product Development",
+    title: "Dr. Meenesh Shah",
+    author: "Chairman, NDDB and NDDB Dairy Services ",
     desc: "From idea to execution, the agency helps startups design, develop, and launch software products, apps, and platforms. Focus on user-centric design (UI/UX) to ensure an engaging customer.",
   },
   {
     img: service_4_2,
     icon: service_4_2Icon,
-    title: "Marketing Strategy",
+    title: "Dr. C. P. Devanand",
+    author: "Managing Director ",
     desc: "Crafting innovative marketing strategies tailored to each client's needs and target audience. Utilizing data-driven insights to optimize campaigns for maximum impact.",
   },
   {
     img: service_4_3,
     icon: service_4_3Icon,
-    title: "Brand Identity",
+    title: "Dr. Rajeev Krishnan",
+    author: "Executive Director ",
     desc: "Developing unique brand identities that resonate with consumers and differentiate from competitors. Building visual assets and brand guidelines for cohesive brand representation.",
-  },
-  {
-    img: service_4_1,
-    icon: service_4_1Icon,
-    title: "CloudPulse Services",
-    desc: "From idea to execution, the agency helps startups design, develop, and launch software products, apps, and platforms. Focus on user-centric design (UI/UX) to ensure an engaging customer.",
   },
   {
     img: service_4_2,
     icon: service_4_2Icon,
-    title: "Innovative IT Hub",
+    title: "Shri S. Regupathi",
+    author: "Executive Director, Operations, NDDB ",
     desc: "Crafting innovative marketing strategies tailored to each client's needs and target audience. Utilizing data-driven insights to optimize campaigns for maximum impact.",
   },
   {
     img: service_4_3,
     icon: service_4_3Icon,
-    title: "NetPulse IT",
+    title: "Shri T.M. Vijay Bhaskar",
+    author: "Retired IAS ",
     desc: "Developing unique brand identities that resonate with consumers and differentiate from competitors. Building visual assets and brand guidelines for cohesive brand representation.",
   },
   {
     img: service_4_1,
     icon: service_4_1Icon,
-    title: "HyperTech Solutions",
+    title: "Shri Manish Bandlish",
+    author: "Managing Director, Mother Dairy Fruit and Vegetables Pvt Ltd ",
     desc: "Developing unique brand identities that resonate with consumers and differentiate from competitors. Building visual assets and brand guidelines for cohesive brand representation.",
   },
   {
     img: service_4_2,
     icon: service_4_2Icon,
-    title: "ByteForce IT",
+    author: "General Manager ",
+    title: "Shri Abhijeet Bhattacharjee",
+    desc: "Developing unique brand identities that resonate with consumers and differentiate from competitors. Building visual assets and brand guidelines for cohesive brand representation.",
+  },
+  {
+    img: service_4_2,
+    icon: service_4_2Icon,
+    title: "Dr. Alka Mahajan",
+    author: "",
+    desc: "Developing unique brand identities that resonate with consumers and differentiate from competitors. Building visual assets and brand guidelines for cohesive brand representation.",
+  },
+  {
+    img: service_4_2,
+    icon: service_4_2Icon,
+    title: "Shri Durga Shanker Mishra",
+    author: "",
+    desc: "Developing unique brand identities that resonate with consumers and differentiate from competitors. Building visual assets and brand guidelines for cohesive brand representation.",
+  },
+  {
+    img: service_4_2,
+    icon: service_4_2Icon,
+    title: "Shri Kamlesh Trivedi",
+    author: "",
     desc: "Developing unique brand identities that resonate with consumers and differentiate from competitors. Building visual assets and brand guidelines for cohesive brand representation.",
   },
 ];
@@ -124,6 +144,19 @@ const OurFeatures2 = () => {
                       <a href="service-details.html">{item.title}</a>
                     </h3>
                     <p className="service-text">{item.desc}</p>
+                    <div className="bd-news__border">
+                      <div className="bd-news__meta">
+                        <div className="bd-news__meta-item">
+                          <span>
+                            <i
+                              className="fa-solid fa-user"
+                              style={{ color: "#5b8c51", marginRight: "5px" }}
+                            />
+                            {item.author}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                     <a
                       href="service-details.html"
                       className="th-btn style4 th-icon"

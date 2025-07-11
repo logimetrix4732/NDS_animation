@@ -53,7 +53,7 @@ const Header = () => {
                         <Link to="/aboutUs">About Us</Link>
                       </li>
                       <li className="">
-                        <a href="#">Our Experties</a>
+                        <Link to="/ourExperties">Our Experties</Link>
                       </li>
                       <li className="">
                         <a href="#">Milk Producer Org.</a>

@@ -111,7 +111,10 @@ const AboutSection5 = () => {
                   <div className="about-item_img wow fadeInLeft">
                     <img src="assets/img/icon/th-shield.svg" alt="" />
                   </div>
-                  <div className="about-item_centent wow fadeInUp">
+                  <div
+                    className="about-item_centent wow fadeInUp"
+                    data-wow-delay=".4s"
+                  >
                     <h5 className="box-title">Responsive Design</h5>
                     <p className="about-item_text">
                       Practices designed to safeguard digital assets and ensure
@@ -122,7 +125,10 @@ const AboutSection5 = () => {
                   <div className="about-item_img wow fadeInRight">
                     <img src="assets/img/icon/th-shield.svg" alt="" />
                   </div>
-                  <div className="about-item_centent wow fadeInUp">
+                  <div
+                    className="about-item_centent wow fadeInUp"
+                    data-wow-delay=".4s"
+                  >
                     <h5 className="box-title">Custom Functionality</h5>
                     <p className="about-item_text">
                       Practices designed to safeguard digital assets and ensure
@@ -133,7 +139,10 @@ const AboutSection5 = () => {
                   <div className="about-item_img wow fadeInLeft">
                     <img src="assets/img/icon/th-shield.svg" alt="" />
                   </div>
-                  <div className="about-item_centent wow fadeInUp">
+                  <div
+                    className="about-item_centent wow fadeInUp"
+                    data-wow-delay=".4s"
+                  >
                     <h5 className="box-title">Integration Capabilities</h5>
                     <p className="about-item_text">
                       Practices designed to safeguard digital assets and ensure
@@ -141,7 +150,7 @@ const AboutSection5 = () => {
                   </div>
                 </div>
               </div>
-              <div className="about-image9 wow fadeInUp">
+              <div className="about-image9 wow fadeInUp" data-wow-delay=".4s">
                 <img src="assets/img/normal/about_8_3.jpg" alt="" />
                 <div className="cilent-box ">
                   <span className="review">

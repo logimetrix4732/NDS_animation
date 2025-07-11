@@ -3,7 +3,7 @@ import AnimatedText from "../AnimatedText";
 
 const AboutSection3 = () => {
   return (
-    <section className="choose-6-area space-bottom">
+    <section className="choose-6-area space">
       <div className="container">
         <div className="row gy-4 align-items-start">
           <div className="col-xl-5 order-1 order-xl-0">
