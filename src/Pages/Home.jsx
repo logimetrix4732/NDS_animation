@@ -20,7 +20,6 @@ const Home = () => {
       </div>
       <Dashboard />
       <AboutSection />
-      <BlogAndArticle1 />
       <AboutSection2 />
       <OurFeatures1 />
       <CountNumber />
