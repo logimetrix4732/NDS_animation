@@ -6,7 +6,7 @@ import OurFeatures1 from "../components/Sliders/OurFeatures1";
 import AboutSection from "../components/AboutUs/AboutSection";
 import AboutSection2 from "../components/AboutUs/AboutSection2";
 import BlogAndArticle1 from "../components/BlogandArticleComponents/BlogAndArticle1";
-import banner from "../Images/banner2.png";
+import banner from "../Images/banner3.png";
 const Home = () => {
   return (
     <React.Fragment>
@@ -29,7 +29,7 @@ const Home = () => {
         }}
         className="space-bottom"
       >
-        <img src={banner} alt="" />
+        <img src={banner} alt="" style={{ width: "1500px" }} />
       </div>
       <AboutSection2 />
       <OurFeatures1 />

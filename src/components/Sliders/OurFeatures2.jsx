@@ -87,7 +87,7 @@ const serviceItems = [
 const OurFeatures2 = () => {
   return (
     <section
-      className="service-area4 space"
+      className="service-area4 space-bottom"
       id="service-sec"
       style={{
         backgroundColor: "#f2f5fa",

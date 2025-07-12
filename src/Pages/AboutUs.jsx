@@ -4,6 +4,7 @@ import AboutSection5 from "../components/AboutUs/AboutSection5";
 import OurFeatures2 from "../components/Sliders/OurFeatures2";
 import breadcumbbg from "../assets/img/bg/breadcumb-bg.jpg";
 import { Link } from "react-router-dom";
+import banner4 from "../Images/banner4.png";
 
 const AboutUs = () => {
   return (
@@ -11,7 +12,7 @@ const AboutUs = () => {
       <div
         className="breadcumb-wrapper"
         style={{
-          backgroundImage: `url(${breadcumbbg})`,
+          backgroundImage: `url(${banner4})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

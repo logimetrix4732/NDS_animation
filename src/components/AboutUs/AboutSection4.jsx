@@ -1,15 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import AnimatedText from "../AnimatedText";
 import aboutImg3 from "../../Images/aboutImg3.jpg";
 import aboutImg4 from "../../Images/aboutImg4.jpg";
 
 const AboutSection4 = () => {
-  const [showFullContent, setShowFullContent] = useState(false);
-
-  const toggleContent = () => {
-    setShowFullContent(!showFullContent);
-  };
-
   return (
     <div
       className="about-area position-relative overflow-hidden space"
@@ -53,87 +47,59 @@ const AboutSection4 = () => {
                   About Us
                 </span>
                 <AnimatedText
-                  text="NDDB Dairy Services (NDS)"
+                  text="Empowering India's Dairy Farmers"
                   tag="h2"
                   className="sec-title mb-10 heading text-anime-style-3"
                   width="100%"
                 />
               </div>
-
-              {/* Always visible content */}
-              <p className="sec-text mb-20 wow fadeInUp" data-wow-delay=".3s">
-                NDDB Dairy Services (NDS) is a Section 8 company registered
-                under the Companies Act, 2013. It is a wholly-owned subsidiary
-                of the National Dairy Development Board (NDDB), and plays a
-                pivotal role in strengthening the dairy sector in India through
-                innovative, sustainable, and inclusive development models.
+              <p className="sec-text mb-30 wow fadeInUp" data-wow-delay=".3s">
+                NDDB Dairy Services (NDS) is a not-for-profit company (Section
+                8), a wholly-owned subsidiary of NDDB. We are committed to
+                strengthening India’s dairy sector through sustainable and
+                inclusive development models, empowering farmers with tools,
+                technologies, and transparent systems.
               </p>
-              <p className="sec-text mb-20 wow fadeInUp" data-wow-delay=".4s">
-                Established to operationalize NDDB’s vision of creating a
-                vibrant rural milk production system, NDS, since its inception
-                has been assisting dairy farmers with the range of initiatives
-                taken throughout the dairy value chain. Our comprehensive
-                approach, aimed at improving breed quality and boosting animal
-                productivity, has resulted in the increase of the surplus and
-                marketable milk available with farmers.
-              </p>
-              <p className="sec-text mb-20 wow fadeInUp" data-wow-delay=".5s">
-                By facilitating the establishment of Milk Producer Organisations
-                (MPOs) and thereafter providing them technical support and an
-                assured market for their surplus produce in the form of strong
-                forward institutional linkages, dairy farmers benefit with
-                improved livelihoods through fair and transparent pricing and
-                direct payments into their bank accounts.
-              </p>
-
-              {/* Hidden content toggle */}
-              {showFullContent && (
-                <>
-                  <p
-                    className="sec-text mb-20 wow fadeInUp"
-                    data-wow-delay=".6s"
-                  >
-                    To ensure long-term sustainability, NDS prioritises training
-                    and capacity building for dairy farmers to ensure they can
-                    manage these organizations effectively. Gender inclusion
-                    remains a key focal area, hence our interventions provide a
-                    platform to women dairy farmers, empowering them to excel in
-                    the remotest regions of India and make significant
-                    contributions to the dairy sector of the country.
-                  </p>
-                  <p
-                    className="sec-text mb-20 wow fadeInUp"
-                    data-wow-delay=".7s"
-                  >
-                    NDS’ commitment to improve milch animal productivity is
-                    evident in its innovative breeding initiatives. With four
-                    world-class semen stations located at Bidaj (Gujarat),
-                    Rahuri (Maharashtra), Alamadhi (Tamil Nadu) and Salon (Uttar
-                    Pradesh) producing over 50 million semen doses annually
-                    serving more than 35% of India’s requirement. Technologies
-                    such as Embryo Transfer and AI have improved the birth rate
-                    of female calves, enhancing gene quality and milk output.
-                  </p>
-                  <p
-                    className="sec-text mb-30 wow fadeInUp"
-                    data-wow-delay=".8s"
-                  >
-                    By combining grassroots involvement with professional
-                    expertise, NDS contributes to building a self-reliant dairy
-                    ecosystem that enhances rural livelihoods and nutritional
-                    security.
-                  </p>
-                </>
-              )}
-
-              <div className="mt-30 wow fadeInUp" data-wow-delay=".9s">
-                <button
-                  onClick={toggleContent}
-                  className="th-btn black-btn btn-2 th-radius th-icon"
-                >
-                  {showFullContent ? "Show Less" : "Learn More"}{" "}
-                  <i className="fa-light fa-arrow-right-long" />
-                </button>
+              <div className="about-item-wrap">
+                <div className="about-item wow fadeInUp" data-wow-delay=".2s">
+                  <div className="about-item_img">
+                    <img src="assets/img/icon/map3.svg" alt="" />
+                  </div>
+                  <div className="about-item_centent">
+                    <h5 className="box-title">Inclusive Development</h5>
+                    <p className="about-item_text">
+                      We help establish Milk Producer Organisations (MPOs) with
+                      technical and market support, ensuring fair and direct
+                      payments to farmers.
+                    </p>
+                  </div>
+                </div>
+                <div className="about-item wow fadeInUp" data-wow-delay=".3s">
+                  <div className="about-item_img">
+                    <img src="assets/img/icon/guide.svg" alt="" />
+                  </div>
+                  <div className="about-item_centent">
+                    <h5 className="box-title">Capacity Building</h5>
+                    <p className="about-item_text">
+                      We focus on training and empowering dairy farmers, with
+                      special attention to women, enabling them to lead and
+                      manage organizations effectively.
+                    </p>
+                  </div>
+                </div>
+                <div className="about-item wow fadeInUp" data-wow-delay=".4s">
+                  <div className="about-item_img">
+                    <img src="assets/img/icon/headphone.svg" alt="" />
+                  </div>
+                  <div className="about-item_centent">
+                    <h5 className="box-title">Breeding Innovations</h5>
+                    <p className="about-item_text">
+                      Through advanced technologies like Embryo Transfer and AI,
+                      our world-class semen stations improve productivity and
+                      genetics of milch animals.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
