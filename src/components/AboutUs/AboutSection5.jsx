@@ -13,7 +13,7 @@ const AboutSection5 = () => {
                 className="sub-title text-anime-style-2 wow fadeInUp"
                 data-wow-delay=".4s"
               >
-                About Us Company
+                About Us
               </span>
 
               <AnimatedText

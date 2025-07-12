@@ -43,7 +43,7 @@ const AboutSection = () => {
                   className="sub-title style1 text-anime-style-2 wow fadeInUp"
                   data-wow-delay=".4s"
                 >
-                  About Us Our Company
+                  About Us
                 </span>
                 <AnimatedText
                   text="NDDB Dairy Services"

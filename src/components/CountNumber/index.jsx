@@ -2,6 +2,7 @@ import React from "react";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import "./CountNumber.css";
+import AnimatedText from "../AnimatedText";
 
 const countData = [
   {
@@ -46,6 +47,26 @@ const CountNumber = () => {
       ref={ref}
     >
       <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-lg-8">
+            <div className="title-area text-center">
+              <AnimatedText
+                text="Major Highlights"
+                tag="h2"
+                className="sec-title mb-10 heading"
+                width="100%"
+                style={{ justifyContent: "center" }}
+              />
+              <span
+                className="sub-title text-anime-style-2 wow fadeInUp"
+                style={{ color: "#6e7070" }}
+              >
+                Key accomplishments and initiatives that showcase our commitment
+                to dairy sector development.
+              </span>
+            </div>
+          </div>
+        </div>
         <div className="counter-wrap1">
           <div className="row">
             {countData.map((item, index) => (
