@@ -1,18 +1,16 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
-// import 'bootstrap/dist/js/bootstrap.bundle.min';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-import "remixicon/fonts/remixicon.css";
 import AboutUs from "./Pages/AboutUs";
+import OurExperties from "./Pages/OurExperties";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import OurExperties from "./Pages/OurExperties";
+import "remixicon/fonts/remixicon.css";
 
 const App = () => {
   return (
-    <Router>
+    <>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -37,7 +35,7 @@ const App = () => {
           />
         </svg>
       </div>
-    </Router>
+    </>
   );
 };
 
