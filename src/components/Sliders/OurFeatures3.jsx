@@ -60,7 +60,7 @@ const OurFeatures3 = () => {
             <div className="col-xl-3 col-lg-6 col-md-6 feature_wrapp">
               <div
                 className="feature-item style-4 text-center wow fadeInUp"
-                data-wow-delay=".6s"
+                data-wow-delay=".4s"
               >
                 <div className="feature_icon">
                   <img src="assets/img/icon/fea-4-3.svg" alt="Icon" />

@@ -87,10 +87,6 @@ const OurFeatures1 = () => {
                       {item.subtitle}
                     </span>
                   </div>
-                  <Link to={item.link} className="th-btn style2">
-                    View Details{" "}
-                    <i className="fa-light fa-arrow-right-long"></i>
-                  </Link>
                 </div>
               </div>
             ))}

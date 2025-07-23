@@ -62,7 +62,6 @@ const OurFeatures4 = () => {
             className="th-slider"
           >
             {[
-              // Slide Data
               {
                 img: project_1_1,
                 title: "Digital Product Design",

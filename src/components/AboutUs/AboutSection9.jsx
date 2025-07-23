@@ -10,13 +10,13 @@ const AboutSection9 = () => {
         <div className="row">
           <div className="col-xl-6">
             <div className="img-box6">
-              <div className="img1 reveal">
+              <div className="img1 reveal wow fadeInLeft" data-wow-delay=".2s">
                 <img src="assets/img/normal/about_6_1.jpg" alt="About" />
               </div>
-              <div className="img2 reveal">
+              <div className="img2 reveal wow fadeInUp" data-wow-delay=".3s">
                 <img src="assets/img/normal/about_6_2.jpg" alt="About" />
               </div>
-              <div className="img3 reveal">
+              <div className="img3 reveal wow fadeInRight" data-wow-delay=".4s">
                 <img src="assets/img/normal/about_6_3.jpg" alt="About" />
               </div>
             </div>
@@ -27,50 +27,33 @@ const AboutSection9 = () => {
                 <span className="sub-title style1 text-anime-style-2">
                   About Us
                 </span>
-                <h2 className="sec-title mb-20 text-anime-style-3">
-                  The First Call You Make for Tech Solutions.
-                </h2>
-                <p className="sec-text mb-30 wow fadeInUp" data-wow-delay=".4s">
-                  Tech support services provide assistance to individuals and
-                  organizations in resolving technical issues related to
-                  hardware, software, networks, and other IT systems. These
-                  services are crucial for ensuring smooth operations,
-                  minimizing downtime.
+                <h2 className="sec-title text-anime-style-3">SAG Live</h2>
+                <p className="sec-text mb-10 wow fadeInUp" data-wow-delay=".4s">
+                  Through SAG Live, NDS is making high genetic merit,
+                  disease-free live animals accessible to farmers across India.
+                  These animals represent a selection of elite indigenous breeds
+                  such as Gir, Sahiwal, Rathi, Tharparkar, and Red Sindhi as
+                  well as crossbred and exotic varieties, including HF and
+                  Jersey crosses, all verified for pedigree, productivity, and
+                  health.
                 </p>
-              </div>
-              <div className="about-item-wrap">
-                <div className="about-item wow fadeInUp" data-wow-delay=".5s">
-                  <div className="about-item_img ab-img7">
-                    <img src="assets/img/icon/th-shield.svg" alt="" />
-                  </div>
-                  <div className="about-item_centent">
-                    <h5 className="box-title">AI-Powered Support</h5>
-                    <p className="about-item_text">
-                      Virtual assistants and chatbots for faster resolution of
-                      common issues.
-                    </p>
-                  </div>
-                </div>
-                <div className="about-item wow fadeInUp" data-wow-delay=".6s">
-                  <div className="about-item_img ab-img7">
-                    <img src="assets/img/icon/th-shield.svg" alt="" />
-                  </div>
-                  <div className="about-item_centent">
-                    <h5 className="box-title">Predictive Maintenance</h5>
-                    <p className="about-item_text">
-                      Leveraging data analytics to prevent issues before they
-                      occur.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-35 wow fadeInUp" data-wow-delay=".7s">
-                <a
-                  href="about.html"
-                  className="th-btn black-btn th-radius th-icon"
-                >
-                  Learn More <i className="fa-light fa-arrow-right-long" />
-                </a>
+                <p className="sec-text mb-10 wow fadeInUp" data-wow-delay=".4s">
+                  Launched as part of NDS's Superior Animal Genetics (SAG)
+                  initiative, SAG Live was created to bring transparency and
+                  fairness into the traditional unregulated live animal trade.
+                  It eliminates the influence of exploitative intermediaries,
+                  ensuring that buyers receive genuine value through verified
+                  animal records and assured quality. Farmers are empowered to
+                  select animals best suited to their specific milk production
+                  goals and management capacities, enabling them to build more
+                  resilient and profitable dairy enterprises.
+                </p>
+                <p className="sec-text mb-30 wow fadeInUp" data-wow-delay=".4s">
+                  By promoting responsible breeding, trust-based networks, and
+                  data-backed transactions, SAG Live contributes to long-term
+                  genetic improvement and sustainability in India’s dairy
+                  sector.
+                </p>
               </div>
             </div>
           </div>

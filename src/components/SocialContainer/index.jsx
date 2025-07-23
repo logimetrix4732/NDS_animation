@@ -118,7 +118,7 @@ const SocialContainer = () => {
                   </span>
                   <span
                     className="wow fadeInUp"
-                    data-wow-delay="0.6s"
+                    data-wow-delay="0.4s"
                     style={{ display: "inline-block", fontWeight: "bold" }}
                   >
                     of

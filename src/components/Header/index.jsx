@@ -56,13 +56,13 @@ const Header = () => {
                         <Link to="/ourExperties">Our Experties</Link>
                       </li>
                       <li className="">
-                        <a href="#">Milk Producer Org.</a>
+                        <Link to="/milkproducer">Milk Producer Org.</Link>
                       </li>
                       <li className="">
-                        <a href="#">Semen Station</a>
+                        <Link to="/semenStations">Semen Station</Link>
                       </li>
                       <li className="">
-                        <a href="#">New Initiative</a>
+                        <Link to="/newInitiative">New Initiative</Link>
                       </li>
                       <li className="menu-item-has-children">
                         <a href="contact.html">More</a>
@@ -71,7 +71,7 @@ const Header = () => {
                             <a href="contact.html">Publications</a>
                           </li>
                           <li>
-                            <a href="contact-2.html">Careers</a>
+                            <Link to="/carrer">Careers</Link>
                           </li>
                           <li>
                             <a href="contact-2.html">Tenders</a>

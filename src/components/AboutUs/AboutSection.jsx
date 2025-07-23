@@ -90,11 +90,7 @@ const AboutSection = () => {
                 </div>
               </div>
 
-              <div className="mt-35 wow fadeInUp">
-                <Link to="/" className="th-btn th-icon">
-                  Learn More <i className="fa-light fa-arrow-right-long" />
-                </Link>
-              </div>
+              <div className="mt-35 wow fadeInUp"></div>
             </div>
           </div>
 

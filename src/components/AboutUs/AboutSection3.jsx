@@ -1,18 +1,19 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
+import { Link } from "react-router-dom";
 
 const AboutSection3 = () => {
   return (
-    <section className="choose-6-area space">
+    <section className="choose-6-area space-bottom">
       <div className="container">
         <div className="row gy-4 align-items-start">
-          <div className="col-xl-5 order-1 order-xl-0">
-            <div className="title-area mt-40 mb-20 pe-xl-5">
-              <span className="sub-title text-anime-style-2">
-                Why Choose Us
+          <div className="col-xl-5 order-1 order-xl-0 mt-50">
+            <div className="title-area mb-20 pe-xl-5">
+              <span className="sub-title text-anime-style-2 wow fadeInLeft">
+                Improving Breed Quality & Productivity
               </span>
               <AnimatedText
-                text="The Art of Web & Mobile Development."
+                text="Animal Productivity Services"
                 tag="h2"
                 className="sec-title mb-20 heading text-anime-style-3"
                 width="100%"
@@ -21,63 +22,53 @@ const AboutSection3 = () => {
             <div className="about-item style-16">
               <div className="about-content">
                 <p className="about-text wow fadeInUp">
-                  Web and app development is the cornerstone of digital
-                  transformation. By creating innovative and user-centric
-                  platforms, businesses can improve their reach, enhance
-                  engagement, and stay ahead in a competitive market.
+                  Improving animal productivity and advancing breed quality is a
+                  key objective of NDS. We owned and managed the four major
+                  semen stations in the country – Sabarmati Ashram Gaushala in
+                  Bidaj (Gujarat); Animal Breeding Centre, Salon (Uttar
+                  Pradesh); Alamadhi Semen Station (Tamil Nadu); and Rahuri
+                  Semen Station (Maharashtra), that produce and supply
+                  high-quality bovine semen under the ‘SAG’ (Superior Animal
+                  Genetics) brand, to promote genetic improvement in milch
+                  animals. Collectively catering over 35% of the country’s semen
+                  dose requirement, these stations form the backbone of our
+                  genetic improvement programmes with a strong focus on
+                  enhancing productivity, fertility, and overall profitability
+                  in the dairy sector.
                 </p>
-                <div className="about-featured-box d-sm-flex align-items-start">
-                  <div className="about-feature pe-xl-4">
-                    <ul>
-                      <li className="wow fadeInUp" data-wow-delay=".2s">
-                        Increased Visibility
-                      </li>
-                      <li className="wow fadeInUp" data-wow-delay=".3s">
-                        Data Collection
-                      </li>
-                      <li className="wow fadeInUp" data-wow-delay=".4s">
-                        Blockchain Technology
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="about-feature">
-                    <ul>
-                      <li className="wow fadeInUp" data-wow-delay=".2s">
-                        Business Growth
-                      </li>
-                      <li className="wow fadeInUp" data-wow-delay=".3s">
-                        Improved Accessibility
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div
-                  className="about-btn mt-30 wow fadeInUp"
-                  data-wow-delay=".4s"
-                >
-                  <a href="contact.html" className="th-btn th-icon">
-                    Get Started Now{" "}
-                    <i className="fa-light fa-arrow-right-long"></i>
-                  </a>
+                <div className="mt-35 wow fadeInUp" data-wow-delay=".4s">
+                  <Link to="/ourExperties" className="th-btn th-icon">
+                    Learn more <i className="fa-light fa-arrow-right-long" />
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-xl-7 order-0 order-xl-1">
+
+          <div className="col-xl-7 mt-80 order-0 order-xl-1">
             <div className="choose-wrapper text-end position-relative mb-80">
               <div className="choose-item4">
-                <div className="choose-img">
-                  <img src="assets/img/choose/choose_4_1.jpg" alt="" />
+                <div className="choose-img wow fadeInUp">
+                  <img
+                    src="assets/img/choose/choose_4_1.jpg"
+                    alt="Animal Productivity Services 1"
+                  />
                 </div>
               </div>
               <div className="choose-item4">
-                <div className="choose-img">
-                  <img src="assets/img/choose/choose_4_2.jpg" alt="" />
+                <div className="choose-img wow fadeInRight">
+                  <img
+                    src="assets/img/choose/choose_4_2.jpg"
+                    alt="Animal Productivity Services 2"
+                  />
                 </div>
               </div>
               <div className="choose-item4">
-                <div className="choose-img">
-                  <img src="assets/img/choose/choose_4_3.jpg" alt="" />
+                <div className="choose-img wow fadeInUp">
+                  <img
+                    src="assets/img/choose/choose_4_3.jpg"
+                    alt="Animal Productivity Services 3"
+                  />
                 </div>
               </div>
             </div>

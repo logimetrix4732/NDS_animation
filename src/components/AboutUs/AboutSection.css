@@ -101,3 +101,19 @@
 .rounded-img img {
   border-radius: 50px;
 }
+@media (max-width: 768px) {
+  .custom-ml {
+    margin-left: 0 !important;
+  }
+}
+@media (min-width: 769px) {
+  .custom-ml {
+    margin-left: 30px;
+  }
+}
+@media (max-width: 767px) {
+  .custom-ml {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}

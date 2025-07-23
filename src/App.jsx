@@ -1,21 +1,47 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./Pages/Home";
 import AboutUs from "./Pages/AboutUs";
 import OurExperties from "./Pages/OurExperties";
+import MilkProducer from "./Pages/MilkProducer";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "remixicon/fonts/remixicon.css";
+import OurExperties1 from "./Pages/OurExperties1";
+import CarrerPage from "./Pages/CarrerPage";
+import CarrerDetailPage from "./components/CarrerComponents/CarrerDetailPage";
+import Errors from "./Errors";
+import SemenStations from "./Pages/SemenStations";
+import NewInitiative from "./Pages/NewInitiative";
+
+// 👇 ScrollToTop logic inside App.js
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 const App = () => {
   return (
     <>
       <Header />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/ourExperties" element={<OurExperties />} />
+        <Route path="/milkproducer" element={<MilkProducer />} />
+        <Route path="/ourExperties1" element={<OurExperties1 />} />
+        <Route path="/carrer" element={<CarrerPage />} />
+        <Route path="/carrerDetail" element={<CarrerDetailPage />} />
+        <Route path="/semenStations" element={<SemenStations />} />
+        <Route path="/newInitiative" element={<NewInitiative />} />
+        <Route path="*" element={<Errors />} />
       </Routes>
       <Footer />
       <div className="scroll-top">

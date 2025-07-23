@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import AnimatedText from "../AnimatedText";
 
 const AboutSection12 = () => {
   return (
@@ -8,46 +10,33 @@ const AboutSection12 = () => {
           <div className="col-lg-6 order-1 order-lg-0">
             <div className="ps-xl-5">
               <div className="title-area">
-                <span className="sub-title style1 text-anime-style-2">
-                  Why Choose Us
+                <span className="sub-title style1 text-anime-style-2 wow fadeInLeft">
+                  Structuring India's Dairy Future
                 </span>
-                <h2 className="sec-title text-anime-style-3">
-                  IT Solutions Designed to Drive Results
-                </h2>
+                <AnimatedText
+                  text="Setting up MPOs"
+                  tag="h2"
+                  className="sec-title mb-10 heading text-anime-style-3"
+                  width="100%"
+                />
                 <p className="wow fadeInUp">
-                  IT solutions are the backbone of modern businesses, enabling
-                  them to adapt to changing technologies and market demands.
-                  Whether you're a small business or a large enterprise,
-                  investing in the right IT solutions can drive growth,
-                  innovation, and long-term success.
+                  At NDDB Dairy Services, we specialise in establishing
+                  sustainable and professionally managed Milk Producer
+                  Organisations (MPOs). These farmers owned institutions drive
+                  sustainable income, self-reliance and rural resilience. Our
+                  end-to-end approach focuses on empowering dairy farmers
+                  through structured processes, scalable systems and an assured
+                  market access. The goal is to transition rural dairy farmers
+                  from informal milk suppliers to organised and empowered
+                  stakeholders in the mainstream economy through structured and
+                  value-driven enterprises that strengthen the cooperative
+                  movement across the country. 
                 </p>
               </div>
-              <div className="skill-feature">
-                <h3 className="skill-feature_title">
-                  IT Solution &amp; Management
-                </h3>
-                <div className="progress">
-                  <div className="progress-bar" style={{ width: "90%" }} />
-                  <div className="progress-value">90%</div>
-                </div>
-              </div>
-              <div className="skill-feature">
-                <h3 className="skill-feature_title">
-                  Website &amp; App Development
-                </h3>
-                <div className="progress">
-                  <div className="progress-bar" style={{ width: "75%" }} />
-                  <div className="progress-value">75%</div>
-                </div>
-              </div>
-              <div className="skill-feature">
-                <h3 className="skill-feature_title">
-                  SEO &amp; Digital Marketing
-                </h3>
-                <div className="progress">
-                  <div className="progress-bar" style={{ width: "82%" }} />
-                  <div className="progress-value">82%</div>
-                </div>
+              <div className="mt-30 wow fadeInUp" data-wow-delay=".4s">
+                <Link to="/milkproducer" className="th-btn th-icon">
+                  Learn more <i className="fa-light fa-arrow-right-long" />
+                </Link>
               </div>
             </div>
           </div>
@@ -55,7 +44,7 @@ const AboutSection12 = () => {
             <div className="choose-imgbox text-center text-md-start">
               <div className="row align-items-center">
                 <div className="col-sm-7 col-md-7 col-xl-7">
-                  <div className="img1">
+                  <div className="img1 wow fadeInLeft" data-wow-delay=".1s">
                     <img
                       className="w-100"
                       src="assets/img/normal/about_10_1.jpg"
@@ -64,7 +53,7 @@ const AboutSection12 = () => {
                   </div>
                 </div>
                 <div className="col-sm-5 col-md-5 col-xl-5 d-lg-none d-xl-block">
-                  <div className="img-box-sm">
+                  <div className="img-box-sm wow fadeInUp" data-wow-delay=".2s">
                     <div className="img2 mb-25">
                       <img
                         className="th-radius"
@@ -72,7 +61,7 @@ const AboutSection12 = () => {
                         alt="About"
                       />
                     </div>
-                    <div className="img3">
+                    <div className="img3 wow fadeInRight" data-wow-delay=".3s">
                       <img
                         className="th-radius"
                         src="assets/img/normal/about_10_3.jpg"

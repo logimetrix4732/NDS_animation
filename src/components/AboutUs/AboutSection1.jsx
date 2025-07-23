@@ -1,74 +1,123 @@
-import React from "react";
+import React, { useState } from "react";
+import AnimatedText from "../AnimatedText";
 
 const AboutSection1 = () => {
+  const [showFullText, setShowFullText] = useState(false);
+
+  const handleMouseEnter = () => {
+    setShowFullText(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowFullText(false);
+  };
+
+  const textContent = (
+    <React.Fragment>
+      The MPO model has had a profound and far-reaching impact on the rural
+      dairy ecosystem. Most significantly, it has brought over 12 lakh dairy
+      farmers - many of whom were previously part of the informal sector - into
+      the organised framework of formal dairying. This integration has not only
+      strengthened the national dairy supply chain but also enabled inclusive
+      economic growth, generated local employment opportunities and nurtured
+      grassroots entrepreneurship across underserved regions of the country.
+      Through collective ownership, access to transparent milk pricing and
+      regular income flows, member farmers have gained greater financial
+      stability. The consistent availability of productivity services - such as
+      Artificial Insemination, cattle feed and fodder - has led to improved
+      animal health, increased milk yields and enhanced profitability at the
+      farm level. Moreover, MPOs have acted as local hubs of knowledge transfer,
+      capacity building and veterinary care bringing long-term benefits to both
+      farmers and their animals.
+      <br />
+      <br />
+      A defining hallmark of the MPO movement is its deep-rooted commitment to
+      gender inclusion and social equity. Of the 23 MPOs promoted by NDS, 16 are
+      exclusively women-led, with all producer directors on their boards being
+      women and 18 chaired by women. Today, women constitute 77% of the total
+      membership, a powerful indicator of the model’s success in promoting women
+      empowerment through economic participation and cooperative leadership.
+      This has not only enhanced household incomes but also elevated the social
+      status of women in their communities enabling them to become key decision
+      makers both at home and in business.
+      <br />
+      <br />
+      Beyond numbers, the MPO model has helped build confidence, financial
+      literacy and institutional capacities among rural producers especially
+      women and smallholders ensuring that they are no longer passive suppliers
+      but active stakeholders in a value-driven and farmer-owned enterprise. It
+      is a model that promotes dignity, sustainability and shared prosperity
+      laying the foundation for a stronger, more equitable rural economy.
+    </React.Fragment>
+  );
+
   return (
     <div
       className="bg-smoke position-relative overflow-hidden space"
       id="about-sec"
       data-bg-src="assets/img/bg/shape_bg_1.png"
     >
+      <style>{`
+        .ellipsis-container {
+          display: -webkit-box;
+          -webkit-line-clamp: 18;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          transition: all 0.4s ease;
+        }
+        .ellipsis-container.expanded {
+          -webkit-line-clamp: unset;
+          overflow: visible;
+          display: block;
+        }
+      `}</style>
+
       <div className="container">
-        <div className="row gy-4 align-items-center">
+        <div className="row gy-4 align-items-center no-gutter-x">
           <div className="col-xl-4 order-1 order-xl-0">
-            <div className="about-area6 text-center text-md-start">
+            <div
+              className="about-area6 text-center text-md-start"
+              onMouseLeave={handleMouseLeave}
+            >
               <div className="title-area mb-20">
-                <span className="sub-title style1 text-anime-style-2">
-                  It Support For Business
+                <span className="sub-title style1 text-anime-style-2 wow fadeInLeft">
+                  Empowering Rural India
                 </span>
-                <h2 className="sec-title mb-20 text-anime-style-3">
-                  Revolutionizing Businesses with SaaS: The Future of Software
-                  Solutions
-                </h2>
+                <AnimatedText
+                  text="Impact of MPOs"
+                  tag="h2"
+                  className="sec-title mb-10 heading text-anime-style-3"
+                  width="100%"
+                />
               </div>
-              <p className="sec-text mb-30 wow fadeInUp" data-wow-delay=".2s">
-                Software as a Service (SaaS) is a cloud-based business model
-                where software applications are delivered over the internet on a
-                subscription basis. SaaS products are accessible via web
-                browsers, eliminating the need for users to install or maintain
-                software locally.
-              </p>
-              <div className="about-item-wrap">
+
+              <div className="sec-text mb-30 wow fadeInUp" data-wow-delay=".2s">
                 <div
-                  className="about-item style6 wow fadeInUp"
-                  data-wow-delay=".3s"
+                  className={`ellipsis-container ${
+                    showFullText ? "expanded" : ""
+                  }`}
                 >
-                  <span className="icon">
-                    <i className="fa-sharp fa-solid fa-circle-check"></i>
-                  </span>
-                  <div className="about-item_centent">
-                    <h5 className="box-title">Trusted and Accurate</h5>
-                    <p className="about-item_text">
-                      Use SASS to define typography styles including font
-                      families, sizes, colors, and spacing to create.
-                    </p>
-                  </div>
-                </div>
-                <div
-                  className="about-item style6 wow fadeInUp"
-                  data-wow-delay=".4s"
-                >
-                  <span className="icon">
-                    <i className="fa-solid fa-building"></i>
-                  </span>
-                  <div className="about-item_centent">
-                    <h5 className="box-title">Hired By Top Company</h5>
-                    <p className="about-item_text">
-                      Define a cohesive color scheme using SASS variables to
-                      maintain consistency across the landing page.
-                    </p>
-                  </div>
+                  {textContent}
                 </div>
               </div>
-              <div className="mt-35 wow fadeInUp" data-wow-delay=".5s">
-                <a href="about.html" className="th-btn th-icon">
-                  Learn More <i className="fa-light fa-arrow-right-long"></i>
-                </a>
-              </div>
+
+              {!showFullText && (
+                <div className="wow fadeInUp" data-wow-delay=".5s">
+                  <button
+                    className="th-btn th-icon"
+                    onClick={() => setShowFullText(true)}
+                  >
+                    Read More <i className="fa-light fa-arrow-right-long"></i>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
+
           <div className="col-xl-8 order-0 order-xl-2">
             <div className="img-box5 text-xl-end">
-              <div className="img1 reveal">
+              <div className="img1 reveal wow fadeInRight" data-wow-delay=".2s">
                 <img src="assets/img/normal/about_5_1.jpg" alt="About" />
               </div>
             </div>

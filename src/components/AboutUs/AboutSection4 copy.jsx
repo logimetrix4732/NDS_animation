@@ -91,7 +91,7 @@ const AboutSection4 = () => {
                 <>
                   <p
                     className="sec-text mb-20 wow fadeInUp"
-                    data-wow-delay=".6s"
+                    data-wow-delay=".4s"
                   >
                     To ensure long-term sustainability, NDS prioritises training
                     and capacity building for dairy farmers to ensure they can

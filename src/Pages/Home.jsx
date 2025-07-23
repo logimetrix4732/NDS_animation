@@ -21,16 +21,7 @@ const Home = () => {
       </div>
       <Dashboard />
       <AboutSection />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        className="space-bottom"
-      >
-        <img src={banner} alt="" style={{ width: "1500px" }} />
-      </div>
+
       <AboutSection2 />
       <OurFeatures1 />
       <CountNumber />

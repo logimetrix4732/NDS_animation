@@ -2,7 +2,7 @@ import React from "react";
 import AnimatedText from "../AnimatedText";
 import aboutImg3 from "../../Images/aboutImg3.jpg";
 import aboutImg4 from "../../Images/aboutImg4.jpg";
-
+import "./AboutSection.css";
 const AboutSection4 = () => {
   return (
     <div
@@ -10,7 +10,7 @@ const AboutSection4 = () => {
       id="about-sec"
     >
       <div className="container">
-        <div className="row">
+        <div className="row custom-ml">
           <div className="col-xl-6 col-xxl-7">
             <div className="img-box2">
               <div className="img1 reveal wow fadeInLeft" data-wow-delay=".4s">
@@ -68,12 +68,12 @@ const AboutSection4 = () => {
                   <div className="about-item_centent">
                     <h5 className="box-title">Inclusive Development</h5>
                     <p className="about-item_text">
-                      We help establish Milk Producer Organisations (MPOs) with
-                      technical and market support, ensuring fair and direct
-                      payments to farmers.
+                      We support MPOs with market access and direct farmer
+                      payments.
                     </p>
                   </div>
                 </div>
+
                 <div className="about-item wow fadeInUp" data-wow-delay=".3s">
                   <div className="about-item_img">
                     <img src="assets/img/icon/guide.svg" alt="" />
@@ -81,12 +81,12 @@ const AboutSection4 = () => {
                   <div className="about-item_centent">
                     <h5 className="box-title">Capacity Building</h5>
                     <p className="about-item_text">
-                      We focus on training and empowering dairy farmers, with
-                      special attention to women, enabling them to lead and
-                      manage organizations effectively.
+                      We train and empower dairy farmers, especially women
+                      leaders.
                     </p>
                   </div>
                 </div>
+
                 <div className="about-item wow fadeInUp" data-wow-delay=".4s">
                   <div className="about-item_img">
                     <img src="assets/img/icon/headphone.svg" alt="" />
@@ -94,9 +94,7 @@ const AboutSection4 = () => {
                   <div className="about-item_centent">
                     <h5 className="box-title">Breeding Innovations</h5>
                     <p className="about-item_text">
-                      Through advanced technologies like Embryo Transfer and AI,
-                      our world-class semen stations improve productivity and
-                      genetics of milch animals.
+                      We improve dairy breeds through Embryo Transfer and AI.
                     </p>
                   </div>
                 </div>

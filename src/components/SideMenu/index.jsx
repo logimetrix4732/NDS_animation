@@ -23,8 +23,8 @@ const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
   const menuItems = [
     { text: "Home", to: "/" },
     { text: "About Us", to: "/aboutUs" },
-    { text: "Our Experties", to: "/experties" },
-    { text: "Milk Producer Org.", to: "/milk-producer-org" },
+    { text: "Our Experties", to: "/ourExperties" },
+    { text: "Milk Producer Org.", to: "/milkproducer" },
     { text: "Semen Station", to: "/semen-station" },
     { text: "New Initiative", to: "/new-initiative" },
     { text: "Publications", to: "/publications" },
