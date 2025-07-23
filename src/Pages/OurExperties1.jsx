@@ -43,8 +43,9 @@ const OurExperties1 = () => {
           </div>
         </div>
       </div>
-      <AboutSection7 />
       <AboutSection9 />
+
+      <AboutSection7 />
       <AboutSection6 />
       <BlogAndArticle />
       <OurFeatures3 />

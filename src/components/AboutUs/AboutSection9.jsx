@@ -27,32 +27,22 @@ const AboutSection9 = () => {
                 <span className="sub-title style1 text-anime-style-2">
                   About Us
                 </span>
-                <h2 className="sec-title text-anime-style-3">SAG Live</h2>
+                <h2 className="sec-title text-anime-style-3">
+                  Animal Productivity Services
+                </h2>
                 <p className="sec-text mb-10 wow fadeInUp" data-wow-delay=".4s">
-                  Through SAG Live, NDS is making high genetic merit,
-                  disease-free live animals accessible to farmers across India.
-                  These animals represent a selection of elite indigenous breeds
-                  such as Gir, Sahiwal, Rathi, Tharparkar, and Red Sindhi as
-                  well as crossbred and exotic varieties, including HF and
-                  Jersey crosses, all verified for pedigree, productivity, and
-                  health.
-                </p>
-                <p className="sec-text mb-10 wow fadeInUp" data-wow-delay=".4s">
-                  Launched as part of NDS's Superior Animal Genetics (SAG)
-                  initiative, SAG Live was created to bring transparency and
-                  fairness into the traditional unregulated live animal trade.
-                  It eliminates the influence of exploitative intermediaries,
-                  ensuring that buyers receive genuine value through verified
-                  animal records and assured quality. Farmers are empowered to
-                  select animals best suited to their specific milk production
-                  goals and management capacities, enabling them to build more
-                  resilient and profitable dairy enterprises.
-                </p>
-                <p className="sec-text mb-30 wow fadeInUp" data-wow-delay=".4s">
-                  By promoting responsible breeding, trust-based networks, and
-                  data-backed transactions, SAG Live contributes to long-term
-                  genetic improvement and sustainability in India’s dairy
-                  sector.
+                  Improving animal productivity and advancing breed quality is a
+                  key objective of NDS. We own/manage the four major semen
+                  stations in the country – Sabarmati Ashram Gaushala in Bidaj
+                  (Gujarat); Animal Breeding Centre, Salon (Uttar Pradesh);
+                  Alamadhi Semen Station (Tamil Nadu); and Rahuri Semen Station
+                  (Maharashtra), that produce and supply high-quality bovine
+                  semen under the SAG (Superior Animal Genetics) brand, to
+                  promote genetic improvement in milch animals. Collectively
+                  catering over 35% of the country’s semen dose requirement,
+                  these station form the backbone of our genetic improvement
+                  programmes with a strong focus on enhancing productivity,
+                  fertility and overall profitability in the dairy sector.
                 </p>
               </div>
             </div>

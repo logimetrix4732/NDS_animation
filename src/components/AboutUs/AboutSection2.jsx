@@ -3,6 +3,8 @@ import AnimatedText from "../AnimatedText";
 import video from "../../Images/Videos/video.mp4";
 import empoweringWomen from "../../Images/empoweringWomen.jpg";
 import empoweringWomen1 from "../../Images/empoweringWomen1.jpg";
+import DSC_4156 from "../../Images/HomeImgs/DSC_4156.jpg";
+import DSC_9821 from "../../Images/HomeImgs/DSC_9821.jpg";
 import checkMarkIcon from "../../Images/checkMarkIcon.jpg";
 const AboutSection2 = () => {
   return (
@@ -79,7 +81,7 @@ const AboutSection2 = () => {
                 >
                   <div className="img1 reveal">
                     <img
-                      src={empoweringWomen}
+                      src={DSC_4156}
                       alt="About"
                       style={{
                         width: "312px",
@@ -95,7 +97,7 @@ const AboutSection2 = () => {
                 >
                   <div className="img2 reveal">
                     <img
-                      src={empoweringWomen1}
+                      src={DSC_9821}
                       alt="About"
                       style={{
                         width: "312px",

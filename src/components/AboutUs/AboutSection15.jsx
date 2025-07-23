@@ -10,11 +10,19 @@ const AboutSection15 = () => {
         <div className="row">
           <div className="col-xl-6">
             <div className="img-box15 d-flex justify-content-center">
-              <div className="img1 d-none d-md-block">
-                <img src="assets/img/normal/about_15_1.jpg" alt="About" />
-                <img src="assets/img/normal/about_15_2.jpg" alt="About" />
+              <div className="img1 d-none d-md-block ">
+                <img
+                  src="assets/img/normal/about_15_1.jpg"
+                  alt="About"
+                  className="wow fadeInUp"
+                />
+                <img
+                  src="assets/img/normal/about_15_2.jpg"
+                  alt="About"
+                  className="wow fadeInLeft"
+                />
               </div>
-              <div className="img2">
+              <div className="img2 wow fadeInDown">
                 <img src="assets/img/normal/about_15_3.jpg" alt="About" />
               </div>
             </div>

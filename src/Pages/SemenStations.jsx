@@ -1,6 +1,6 @@
 import React from "react";
 import AboutSection7 from "../components/AboutUs/AboutSection7";
-import AboutSection15 from "../components/AboutUs/AboutSection15";
+import AboutSection17 from "../components/AboutUs/AboutSection17";
 import CommonBanner from "../components/BannersComponents/CommonBanner";
 
 const SemenStations = () => {
@@ -13,7 +13,7 @@ const SemenStations = () => {
           { label: "Semen Stations" },
         ]}
       />
-      <AboutSection15 />
+      <AboutSection17 />
       <AboutSection7 />
     </div>
   );

@@ -21,7 +21,6 @@ const Home = () => {
       </div>
       <Dashboard />
       <AboutSection />
-
       <AboutSection2 />
       <OurFeatures1 />
       <CountNumber />

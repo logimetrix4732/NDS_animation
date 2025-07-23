@@ -5,12 +5,14 @@ import SuccessStoriesImg2 from "../../Images/SuccessStoriesImg2.jpg";
 import icon from "../../Images/icon/1.png";
 import icon1 from "../../Images/icon/2.png";
 import icon2 from "../../Images/icon/3.png";
-import { Link } from "react-router-dom";
+import DSC_9355 from "../../Images/HomeImgs/DSC_9355.jpg";
+import DSC_3158 from "../../Images/HomeImgs/DSC_3796.jpg";
+import DSC_1362 from "../../Images/HomeImgs/DSC_7813.jpg";
 import "./OurFeatures.css";
 
 const featuresData = [
   {
-    image: SuccessStoriesImg,
+    image: DSC_9355,
     icon: icon,
     title: "Premium Cattle Feed",
     subtitle:
@@ -18,7 +20,7 @@ const featuresData = [
     link: "/",
   },
   {
-    image: SuccessStoriesImg1,
+    image: DSC_1362,
     icon: icon1,
     title: "Dairy Mineral Mixture",
     subtitle:
@@ -26,7 +28,7 @@ const featuresData = [
     link: "/",
   },
   {
-    image: SuccessStoriesImg2,
+    image: DSC_3158,
     icon: icon2,
     title: "Calf Starter Feed",
     subtitle:

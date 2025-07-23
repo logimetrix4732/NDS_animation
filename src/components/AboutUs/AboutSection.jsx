@@ -5,6 +5,9 @@ import aboutImg from "../../Images/aboutImg.jpg";
 import aboutImg1 from "../../Images/aboutImg1.jpg";
 import aboutImg2 from "../../Images/aboutImg2.jpg";
 import { Link } from "react-router-dom";
+import DSC_7694 from "../../Images/HomeImgs/DSC_7694.jpg";
+import DSC_2802 from "../../Images/HomeImgs/DSC_2802.jpg";
+import DSC_0344 from "../../Images/HomeImgs/DSC_0344.jpg";
 
 const AboutSection = () => {
   return (
@@ -98,7 +101,7 @@ const AboutSection = () => {
             <div className="img-box1">
               <div className="img1 wow fadeInUp" data-wow-delay=".4s">
                 <img
-                  src={aboutImg2}
+                  src={DSC_7694}
                   alt="About"
                   style={{
                     width: "325px",
@@ -109,7 +112,7 @@ const AboutSection = () => {
               </div>
               <div className="img2 wow fadeInLeft" data-wow-delay=".4s">
                 <img
-                  src={aboutImg1}
+                  src={DSC_2802}
                   alt="About"
                   style={{
                     width: "312px",
@@ -120,7 +123,7 @@ const AboutSection = () => {
               </div>
               <div className="img3 wow fadeInLeft" data-wow-delay=".4s">
                 <img
-                  src={aboutImg}
+                  src={DSC_0344}
                   alt="About"
                   style={{
                     width: "312px",
