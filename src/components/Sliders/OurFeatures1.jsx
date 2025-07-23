@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
-import SuccessStoriesImg from "../../Images/SuccessStoriesImg.jpg";
-import SuccessStoriesImg1 from "../../Images/SuccessStoriesImg1.jpg";
-import SuccessStoriesImg2 from "../../Images/SuccessStoriesImg2.jpg";
 import icon from "../../Images/icon/1.png";
 import icon1 from "../../Images/icon/2.png";
 import icon2 from "../../Images/icon/3.png";
-import DSC_9355 from "../../Images/HomeImgs/DSC_9355.jpg";
+import DSC_9355 from "../../Images/HomeImgs/DSC_9355.png";
 import DSC_3158 from "../../Images/HomeImgs/DSC_3796.jpg";
 import DSC_1362 from "../../Images/HomeImgs/DSC_7813.jpg";
 import "./OurFeatures.css";

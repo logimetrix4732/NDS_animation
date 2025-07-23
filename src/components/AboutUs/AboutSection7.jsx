@@ -1,5 +1,6 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
+import { Link } from "react-router-dom";
 
 const AboutSection7 = () => {
   return (
@@ -100,9 +101,9 @@ const AboutSection7 = () => {
                 </div>
               </div>
               <div class="mt-35 wow fadeInUp" data-wow-delay=".6s">
-                <a href="about.html" class="th-btn th-icon">
+                <Link to="/semenStations" class="th-btn th-icon">
                   Learn More <i class="fa-light fa-arrow-right-long"></i>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

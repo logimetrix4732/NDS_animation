@@ -99,7 +99,7 @@ const AboutSection = () => {
 
           <div className="col-xl-6 order-2 order-xl-1 mt-4 mt-xl-0">
             <div className="img-box1">
-              <div className="img1 wow fadeInUp" data-wow-delay=".4s">
+              <div className="img1 wow fadeInLeft" data-wow-delay=".4s">
                 <img
                   src={DSC_7694}
                   alt="About"
@@ -110,7 +110,7 @@ const AboutSection = () => {
                   }}
                 />
               </div>
-              <div className="img2 wow fadeInLeft" data-wow-delay=".4s">
+              <div className="img2 wow fadeInRight" data-wow-delay=".4s">
                 <img
                   src={DSC_2802}
                   alt="About"
@@ -121,7 +121,7 @@ const AboutSection = () => {
                   }}
                 />
               </div>
-              <div className="img3 wow fadeInLeft" data-wow-delay=".4s">
+              <div className="img3 wow fadeInUp" data-wow-delay=".4s">
                 <img
                   src={DSC_0344}
                   alt="About"

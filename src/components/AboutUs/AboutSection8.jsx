@@ -79,7 +79,7 @@ const AboutSection8 = () => {
         </div>
       </div>
       <div
-        className="shape-mockup d-none d-xxl-block"
+        className="shape-mockup d-none d-xxl-block wow fadeInRight"
         style={{
           position: "absolute",
           bottom: 0, // percentage unnecessary here

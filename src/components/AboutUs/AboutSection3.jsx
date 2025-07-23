@@ -37,7 +37,7 @@ const AboutSection3 = () => {
                   in the dairy sector.
                 </p>
                 <div className="mt-35 wow fadeInUp" data-wow-delay=".4s">
-                  <Link to="/ourExperties" className="th-btn th-icon">
+                  <Link to="/semenStations" className="th-btn th-icon">
                     Learn more <i className="fa-light fa-arrow-right-long" />
                   </Link>
                 </div>

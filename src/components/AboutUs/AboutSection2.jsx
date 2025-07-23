@@ -92,10 +92,10 @@ const AboutSection2 = () => {
                   </div>
                 </div>
                 <div
-                  className="col-xl-6 col-md-6 col-sm-6 col-12 d-flex justify-content-center wow fadeInUp"
+                  className="col-xl-6 col-md-6 col-sm-6 col-12 d-flex justify-content-center wow fadeInRight"
                   data-wow-delay=".4s"
                 >
-                  <div className="img2 reveal">
+                  <div className="img2 reveal ">
                     <img
                       src={DSC_9821}
                       alt="About"

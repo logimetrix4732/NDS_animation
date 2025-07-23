@@ -7,10 +7,10 @@ const SemenStations = () => {
   return (
     <div>
       <CommonBanner
-        title="Semen Stations"
+        title="Animal Productivity Services"
         breadcrumbs={[
           { label: "Home", path: "/" },
-          { label: "Semen Stations" },
+          { label: "Animal Productivity Services" },
         ]}
       />
       <AboutSection17 />

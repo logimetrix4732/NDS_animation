@@ -55,13 +55,16 @@ const AboutSection14 = () => {
           <div className="row">
             <div className="col-xl-7">
               <div className="about-imgbox12 img-box3">
-                <div className="img1" style={{ marginLeft: "280px" }}>
+                <div
+                  className="img1 wow fadeInRight"
+                  style={{ marginLeft: "280px" }}
+                >
                   <img src="assets/img/normal/ab_12_1.jpg" alt="About" />
                 </div>
-                <div className="img2">
+                <div className="img2 wow fadeInLeft">
                   <img src="assets/img/normal/ab_12_2.jpg" alt="About" />
                 </div>
-                <div className="img3 text-center text-md-end">
+                <div className="img3 text-center text-md-end wow fadeInUp">
                   <img src="assets/img/normal/ab_12_3.jpg" alt="About" />
                 </div>
               </div>

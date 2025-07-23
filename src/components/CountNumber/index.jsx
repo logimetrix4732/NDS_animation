@@ -70,7 +70,10 @@ const CountNumber = () => {
         <div className="counter-wrap1">
           <div className="row">
             {countData.map((item, index) => (
-              <div className="col-md-6 col-xl-3 counter-card-wrap" key={index}>
+              <div
+                className="col-md-6 col-xl-3 counter-card-wrap wow fadeInRight"
+                key={index}
+              >
                 <div className="counter-card">
                   <div className="counter-shape">
                     <span />
