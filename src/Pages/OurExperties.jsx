@@ -4,12 +4,12 @@ import AboutSection10 from "../components/AboutUs/AboutSection10";
 import AboutSection11 from "../components/AboutUs/AboutSection11";
 import AboutSection12 from "../components/AboutUs/AboutSection12";
 import AboutSection16 from "../components/AboutUs/AboutSection16";
-import MainBanner from "../components/BannersComponents/mainBanner";
+import CommonBanner from "../components/BannersComponents/CommonBanner";
 
 const OurExperties = () => {
   return (
     <React.Fragment>
-      <MainBanner
+      <CommonBanner
         title="Our Experties"
         breadcrumbs={[{ label: "Home", path: "/" }, { label: "Our Experties" }]}
       />

@@ -2,12 +2,12 @@ import React from "react";
 import OurFeatures2 from "../components/Sliders/OurFeatures2";
 import AboutSection4 from "../components/AboutUs/AboutSection4";
 import AboutSection14 from "../components/AboutUs/AboutSection14";
-import MainBanner from "../components/BannersComponents/mainBanner";
+import CommonBanner from "../components/BannersComponents/CommonBanner";
 
 const AboutUs = () => {
   return (
     <React.Fragment>
-      <MainBanner
+      <CommonBanner
         title="About Us"
         breadcrumbs={[{ label: "Home", path: "/" }, { label: "About Us" }]}
       />

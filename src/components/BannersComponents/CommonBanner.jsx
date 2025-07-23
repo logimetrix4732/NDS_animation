@@ -2,7 +2,7 @@ import React from "react";
 import banner4 from "../../Images/banner4.png";
 import { Link } from "react-router-dom";
 
-const MainBanner = ({ title, breadcrumbs }) => {
+const CommonBanner = ({ title, breadcrumbs }) => {
   return (
     <div
       className="breadcumb-wrapper"
@@ -32,4 +32,4 @@ const MainBanner = ({ title, breadcrumbs }) => {
   );
 };
 
-export default MainBanner;
+export default CommonBanner;

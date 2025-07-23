@@ -1,11 +1,11 @@
 import React from "react";
-import MainBanner from "../components/BannersComponents/mainBanner";
 import AboutSection13 from "../components/AboutUs/AboutSection13";
+import CommonBanner from "../components/BannersComponents/CommonBanner";
 
 const NewInitiative = () => {
   return (
     <div>
-      <MainBanner
+      <CommonBanner
         title="New Initiative"
         breadcrumbs={[
           { label: "Home", path: "/" },
