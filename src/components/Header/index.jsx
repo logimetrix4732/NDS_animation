@@ -77,7 +77,7 @@ const Header = () => {
                             <a href="contact-2.html">Tenders</a>
                           </li>
                           <li>
-                            <a href="contact-2.html">Contact Us</a>
+                            <Link to="/contactUs">Contact Us</Link>
                           </li>
                         </ul>
                       </li>
@@ -101,8 +101,11 @@ const Header = () => {
                       marginLeft: "65px",
                     }}
                   >
-                    <a href="/" className="th-btn th-icon d-none d-xxl-block">
-                      Contact Us{" "}
+                    <a
+                      href="/contactUs"
+                      className="th-btn th-icon d-none d-xxl-block"
+                    >
+                      Contact Us
                       <i className="fa-light fa-arrow-right-long"></i>
                     </a>
                     <button

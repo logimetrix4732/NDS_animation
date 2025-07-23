@@ -14,6 +14,7 @@ import CarrerDetailPage from "./components/CarrerComponents/CarrerDetailPage";
 import Errors from "./Errors";
 import SemenStations from "./Pages/SemenStations";
 import NewInitiative from "./Pages/NewInitiative";
+import ContactUs from "./Pages/ContactUs";
 
 // 👇 ScrollToTop logic inside App.js
 const ScrollToTop = () => {
@@ -41,6 +42,7 @@ const App = () => {
         <Route path="/carrerDetail" element={<CarrerDetailPage />} />
         <Route path="/semenStations" element={<SemenStations />} />
         <Route path="/newInitiative" element={<NewInitiative />} />
+        <Route path="/contactUs" element={<ContactUs />} />
         <Route path="*" element={<Errors />} />
       </Routes>
       <Footer />

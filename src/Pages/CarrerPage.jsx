@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import CommonBanner from "../components/BannersComponents/CommonBanner";
 
 const CarrerPage = () => {
   return (
@@ -14,22 +15,10 @@ const CarrerPage = () => {
         </span>
       </div>
 
-      <div
-        className="breadcumb-wrapper"
-        data-bg-src="assets/img/bg/breadcumb-bg.jpg"
-      >
-        <div className="container">
-          <div className="breadcumb-content">
-            <h1 className="breadcumb-title">Career Page</h1>
-            <ul className="breadcumb-menu">
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>Career</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <CommonBanner
+        title="Carrer Page"
+        breadcrumbs={[{ label: "Home", path: "/" }, { label: "Carrer Page" }]}
+      />
       <div className="space">
         <div className="container">
           <div className="th-sort-bar">
