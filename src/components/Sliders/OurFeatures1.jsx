@@ -52,7 +52,7 @@ const OurFeatures1 = () => {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isHovered]); // rerun on hover state change
+  }, [isHovered]);
 
   return (
     <div className="service-area" id="service-sec">
