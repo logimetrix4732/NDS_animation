@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AnimatedText from "../AnimatedText";
-
 const AboutSection12 = () => {
   return (
     <div className="choose-area space">
@@ -49,6 +48,12 @@ const AboutSection12 = () => {
                       className="w-100"
                       src="assets/img/normal/about_10_1.jpg"
                       alt="About"
+                      style={{
+                        width: "368px",
+                        height: "512.64px",
+                        objectFit: "cover",
+                        borderRadius: "25px",
+                      }}
                     />
                   </div>
                 </div>

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import SocialContainerImg from "../../Images/SocialContainerImg1.jpg";
 import "./SocialContainer.css";
-import { Link } from "react-router-dom";
 
 const icons = [
   {
@@ -14,11 +13,19 @@ const icons = [
     url: "https://www.linkedin.com/company/nddb-dairy-services/",
     color: "#0077B5",
   },
-  { class: "ri-twitter-line", url: "https://twitter.com", color: "#1DA1F2" },
-  { class: "ri-facebook-fill", url: "https://facebook.com", color: "#1877F2" },
+  {
+    class: "ri-twitter-line",
+    url: "https://x.com/NDDBDairyServ",
+    color: "#1DA1F2",
+  },
+  {
+    class: "ri-facebook-fill",
+    url: "https://www.facebook.com/people/NDDB-Dairy-Services/61557086137103/",
+    color: "#1877F2",
+  },
   {
     class: "ri-instagram-line",
-    url: "https://instagram.com",
+    url: "https://www.instagram.com/dudh.nddb/",
     color: "#E1306C",
   },
 ];
@@ -27,7 +34,7 @@ const SocialContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
 
-  const radius = 262;
+  const radius = 200; // reduced from 262
   const startAngle = 180;
   const stepAngle = 25;
 
@@ -40,7 +47,6 @@ const SocialContainer = () => {
     );
 
     if (ref.current) observer.observe(ref.current);
-
     return () => observer.disconnect();
   }, []);
 
@@ -78,8 +84,7 @@ const SocialContainer = () => {
         justifyContent: "flex-end",
       }}
     >
-      {/* ✅ Left Side Content */}
-
+      {/* Left Side Content */}
       <div className="container LeftSideContent">
         <div className="row gy-4 justify-content-between align-items-center">
           <div className="col-lg-6 col-xl-6">
@@ -95,69 +100,30 @@ const SocialContainer = () => {
                   className="sec-title text-white text-anime-style-2"
                   style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}
                 >
-                  <span
-                    className="wow fadeInUp"
-                    data-wow-delay="0s"
-                    style={{ display: "inline-block", fontWeight: "bold" }}
-                  >
-                    Join
-                  </span>
-                  <span
-                    className="wow fadeInUp"
-                    data-wow-delay="0.2s"
-                    style={{ display: "inline-block", fontWeight: "bold" }}
-                  >
-                    the
-                  </span>
-                  <span
-                    className="wow fadeInUp"
-                    data-wow-delay="0.4s"
-                    style={{ display: "inline-block", fontWeight: "bold" }}
-                  >
-                    Journey
-                  </span>
-                  <span
-                    className="wow fadeInUp"
-                    data-wow-delay="0.4s"
-                    style={{ display: "inline-block", fontWeight: "bold" }}
-                  >
-                    of
-                  </span>
-                  <span
-                    className="wow fadeInUp"
-                    data-wow-delay="0.8s"
-                    style={{ display: "inline-block", fontWeight: "bold" }}
-                  >
-                    Dairy
-                  </span>
-                  <span
-                    className="wow fadeInUp"
-                    data-wow-delay="1s"
-                    style={{ display: "inline-block", fontWeight: "bold" }}
-                  >
-                    Excellence
-                  </span>
-                  <span
-                    className="wow fadeInUp"
-                    data-wow-delay="1.2s"
-                    style={{ display: "inline-block", fontWeight: "bold" }}
-                  >
-                    with
-                  </span>
-                  <span
-                    className="wow fadeInUp"
-                    data-wow-delay="1.4s"
-                    style={{ display: "inline-block", fontWeight: "bold" }}
-                  >
-                    NDDB
-                  </span>
-                  <span
-                    className="wow fadeInUp"
-                    data-wow-delay="1.6s"
-                    style={{ display: "inline-block", fontWeight: "bold" }}
-                  >
-                    Services
-                  </span>
+                  {[
+                    "Join",
+                    "the",
+                    "Journey",
+                    "of",
+                    "Dairy",
+                    "Excellence",
+                    "with",
+                    "NDDB",
+                    "Dairy",
+                    "Services",
+                  ].map((word, index) => (
+                    <span
+                      key={index}
+                      className="wow fadeInUp"
+                      data-wow-delay={`${index * 0.2}s`}
+                      style={{
+                        display: "inline-block",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {word}
+                    </span>
+                  ))}
                 </h2>
                 <p
                   className="contact-text2 text-white wow fadeInUp"
@@ -179,8 +145,8 @@ const SocialContainer = () => {
           position: "absolute",
           bottom: 0,
           right: 0,
-          width: isOpen ? "380px" : "0px",
-          height: isOpen ? "380px" : "0px",
+          width: isOpen ? "280px" : "0px",
+          height: isOpen ? "280px" : "0px",
           backgroundColor: "rgba(91, 140, 81, 68%)",
           transition: "all 0.4s ease",
           borderRadius: "80% 0 0 0",
@@ -193,8 +159,8 @@ const SocialContainer = () => {
           position: "absolute",
           bottom: 0,
           right: 0,
-          width: isOpen ? "320px" : "0px",
-          height: isOpen ? "320px" : "0px",
+          width: isOpen ? "235px" : "0px",
+          height: isOpen ? "235px" : "0px",
           backgroundColor: "rgba(64, 74, 61, 60%)",
           transition: "all 0.4s ease",
           borderRadius: "80% 0 0 0",
@@ -207,8 +173,8 @@ const SocialContainer = () => {
           position: "absolute",
           bottom: 0,
           right: 0,
-          width: isOpen ? "400px" : "0px",
-          height: isOpen ? "400px" : "0px",
+          width: isOpen ? "300px" : "0px",
+          height: isOpen ? "300px" : "0px",
           background: isOpen
             ? "radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.06), transparent 70%)"
             : "transparent",
@@ -224,8 +190,8 @@ const SocialContainer = () => {
         className="social-wrapper"
         style={{
           position: "relative",
-          width: "70px",
-          height: "70px",
+          width: "40px",
+          height: "40px",
           margin: "30px",
           borderRadius: "50%",
           zIndex: 10,
@@ -245,10 +211,10 @@ const SocialContainer = () => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: "35px",
+              fontSize: "25px",
               textDecoration: "none",
               zIndex: 5,
-              transitionDelay: `${index * 0.1}s`, // stagger effect
+              transitionDelay: `${index * 0.1}s`,
               ...getPositionStyle(index),
             }}
           >
@@ -261,13 +227,13 @@ const SocialContainer = () => {
           style={{
             backgroundColor: "rgba(64, 74, 61, 85%)",
             borderRadius: "50%",
-            width: "85px",
-            height: "85px",
+            width: "65px",
+            height: "65px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             color: "white",
-            fontSize: "11px",
+            fontSize: "9px",
             flexDirection: "column",
             cursor: "default",
             transition: "all 0.4s ease",
@@ -280,7 +246,7 @@ const SocialContainer = () => {
         >
           <div
             style={{
-              fontSize: "10px",
+              fontSize: "9px",
               lineHeight: "1.1",
               fontWeight: "bold",
               letterSpacing: "0.5px",

@@ -33495,7 +33495,7 @@ span.select2-selection.select2-selection--single:focus {
   max-width: 1560px;
   display: block;
   margin: auto;
-  border-radius: 60px;
+  border-radius: 10px;
   z-index: 2;
 }
 @media (max-width: 991px) {

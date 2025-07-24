@@ -78,21 +78,6 @@ const AboutSection8 = () => {
           </div>
         </div>
       </div>
-      <div
-        className="shape-mockup d-none d-xxl-block wow fadeInRight"
-        style={{
-          position: "absolute",
-          bottom: 0, // percentage unnecessary here
-          right: 0,
-          zIndex: 1, // optional: bring it above or below as needed
-        }}
-      >
-        <img
-          src={about5shape}
-          alt="Shape"
-          style={{ maxWidth: "100%", height: "auto" }}
-        />
-      </div>
     </div>
   );
 };

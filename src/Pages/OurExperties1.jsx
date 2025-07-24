@@ -43,7 +43,6 @@ const OurExperties1 = () => {
           </div>
         </div>
       </div>
-      <AboutSection9 />
 
       <AboutSection7 />
       <AboutSection6 />

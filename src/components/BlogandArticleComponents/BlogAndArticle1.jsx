@@ -1,109 +1,43 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
-import goal from "../../Images/goal.jpg";
-import goal1 from "../../Images/goal1.jpg";
-import goal2 from "../../Images/goal2.jpg";
-import goal3 from "../../Images/goal3.jpg";
-import goal4 from "../../Images/goal4.jpg";
-import goal5 from "../../Images/goal5.jpg";
-import goal6 from "../../Images/goal6.jpg";
-import goal7 from "../../Images/goal7.jpg";
-import goal8 from "../../Images/goal8.jpg";
-import goal10 from "../../Images/goal10.jpg";
-import goal11 from "../../Images/goal11.jpg";
-import goal12 from "../../Images/goal12.jpg";
 import video07 from "../../Images/Videos/video07.mp4";
-
-const goals = [
-  {
-    goal: "Goal 1",
-    title: "Better and Timely Income",
-    description:
-      "Focusing on generating consistent income for farmers through organized dairy services.",
-    image: goal,
-  },
-  {
-    goal: "Goal 2",
-    title: "Income for Small & Marginal Farmers, Especially Women",
-    description:
-      "Empowering small and marginal farmers, especially women, through inclusive dairy initiatives.",
-    image: goal1,
-  },
-  {
-    goal: "Goal 3",
-    title: "Safe Milk, Healthy Communities",
-    description:
-      "Ensuring access to safe and nutritious milk, promoting better health for communities.",
-    image: goal2,
-  },
-  {
-    goal: "Goal 4",
-    title: "Women Empowerment via Ownership & Leadership",
-    description:
-      "Encouraging leadership roles and ownership among rural women in dairy cooperatives.",
-    image: goal3,
-  },
-  {
-    goal: "Goal 5",
-    title: "Renewable Energy in Dairy",
-    description:
-      "Promoting the use of clean and renewable energy throughout the dairy value chain.",
-    image: goal4,
-  },
-  {
-    goal: "Goal 6",
-    title: "Dignified Rural Livelihoods",
-    description:
-      "Creating sustainable livelihoods and income opportunities through dairy enterprises.",
-    image: goal5,
-  },
-  {
-    goal: "Goal 7",
-    title: "Rural Dairy Infrastructure & Innovation",
-    description:
-      "Investing in rural dairy infrastructure and encouraging innovation to improve productivity.",
-    image: goal6,
-  },
-  {
-    goal: "Goal 8",
-    title: "Market Access for Marginal Farmers",
-    description:
-      "Building efficient systems to help marginal farmers access markets and services.",
-    image: goal7,
-  },
-  {
-    goal: "Goal 9",
-    title: "Resilient Rural Communities",
-    description:
-      "Supporting rural communities to be more resilient, connected, and self-reliant.",
-    image: goal8,
-  },
-  {
-    goal: "Goal 10",
-    title: "Sustainable Dairy Production",
-    description:
-      "Encouraging environment-friendly and sustainable dairy production practices.",
-    image: goal10,
-  },
-  {
-    goal: "Goal 11",
-    title: "Climate-Smart Dairy Practices",
-    description:
-      "Adapting climate-smart technologies to support farmers in changing environments.",
-    image: goal11,
-  },
-  {
-    goal: "Goal 12",
-    title: "Ecosystem-Friendly Livestock Practices",
-    description:
-      "Promoting livestock management that conserves ecosystems and biodiversity.",
-    image: goal12,
-  },
-];
+import { useMediaQuery, useTheme } from "@mui/material";
+import DrawerModal from "../DrawerModal";
+import AnimalNutrition from "../../Images/OurExpertiesImg/AnimalNutrition.JPG";
+import checkMarkIcon from "../../Images/checkMarkIcon.jpg";
 
 const BlogAndArticle1 = () => {
+  const [open, setOpen] = React.useState(false);
+
+  const toggleDrawer = (state) => () => {
+    setOpen(state);
+  };
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const AboutUsContent = {
+    title: "Animal Nutrition",
+    content: [
+      "Ensuring proper animal nutrition is fundamental to improve milk productivity, animal health and farm profitability. Recognizing this need, NDS strategically entered the cattle feed market under the ‘SAG’ brand to strengthen the availability of scientifically formulated feed for dairy farmers across the country. By leveraging the network of MPOs and general trade channels, NDS ensures that quality inputs like cattle feed, mineral mixtures and high-yielding and nutritious fodder seeds reach efficiently to the farmers. These inputs play a vital role in addressing the widespread nutritional deficiencies commonly seen in dairy animals in rural India, ultimately supporting better milk yields and healthier livestock at the grassroots level.",
+      "To promote balanced feeding practices, NDS guides Producer Organisation in implementing Ration Balancing Services. These services are designed to educate farmers on optimizing available feed resources to meet the specific nutritional needs of their animals based on age, breed and stage of lactation.   ",
+      "Key focus areas include :-",
+      "♦ Heat stress mitigation techniques during summer ",
+      "♦ Mastitis prevention and udder hygiene practices ",
+      "♦ Calf and heifer management for future productivity ",
+      "♦ Preventive healthcare including vaccination and deworming schedules ",
+      "♦ Fodder planning and conservation including silage making and multi cut fodder cultivation ",
+      "Through these integrated nutrition services, NDS empowers producer members to adopt best practices, reduce input costs and sustainably enhance animal productivity ultimately improving farmer livelihoods and milk quality. ",
+    ],
+  };
   return (
     <section className="space-bottom">
+      <DrawerModal
+        isMobile={isMobile}
+        open={open}
+        toggleDrawer={toggleDrawer}
+        title={AboutUsContent.title}
+        content={AboutUsContent.content}
+      />
       <div className="container">
         <div className="row">
           <div className="col-lg-5">
@@ -111,68 +45,114 @@ const BlogAndArticle1 = () => {
               <div className="sec_title_wrap">
                 <div className="title-area text-center text-lg-start pe-xl-5">
                   <span className="sub-title text-anime-style-2">
-                    Aligned with Global Goals
+                    Animal Nutrition  
                   </span>
                   <AnimatedText
-                    text="Why NDDB Dairy Services"
+                    text="Scientific Feeding for Dairy Success"
                     tag="h2"
                     className="sec-title mb-10 heading text-anime-style-3"
                     width="100%"
                   />
                 </div>
                 <div className="blog-shape text-lg-start text-center">
-                  <video
-                    src={video07}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
+                  <img
+                    src={AnimalNutrition}
+                    alt="Animal Productivity Services 2"
                     style={{
-                      width: "500px",
-                      height: "354px",
-                      borderRadius: "40px",
+                      width: "672px",
+                      height: "367px",
                       objectFit: "cover",
+                      borderRadius: "28px",
                     }}
-                  ></video>
+                  />
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="col-lg-7">
-            <div className="blog-grid4-static-wrap">
-              {goals.map((goal, index) => {
-                const words = goal.description.split(" ").length;
-                const readTime = Math.max(1, Math.ceil(words / 20));
-
-                return (
-                  <div key={index} className="col-12 blog-grid4_wrapp">
-                    <div className="blog-grid4 th-ani style4 mt-24">
-                      <div className="box-content">
-                        <div className="blog-meta">
-                          <a className="author" href="#">
-                            {goal.goal || `Goal ${index + 1}`}
-                          </a>
-                        </div>
-                        <h3 className="box-title">
-                          <a href="#">{goal.title}</a>
-                        </h3>
-                        <p>{goal.description}</p>
-                      </div>
-                      <div className="blog-img global-img">
-                        <img
-                          src={goal.image}
-                          alt="goal visual"
-                          style={{
-                            height: "160px",
-                            borderRadius: "8px",
-                          }}
-                        />
-                      </div>
-                    </div>
+          <div className="col-xl-6 mt-10">
+            <div className="ps-xl-3 ms-xl-3 ps-xl-5 ms-xxl-5">
+              <div className="title-area about-7-titlebox mb-20">
+                <p
+                  className="sec-text mb-15 mt-20  wow fadeInUp"
+                  data-wow-delay=".4s"
+                >
+                  Ensuring proper animal nutrition is fundamental to improve
+                  milk productivity, animal health and farm profitability.
+                  Recognizing this need, NDS strategically entered the cattle
+                  feed market under the ‘SAG’ brand to strengthen the
+                  availability of scientifically formulated feed for dairy
+                  farmers across the country. By leveraging the network of MPOs
+                  and general trade channels, NDS ensures that quality inputs
+                  like cattle feed, mineral mixtures
+                </p>
+                <div class="about-feature-wrap">
+                  <div class="about-feature-list">
+                    <ul>
+                      <li class="wow fadeInUp" data-wow-delay=".4s">
+                        <span class="about-feature-icon">
+                          <img
+                            src={checkMarkIcon}
+                            alt=""
+                            style={{ width: "26px", height: "22px" }}
+                          />
+                        </span>
+                        Heat stress mitigation techniques during summer
+                      </li>
+                      <li class="wow fadeInUp" data-wow-delay=".5s">
+                        <span class="about-feature-icon">
+                          <img
+                            src={checkMarkIcon}
+                            alt=""
+                            style={{ width: "26px", height: "22px" }}
+                          />
+                        </span>
+                        Mastitis prevention and udder hygiene practices
+                      </li>
+                      <li class="wow fadeInUp" data-wow-delay=".5s">
+                        <span class="about-feature-icon">
+                          <img
+                            src={checkMarkIcon}
+                            alt=""
+                            style={{ width: "26px", height: "22px" }}
+                          />
+                        </span>
+                        Calf and heifer management for future productivity
+                      </li>
+                      <li class="wow fadeInUp" data-wow-delay=".5s">
+                        <span class="about-feature-icon">
+                          <img
+                            src={checkMarkIcon}
+                            alt=""
+                            style={{ width: "26px", height: "22px" }}
+                          />
+                        </span>
+                        Preventive healthcare including vaccination and
+                        deworming schedules 
+                      </li>
+                      <li class="wow fadeInUp" data-wow-delay=".5s">
+                        <span class="about-feature-icon">
+                          <img
+                            src={checkMarkIcon}
+                            alt=""
+                            style={{ width: "26px", height: "22px" }}
+                          />
+                        </span>
+                        Fodder planning and conservation including silage making
+                        and multi cut fodder cultivation 
+                      </li>
+                    </ul>
                   </div>
-                );
-              })}
+                </div>
+                <div className="wow fadeInUp" data-wow-delay=".4s">
+                  <button
+                    onClick={toggleDrawer(true)}
+                    className="th-btn th-icon"
+                  >
+                    Learn more <i className="fa-light fa-arrow-right-long" />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

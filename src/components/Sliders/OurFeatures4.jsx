@@ -36,10 +36,10 @@ const OurFeatures4 = () => {
       <div className="container">
         <div className="title-area text-center">
           <span className="sub-title text-white text-anime-style-2">
-            Examples of our work
+            Showcasing Our Impact
           </span>
           <h2 className="sec-title text-white text-anime-style-3">
-            Explore our recent projects
+            films produced by/on MPOs
           </h2>
         </div>
 

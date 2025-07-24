@@ -108,7 +108,7 @@ const AboutSection1 = () => {
                     className="th-btn th-icon"
                     onClick={() => setShowFullText(true)}
                   >
-                    Read More <i className="fa-light fa-arrow-right-long"></i>
+                    Learn More <i className="fa-light fa-arrow-right-long"></i>
                   </button>
                 </div>
               )}

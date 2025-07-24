@@ -2,13 +2,39 @@ import React from "react";
 import AnimatedText from "../AnimatedText";
 import aboutImg3 from "../../Images/aboutImg3.jpg";
 import aboutImg4 from "../../Images/aboutImg4.jpg";
+import DrawerModal from "../DrawerModal";
+import { useMediaQuery, useTheme } from "@mui/material";
 import "./AboutSection.css";
 const AboutSection4 = () => {
+  const [open, setOpen] = React.useState(false);
+
+  const toggleDrawer = (state) => () => {
+    setOpen(state);
+  };
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const AboutUsContent = {
+    title: "Empowering India's Dairy Farmers",
+    content: [
+      "NDDB Dairy Services (NDS) is a Section 8 company registered under the Companies Act, 2013. It is a wholly-owned subsidiary of the National Dairy Development Board (NDDB), and plays a pivotal role in strengthening the dairy sector in India through innovative, sustainable, and inclusive development models.",
+      "Established to operationalize NDDB’s vision of creating a vibrant rural dairying ecosystem, NDS, since its inception has been assisting dairy farmers with a range of initiatives throughout the dairy value chain. Our comprehensive approach, aimed at improving breed quality and boosting animal productivity, has resulted in the increase of the surplus and marketable milk available with farmers.  ",
+      "By facilitating the establishment of Milk Producer Organisations (MPOs) and thereafter providing them technical support and an assured market for their surplus produce in the form of strong forward institutional linkages, dairy farmers benefit with improved livelihoods through fair and transparent pricing and direct payments into their bank accounts.",
+      "For long-term sustainability, NDS prioritises training and capacity building for dairy farmers to ensure they can manage these (producer owned) organizations effectively. Gender inclusion remains a key focal area, hence our interventions provide a platform to women dairy farmers, empowering them to excel in the remotest regions of India and make significant contributions to the dairy sector of the country.",
+    ],
+  };
   return (
     <div
       className="about-area position-relative overflow-hidden space"
       id="about-sec"
     >
+      <DrawerModal
+        isMobile={isMobile}
+        open={open}
+        toggleDrawer={toggleDrawer}
+        title={AboutUsContent.title}
+        content={AboutUsContent.content}
+      />
       <div className="container">
         <div className="row custom-ml">
           <div className="col-xl-6 col-xxl-7">
@@ -17,7 +43,7 @@ const AboutSection4 = () => {
                 <img
                   src={aboutImg3}
                   alt="About"
-                  style={{ width: "585px", height: "622px" }}
+                  style={{ width: "585px", height: "600px" }}
                 />
               </div>
               <div className="img2 wow fadeInUp" data-wow-delay=".4s">
@@ -53,51 +79,27 @@ const AboutSection4 = () => {
                   width="100%"
                 />
               </div>
-              <p className="sec-text mb-30 wow fadeInUp" data-wow-delay=".3s">
-                NDDB Dairy Services (NDS) is a not-for-profit company (Section
-                8), a wholly-owned subsidiary of NDDB. We are committed to
-                strengthening India’s dairy sector through sustainable and
-                inclusive development models, empowering farmers with tools,
-                technologies, and transparent systems.
+              <p className="about-item_text wow fadeInUp about-ellipsis">
+                NDDB Dairy Services (NDS) is a Section 8 company registered
+                under the Companies Act, 2013. It is a wholly-owned subsidiary
+                of the National Dairy Development Board (NDDB), and plays a
+                pivotal role in strengthening the dairy sector in India through
+                innovative, sustainable, and inclusive development models.
+                <br />
+                Established to operationalize NDDB’s vision of creating a
+                vibrant rural dairying ecosystem, NDS, since its inception has
+                been assisting dairy farmers with a range of initiatives
+                throughout the dairy value chain. Our comprehensive approach,
+                aimed at improving breed quality and boosting animal
+                productivity, has resulted in the increase of the surplus and
+                marketable milk available with farmers.  
+                <br />
               </p>
-              <div className="about-item-wrap">
-                <div className="about-item wow fadeInUp" data-wow-delay=".2s">
-                  <div className="about-item_img">
-                    <img src="assets/img/icon/map3.svg" alt="" />
-                  </div>
-                  <div className="about-item_centent">
-                    <h5 className="box-title">Inclusive Development</h5>
-                    <p className="about-item_text">
-                      We support MPOs with market access and direct farmer
-                      payments.
-                    </p>
-                  </div>
-                </div>
 
-                <div className="about-item wow fadeInUp" data-wow-delay=".3s">
-                  <div className="about-item_img">
-                    <img src="assets/img/icon/guide.svg" alt="" />
-                  </div>
-                  <div className="about-item_centent">
-                    <h5 className="box-title">Capacity Building</h5>
-                    <p className="about-item_text">
-                      We train and empower dairy farmers, especially women
-                      leaders.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="about-item wow fadeInUp" data-wow-delay=".4s">
-                  <div className="about-item_img">
-                    <img src="assets/img/icon/headphone.svg" alt="" />
-                  </div>
-                  <div className="about-item_centent">
-                    <h5 className="box-title">Breeding Innovations</h5>
-                    <p className="about-item_text">
-                      We improve dairy breeds through Embryo Transfer and AI.
-                    </p>
-                  </div>
-                </div>
+              <div className="mt-20 wow fadeInUp">
+                <button onClick={toggleDrawer(true)} className="th-btn th-icon">
+                  Learn more <i className="fa-light fa-arrow-right-long" />
+                </button>
               </div>
             </div>
           </div>

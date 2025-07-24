@@ -101,7 +101,7 @@ const AboutSection7 = () => {
                 </div>
               </div>
               <div class="mt-35 wow fadeInUp" data-wow-delay=".6s">
-                <Link to="/semenStations" class="th-btn th-icon">
+                <Link to="/animalProductivity" class="th-btn th-icon">
                   Learn More <i class="fa-light fa-arrow-right-long"></i>
                 </Link>
               </div>
