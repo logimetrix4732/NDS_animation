@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import SocialContainerImg from "../../Images/SocialContainerImg1.jpg";
 import "./SocialContainer.css";
-
+import DSC_0344 from "../../Images/HomeImgs/DSC_0344.jpg";
 const icons = [
   {
     class: "ri-youtube-fill",
@@ -69,7 +69,7 @@ const SocialContainer = () => {
       ref={ref}
       className="social-container mt-3 mb-1 contact6-overlay"
       style={{
-        backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.25), rgba(0,0,0,0.15)), url(${SocialContainerImg})`,
+        backgroundImage: `linear-gradient(to bottom right, rgba(0,0,0,0.25), rgba(0,0,0,0.15)), url(${DSC_0344})`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",

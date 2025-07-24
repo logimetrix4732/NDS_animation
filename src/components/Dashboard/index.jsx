@@ -12,51 +12,55 @@ import dashboard1 from "../../Images/dashboard1.jpg";
 import dashboard2 from "../../Images/dashboard2.jpg";
 import dashboard3 from "../../Images/dashboard3.jpg";
 import dashboard4 from "../../Images/dashboard4.jpeg";
+import DSC_1362 from "../../Images/HomeImgs/DSC_1362.jpg";
+import DSC_3158 from "../../Images/HomeImgs/DSC_3158.jpg";
+import DSC_4722 from "../../Images/HomeImgs/DSC_4722.jpg";
+import DSC_7380 from "../../Images/HomeImgs/DSC_7380.jpg";
 import "./dashboard.css";
 const heroSlides = [
   {
-    bg: dashboard1,
+    bg: DSC_7380,
     title: "Empowering India's Dairy Sector",
     desc: "NDDB Dairy Services is committed to building a robust producer-owned dairy cooperative network across the country.",
     thumbs: [
       {
-        img: dashboard1,
+        img: DSC_7380,
         title: "Producer Organizations",
         desc: "Strengthening farmer institutions through sustainable dairy cooperatives.",
       },
     ],
   },
   {
-    bg: dashboard2,
+    bg: DSC_3158,
     title: "Sustainable Dairy Development",
     desc: "We promote animal husbandry practices, productivity enhancement, and rural livelihood through innovative solutions.",
     thumbs: [
       {
-        img: dashboard2,
+        img: DSC_3158,
         title: "Productivity Initiatives",
         desc: "Focusing on breed improvement, nutrition, and animal health services.",
       },
     ],
   },
   {
-    bg: dashboard3,
+    bg: DSC_4722,
     title: "Creating Livelihood Opportunities",
     desc: "Our programs benefit lakhs of dairy farmers, especially women, by ensuring regular income through organized dairying.",
     thumbs: [
       {
-        img: dashboard3,
+        img: DSC_4722,
         title: "Women Empowerment",
         desc: "Enabling women to lead and participate in dairy-based livelihoods.",
       },
     ],
   },
   {
-    bg: dashboard4,
+    bg: DSC_1362,
     title: "Innovation in Dairy Services",
     desc: "From digital solutions to cold chain infrastructure, NDS integrates modern tools to transform dairy systems.",
     thumbs: [
       {
-        img: dashboard4,
+        img: DSC_1362,
         title: "Technology & Infrastructure",
         desc: "Driving efficiency with digital platforms, automation, cold-chain systems, and robust logistics.",
       },
