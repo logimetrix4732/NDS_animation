@@ -1,6 +1,6 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
-
+import SAGLiveImg from "../../Images/OurExpertiesImg/SAGLiveImg.jpg";
 const AboutSection11 = () => {
   return (
     <div
@@ -15,13 +15,29 @@ const AboutSection11 = () => {
                 className="img1 bg-mask wow fadeInLeft"
                 data-mask-src="assets/img/shape/about_9_1_shape.png"
               >
-                <img src="assets/img/normal/about_9_1.jpg" alt="About" />
+                <img
+                  src="assets/img/normal/about_9_1.jpg"
+                  alt="About"
+                  style={{
+                    width: "480px",
+                    height: "480px",
+                    objectFit: "cover",
+                  }}
+                />
               </div>
               <div
                 className="img2 bg-mask wow fadeInDown"
                 data-mask-src="assets/img/shape/about_9_2_shape.png"
               >
-                <img src="assets/img/normal/about_9_2.jpg" alt="About" />
+                <img
+                  src={SAGLiveImg}
+                  alt="About"
+                  style={{
+                    width: "354px",
+                    height: "354px",
+                    objectFit: "cover",
+                  }}
+                />
               </div>
             </div>
           </div>

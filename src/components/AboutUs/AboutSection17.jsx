@@ -1,6 +1,6 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
-
+import GroupPhoto from "../../Images/AnimalProductivityImg/GroupPhoto.jpg";
 const AboutSection17 = () => {
   return (
     <div
@@ -12,7 +12,15 @@ const AboutSection17 = () => {
           <div className="col-xl-6">
             <div className="img-box17">
               <div className="img1 global-img">
-                <img src="assets/img/normal/about_12_1.jpg" alt="About" />
+                <img
+                  src={GroupPhoto}
+                  alt="About"
+                  style={{
+                    width: "576px",
+                    height: "370px",
+                    objectFit: "cover",
+                  }}
+                />
               </div>
             </div>
           </div>

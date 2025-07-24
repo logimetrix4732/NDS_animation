@@ -17,7 +17,6 @@ const MilkProducer = () => {
       <AboutSection1 />
       <Banner />
       <AboutSection8 />
-      <OurFeatures />
     </div>
   );
 };

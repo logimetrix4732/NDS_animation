@@ -8,7 +8,8 @@ import img1 from "../../assets/img/normal/about_11_1.jpg";
 import img2 from "../../assets/img/normal/about_11_2.jpg";
 import logoIcon from "../../assets/img/logo-icon.svg";
 import badgeCircle from "../../assets/img/shape/bullets-circle2.png";
-
+import FVF02218 from "../../Images/NewInitiativeImg/FVF02218.JPG";
+import FVF02761 from "../../Images/NewInitiativeImg/FVF02761.JPG";
 const AboutSection13 = () => {
   const [expandedCard, setExpandedCard] = useState(null);
 
@@ -117,10 +118,26 @@ const AboutSection13 = () => {
             <div className="img-box14 img-box19 img-box ps-xl-2 ms-xl-5">
               <div className="about-img-wrapp position-relative">
                 <div className="img1 rounded-img">
-                  <img src={img1} alt="About" />
+                  <img
+                    src={FVF02218}
+                    alt="About"
+                    style={{
+                      width: "360px",
+                      height: "587px",
+                      objectFit: "cover",
+                    }}
+                  />
                 </div>
                 <div className="img2 rounded-img">
-                  <img src={img2} alt="About" />
+                  <img
+                    src={FVF02761}
+                    alt="About"
+                    style={{
+                      width: "360px",
+                      height: "587px",
+                      objectFit: "cover",
+                    }}
+                  />
                 </div>
                 <div
                   className="position-absolute top-50"

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AnimatedText from "../AnimatedText";
+import DSC_1967 from "../../Images/OurExpertiesImg/DSC_1967.jpg";
 const AboutSection12 = () => {
   return (
     <div className="choose-area space">
@@ -46,7 +47,7 @@ const AboutSection12 = () => {
                   <div className="img1 wow fadeInLeft" data-wow-delay=".1s">
                     <img
                       className="w-100"
-                      src="assets/img/normal/about_10_1.jpg"
+                      src={DSC_1967}
                       alt="About"
                       style={{
                         width: "368px",

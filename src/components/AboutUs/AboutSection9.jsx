@@ -4,6 +4,8 @@ import DrawerModal from "../DrawerModal";
 import { useMediaQuery, useTheme } from "@mui/material";
 import AnimatedText from "../AnimatedText";
 import ClimateSustainabilityImg from "../../Images/OurExpertiesImg/ClimateSustainabilityImg.JPG";
+import finalcover from "../../Images/OurExpertiesImg/finalcover.jpg";
+import DSC_2582 from "../../Images/OurExpertiesImg/DSC_2582.JPG";
 const AboutSection9 = () => {
   const [open, setOpen] = React.useState(false);
 
@@ -39,7 +41,7 @@ const AboutSection9 = () => {
             <div className="img-box6">
               <div className="img1 reveal wow fadeInLeft" data-wow-delay=".2s">
                 <img
-                  src="assets/img/normal/about_6_1.jpg"
+                  src={finalcover}
                   alt="About"
                   style={{
                     width: "328px",
@@ -63,7 +65,7 @@ const AboutSection9 = () => {
               </div>
               <div className="img3 reveal wow fadeInRight" data-wow-delay=".4s">
                 <img
-                  src="assets/img/normal/about_6_3.jpg"
+                  src={DSC_2582}
                   alt="About"
                   style={{
                     width: "328px",

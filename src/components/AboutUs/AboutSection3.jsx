@@ -2,7 +2,8 @@ import React from "react";
 import AnimatedText from "../AnimatedText";
 import { Link } from "react-router-dom";
 import SemenStationsImg from "../../Images/OurExpertiesImg/SemenStationsImg.JPG";
-
+import animalImg from "../../Images/OurExpertiesImg/21046.jpg";
+import IMG_6393 from "../../Images/OurExpertiesImg/IMG_6393.JPG";
 const AboutSection3 = () => {
   return (
     <section className="choose-6-area space-bottom">
@@ -46,8 +47,13 @@ const AboutSection3 = () => {
               <div className="choose-item4">
                 <div className="choose-img wow fadeInUp">
                   <img
-                    src="assets/img/choose/choose_4_1.jpg"
+                    src={animalImg}
                     alt="Animal Productivity Services 1"
+                    style={{
+                      width: "302px",
+                      height: "268px",
+                      objectFit: "cover",
+                    }}
                   />
                 </div>
               </div>
@@ -68,8 +74,13 @@ const AboutSection3 = () => {
               <div className="choose-item4">
                 <div className="choose-img wow fadeInUp">
                   <img
-                    src="assets/img/choose/choose_4_3.jpg"
+                    src={IMG_6393}
                     alt="Animal Productivity Services 3"
+                    style={{
+                      width: "506px",
+                      height: "251px",
+                      objectFit: "cover",
+                    }}
                   />
                 </div>
               </div>

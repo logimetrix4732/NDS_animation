@@ -1,7 +1,9 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
 import { Link } from "react-router-dom";
-
+import ME7A8877 from "../../Images/AnimalProductivityImg/ME7A8877.JPG";
+import _SUN7366 from "../../Images/AnimalProductivityImg/_SUN7366.JPG";
+import DSC_0492 from "../../Images/AnimalProductivityImg/DSC_0492.JPG";
 const AboutSection7 = () => {
   return (
     <div
@@ -13,13 +15,37 @@ const AboutSection7 = () => {
           <div className="col-xl-7">
             <div className="img-box3 style1">
               <div className="img1 reveal">
-                <img src="assets/img/normal/about_3_1.jpg" alt="About" />
+                <img
+                  src={_SUN7366}
+                  alt="About"
+                  style={{
+                    width: "424px",
+                    height: "432px",
+                    objectFit: "cover",
+                  }}
+                />
               </div>
               <div className="img2 wow fadeInRight" data-wow-delay=".3s">
-                <img src="assets/img/normal/about_3_2.jpg" alt="About" />
+                <img
+                  src={ME7A8877}
+                  alt="About"
+                  style={{
+                    width: "434px",
+                    height: "448px",
+                    objectFit: "cover",
+                  }}
+                />
               </div>
               <div className="img3 movingX">
-                <img src="assets/img/normal/about_3_3.jpg" alt="About" />
+                <img
+                  src={DSC_0492}
+                  alt="About"
+                  style={{
+                    width: "434px",
+                    height: "330px",
+                    objectFit: "cover",
+                  }}
+                />
               </div>
             </div>
           </div>
