@@ -15,7 +15,7 @@ import dashboard4 from "../../Images/dashboard4.jpeg";
 import DSC_1362 from "../../Images/HomeImgs/DSC_1362.jpg";
 import DSC_3158 from "../../Images/HomeImgs/DSC_3158.jpg";
 import DSC_4722 from "../../Images/HomeImgs/DSC_4722.jpg";
-import DSC_7380 from "../../Images/HomeImgs/DSC_7380.jpg";
+import DSC_7380 from "../../Images/HomeImgs/DSC_7380.JPG";
 import "./dashboard.css";
 const heroSlides = [
   {
