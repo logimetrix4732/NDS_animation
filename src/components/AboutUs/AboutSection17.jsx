@@ -1,6 +1,6 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
-import GroupPhoto from "../../Images/AnimalProductivityImg/GroupPhoto.jpg";
+import GroupPhoto from "../../Images/AnimalProductivityImg/DSC_0266.jpg";
 const AboutSection17 = () => {
   return (
     <div
@@ -17,7 +17,7 @@ const AboutSection17 = () => {
                   alt="About"
                   style={{
                     width: "576px",
-                    height: "370px",
+                    height: "430px",
                     objectFit: "cover",
                   }}
                 />
@@ -25,7 +25,7 @@ const AboutSection17 = () => {
             </div>
           </div>
           <div className="col-xl-6">
-            <div className="title-area mb-20">
+            <div className="title-area mb-20 mt-30">
               <span className="sub-title style1 wow fadeInLeft">
                 Animal Productivity Services
               </span>
