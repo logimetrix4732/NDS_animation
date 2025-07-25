@@ -74,7 +74,7 @@ const OurFeatures1 = () => {
                   <span className="service-icon">
                     <img src={item.icon} alt="" />
                   </span>
-                  <div className="service-content">
+                  <div className="service-content service-content-main">
                     <h4 className="box-title">{item.title}</h4>
 
                     <span
