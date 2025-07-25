@@ -100,11 +100,8 @@ const OurExperties7 = () => {
         <div className="row justify-content-between">
           <div className="col-xl-6">
             <div className="title-area service-3-titlebox text-center text-md-start">
-              <span className="sub-title text-anime-style-2 wow fadeInLeft">
-                Setting Up MPOs
-              </span>
               <AnimatedText
-                text="Strategic Foundations for Sustainable MPOs"
+                text="Setting Up MPOs"
                 tag="h2"
                 className="sec-title mb-10 heading text-anime-style-3"
                 width="100%"

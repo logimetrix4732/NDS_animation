@@ -71,12 +71,6 @@ const AboutSection4 = () => {
           <div className="col-xl-6 col-xxl-5">
             <div className="">
               <div className="title-area about4-titlebox mb-20">
-                <span
-                  className="sub-title style1 text-anime-style-2 wow fadeInUp"
-                  data-wow-delay=".4s"
-                >
-                  About Us
-                </span>
                 <AnimatedText
                   text="Empowering India's Dairy Farmers"
                   tag="h2"

@@ -39,12 +39,6 @@ const AboutSection = () => {
               style={{ zIndex: 1 }}
             >
               <div className="title-area about1-title-box mb-20 pe-xxl-5 me-xxl-5">
-                <span
-                  className="sub-title style1 text-anime-style-2 wow fadeInUp"
-                  data-wow-delay=".4s"
-                >
-                  About Us
-                </span>
                 <AnimatedText
                   text="NDDB Dairy Services"
                   tag="h2"

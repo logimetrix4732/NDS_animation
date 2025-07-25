@@ -26,11 +26,8 @@ const AboutSection17 = () => {
           </div>
           <div className="col-xl-6">
             <div className="title-area mb-20 mt-30">
-              <span className="sub-title style1 wow fadeInLeft">
-                Animal Productivity Services
-              </span>
               <AnimatedText
-                text="Powering Dairy Through Genetics"
+                text="Animal Productivity Services"
                 tag="h2"
                 className="sec-title mb-10 heading text-anime-style-3"
                 width="100%"

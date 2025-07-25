@@ -81,9 +81,6 @@ const AboutSection1 = () => {
               onMouseLeave={handleMouseLeave}
             >
               <div className="title-area mb-20">
-                <span className="sub-title style1 text-anime-style-2 wow fadeInLeft">
-                  Empowering Rural India
-                </span>
                 <AnimatedText
                   text="Impact of MPOs"
                   tag="h2"

@@ -51,9 +51,6 @@ const AboutSection8 = () => {
           <div className="col-xl-6">
             <div className="mt-8 ml-20">
               <div className="title-area">
-                <span className="sub-title style1 text-anime-style-2 wow fadeInLeft">
-                  Farmer Producer Organisation
-                </span>
                 <AnimatedText
                   text="Fodder Plus FPOs"
                   tag="h2"
