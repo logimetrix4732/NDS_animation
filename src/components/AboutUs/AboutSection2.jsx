@@ -9,7 +9,7 @@ import checkMarkIcon from "../../Images/checkMarkIcon.jpg";
 const AboutSection2 = () => {
   return (
     <div
-      className="about-area position-relative overflow-hidden"
+      className="about-area position-relative overflow-hidden space-top"
       id="about-sec"
     >
       <div className="container">

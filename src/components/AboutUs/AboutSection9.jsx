@@ -84,7 +84,7 @@ const AboutSection9 = () => {
                   Climate & Sustainability
                 </span>
                 <AnimatedText
-                  text=" Greening the Dairy Value Chain"
+                  text="Greening the Dairy Value Chain"
                   tag="h2"
                   className="sec-title mb-20 heading text-anime-style-3"
                   width="100%"

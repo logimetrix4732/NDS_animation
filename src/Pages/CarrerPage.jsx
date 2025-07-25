@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import CommonBanner from "../components/BannersComponents/CommonBanner";
+import CarrerGallery from "../components/CarrerComponents/CarrerGallery";
 
 const CarrerPage = () => {
   return (
@@ -19,6 +20,7 @@ const CarrerPage = () => {
         title="Carrer Page"
         breadcrumbs={[{ label: "Home", path: "/" }, { label: "Carrer Page" }]}
       />
+      <CarrerGallery />
       <div className="space">
         <div className="container">
           <div className="th-sort-bar">

@@ -62,8 +62,6 @@ const OurFeatures1 = () => {
                   index === activeIndex ? "active" : ""
                 }`}
                 key={index}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
               >
                 <div
                   className="service-list"
@@ -73,9 +71,6 @@ const OurFeatures1 = () => {
                     backgroundPosition: "center",
                   }}
                 >
-                  <span className="service-icon">
-                    <img src={item.icon} alt="" />
-                  </span>
                   <div className="service-content">
                     <h4 className="box-title">{item.title}</h4>
 
@@ -86,6 +81,9 @@ const OurFeatures1 = () => {
                       {item.subtitle}
                     </span>
                   </div>
+                  <span className="service-icon">
+                    <img src={item.icon} alt="" />
+                  </span>
                 </div>
               </div>
             ))}
