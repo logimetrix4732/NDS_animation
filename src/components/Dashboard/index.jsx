@@ -8,10 +8,6 @@ import "swiper/css/pagination";
 
 import heroarrowleft from "../../assets/img/icon/hero-arrow-left.svg";
 import heroarrowright from "../../assets/img/icon/hero-arrow-right.svg";
-import dashboard1 from "../../Images/dashboard1.jpg";
-import dashboard2 from "../../Images/dashboard2.jpg";
-import dashboard3 from "../../Images/dashboard3.jpg";
-import dashboard4 from "../../Images/dashboard4.jpeg";
 import DSC_1362 from "../../Images/HomeImgs/DSC_1362.jpg";
 import DSC_3158 from "../../Images/HomeImgs/DSC_3158.jpg";
 import DSC_4722 from "../../Images/HomeImgs/DSC_4722.jpg";
