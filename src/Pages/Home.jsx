@@ -27,7 +27,7 @@ const Home = () => {
       >
         <div className="container">
           <div className="row align-items-center">
-            <div className="col-xl-12 order-1 order-xl-2 position-relative">
+            <div className="col-xl-12 order-1 order-xl-2 position-relative wow fadeInUp">
               <img src={sdgImg} alt="" />
             </div>
           </div>
