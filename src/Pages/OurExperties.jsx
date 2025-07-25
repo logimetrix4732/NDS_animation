@@ -56,11 +56,8 @@ const OurExperties = () => {
           <div className="row gy-4 align-items-start">
             <div className="col-xl-5 order-1 order-xl-0 mt-50">
               <div className="title-area mb-20 mt-10 pe-xl-5">
-                <span className="sub-title text-anime-style-2 wow fadeInLeft">
-                  Project Implementation 
-                </span>
                 <AnimatedText
-                  text="Transforming Dairy Ecosystems"
+                  text="Project Implementation"
                   tag="h2"
                   className="sec-title mb-20 heading text-anime-style-3"
                   width="100%"

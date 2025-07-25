@@ -80,11 +80,8 @@ const AboutSection9 = () => {
           <div className="col-xl-6 mt-10">
             <div className="ps-xl-3 ms-xl-3 ps-xl-5 ms-xxl-5">
               <div className="title-area about-7-titlebox mb-20">
-                <span className="sub-title style1 text-anime-style-2">
-                  Climate & Sustainability
-                </span>
                 <AnimatedText
-                  text="Greening the Dairy Value Chain"
+                  text="Climate & Sustainability"
                   tag="h2"
                   className="sec-title mb-20 heading text-anime-style-3"
                   width="100%"

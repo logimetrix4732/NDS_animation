@@ -43,12 +43,9 @@ const BlogAndArticle1 = () => {
           <div className="col-lg-5">
             <div className="sec_title_static">
               <div className="sec_title_wrap">
-                <div className="title-area text-center text-lg-start pe-xl-5">
-                  <span className="sub-title text-anime-style-2">
-                    Animal Nutrition  
-                  </span>
+                <div className="title-area text-center text-lg-start pe-xl-5 mt-20">
                   <AnimatedText
-                    text="Scientific Feeding for Dairy Success"
+                    text="Animal Nutrition"
                     tag="h2"
                     className="sec-title mb-10 heading text-anime-style-3"
                     width="100%"
@@ -129,17 +126,6 @@ const BlogAndArticle1 = () => {
                         </span>
                         Preventive healthcare including vaccination and
                         deworming schedules 
-                      </li>
-                      <li class="wow fadeInUp" data-wow-delay=".5s">
-                        <span class="about-feature-icon">
-                          <img
-                            src={checkMarkIcon}
-                            alt=""
-                            style={{ width: "26px", height: "22px" }}
-                          />
-                        </span>
-                        Fodder planning and conservation including silage making
-                        and multi cut fodder cultivation 
                       </li>
                     </ul>
                   </div>

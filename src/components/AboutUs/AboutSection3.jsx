@@ -11,9 +11,6 @@ const AboutSection3 = () => {
         <div className="row gy-4 align-items-start">
           <div className="col-xl-5 order-1 order-xl-0 mt-50">
             <div className="title-area mb-20 pe-xl-5">
-              <span className="sub-title text-anime-style-2 wow fadeInLeft">
-                Improving Breed Quality & Productivity
-              </span>
               <AnimatedText
                 text="Animal Productivity Services"
                 tag="h2"

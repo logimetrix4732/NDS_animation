@@ -1,175 +1,65 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectFade, Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Autoplay, EffectFade } from "swiper/modules";
+
 import "swiper/css";
 import "swiper/css/effect-fade";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 
-import heroarrowleft from "../../assets/img/icon/hero-arrow-left.svg";
-import heroarrowright from "../../assets/img/icon/hero-arrow-right.svg";
-import DSC_1362 from "../../Images/HomeImgs/DSC_1362.jpg";
+import DSC_0344 from "../../Images/HomeImgs/DSC_0344.jpg";
 import DSC_3158 from "../../Images/HomeImgs/DSC_3158.jpg";
 import DSC_4722 from "../../Images/HomeImgs/DSC_4722.jpg";
-import DSC_7380 from "../../Images/HomeImgs/DSC_7380.JPG";
+import villagemeeting from "../../Images/HomeImgs/villagemeeting.JPG";
+import DSC_9355 from "../../Images/HomeImgs/DSC_9355.png";
+
 import "./dashboard.css";
-const heroSlides = [
-  {
-    bg: DSC_7380,
-    title: "Empowering India's Dairy Sector",
-    desc: "NDDB Dairy Services is committed to building a robust producer-owned dairy cooperative network across the country.",
-    thumbs: [
-      {
-        img: DSC_7380,
-        title: "Producer Organizations",
-        desc: "Strengthening farmer institutions through sustainable dairy cooperatives.",
-      },
-    ],
-  },
-  {
-    bg: DSC_3158,
-    title: "Sustainable Dairy Development",
-    desc: "We promote animal husbandry practices, productivity enhancement, and rural livelihood through innovative solutions.",
-    thumbs: [
-      {
-        img: DSC_3158,
-        title: "Productivity Initiatives",
-        desc: "Focusing on breed improvement, nutrition, and animal health services.",
-      },
-    ],
-  },
-  {
-    bg: DSC_4722,
-    title: "Creating Livelihood Opportunities",
-    desc: "Our programs benefit lakhs of dairy farmers, especially women, by ensuring regular income through organized dairying.",
-    thumbs: [
-      {
-        img: DSC_4722,
-        title: "Women Empowerment",
-        desc: "Enabling women to lead and participate in dairy-based livelihoods.",
-      },
-    ],
-  },
-  {
-    bg: DSC_1362,
-    title: "Innovation in Dairy Services",
-    desc: "From digital solutions to cold chain infrastructure, NDS integrates modern tools to transform dairy systems.",
-    thumbs: [
-      {
-        img: DSC_1362,
-        title: "Technology & Infrastructure",
-        desc: "Driving efficiency with digital platforms, automation, cold-chain systems, and robust logistics.",
-      },
-    ],
-  },
-];
+
+const heroImages = [villagemeeting, DSC_9355, DSC_4722, DSC_3158, DSC_0344];
 
 const Dashboard = () => {
-  const [animateThumbs, setAnimateThumbs] = useState(false);
-
-  useEffect(() => {
-    setAnimateThumbs(true);
-  }, []);
-
   return (
-    <div className="hero-2 " id="hero">
+    <div className="th-hero-wrapper hero-1" id="hero">
       <Swiper
-        className="hero-slider-2"
-        modules={[EffectFade, Navigation, Pagination, Autoplay]}
+        className="hero-swiper"
+        modules={[Autoplay, EffectFade]}
         effect="fade"
         loop
-        autoplay={{ delay: 5000 }}
-        navigation={{
-          nextEl: ".slider-next",
-          prevEl: ".slider-prev",
-        }}
-        pagination={{ el: ".swiper-pagination", clickable: true }}
+        autoplay={{ delay: 4000 }}
       >
-        {heroSlides.map((slide, index) => (
+        {heroImages.map((img, index) => (
           <SwiperSlide key={index}>
-            <div className="hero-inner">
-              <div
-                className="th-hero-bg"
-                style={{
-                  backgroundImage: `url(${slide.bg})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              />
-              <div className="container">
-                <div className="hero-style2 text-center text-md-start">
-                  <h1
-                    className="hero-title mb-20 wow fadeInUp"
-                    data-wow-delay=".4s"
-                  >
-                    {slide.title}
-                  </h1>
-                  <p className="hero-desc wow fadeInUp" data-wow-delay=".4s">
-                    {slide.desc}
-                  </p>
-                </div>
-
-                <div
-                  className={`swiper heroThumbs style2 mt-5 ${
-                    animateThumbs ? "animate-in" : ""
-                  }`}
+            <div
+              style={{
+                backgroundImage: `url(${img})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                height: "92vh",
+                display: "flex",
+                alignItems: "flex-end",
+                justifyContent: "left",
+                paddingBottom: "80px",
+              }}
+            >
+              {index === 0 && (
+                <h1
+                  style={{
+                    color: "#fff",
+                    fontSize: "3.5rem",
+                    fontWeight: "bold",
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    padding: "12px 30px",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                    width: "700px",
+                    wordSpacing: "10px",
+                  }}
                 >
-                  <div className="swiper-wrapper d-flex gap-4 flex-wrap">
-                    {slide.thumbs.map((thumb, thumbIndex) => (
-                      <div className="swiper-slide" key={thumbIndex}>
-                        <div className="hero-card">
-                          <div className="hero-img">
-                            <img src={thumb.img} alt={thumb.title} />
-                          </div>
-                          <div className="hero-card_content">
-                            <h3
-                              className="box-title wow fadeInUp"
-                              data-wow-delay=".4s"
-                            >
-                              {thumb.title}
-                            </h3>
-                            <p
-                              className="sec-text text-white wow fadeInUp"
-                              data-wow-delay=".4s"
-                            >
-                              {thumb.desc}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+                  Purposeful Growth, Meaningful Impact
+                </h1>
+              )}
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
-
-      <div className="th-swiper-custom">
-        <div className="swiper-pagination" />
-        <div className="hero-icon">
-          <button className="hero-arrow slider-prev">
-            <img src={heroarrowleft} alt="Previous" />
-          </button>
-          <button className="hero-arrow slider-next">
-            <img src={heroarrowright} alt="Next" />
-          </button>
-        </div>
-      </div>
-
-      <div className="scroll-down">
-        <div
-          className="scroll-wrap"
-          style={{ cursor: "pointer" }}
-          onClick={() => window.scrollBy({ top: 740, behavior: "smooth" })}
-        >
-          <span>
-            <img src="assets/img/icon/down-arrow.svg" alt="Scroll down" />
-          </span>
-          Scroll Down
-        </div>
-      </div>
     </div>
   );
 };

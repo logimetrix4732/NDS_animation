@@ -44,9 +44,6 @@ const AboutSection11 = () => {
           <div className="col-xl-6">
             <div className="ps-xxl-5 ms-xxl-4">
               <div className="title-area about10-titlebox mb-20 mt-15">
-                <span className="sub-title style1 text-anime-style-2">
-                  Superior Animal Genetics
-                </span>
                 <AnimatedText
                   text="SAG Live"
                   tag="h2"

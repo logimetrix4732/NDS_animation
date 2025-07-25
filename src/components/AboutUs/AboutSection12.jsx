@@ -10,9 +10,6 @@ const AboutSection12 = () => {
           <div className="col-lg-6 order-1 order-lg-0">
             <div className="ps-xl-5">
               <div className="title-area">
-                <span className="sub-title style1 text-anime-style-2 wow fadeInLeft">
-                  Structuring India's Dairy Future
-                </span>
                 <AnimatedText
                   text="Setting up MPOs"
                   tag="h2"

@@ -32,9 +32,6 @@ const AboutSection10 = () => {
         <div className="row gy-4 align-items-center">
           <div className="col-lg-6 order-1 order-lg-0">
             <div className="title-area mt-50">
-              <span className="sub-title style1 text-anime-style-2 wow fadeInLeft">
-                Artificial Insemination & Embryo Transfer
-              </span>
               <AnimatedText
                 text="AI & ET Services"
                 tag="h2"
