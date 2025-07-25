@@ -12,10 +12,19 @@ import service_4_3Icon from "../../assets/img/icon/service_4_3.svg";
 import AnimatedText from "../AnimatedText";
 import { Box, IconButton, Paper, Typography } from "@mui/material";
 import { Close as CloseIcon } from "@mui/icons-material";
-
+import ChairmanSir from "../../Images/AboutUsImg/Chairman-Sir-01.png";
+import AbhijitSir from "../../Images/AboutUsImg/Abhijit-sir-1.png";
+import DevanandSir from "../../Images/AboutUsImg/Devanand-sir.png";
+import AlkaMaam from "../../Images/AboutUsImg/Dr-Alka-Mahajan-003.png";
+import TrivediSir from "../../Images/AboutUsImg/K.R.Trivedi.png";
+import ManishSir from "../../Images/AboutUsImg/Manish-Bandlish-sir.png";
+import RegupathiSir from "../../Images/AboutUsImg/Photo-S-Regupathi-scaled.png";
+import RajeevSir from "../../Images/AboutUsImg/Rajeev-Krishnan-sir.png";
+import VijaySir from "../../Images/AboutUsImg/Shri-T.M.-Vijay-Bhaskar.png";
+import dummyImg from "../../Images/AboutUsImg/dummyImg1.jpg";
 const serviceItems = [
   {
-    img: service_4_1,
+    img: ChairmanSir,
     icon: service_4_1Icon,
     title: "Dr. Meenesh Shah",
     author: "Chairman, NDDB and NDDB Dairy Services ",
@@ -28,7 +37,7 @@ const serviceItems = [
       "His deep understanding of grassroots dairy operations, combined with strategic vision, has guided numerous initiatives aimed at strengthening producer-owned organizations. As Chairman of NDDB Dairy Services, he continues to champion sustainable, farmer-centric development with a focus on innovation, empowerment, and long-term impact.",
   },
   {
-    img: service_4_2,
+    img: DevanandSir,
     icon: service_4_2Icon,
     title: "Dr. C. P. Devanand",
     author: "Managing Director ",
@@ -39,7 +48,7 @@ const serviceItems = [
       "Widely regarded as a thought leader in productivity enhancement services and reproductive interventions, Dr. Devanand has contributed significantly to advancing animal husbandry practices across India. He currently serves on the Boards of several Milk Producer CompaniesOrganisations, where he offers expert guidance to strengthen governance, operational efficiency, and farmer-centric development. His vision and insights continue to play a key role in shaping sustainable and inclusive growth in the dairy sector.",
   },
   {
-    img: service_4_3,
+    img: RajeevSir,
     icon: service_4_3Icon,
     title: "Dr. Rajeev Krishnan",
     author: "Executive Director ",
@@ -50,7 +59,7 @@ const serviceItems = [
       "Dr. Krishnan has demonstrated expertise across multiple domains, including Sales & Marketing, Strategy & Planning, IT & MIS, and Business Excellence. His career spans key roles with NDDB Dairy Services, PricewaterhouseCoopers, and the Kerala Livestock Development Board, where he contributed significantly to organizational growth and operational efficiency.",
   },
   {
-    img: service_4_2,
+    img: RegupathiSir,
     icon: service_4_2Icon,
     title: "Shri S. Regupathi",
     author: "Executive Director, Operations, NDDB ",
@@ -61,7 +70,7 @@ const serviceItems = [
       "Shri Regupathi holds an M. Com degree from ICWAI, and has a Master’s degree from IRMA, Anand. His leadership extends beyond NDDB, having held key positions such as Member and Trustee of ABRO (India), Member of the NDDB Foundation for Nutrition, and Management Committee Member of both the Jharkhand Milk Federation Ltd. and the West Assam Milk Union Ltd. (WAMUL).",
   },
   {
-    img: service_4_3,
+    img: VijaySir,
     icon: service_4_3Icon,
     title: "Shri T.M. Vijay Bhaskar",
     author: "Retired IAS ",
@@ -74,7 +83,7 @@ const serviceItems = [
       "He superannuated as the Chief Secretary of the Government of Karnataka and is currently serving as the Chairman of the Karnataka Administrative Reforms Committee 2. His expertise and strategic vision continue to play a key role in advancing public policy and rural development initiatives.",
   },
   {
-    img: service_4_1,
+    img: ManishSir,
     icon: service_4_1Icon,
     title: "Shri Manish Bandlish",
     author: "Managing Director, Mother Dairy Fruit and Vegetables Pvt Ltd ",
@@ -87,7 +96,7 @@ const serviceItems = [
       "His vast experience spans areas such as business development, operations, marketing and corporate strategy.",
   },
   {
-    img: service_4_2,
+    img: AbhijitSir,
     icon: service_4_2Icon,
     author: "General Manager ",
     title: "Shri Abhijeet Bhattacharjee",
@@ -100,7 +109,7 @@ const serviceItems = [
       "Shri Bhattacharjee also serves on the boards of several prominent dairy organizations, including the West Assam Milk Union, Jharkhand Milk Federation and Panchmahal Milk Union, contributing his expertise to their strategic development. ",
   },
   {
-    img: service_4_2,
+    img: AlkaMaam,
     icon: service_4_2Icon,
     title: "Dr. Alka Mahajan",
     author: "",
@@ -113,7 +122,7 @@ const serviceItems = [
       "Her leadership contributed significantly to UGC’s 12th Five-Year Plan and capacity-building guidelines for women in higher education. Dr. Mahajan has also advised the UPSC as a subject expert. Her career reflects a commitment to academic excellence, gender equity, and systemic reform in technical education. ",
   },
   {
-    img: service_4_2,
+    img: dummyImg,
     icon: service_4_2Icon,
     title: "Shri Durga Shanker Mishra",
     author: "",
@@ -126,7 +135,7 @@ const serviceItems = [
       "An alumnus of IIT Kanpur in Electrical Engineering, he also holds an MBA from the University of Western Sydney and a diploma in Public Policy from The Hague. He has widely published, hand has represented India at numerous global platforms. A strong advocate of good governance, he is also passionate about trekking, tourism, and teaching, he has also served as visiting faculty at the University of Guelph, Canada. ",
   },
   {
-    img: service_4_2,
+    img: TrivediSir,
     icon: service_4_2Icon,
     title: "Shri Kamlesh Trivedi",
     author: "",
@@ -191,6 +200,7 @@ const OurFeatures2 = () => {
               nextEl: ".slider-next",
               prevEl: ".slider-prev",
             }}
+            loop={true}
             breakpoints={{
               0: { slidesPerView: 1 },
               576: { slidesPerView: 1 },
@@ -206,12 +216,20 @@ const OurFeatures2 = () => {
                   <div className="service-item style4 th-ani">
                     <div className="service-img position-relative wow fadeInUp">
                       <a href="#!">
-                        <img src={item.img} alt="service" />
+                        <img
+                          src={item.img}
+                          alt="service"
+                          style={{
+                            width: "380px",
+                            height: "347.09px",
+                            objectFit: "cover",
+                          }}
+                        />
                       </a>
                     </div>
                     <div className="service-content text-start wow fadeInUp">
                       <h3 className="box-title ellipsis-1">{item.title}</h3>
-                      <p className="service-text ellipsis-4">{item.desc}</p>
+                      <p className="service-text ellipsis-3">{item.desc}</p>
                       <div className="bd-news__border">
                         <div className="bd-news__meta">
                           <div className="bd-news__meta-item ellipsis-1">
