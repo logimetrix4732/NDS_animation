@@ -3,10 +3,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import cta6shape from "../../assets/img/shape/cta6-shape.png";
 import ctaimg6 from "../../assets/img/normal/cta-img-6.jpg";
 import AnimatedText from "../AnimatedText";
+import DSC_1059 from "../../Images/MilkProducerImg/DSC_1059.jpg";
 
 const highlights = [
   "37,000+ Villages across 206 Districts",
@@ -80,7 +80,15 @@ const Banner = () => {
           className="shape-mockup wow fadeInRight"
           style={{ position: "absolute", bottom: 0, right: 0 }}
         >
-          <img src={ctaimg6} alt="" />
+          <img
+            src={DSC_1059}
+            alt=""
+            style={{
+              width: "780px",
+              height: "527.29px",
+              objectFit: "cover",
+            }}
+          />
         </div>
       </div>
     </div>

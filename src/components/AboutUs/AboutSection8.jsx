@@ -1,6 +1,8 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
-import about5shape from "../../assets/img/shape/about-5-shape.png";
+import DSC_3464 from "../../Images/MilkProducerImg/DSC_3464.jpg";
+import DSC_3523 from "../../Images/MilkProducerImg/DSC_3523.jpg";
+
 const AboutSection8 = () => {
   return (
     <div
@@ -17,10 +19,26 @@ const AboutSection8 = () => {
           <div className="col-xl-6">
             <div className="img-box4 ab5-imgbox space-bottom text-end">
               <div className="img1 reveal wow fadeInLeft">
-                <img src="assets/img/normal/about_4_1.jpg" alt="About" />
+                <img
+                  src={DSC_3464}
+                  alt="About"
+                  style={{
+                    width: "608px",
+                    height: "580px",
+                    objectFit: "cover",
+                  }}
+                />
               </div>
               <div className="img2 wow fadeInRight">
-                <img src="assets/img/normal/about_4_2.jpg" alt="About" />
+                <img
+                  src={DSC_3523}
+                  alt="About"
+                  style={{
+                    width: "320px",
+                    height: "243px",
+                    objectFit: "cover",
+                  }}
+                />
                 <a
                   href="https://www.youtube.com/watch?v=pQpFebyALV0"
                   className="play-btn popup-video"

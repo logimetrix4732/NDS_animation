@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AnimatedText from "../AnimatedText";
-
+import DSC_2883 from "../../Images/MilkProducerImg/DSC_2883.jpg";
 const AboutSection1 = () => {
   const [showFullText, setShowFullText] = useState(false);
 
@@ -118,7 +118,15 @@ const AboutSection1 = () => {
           <div className="col-xl-8 order-0 order-xl-2">
             <div className="img-box5 text-xl-end">
               <div className="img1 reveal wow fadeInRight" data-wow-delay=".2s">
-                <img src="assets/img/normal/about_5_1.jpg" alt="About" />
+                <img
+                  src={DSC_2883}
+                  alt="About"
+                  style={{
+                    width: "802px",
+                    height: "860px",
+                    objectFit: "cover",
+                  }}
+                />
               </div>
             </div>
           </div>
