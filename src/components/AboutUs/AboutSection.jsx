@@ -8,13 +8,39 @@ import { Link } from "react-router-dom";
 import DSC_7694 from "../../Images/HomeImgs/DSC_7694.jpg";
 import DSC_2802 from "../../Images/HomeImgs/DSC_2802.jpg";
 import DSC_0344 from "../../Images/HomeImgs/DSC_0344.jpg";
+import { useTheme, useMediaQuery } from "@mui/material";
+import DrawerModal from "../DrawerModal";
 
 const AboutSection = () => {
+  const [open, setOpen] = React.useState(false);
+
+  const toggleDrawer = (state) => () => {
+    setOpen(state);
+  };
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const chairmanMessage = {
+    title: "NDDB Dairy Services",
+    content: [
+      "NDDB Dairy Services (NDS), a Section 8 company registered under the Companies Act, is a wholly owned subsidiary of the National Dairy Development Board (NDDB). It functions as the delivery arm of NDDB for field operations relating to promoting Milk Producer Organisations (MPOs) and Productivity Enhancement Services for milch animals.",
+      "NDS works towards enhancing rural livelihoods by assisting farmers in establishing ‘Producer owned enterprises’ (POEs) which are incorporated under provisions of Part XXI A of the Companies Act. These enterprises run on the principles of mutual assistance.",
+      "NDS’ efforts to improve milch animal productivity are evident in its innovative breeding initiatives. With four world-class semen stations producing over 50 million semen doses annually, NDS is serving more than 35% of India’s requirement. Technologies such as Embryo Transfer and AI have improved the birth rate of female calves, enhancing gene quality and milk output.",
+      "Committed to inclusive growth, NDS empowers smallholder dairy farmers, especially women, and facilitates access to markets, technology, and capacity building contributing to a self-reliant and robust rural dairy sector. ",
+    ],
+  };
   return (
     <div
       className="about-area position-relative overflow-hidden space"
       id="about-sec"
     >
+      <DrawerModal
+        isMobile={isMobile}
+        open={open}
+        toggleDrawer={toggleDrawer}
+        title={chairmanMessage.title}
+        content={chairmanMessage.content}
+      />
       <div className="container">
         <div className="row align-items-center">
           <div className="col-xl-6 order-1 order-xl-2 position-relative">
@@ -61,42 +87,26 @@ const AboutSection = () => {
                   delivery arm of NDDB for field operations relating to
                   promoting Milk Producer Organisations (MPOs) and Productivity
                   Enhancement Services for milch animals.
+                  <br />
+                  NDS works towards enhancing rural livelihoods by assisting
+                  farmers in establishing ‘Producer owned enterprises’ (POEs)
+                  which are incorporated under provisions of Part XXI A of the
+                  Companies Act. These enterprises run on the principles of
+                  mutual assistance.
+                  <br />
+                  NDS’ efforts to improve milch animal productivity are evident
+                  in its innovative breeding initiatives. With four world-class
+                  semen stations producing over 50 million semen doses annually,
+                  NDS is serving more than 35% of India’s requirement.
+                  Technologies such as Embryo Transfer and AI have improved the
+                  birth rate of female calves, enhancing gene quality and milk
+                  output.
                 </p>
               </div>
-
-              <div className="about-item-wrap">
-                <div className="about-item wow fadeInUp" data-wow-delay=".2s">
-                  <div className="about-item_img">
-                    <img src="assets/img/icon/map3.svg" alt="Mission" />
-                  </div>
-                  <div className="about-item_centent">
-                    <h5 className="box-title">Our Mission</h5>
-                    <p className="about-item_text">
-                      Empowering dairy farmers by building efficient,
-                      transparent, and sustainable milk production and
-                      procurement systems.
-                    </p>
-                  </div>
-                </div>
-                <div className="about-item wow fadeInUp" data-wow-delay=".3s">
-                  <div className="about-item_img">
-                    <img src="assets/img/icon/guide.svg" alt="Vision" />
-                  </div>
-                  <div className="about-item_centent">
-                    <h5 className="box-title">Our Vision</h5>
-                    <p className="about-item_text">
-                      To be the leading enabler of farmer-owned institutions
-                      delivering end-to-end dairy solutions for long-term rural
-                      prosperity.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
               <div className="mt-20 wow fadeInUp">
-                <Link to="/aboutUs" className="th-btn th-icon">
+                <button onClick={toggleDrawer(true)} className="th-btn th-icon">
                   Learn more <i className="fa-light fa-arrow-right-long" />
-                </Link>
+                </button>
               </div>
             </div>
           </div>

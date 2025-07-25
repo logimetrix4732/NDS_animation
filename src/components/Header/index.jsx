@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import SideMenu from "../SideMenu";
 import nds_logo from "../../assets/img/nds_logo.png";
 import { Link, useLocation } from "react-router-dom";
@@ -10,7 +10,7 @@ const Header = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   return (
-    <>
+    <React.Fragment>
       <header className="th-header header-layout1 header-layout2">
         <SideMenu
           openRight={openRight}
@@ -130,7 +130,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-    </>
+    </React.Fragment>
   );
 };
 
