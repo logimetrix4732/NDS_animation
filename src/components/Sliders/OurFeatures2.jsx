@@ -24,7 +24,7 @@ import VijaySir from "../../Images/AboutUsImg/Shri-T.M.-Vijay-Bhaskar.png";
 import dummyImg from "../../Images/AboutUsImg/dummyImg1.jpg";
 const serviceItems = [
   {
-    img: ChairmanSir,
+    img: dummyImg,
     icon: service_4_1Icon,
     title: "Dr. Meenesh Shah",
     author: "Chairman, NDDB and NDDB Dairy Services ",
@@ -37,7 +37,7 @@ const serviceItems = [
       "His deep understanding of grassroots dairy operations, combined with strategic vision, has guided numerous initiatives aimed at strengthening producer-owned organizations. As Chairman of NDDB Dairy Services, he continues to champion sustainable, farmer-centric development with a focus on innovation, empowerment, and long-term impact.",
   },
   {
-    img: DevanandSir,
+    img: dummyImg,
     icon: service_4_2Icon,
     title: "Dr. C. P. Devanand",
     author: "Managing Director ",
@@ -48,7 +48,7 @@ const serviceItems = [
       "Widely regarded as a thought leader in productivity enhancement services and reproductive interventions, Dr. Devanand has contributed significantly to advancing animal husbandry practices across India. He currently serves on the Boards of several Milk Producer CompaniesOrganisations, where he offers expert guidance to strengthen governance, operational efficiency, and farmer-centric development. His vision and insights continue to play a key role in shaping sustainable and inclusive growth in the dairy sector.",
   },
   {
-    img: RajeevSir,
+    img: dummyImg,
     icon: service_4_3Icon,
     title: "Dr. Rajeev Krishnan",
     author: "Executive Director ",
@@ -59,7 +59,7 @@ const serviceItems = [
       "Dr. Krishnan has demonstrated expertise across multiple domains, including Sales & Marketing, Strategy & Planning, IT & MIS, and Business Excellence. His career spans key roles with NDDB Dairy Services, PricewaterhouseCoopers, and the Kerala Livestock Development Board, where he contributed significantly to organizational growth and operational efficiency.",
   },
   {
-    img: RegupathiSir,
+    img: dummyImg,
     icon: service_4_2Icon,
     title: "Shri S. Regupathi",
     author: "Executive Director, Operations, NDDB ",
@@ -70,7 +70,7 @@ const serviceItems = [
       "Shri Regupathi holds an M. Com degree from ICWAI, and has a Master’s degree from IRMA, Anand. His leadership extends beyond NDDB, having held key positions such as Member and Trustee of ABRO (India), Member of the NDDB Foundation for Nutrition, and Management Committee Member of both the Jharkhand Milk Federation Ltd. and the West Assam Milk Union Ltd. (WAMUL).",
   },
   {
-    img: VijaySir,
+    img: dummyImg,
     icon: service_4_3Icon,
     title: "Shri T.M. Vijay Bhaskar",
     author: "Retired IAS ",
@@ -83,7 +83,7 @@ const serviceItems = [
       "He superannuated as the Chief Secretary of the Government of Karnataka and is currently serving as the Chairman of the Karnataka Administrative Reforms Committee 2. His expertise and strategic vision continue to play a key role in advancing public policy and rural development initiatives.",
   },
   {
-    img: ManishSir,
+    img: dummyImg,
     icon: service_4_1Icon,
     title: "Shri Manish Bandlish",
     author: "Managing Director, Mother Dairy Fruit and Vegetables Pvt Ltd ",
@@ -96,7 +96,7 @@ const serviceItems = [
       "His vast experience spans areas such as business development, operations, marketing and corporate strategy.",
   },
   {
-    img: AbhijitSir,
+    img: dummyImg,
     icon: service_4_2Icon,
     author: "General Manager ",
     title: "Shri Abhijeet Bhattacharjee",
@@ -109,7 +109,7 @@ const serviceItems = [
       "Shri Bhattacharjee also serves on the boards of several prominent dairy organizations, including the West Assam Milk Union, Jharkhand Milk Federation and Panchmahal Milk Union, contributing his expertise to their strategic development. ",
   },
   {
-    img: AlkaMaam,
+    img: dummyImg,
     icon: service_4_2Icon,
     title: "Dr. Alka Mahajan",
     author: "",

@@ -108,38 +108,6 @@ const Dashboard = () => {
                     {slide.desc}
                   </p>
                 </div>
-
-                <div
-                  className={`swiper heroThumbs style2 mt-5 ${
-                    animateThumbs ? "animate-in" : ""
-                  }`}
-                >
-                  <div className="swiper-wrapper d-flex gap-4 flex-wrap">
-                    {slide.thumbs.map((thumb, thumbIndex) => (
-                      <div className="swiper-slide" key={thumbIndex}>
-                        <div className="hero-card">
-                          <div className="hero-img">
-                            <img src={thumb.img} alt={thumb.title} />
-                          </div>
-                          <div className="hero-card_content">
-                            <h3
-                              className="box-title wow fadeInUp"
-                              data-wow-delay=".4s"
-                            >
-                              {thumb.title}
-                            </h3>
-                            <p
-                              className="sec-text text-white wow fadeInUp"
-                              data-wow-delay=".4s"
-                            >
-                              {thumb.desc}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
             </div>
           </SwiperSlide>
