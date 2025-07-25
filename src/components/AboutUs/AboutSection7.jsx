@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import ME7A8877 from "../../Images/AnimalProductivityImg/ME7A8877.JPG";
 import _SUN7366 from "../../Images/AnimalProductivityImg/_SUN7366.JPG";
 import DSC_0492 from "../../Images/AnimalProductivityImg/DSC_0492.JPG";
+import checkMarkIcon from "../../Images/checkMarkIcon.jpg";
+
 const AboutSection7 = () => {
   return (
     <div
@@ -94,7 +96,14 @@ const AboutSection7 = () => {
                   <ul>
                     <li class="wow fadeInUp" data-wow-delay=".4s">
                       <span class="about-feature-icon">
-                        <img src="assets/img/icon/checkmark.svg" alt="" />
+                        <img
+                          src={checkMarkIcon}
+                          alt=""
+                          style={{
+                            width: "26px",
+                            height: "22px",
+                          }}
+                        />
                       </span>
                       Genetic Selection - Sourcing and breeding genetically
                       superior bulls through structured Progeny Testing and
@@ -102,7 +111,11 @@ const AboutSection7 = () => {
                     </li>
                     <li class="wow fadeInUp" data-wow-delay=".5s">
                       <span class="about-feature-icon">
-                        <img src="assets/img/icon/checkmark.svg" alt="" />
+                        <img
+                          src={checkMarkIcon}
+                          alt=""
+                          style={{ width: "26px", height: "22px" }}
+                        />
                       </span>
                       Biosecurity & Welfare - Ensuring animal health, comfort
                       and biosecurity through high-standard management
@@ -110,14 +123,22 @@ const AboutSection7 = () => {
                     </li>
                     <li class="wow fadeInUp" data-wow-delay=".5s">
                       <span class="about-feature-icon">
-                        <img src="assets/img/icon/checkmark.svg" alt="" />
+                        <img
+                          src={checkMarkIcon}
+                          alt=""
+                          style={{ width: "26px", height: "22px" }}
+                        />
                       </span>
                       Technology Integration - Using digital platforms for semen
                       inventory, traceability and performance tracking. 
                     </li>
                     <li class="wow fadeInUp" data-wow-delay=".5s">
                       <span class="about-feature-icon">
-                        <img src="assets/img/icon/checkmark.svg" alt="" />
+                        <img
+                          src={checkMarkIcon}
+                          alt=""
+                          style={{ width: "26px", height: "22px" }}
+                        />
                       </span>
                       Farmer Access - Facilitating seamless access to quality
                       semen through Producer Organisations and field AI
