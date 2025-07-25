@@ -8,7 +8,7 @@ import "swiper/css/effect-fade";
 import DSC_0344 from "../../Images/HomeImgs/DSC_0344.jpg";
 import DSC_3158 from "../../Images/HomeImgs/DSC_3158.jpg";
 import DSC_4722 from "../../Images/HomeImgs/DSC_4722.jpg";
-import villagemeeting from "../../Images/HomeImgs/villagemeeting.JPG";
+import villagemeeting from "../../Images/HomeImgs/villagemeeting.jpg";
 import DSC_9355 from "../../Images/HomeImgs/DSC_9355.png";
 
 import "./dashboard.css";
