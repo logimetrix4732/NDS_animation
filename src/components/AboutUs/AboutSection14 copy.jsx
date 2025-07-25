@@ -56,7 +56,7 @@ const AboutSection14 = () => {
                   className="th-btn btn-2 style5 th-icon"
                   onClick={handleOpen}
                 >
-                  Read More <i className="fa-light fa-arrow-right-long" />
+                  Learn More <i className="fa-light fa-arrow-right-long" />
                 </button>
               </div>
             </div>

@@ -247,7 +247,8 @@ const OurFeatures2 = () => {
                         className="th-btn style4 th-icon"
                         onClick={() => handleReadMore(index)}
                       >
-                        Read More <i className="fa-light fa-arrow-right-long" />
+                        Learn More{" "}
+                        <i className="fa-light fa-arrow-right-long" />
                       </button>
                     </div>
                   </div>

@@ -3118,12 +3118,12 @@ hr.title-line {
   margin-bottom: -0.26em;
 }
 
-/* @media (min-width: 1199px) and (max-width: 1300px) {
+@media (min-width: 1199px) and (max-width: 1300px) {
     .header-layout1 .main-menu > ul > li
  {
     margin: 0px 8px !important;
 }
-} */
+}
 
 @media (max-width: 1700px) {
   .title-area2 {

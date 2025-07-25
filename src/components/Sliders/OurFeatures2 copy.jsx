@@ -154,7 +154,7 @@ const OurFeatures2 = () => {
                       </div>
                     </div>
                     <Link to="/aboutUs" className="th-btn style4 th-icon">
-                      Read More <i className="fa-light fa-arrow-right-long" />
+                      Learn More <i className="fa-light fa-arrow-right-long" />
                     </Link>
                   </div>
                 </div>

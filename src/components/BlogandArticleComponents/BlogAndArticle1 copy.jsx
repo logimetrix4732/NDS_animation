@@ -42,7 +42,7 @@ const BlogAndArticle1 = () => {
                       href="blog-details.html"
                       className="th-btn style4 th-icon"
                     >
-                      Read More <i className="fa-light fa-arrow-right-long" />
+                      Learn More <i className="fa-light fa-arrow-right-long" />
                     </a>
                   </div>
                   <div className="blog-img global-img">
@@ -68,7 +68,7 @@ const BlogAndArticle1 = () => {
                       href="blog-details.html"
                       className="th-btn style4 th-icon"
                     >
-                      Read More <i className="fa-light fa-arrow-right-long" />
+                      Learn More <i className="fa-light fa-arrow-right-long" />
                     </a>
                   </div>
                   <div className="blog-img global-img">
@@ -94,7 +94,7 @@ const BlogAndArticle1 = () => {
                       href="blog-details.html"
                       className="th-btn style4 th-icon"
                     >
-                      Read More <i className="fa-light fa-arrow-right-long" />
+                      Learn More <i className="fa-light fa-arrow-right-long" />
                     </a>
                   </div>
                   <div className="blog-img global-img">
@@ -120,7 +120,7 @@ const BlogAndArticle1 = () => {
                       href="blog-details.html"
                       className="th-btn style4 th-icon"
                     >
-                      Read More <i className="fa-light fa-arrow-right-long" />
+                      Learn More <i className="fa-light fa-arrow-right-long" />
                     </a>
                   </div>
                   <div className="blog-img global-img">
@@ -146,7 +146,7 @@ const BlogAndArticle1 = () => {
                       href="blog-details.html"
                       className="th-btn style4 th-icon"
                     >
-                      Read More <i className="fa-light fa-arrow-right-long" />
+                      Learn More <i className="fa-light fa-arrow-right-long" />
                     </a>
                   </div>
                   <div className="blog-img global-img">
@@ -172,7 +172,7 @@ const BlogAndArticle1 = () => {
                       href="blog-details.html"
                       className="th-btn style4 th-icon"
                     >
-                      Read More <i className="fa-light fa-arrow-right-long" />
+                      Learn More <i className="fa-light fa-arrow-right-long" />
                     </a>
                   </div>
                   <div className="blog-img global-img">

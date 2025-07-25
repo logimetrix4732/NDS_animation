@@ -40,7 +40,7 @@ const BlogAndArticle = () => {
                   </a>
                 </h3>
                 <a href="blog-details.html" class="th-btn style4 th-icon">
-                  Read More <i class="fa-light fa-arrow-right-long"></i>
+                  Learn More <i class="fa-light fa-arrow-right-long"></i>
                 </a>
               </div>
             </div>
@@ -63,7 +63,7 @@ const BlogAndArticle = () => {
                   </a>
                 </h3>
                 <a href="blog-details.html" class="th-btn style4 th-icon">
-                  Read More <i class="fa-light fa-arrow-right-long"></i>
+                  Learn More <i class="fa-light fa-arrow-right-long"></i>
                 </a>
               </div>
             </div>
@@ -84,7 +84,7 @@ const BlogAndArticle = () => {
                   </a>
                 </h3>
                 <a href="blog-details.html" class="th-btn style4 th-icon">
-                  Read More <i class="fa-light fa-arrow-right-long"></i>
+                  Learn More <i class="fa-light fa-arrow-right-long"></i>
                 </a>
               </div>
             </div>

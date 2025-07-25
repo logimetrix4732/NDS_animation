@@ -184,7 +184,8 @@ const OurExperties7 = () => {
                           onClick={() => handleReadMore(index)}
                           disabled={expandedIndex !== null}
                         >
-                          Read More <i class="fa-light fa-arrow-right-long"></i>
+                          Learn More{" "}
+                          <i class="fa-light fa-arrow-right-long"></i>
                         </button>
                       </div>
                     </div>
