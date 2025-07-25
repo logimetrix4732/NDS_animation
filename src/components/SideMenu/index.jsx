@@ -25,12 +25,12 @@ const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
     { text: "About Us", to: "/aboutUs" },
     { text: "Our Experties", to: "/ourExperties" },
     { text: "Milk Producer Org.", to: "/milkproducer" },
-    { text: "Semen Station", to: "/semen-station" },
-    { text: "New Initiative", to: "/new-initiative" },
+    { text: "Animal Productivity", to: "/animalProductivity" },
+    { text: "New Initiative", to: "/newInitiative" },
     { text: "Publications", to: "/publications" },
-    { text: "Careers", to: "/careers" },
+    { text: "Careers", to: "/carrer" },
     { text: "Tenders", to: "/tenders" },
-    { text: "Contact Us", to: "/contact" },
+    { text: "Contact Us", to: "/contactUs" },
   ];
 
   const contactInfo = (
