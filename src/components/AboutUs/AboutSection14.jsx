@@ -8,7 +8,7 @@ import aboutImg3 from "../../Images/AboutUsImg/aboutImg3.png";
 
 const AboutSection14 = () => {
   const [open, setOpen] = React.useState(false);
-
+  console.log("nds");
   const toggleDrawer = (state) => () => {
     setOpen(state);
   };
