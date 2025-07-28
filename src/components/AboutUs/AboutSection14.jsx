@@ -43,6 +43,7 @@ const AboutSection14 = () => {
         toggleDrawer={toggleDrawer}
         title={chairmanMessage.title}
         content={chairmanMessage.content}
+        width="37%"
       />
       <div
         className="about-area position-relative overflow-hidden space"
@@ -105,7 +106,10 @@ const AboutSection14 = () => {
                   and self-reliant focused on innovation, operational
                   excellence, scale, capacity building and digitisation.
                 </p>
-                <p className="sec-text  wow fadeInUp" data-wow-delay=".2s">
+                <p
+                  className="sec-text  wow fadeInUp ellipsis-2"
+                  data-wow-delay=".2s"
+                >
                   Looking back at the work done in the sector is comforting but
                   it does not entitle us to rest. Increasingly there are newer
                   themes emerging that compel us to play a bigger role in the

@@ -125,7 +125,7 @@ const AboutSection2 = () => {
                   </div>
                   <div className="about-item_centent">
                     <h5 className="box-title">Empowering Women Farmers</h5>
-                    <p className="about-item_text">
+                    <p className="sec-text  wow fadeInUp" data-wow-delay=".2s">
                       Women-led dairy initiatives brought financial growth,
                       confidence, leadership, and social change in villages
                       through skill-building, training, self-reliance,
@@ -142,7 +142,7 @@ const AboutSection2 = () => {
                     <h5 className="box-title">
                       Transforming Rural Livelihoods
                     </h5>
-                    <p className="about-item_text">
+                    <p className="sec-text  wow fadeInUp" data-wow-delay=".2s">
                       A small village in Gujarat boosted incomes by 300% through
                       modern dairy practices, better animal healthcare,
                       training, digital payment systems, and empowerment.
