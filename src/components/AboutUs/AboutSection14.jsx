@@ -106,22 +106,10 @@ const AboutSection14 = () => {
                   and self-reliant focused on innovation, operational
                   excellence, scale, capacity building and digitisation.
                 </p>
-                <p
-                  className="sec-text  wow fadeInUp"
-                  data-wow-delay=".2s"
-                  style={{
-                    display: "-webkit-box",
-                    WebkitLineClamp: 2,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    minHeight: "48px",
-                  }}
-                >
+                <p className="sec-text  wow fadeInUp" data-wow-delay=".2s">
                   Looking back at the work done in the sector is comforting but
-                  it does not entitle us to rest. Increasingly there are newer
-                  themes emerging that compel us to play a bigger role in the
-                  global dairy landscape and set
+                  it does not entitle us to rest. Increasingly there are
+                  newer...
                 </p>
               </div>
               <div className="about-12-item-wrap">
