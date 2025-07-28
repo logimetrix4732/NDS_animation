@@ -1,0 +1,42 @@
+.breadcumb-wrapper {
+  background-image: url("../../Images/banner4.png");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Default height */
+.responsive-banner {
+  height: 300px;
+}
+
+/* For 13.6 inch (~1366px width) */
+@media screen and (max-width: 1370px) {
+  .responsive-banner {
+    height: 250px;
+  }
+}
+
+/* For 14 inch (~1440px width) */
+@media screen and (min-width: 1371px) and (max-width: 1440px) {
+  .responsive-banner {
+    height: 280px;
+  }
+}
+
+/* For 15 inch (~1536px width) */
+@media screen and (min-width: 1441px) and (max-width: 1600px) {
+  .responsive-banner {
+    height: 320px;
+  }
+}
+
+/* Mobile fallback */
+@media screen and (max-width: 768px) {
+  .responsive-banner {
+    height: 200px;
+    text-align: center;
+  }
+}

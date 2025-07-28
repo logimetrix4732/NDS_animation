@@ -2514,7 +2514,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   border: none;
   font-size: 16px;
   font-weight: 400;
-  padding: 19px 40px;
+  padding: 14px 27px;
   border-radius: 10px;
   -webkit-transition: all 0.3s 0s ease-out;
   transition: all 0.3s 0s ease-out;
@@ -7833,8 +7833,26 @@ ol.wp-block-rss {
   padding: 30.5px 0px !important;
   /* padding: 38.5px 0px; */
 }
+@media (max-width: 1440px) {
+  .header-layout2 .main-menu > ul > li > a {
+    padding: 26px 0px !important;
+  }
+}
+
+@media (max-width: 1366px) {
+  .header-layout2 .main-menu > ul > li > a {
+    padding: 24px 0px !important;
+  }
+}
+
+@media (max-width: 1280px) {
+  .header-layout2 .main-menu > ul > li > a {
+    padding: 22px 0px !important;
+  }
+}
+
 .header-layout2 .sticky-wrapper.sticky .menu-area {
-  padding-top: 5px;
+  /* padding-top: 5px; */
 }
 @media (max-width: 1199px) {
   .header-layout2 .sticky-wrapper.sticky .menu-area {

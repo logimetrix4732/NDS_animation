@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import AnimatedText from "../AnimatedText";
 import bgCow from "../../Images/bg-cow.png";
 import DSC_7694 from "../../Images/HomeImgs/DSC_7694.jpg";
 import DSC_2802 from "../../Images/HomeImgs/DSC_2802.jpg";
 import DSC_0344 from "../../Images/HomeImgs/DSC_0344.jpg";
+import { HashLink as Link } from "react-router-hash-link";
 
 const AboutSection = () => {
   return (
@@ -38,7 +38,10 @@ const AboutSection = () => {
               className="ps-xl-4 ms-xxl-4 position-relative"
               style={{ zIndex: 1 }}
             >
-              <div className="title-area about1-title-box mb-20 pe-xxl-5 me-xxl-5">
+              <div
+                className="title-area about1-title-box mb-20 pe-xxl-5 me-xxl-5"
+                style={{ marginTop: "-20px" }}
+              >
                 <AnimatedText
                   text="NDDB Dairy Services"
                   tag="h2"
@@ -66,10 +69,17 @@ const AboutSection = () => {
                   Technologies such as Embryo Transfer and AI have improved the
                   birth rate of female calves, enhancing gene quality and milk
                   output.
+                  <br />
+                  Committed to inclusive growth, NDS empowers smallholder dairy
+                  farmers, especially women, and facilitates access to markets.
                 </p>
               </div>
-              <div className="mt-20 wow fadeInUp">
-                <Link to="/aboutUs" className="th-btn th-icon">
+              <div className="wow fadeInUp" style={{ marginTop: "-10px" }}>
+                <Link
+                  smooth
+                  to="/aboutUs#about-sec5"
+                  className="th-btn th-icon"
+                >
                   Learn more <i className="fa-light fa-arrow-right-long" />
                 </Link>
               </div>
@@ -84,7 +94,7 @@ const AboutSection = () => {
                   alt="About"
                   style={{
                     width: "325px",
-                    height: "630px",
+                    height: "600px",
                     objectFit: "cover",
                   }}
                 />
@@ -95,18 +105,18 @@ const AboutSection = () => {
                   alt="About"
                   style={{
                     width: "312px",
-                    height: "315px",
+                    height: "295px",
                     objectFit: "cover",
                   }}
                 />
               </div>
-              <div className="img3 wow fadeInUp" data-wow-delay=".4s">
+              <div className="img3 wow fadeInUp mb-15" data-wow-delay=".4s">
                 <img
                   src={DSC_0344}
                   alt="About"
                   style={{
                     width: "312px",
-                    height: "315px",
+                    height: "295px",
                     objectFit: "cover",
                   }}
                 />

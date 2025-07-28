@@ -9,19 +9,13 @@ import checkMarkIcon from "../../Images/checkMarkIcon.jpg";
 const AboutSection2 = () => {
   return (
     <div
-      className="about-area position-relative overflow-hidden space-top"
+      className="about-area position-relative overflow-hidden"
       id="about-sec"
     >
       <div className="container">
         <div className="row">
           <div className="col-xl-6 col-lg-6">
-            <div className="title-area mb-20">
-              <span
-                className="sub-title style1 text-anime-style-2 wow fadeInUp"
-                data-wow-delay=".4s"
-              >
-                Who We Are
-              </span>
+            <div className="title-area mb-20 mt-35">
               <AnimatedText
                 text="Success Stories"
                 tag="h2"
@@ -46,8 +40,7 @@ const AboutSection2 = () => {
                         style={{ width: "26px", height: "22px" }}
                       />
                     </span>
-                    Over 50,000 farmers impacted through sustainable dairy
-                    programs.
+                    50,000+ farmers empowered via dairy programs.
                   </li>
                   <li className="wow fadeInUp" data-wow-delay=".5s">
                     <span className="about-feature-icon">
@@ -67,8 +60,7 @@ const AboutSection2 = () => {
                         style={{ width: "26px", height: "22px" }}
                       />
                     </span>
-                    Women-led dairy cooperatives are driving socio-economic
-                    change.
+                    Women-led dairies driving change.
                   </li>
                 </ul>
               </div>
@@ -121,7 +113,7 @@ const AboutSection2 = () => {
                   playsInline
                   style={{
                     width: "100%",
-                    height: "auto",
+                    height: "100%",
                     borderRadius: "40px",
                   }}
                 ></video>
@@ -134,8 +126,11 @@ const AboutSection2 = () => {
                   <div className="about-item_centent">
                     <h5 className="box-title">Empowering Women Farmers</h5>
                     <p className="about-item_text">
-                      Women-led dairy initiatives brought financial growth and
-                      social change in villages.
+                      Women-led dairy initiatives brought financial growth,
+                      confidence, leadership, and social change in villages
+                      through skill-building, training, self-reliance,
+                      collective efforts, awareness, unity, dignity, and
+                      entrepreneurship.
                     </p>
                   </div>
                 </div>
@@ -149,7 +144,8 @@ const AboutSection2 = () => {
                     </h5>
                     <p className="about-item_text">
                       A small village in Gujarat boosted incomes by 300% through
-                      modern dairy practices.
+                      modern dairy practices, better animal healthcare,
+                      training, digital payment systems, and empowerment.
                     </p>
                   </div>
                 </div>

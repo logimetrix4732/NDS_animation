@@ -30,8 +30,8 @@ const AboutSection4 = () => {
   };
   return (
     <div
-      className="about-area position-relative overflow-hidden space"
       id="about-sec"
+      className="about-area position-relative overflow-hidden space"
     >
       <DrawerModal
         isMobile={isMobile}
@@ -40,7 +40,7 @@ const AboutSection4 = () => {
         title={AboutUsContent.title}
         content={AboutUsContent.content}
       />
-      <div className="container">
+      <div className="container" id="about-sec5">
         <div className="row custom-ml">
           <div className="col-xl-6 col-xxl-7">
             <div className="img-box2">

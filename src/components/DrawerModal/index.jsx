@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 const StyledDrawer = styled(Drawer)(({ theme }) => ({
   "& .MuiDrawer-paper": {
     width: "600px",
-    height: "60vh",
+    height: "100%",
     top: "auto",
     bottom: 0,
     borderTopLeftRadius: "12px",
@@ -16,14 +16,14 @@ const StyledDrawer = styled(Drawer)(({ theme }) => ({
     boxShadow: "0 8px 30px rgba(0,0,0,0.2)",
     display: "flex",
     flexDirection: "column",
-    overflow: "hidden",
+    overflow: "scroll",
 
     [theme.breakpoints.down("md")]: {
       width: "100%",
     },
 
     [theme.breakpoints.down("sm")]: {
-      height: "80vh",
+      height: "100%",
       borderRadius: 0,
     },
   },
@@ -43,12 +43,22 @@ const DrawerModal = ({
   content = [],
   anchor = isMobile ? "bottom" : "right",
 }) => {
+  const contentRef = React.useRef(null);
+
+  // Reset scroll position when Drawer opens
+  React.useEffect(() => {
+    if (open && contentRef.current) {
+      contentRef.current.scrollTop = 0;
+    }
+  }, [open]);
+
   return (
     <StyledDrawer
       anchor={anchor}
       open={open}
       onClose={toggleDrawer(false)}
       transitionDuration={300}
+      ModalProps={{ style: { overflow: "hidden" } }}
     >
       <motion.div
         initial="hidden"
@@ -56,7 +66,7 @@ const DrawerModal = ({
         exit="exit"
         variants={animationVariants}
         transition={{ duration: 0.4, ease: "easeInOut" }}
-        style={{ height: "100%", display: "flex", flexDirection: "column" }}
+        style={{ height: "100%", display: "flex", flexDirection: "column", overflow: "hidden" }}
       >
         <Box
           display="flex"
@@ -74,7 +84,7 @@ const DrawerModal = ({
           </IconButton>
         </Box>
 
-        <Box sx={{ flexGrow: 1, overflowY: "auto", pr: 1, pb: 2 }}>
+        <Box ref={contentRef} sx={{ flexGrow: 1, overflowY: "auto", pr: 1, pb: 2 }}>
           {content.map((para, idx) => (
             <Typography key={idx} gutterBottom>
               {para}
