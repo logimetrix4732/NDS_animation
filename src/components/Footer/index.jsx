@@ -53,35 +53,8 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-6 col-xl-auto">
-            <div className="widget widget_nav_menu footer-widget">
-              <h3 className="widget_title">About Us</h3>
-              <div className="menu-all-pages-container">
-                <ul className="menu">
-                  <li>
-                    <a href="index.html">Annual Reports</a>
-                  </li>
-                  <li>
-                    <a href="about.html">Gallery (Photos and Videos)</a>
-                  </li>
-                </ul>
-              </div>
-              <h3 className="widget_title" style={{ marginTop: "30px" }}>
-                Producer Companies
-              </h3>
-              <div className="menu-all-pages-container">
-                <ul className="menu">
-                  <li>
-                    <a href="index.html">MPCs Operationalized</a>
-                  </li>
-                  <li>
-                    <a href="about.html">Setting up MPCs</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6 col-xl-auto">
+
+          <div className="col-md-3 col-xl-auto">
             <div className="widget footer-widget">
               <h3 className="widget_title">Get In Touch</h3>
               <div className="th-widget-contact">
@@ -131,22 +104,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-6 col-xl-auto">
-            <div className="col-md-6 col-xl-auto">
-              <div className="widget widget_nav_menu footer-widget">
-                <h3 className="widget_title">Productivity Services</h3>
-                <div className="menu-all-pages-container">
-                  <ul className="menu">
-                    <li>
-                      <a href="index.html">Animal Nutrition Services</a>
-                    </li>
-                    <li>
-                      <a href="about.html">AI Delivery Services</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+          <div className="col-md-3 col-xl-auto">
             <div className="widget footer-widget">
               <h3 className="widget_title">Email Address</h3>
               <div className="row gy-4 align-items-center">
@@ -177,6 +135,8 @@ const Footer = () => {
               </div>
             </div>
           </div>
+          <div className="col-md-3 col-xl-auto"></div>
+          <div className="col-md-3 col-xl-auto"></div>
         </div>
       </div>
       <div className="copyright-wrap">
