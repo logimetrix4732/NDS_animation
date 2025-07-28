@@ -39,6 +39,7 @@ const AboutSection4 = () => {
         toggleDrawer={toggleDrawer}
         title={AboutUsContent.title}
         content={AboutUsContent.content}
+        width="700px"
       />
       <div className="container" id="about-sec5">
         <div className="row custom-ml">
