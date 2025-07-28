@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import AnimatedText from "../AnimatedText";
 import bgCow from "../../Images/bg-cow.png";
 import DSC_7694 from "../../Images/HomeImgs/DSC_7694.jpg";
 import DSC_2802 from "../../Images/HomeImgs/DSC_2802.jpg";
 import DSC_0344 from "../../Images/HomeImgs/DSC_0344.jpg";
+import { HashLink as Link } from "react-router-hash-link";
 
 const AboutSection = () => {
   return (
@@ -75,7 +75,11 @@ const AboutSection = () => {
                 </p>
               </div>
               <div className="wow fadeInUp" style={{ marginTop: "-10px" }}>
-                <Link to="/aboutUs" className="th-btn th-icon">
+                <Link
+                  smooth
+                  to="/aboutUs#about-sec5"
+                  className="th-btn th-icon"
+                >
                   Learn more <i className="fa-light fa-arrow-right-long" />
                 </Link>
               </div>
