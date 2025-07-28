@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const getDrawerStyles = (width) => ({
   "& .MuiDrawer-paper": {
-    width: width || "600px",
+    width: width || "50%",
     height: "100%",
     top: "auto",
     bottom: 0,
@@ -67,7 +67,12 @@ const DrawerModal = ({
         exit="exit"
         variants={animationVariants}
         transition={{ duration: 0.4, ease: "easeInOut" }}
-        style={{ height: "100%", display: "flex", flexDirection: "column", overflow: "hidden" }}
+        style={{
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          overflow: "hidden",
+        }}
       >
         <Box
           display="flex"
@@ -85,7 +90,10 @@ const DrawerModal = ({
           </IconButton>
         </Box>
 
-        <Box ref={contentRef} sx={{ flexGrow: 1, overflowY: "auto", pr: 1, pb: 2 }}>
+        <Box
+          ref={contentRef}
+          sx={{ flexGrow: 1, overflowY: "auto", pr: 1, pb: 2 }}
+        >
           {content.map((para, idx) => (
             <Typography key={idx} gutterBottom>
               {para}
