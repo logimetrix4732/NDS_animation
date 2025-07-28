@@ -7,14 +7,14 @@ import AnimatedText from "../AnimatedText";
 const countData = [
   {
     number: 11,
-    suffix: "+",
+    suffix: "",
     title: "States Covered",
     description:
       "Established over 23 Milk Producer Organizations benefiting more than 800,000 dairy farmers across India.",
   },
   {
     number: 162,
-    suffix: "+",
+    suffix: "",
     title: "Districts Covered",
     description:
       "Implemented quality testing and assurance systems that have improved milk quality by 40% in partner regions.",
