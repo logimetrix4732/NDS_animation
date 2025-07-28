@@ -107,8 +107,16 @@ const AboutSection14 = () => {
                   excellence, scale, capacity building and digitisation.
                 </p>
                 <p
-                  className="sec-text  wow fadeInUp ellipsis-2"
+                  className="sec-text  wow fadeInUp"
                   data-wow-delay=".2s"
+                  style={{
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    minHeight: "48px",
+                  }}
                 >
                   Looking back at the work done in the sector is comforting but
                   it does not entitle us to rest. Increasingly there are newer
