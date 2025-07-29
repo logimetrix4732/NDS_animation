@@ -6,6 +6,7 @@ import OurFeatures1 from "../components/Sliders/OurFeatures1";
 import AboutSection from "../components/AboutUs/AboutSection";
 import AboutSection2 from "../components/AboutUs/AboutSection2";
 import sdgImg from "../Images/HomeImgs/sdgImg.png";
+import AnimatedText from "../components/AnimatedText";
 const Home = () => {
   return (
     <React.Fragment>
@@ -26,6 +27,26 @@ const Home = () => {
         style={{ backgroundColor: "white" }}
       >
         <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-lg-8">
+              <div className="title-area text-center">
+                <AnimatedText
+                  text="Why NDDB Dairy Services "
+                  tag="h2"
+                  className="sec-title mb-10 heading"
+                  width="100%"
+                  style={{ justifyContent: "center" }}
+                />
+                <span
+                  className="sub-title text-anime-style-2 wow fadeInUp"
+                  style={{ color: "#bd8f59" }}
+                >
+                  Aligned with the United Nations Sustainable Development Goals
+                  (SDGs)
+                </span>
+              </div>
+            </div>
+          </div>
           <div className="row align-items-center">
             <div className="col-xl-12 order-1 order-xl-2 position-relative wow fadeInUp">
               <img src={sdgImg} alt="" />

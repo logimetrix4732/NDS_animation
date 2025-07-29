@@ -1,0 +1,7 @@
+.Footer-icon {
+  color: #a46c35;
+}
+
+.icon:hover .Footer-icon {
+  color: white;
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
 import SAGLiveImg from "../../Images/OurExpertiesImg/SAGLiveImg.jpg";
+import SAGLiveImg1 from "../../Images/OurExpertiesImg/21083.jpg";
 const AboutSection11 = () => {
   return (
     <div
@@ -16,7 +17,7 @@ const AboutSection11 = () => {
                 data-mask-src="assets/img/shape/about_9_1_shape.png"
               >
                 <img
-                  src="assets/img/normal/about_9_1.jpg"
+                  src={SAGLiveImg1}
                   alt="About"
                   style={{
                     width: "480px",

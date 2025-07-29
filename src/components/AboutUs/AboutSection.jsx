@@ -1,9 +1,9 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
 import bgCow from "../../Images/bg-cow.png";
-import DSC_7694 from "../../Images/HomeImgs/DSC_7694.jpg";
+import DSC_7694 from "../../Images/HomeImgs/DSC_4579.jpg";
 import DSC_2802 from "../../Images/HomeImgs/DSC_2802.jpg";
-import DSC_0344 from "../../Images/HomeImgs/DSC_0344.jpg";
+import DSC_0344 from "../../Images/HomeImgs/SUN0545.JPG";
 import { HashLink as Link } from "react-router-hash-link";
 
 const AboutSection = () => {
@@ -45,7 +45,7 @@ const AboutSection = () => {
                 <AnimatedText
                   text="NDDB Dairy Services"
                   tag="h2"
-                  className="sec-title mb-10 heading text-anime-style-3"
+                  className="sec-title heading text-anime-style-3"
                   width="100%"
                 />
                 <p
@@ -96,7 +96,7 @@ const AboutSection = () => {
                   alt="About"
                   style={{
                     width: "325px",
-                    height: "600px",
+                    height: "630px",
                     objectFit: "cover",
                   }}
                 />
@@ -107,18 +107,18 @@ const AboutSection = () => {
                   alt="About"
                   style={{
                     width: "312px",
-                    height: "295px",
+                    height: "315px",
                     objectFit: "cover",
                   }}
                 />
               </div>
-              <div className="img3 wow fadeInUp mb-15" data-wow-delay=".4s">
+              <div className="img3 wow fadeInUp " data-wow-delay=".4s">
                 <img
                   src={DSC_0344}
                   alt="About"
                   style={{
                     width: "312px",
-                    height: "295px",
+                    height: "315px",
                     objectFit: "cover",
                   }}
                 />

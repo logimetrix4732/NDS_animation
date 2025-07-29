@@ -31294,7 +31294,8 @@ span.select2-selection.select2-selection--single:focus {
 }
 .service-item.style4 .th-btn {
   border: 1px solid var(--th-border-color);
-  border-radius: 50px;
+  /* border-radius: 50px; */
+  border-radius: 10px;
 }
 .service-4-title-box .sec-title {
   text-transform: capitalize;

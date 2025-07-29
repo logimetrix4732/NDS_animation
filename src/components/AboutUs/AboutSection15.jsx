@@ -27,14 +27,11 @@ const AboutSection15 = () => {
               </div>
             </div>
           </div>
-          <div className="col-xl-6 mt-80">
+          <div className="col-xl-6 mt-20">
             <div className="about-15-title-box ps-xl-3 ms-xl-5">
               <div className="title-area mb-20">
-                <span className="sub-title style1 text-anime-style-2">
-                  About Us
-                </span>
                 <h2 className="sec-title mb-25 text-anime-style-3">
-                  Smart Dairy Solutions 
+                  Vision, Mission & Core Values
                 </h2>
               </div>
               <p

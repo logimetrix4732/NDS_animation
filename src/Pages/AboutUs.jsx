@@ -3,6 +3,8 @@ import OurFeatures2 from "../components/Sliders/OurFeatures2";
 import AboutSection4 from "../components/AboutUs/AboutSection4";
 import AboutSection14 from "../components/AboutUs/AboutSection14";
 import CommonBanner from "../components/BannersComponents/CommonBanner";
+import OurFeatures5 from "../components/Sliders/OurFeatures5";
+import AboutSection15 from "../components/AboutUs/AboutSection15";
 
 const AboutUs = () => {
   return (
@@ -13,6 +15,7 @@ const AboutUs = () => {
       />
       <AboutSection4 />
       <AboutSection14 />
+      <OurFeatures5 />
       <OurFeatures2 />
     </React.Fragment>
   );

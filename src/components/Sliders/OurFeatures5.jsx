@@ -1,115 +1,217 @@
 import React from "react";
+import {
+  ThemeProvider,
+  CssBaseline,
+  Container,
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  Box,
+  Avatar,
+  Grow,
+} from "@mui/material";
+import TrackChangesIcon from "@mui/icons-material/TrackChanges";
+import FlagIcon from "@mui/icons-material/Flag";
+import { theme } from "../../theme";
 
-const OurFeatures5 = () => {
+function OurFeatures5() {
+  const [hoveredCard, setHoveredCard] = React.useState(null);
+
   return (
-    <div
-      className="history-sec1 overflow-hidden space-top"
-      id="story-sec"
-      data-pos-for=".team-area7"
-      data-sec-pos="bottom-half"
-    >
-      <div className="container">
-        <div
-          className="history-area overflow-hidden"
-          data-bg-src="assets/img/bg/history_bg_1.jpg"
-        >
-          <div className="history-content">
-            <div className="title-area">
-              <h3 className="sec-title text-anime-style-2">
-                History Of Digital Transformation
-              </h3>
-              <p className="sec-text wow fadeInUp">
-                Digital transformation is the process of integrating digital
-                technology into all aspects of a business, fundamentally
-                changing how it operates and delivers value to customers.
-              </p>
-            </div>
-            <div className="btn-group">
-              <a
-                href="contact.html"
-                className="th-btn style1 th-radius th-icon"
-              >
-                Discover More <i className="fa-light fa-arrow-right-long" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="container mt-60">
-        <div className="row gy-4 justify-content-center">
-          <div className="col-xl-4 col-md-6">
-            <div className="story-box">
-              <h3 className="box-title">Our Mission</h3>
-              <p className="story-box_text">
-                It involves adopting modern technologies such as cloud
-                computing, artificial intelligence (AI), data analytics,
-                automation, and the Internet of Things (IoT) to enhance
-                efficiency, customer experiences, and overall business
-                performance.
-              </p>
-              <span className="story-box_icon">
-                <img src="assets/img/icon/history_1_1.svg" alt="" />
-              </span>
-              <a href="history.html" className="icon">
-                <i className="fa-light fa-arrow-up-right" />
-              </a>
-              <div className="story-wrapp">
-                <div className="discount-tag">
-                  <span className="discount-anime">See More about History</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-4 col-md-6">
-            <div className="story-box">
-              <h3 className="box-title">Our Vision</h3>
-              <p className="story-box_text">
-                It involves adopting modern technologies such as cloud
-                computing, artificial intelligence (AI), data analytics,
-                automation, and the Internet of Things (IoT) to enhance
-                efficiency, customer experiences, and overall business
-                performance.
-              </p>
-              <span className="story-box_icon">
-                <img src="assets/img/icon/history_1_2.svg" alt="" />
-              </span>
-              <a href="history.html" className="icon">
-                <i className="fa-light fa-arrow-up-right" />
-              </a>
-              <div className="story-wrapp">
-                <div className="discount-tag">
-                  <span className="discount-anime">See More about History</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xl-4 col-md-6">
-            <div className="story-box">
-              <h3 className="box-title">Our Goal</h3>
-              <p className="story-box_text">
-                It involves adopting modern technologies such as cloud
-                computing, artificial intelligence (AI), data analytics,
-                automation, and the Internet of Things (IoT) to enhance
-                efficiency, customer experiences, and overall business
-                performance.
-              </p>
-              <span className="story-box_icon">
-                <img src="assets/img/icon/history_1_3.svg" alt="" />
-              </span>
-              <a href="history.html" className="icon">
-                <i className="fa-light fa-arrow-up-right" />
-              </a>
-              <div className="story-wrapp">
-                <div className="discount-tag">
-                  <span className="discount-anime">See More about History</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box
+        sx={{
+          minHeight: "100%",
+          background:
+            "linear-gradient(135deg, #fefcf8 0%, #f8f4ed 50%, #f5f0e8 100%)",
+        }}
+        className="space"
+      >
+        <Container maxWidth="lg">
+          <Grid container spacing={4}>
+            <Grid item xs={12} md={6} lg={6}>
+              <Grow in timeout={1000}>
+                <Card
+                  onMouseEnter={() => setHoveredCard("mission")}
+                  onMouseLeave={() => setHoveredCard(null)}
+                  sx={{
+                    height: "100%",
+                    background:
+                      "linear-gradient(135deg, #bd8f59 0%, #a46c35 100%)",
+                    color: "white",
+                    position: "relative",
+                    overflow: "hidden",
+                    cursor: "pointer",
+                    transform:
+                      hoveredCard === "mission" ? "scale(1.02)" : "scale(1)",
+                    transition: "all 0.3s ease-in-out",
+                    "&::before": {
+                      content: '""',
+                      position: "absolute",
+                      top: 0,
+                      right: 0,
+                      width: 200,
+                      height: 200,
+                      background: "rgba(255, 255, 255, 0.1)",
+                      borderRadius: "50%",
+                      transform: "translate(50%, -50%)",
+                    },
+                    "&::after": {
+                      content: '""',
+                      position: "absolute",
+                      bottom: 0,
+                      left: 0,
+                      width: 150,
+                      height: 150,
+                      background: "rgba(255, 255, 255, 0.05)",
+                      borderRadius: "50%",
+                      transform: "translate(-50%, 50%)",
+                    },
+                  }}
+                >
+                  <CardContent
+                    sx={{
+                      p: 4,
+                      position: "relative",
+                      zIndex: 1,
+                      height: "100%",
+                    }}
+                  >
+                    <Box display="flex" alignItems="center" mb={3}>
+                      <Avatar
+                        sx={{
+                          bgcolor: "rgba(255, 255, 255, 0.2)",
+                          mr: 2,
+                          width: 56,
+                          height: 56,
+                          transform:
+                            hoveredCard === "mission"
+                              ? "scale(1.1)"
+                              : "scale(1)",
+                          transition: "transform 0.3s ease",
+                        }}
+                      >
+                        <TrackChangesIcon sx={{ fontSize: 28 }} />
+                      </Avatar>
+                      <Typography variant="h2" sx={{ color: "white" }}>
+                        Our Mission
+                      </Typography>
+                    </Box>
+
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        color: "rgba(255, 255, 255, 0.9)",
+                        mb: 4,
+                        fontSize: "1.1rem",
+                        lineHeight: 1.7,
+                      }}
+                    >
+                      Building pathways to prosperity in rural India through
+                      scientific methods, fairness, empowerment, sustainability,
+                      innovation, inclusion, resilience, transparency, and
+                      collaboration.
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grow>
+            </Grid>
+            {/* Vision Card */}
+            <Grid item xs={12} md={6} lg={6}>
+              <Grow in timeout={1200}>
+                <Card
+                  onMouseEnter={() => setHoveredCard("vision")}
+                  onMouseLeave={() => setHoveredCard(null)}
+                  sx={{
+                    height: "100%",
+                    background:
+                      "linear-gradient(135deg, #a46c35 0%, #8b5a2b 100%)",
+                    color: "white",
+                    position: "relative",
+                    overflow: "hidden",
+                    cursor: "pointer",
+                    transform:
+                      hoveredCard === "vision" ? "scale(1.02)" : "scale(1)",
+                    transition: "all 0.3s ease-in-out",
+                    "&::before": {
+                      content: '""',
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: 180,
+                      height: 180,
+                      background: "rgba(255, 255, 255, 0.08)",
+                      borderRadius: "50%",
+                      transform: "translate(-50%, -50%)",
+                    },
+                    "&::after": {
+                      content: '""',
+                      position: "absolute",
+                      bottom: 0,
+                      right: 0,
+                      width: 120,
+                      height: 120,
+                      background: "rgba(255, 255, 255, 0.05)",
+                      borderRadius: "50%",
+                      transform: "translate(50%, 50%)",
+                    },
+                  }}
+                >
+                  <CardContent
+                    sx={{
+                      p: 4,
+                      position: "relative",
+                      zIndex: 1,
+                      height: "100%",
+                    }}
+                  >
+                    <Box display="flex" alignItems="center" mb={3}>
+                      <Avatar
+                        sx={{
+                          bgcolor: "rgba(255, 255, 255, 0.2)",
+                          mr: 2,
+                          width: 56,
+                          height: 56,
+                          transform:
+                            hoveredCard === "vision"
+                              ? "scale(1.1)"
+                              : "scale(1)",
+                          transition: "transform 0.3s ease",
+                        }}
+                      >
+                        <FlagIcon sx={{ fontSize: 28 }} />
+                      </Avatar>
+                      <Typography variant="h2" sx={{ color: "white" }}>
+                        Our Vision
+                      </Typography>
+                    </Box>
+
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        color: "rgba(255, 255, 255, 0.9)",
+                        mb: 4,
+                        fontSize: "1.1rem",
+                        lineHeight: 1.7,
+                      }}
+                    >
+                      Ensuring consistent and sustainable livelihoods for
+                      farmers especially women even in the remotest parts of the
+                      country by developing fair and transparent value chains
+                      based on scientific methods while striving towards net
+                      zero emissions.
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grow>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+    </ThemeProvider>
   );
-};
+}
 
 export default OurFeatures5;

@@ -12,6 +12,7 @@ import AnimatedText from "../components/AnimatedText";
 import video from "../Images/Videos/video1.mp4";
 import OurEx from "../Images/OurExpertiesImg/OurEx1.jpg";
 import BlogAndArticle1 from "../components/BlogandArticleComponents/BlogAndArticle1";
+import finalcover from "../Images/OurExpertiesImg/finalcover.jpg";
 import ProjectImplementation from "../Images/OurExpertiesImg/ProjectImplementation.JPG";
 const OurExperties = () => {
   const [open, setOpen] = React.useState(false);
@@ -28,7 +29,8 @@ const OurExperties = () => {
       "NDS is an implementing agency for various projects under the Rashtriya Gokul Mission (RGM). It is currently implementing 24 projects under RGM in multiple states to conserve and develop indigenous bovine breeds, improve livestock productivity and make dairying a sustainable and profitable livelihood especially in regions with low animal productivity.",
       "These efforts are focused in regions like the Vidarbha–Marathwada belt in Maharashtra, Varanasi in the Purvanchal region of Uttar Pradesh, Mayurbhanj in Odissa and Champaran in Bihar areas that hold significant potential for dairy development but have historically lacked access to quality services and infrastructure. ",
       "To enhance productivity and improve the genetic potential of animals in these regions, NDS is undertaking key interventions such as the introduction of high-yielding indigenous cattle, use of sex-sorted frozen semen and conventional semen for artificial insemination and use of embryo transfer technology. ",
-      "These services are delivered in a structured and scientific manner ensuring accessibility and impact at the grassroots level. Through these projects, NDS aims to build a strong foundation for inclusive growth in the dairy sector enabling farmers in the most challenging and underserved regions to participate meaningfully in the dairy economy. Recognising the strategic importance of Central Cattle Breeding Farms (CCBFs), the Government of India has entrusted the management of two CCBFs located at Andeshnagar (Uttar Pradesh) and Dhamrod (Gujarat), to NDDB to transform them into Centres of Excellence in Dairy Innovation. Supported by NDS as the technical arm of NDDB, these farms are undergoing comprehensive modernisation with infrastructure upgradation, technology integration and capacity building as core pillars. The upgraded facilities include advanced laboratories for embryo production, disease-free housing for producing high genetic merit bulls and heifers and training centres to build skills in livestock and dairy management. These Centres of Excellence are envisioned to serve as catalytic hubs for research and innovation in the dairy sector.",
+      "These services are delivered in a structured and scientific manner ensuring accessibility and impact at the grassroots level. Through these projects, NDS aims to build a strong foundation for inclusive growth in the dairy sector enabling farmers in the most challenging and underserved regions to participate meaningfully in the dairy economy.",
+      "Recognising the strategic importance of Central Cattle Breeding Farms (CCBFs), the Government of India has entrusted the management of two CCBFs located at Andeshnagar (Uttar Pradesh) and Dhamrod (Gujarat), to NDDB to transform them into Centres of Excellence in Dairy Innovation. Supported by NDS as the technical arm of NDDB, these farms are undergoing comprehensive modernisation with infrastructure upgradation, technology integration and capacity building as core pillars. The upgraded facilities include advanced laboratories for embryo production, disease-free housing for producing high genetic merit bulls and heifers and training centres to build skills in livestock and dairy management. These Centres of Excellence are envisioned to serve as catalytic hubs for research and innovation in the dairy sector.",
     ],
   };
   return (
@@ -86,7 +88,7 @@ const OurExperties = () => {
                 <div className="choose-item4">
                   <div className="choose-img wow fadeInUp">
                     <img
-                      src={OurEx}
+                      src={finalcover}
                       alt="Animal Productivity Services 2"
                       style={{
                         width: "302px",

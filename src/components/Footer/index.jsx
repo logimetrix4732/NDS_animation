@@ -3,6 +3,10 @@ import nds_logo from "../../assets/img/nds_logo.png";
 import phone_icon from "../../assets/img/icon/phone_icon.svg";
 import email_icon from "../../assets/img/icon/email_icon.svg";
 import location_icon from "../../assets/img/icon/location_icon.svg";
+import CallIcon from "@mui/icons-material/Call";
+import MailIcon from "@mui/icons-material/Mail";
+import LocationPinIcon from "@mui/icons-material/LocationPin";
+import "./Footer.css";
 const Footer = () => {
   return (
     <footer className="footer-wrapper footer-layout1 black-bg pt-50">
@@ -16,7 +20,7 @@ const Footer = () => {
                     <img src={nds_logo} alt="NDDB" width="168" height="46" />
                   </a>
                 </div>
-                <p className="about-text">
+                <p className="about-text" style={{ color: "#ffffff" }}>
                   Empowering India’s dairy sector with sustainable solutions and
                   farmer-focused services to enhance rural livelihoods.
                 </p>
@@ -60,7 +64,7 @@ const Footer = () => {
               <div className="th-widget-contact">
                 <div className="info-box_text">
                   <div className="icon">
-                    <img src={phone_icon} alt="img" />
+                    <CallIcon className="Footer-icon" />
                   </div>
                   <div className="details">
                     <p>
@@ -72,7 +76,7 @@ const Footer = () => {
                 </div>
                 <div className="info-box_text">
                   <div className="icon">
-                    <img src={email_icon} alt="img" />
+                    <MailIcon className="Footer-icon" />
                   </div>
                   <div className="details">
                     <p>
@@ -87,12 +91,12 @@ const Footer = () => {
                 </div>
                 <div className="info-box_text">
                   <div className="icon">
-                    <img src={location_icon} alt="img" />
+                    <LocationPinIcon className="Footer-icon" />
                   </div>
                   <div className="details">
                     <p>
                       <a
-                        href="https://maps.app.goo.gl/QyH2fFoJ9fii93mt7"
+                        href="https://www.google.com/maps/place/NDDB+Dairy+Services/@28.5648486,77.1973818,17z/data=!3m1!4b1!4m6!3m5!1s0x390ce279fa28f713:0xa6914db36a4ac6a6!8m2!3d28.5648439!4d77.1999621!16s%2Fg%2F1hf6ft670?entry=ttu&g_ep=EgoyMDI1MDcyMy4wIKXMDSoASAFQAw%3D%3D"
                         target="_blank"
                       >
                         NDDB House, Safdarjung Enclave, New Delhi, Southwest

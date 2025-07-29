@@ -5,7 +5,7 @@ import empoweringWomen from "../../Images/empoweringWomen.jpg";
 import empoweringWomen1 from "../../Images/empoweringWomen1.jpg";
 import DSC_4156 from "../../Images/HomeImgs/DSC_4156.jpg";
 import DSC_9821 from "../../Images/HomeImgs/DSC_9821.jpg";
-import checkMarkIcon from "../../Images/checkMarkIcon.jpg";
+import checkMarkIcon from "../../Images/HomeImgs/checkMarkIcon.png";
 import { Link } from "react-router-dom";
 const AboutSection2 = () => {
   return (
@@ -16,55 +16,25 @@ const AboutSection2 = () => {
       <div className="container">
         <div className="row">
           <div className="col-xl-6 col-lg-6">
-            <div className="title-area mb-20 mt-35">
+            <div className="title-area mb-10 mt-35">
               <AnimatedText
                 text="Success Stories"
                 tag="h2"
-                className="sec-title mb-20 heading text-anime-style-3"
+                className="sec-title mb-10 heading text-anime-style-3"
                 width="100%"
               />
-              <p className="sec-text mb-40  wow fadeInUp" data-wow-delay=".2s">
-                Real-life success stories showcasing how our programs and
-                partnerships have empowered rural communities, enhanced milk
-                productivity, created sustainable income sources, and uplifted
-                thousands of farmer families. These stories reflect the
-                dedication of our team, the resilience of our farmers, and the
-                power of collaboration in building a self-reliant rural India.
+              <p
+                className="sec-text wow fadeInUp desktop-margin-bottom"
+                data-wow-delay=".2s"
+              >
+                At the heart of NDDB Dairy Services lies the spirit of rural
+                women who are not just dairy farmers but changemakers. Through
+                our programs, thousands of women have unlocked new
+                opportunities, financial independence and community leadership.
+                Here we share real stories of courage, resilience and
+                transformation directly from the women who are redefining rural
+                India
               </p>
-              <div className="about-feature-list">
-                <ul>
-                  <li className="wow fadeInUp" data-wow-delay=".4s">
-                    <span className="about-feature-icon">
-                      <img
-                        src={checkMarkIcon}
-                        alt=""
-                        style={{ width: "26px", height: "22px" }}
-                      />
-                    </span>
-                    50,000+ farmers empowered via dairy programs.
-                  </li>
-                  <li className="wow fadeInUp" data-wow-delay=".5s">
-                    <span className="about-feature-icon">
-                      <img
-                        src={checkMarkIcon}
-                        alt=""
-                        style={{ width: "26px", height: "22px" }}
-                      />
-                    </span>
-                    3x increase in household income in supported regions.
-                  </li>
-                  <li className="wow fadeInUp" data-wow-delay=".5s">
-                    <span className="about-feature-icon">
-                      <img
-                        src={checkMarkIcon}
-                        alt=""
-                        style={{ width: "26px", height: "22px" }}
-                      />
-                    </span>
-                    Women-led dairies driving change.
-                  </li>
-                </ul>
-              </div>
             </div>
             <div className="img-box8">
               <div className="row">
@@ -78,7 +48,7 @@ const AboutSection2 = () => {
                       alt="About"
                       style={{
                         width: "312px",
-                        height: "361.05px",
+                        height: "331.05px",
                         objectFit: "cover",
                       }}
                     />
@@ -94,7 +64,7 @@ const AboutSection2 = () => {
                       alt="About"
                       style={{
                         width: "312px",
-                        height: "361.05px",
+                        height: "331.05px",
                         objectFit: "cover",
                       }}
                     />
@@ -119,37 +89,74 @@ const AboutSection2 = () => {
                   }}
                 ></video>
               </div>
-              <div className="about-item-wrap mt-2">
-                <div className="about-item wow fadeInUp" data-wow-delay=".3s">
-                  <div className="about-item_img">
-                    <img src="assets/img/icon/shield.svg" alt="" />
-                  </div>
-                  <div className="about-item_centent">
-                    <h5 className="box-title mt-0">Empowering Women Farmers</h5>
-                    <p className="about-item_text">
-                      Women-led dairy initiatives brought financial growth,
-                      confidence, leadership, and social change in villages
-                      through skill-building, training, self-reliance, and
-                      collective efforts.
+              <div className="about-feature-list mt-20">
+                <ul>
+                  <li className="wow fadeInUp" data-wow-delay=".5s">
+                    <span className="about-feature-icon">
+                      <img
+                        src={checkMarkIcon}
+                        alt=""
+                        style={{ width: "26px", height: "22px" }}
+                      />
+                    </span>
+                    <p className="sec-text wow fadeInUp" data-wow-delay=".2s">
+                      Empowered through skill building to run dairy operations
+                      independently.
                     </p>
-                  </div>
-                </div>
-                <div className="about-item wow fadeInUp " data-wow-delay=".4s">
-                  <div className="about-item_img">
-                    <img src="assets/img/icon/shield.svg" alt="" />
-                  </div>
-                  <div className="about-item_centent">
-                    <h5 className="box-title mt-1">
-                      Transforming Rural Livelihoods
-                    </h5>
-                    <p className="sec-text  wow fadeInUp" data-wow-delay=".2s">
-                      A small village in Gujarat boosted incomes by 300% through
-                      modern dairy practices, better animal healthcare, cold
-                      storage, training, digital payment systems, innovation,
-                      sustainability, efficiency, and empowerment.
+                  </li>
+                  <li className="wow fadeInUp" data-wow-delay=".5s">
+                    <span className="about-feature-icon">
+                      <img
+                        src={checkMarkIcon}
+                        alt=""
+                        style={{ width: "26px", height: "22px" }}
+                      />
+                    </span>
+                    <p className="sec-text wow fadeInUp" data-wow-delay=".2s">
+                      Creating community impact by inspiring change beyond their
+                      households.
                     </p>
-                  </div>
-                </div>
+                  </li>
+                  <li className="wow fadeInUp" data-wow-delay=".5s">
+                    <span className="about-feature-icon">
+                      <img
+                        src={checkMarkIcon}
+                        alt=""
+                        style={{ width: "26px", height: "22px" }}
+                      />
+                    </span>
+                    <p className="sec-text wow fadeInUp" data-wow-delay=".2s">
+                      Breaking barriers and rising above social and economic
+                      challenges.
+                    </p>
+                  </li>
+                  <li className="wow fadeInUp" data-wow-delay=".4s">
+                    <span className="about-feature-icon">
+                      <img
+                        src={checkMarkIcon}
+                        alt=""
+                        style={{ width: "26px", height: "22px" }}
+                      />
+                    </span>
+                    <p className="sec-text wow fadeInUp" data-wow-delay=".2s">
+                      From milking to managing, Women are leading dairy
+                      cooperatives with confidence.
+                    </p>
+                  </li>
+                  <li className="wow fadeInUp" data-wow-delay=".5s">
+                    <span className="about-feature-icon">
+                      <img
+                        src={checkMarkIcon}
+                        alt=""
+                        style={{ width: "26px", height: "22px" }}
+                      />
+                    </span>
+                    <p className="sec-text wow fadeInUp" data-wow-delay=".2s">
+                      Achieving financial freedom by earning through dairy and
+                      becoming self reliant.
+                    </p>
+                  </li>
+                </ul>
               </div>
               <div className="mt-35 wow fadeInUp" data-wow-delay=".5s"></div>
             </div>

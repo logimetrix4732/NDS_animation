@@ -1,5 +1,5 @@
 import React from "react";
-import SmartDairySolutionImg from "../../Images/OurExpertiesImg/SmartDairySolutionImg.JPG";
+import SmartDairySolutionImg from "../../Images/OurExpertiesImg/ALML5052.JPG";
 import DrawerModal from "../DrawerModal";
 import { useMediaQuery, useTheme } from "@mui/material";
 import AnimatedText from "../AnimatedText";

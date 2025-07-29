@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import SocialContainerImg from "../../Images/SocialContainerImg1.jpg";
 import "./SocialContainer.css";
-import DSC_0344 from "../../Images/HomeImgs/DSC_0344.jpg";
+import DSC_0344 from "../../Images/HomeImgs/DSC_0271.JPG";
 const icons = [
   {
     class: "ri-youtube-fill",
@@ -225,10 +225,10 @@ const SocialContainer = () => {
         <div
           className={`share-toggle ${isOpen ? "bounce" : ""}`}
           style={{
-            backgroundColor: "rgba(64, 74, 61, 85%)",
+            backgroundColor: "#bd8f59",
             borderRadius: "50%",
-            width: "65px",
-            height: "65px",
+            width: "85px",
+            height: "80px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -242,11 +242,13 @@ const SocialContainer = () => {
               ? "bounce 0.6s ease"
               : "pulse 2s infinite ease-in-out",
             zIndex: 20,
+            marginTop: "-70px",
+            marginLeft: "-65px",
           }}
         >
           <div
             style={{
-              fontSize: "9px",
+              fontSize: "10px",
               lineHeight: "1.1",
               fontWeight: "bold",
               letterSpacing: "0.5px",

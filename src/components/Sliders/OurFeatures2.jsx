@@ -182,7 +182,7 @@ const OurFeatures2 = () => {
                 Meet the Visionaries Behind Our Mission
               </span>
               <AnimatedText
-                text="Board of Directors & Key Leadership"
+                text="Board of Directors"
                 tag="h2"
                 className="sec-title mb-10 heading"
                 width="100%"

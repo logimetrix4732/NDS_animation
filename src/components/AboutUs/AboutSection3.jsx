@@ -1,7 +1,7 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
 import { Link } from "react-router-dom";
-import SemenStationsImg from "../../Images/OurExpertiesImg/SemenStationsImg.JPG";
+import SemenStationsImg from "../../Images/OurExpertiesImg/DSC_0524.JPG";
 import animalImg from "../../Images/OurExpertiesImg/21046.jpg";
 import IMG_6393 from "../../Images/OurExpertiesImg/IMG_6393.JPG";
 const AboutSection3 = () => {
@@ -12,7 +12,7 @@ const AboutSection3 = () => {
           <div className="col-xl-5 order-1 order-xl-0 mt-50">
             <div className="title-area mb-20 pe-xl-5">
               <AnimatedText
-                text="Animal Productivity Services"
+                text="Animal Productivity Enhancement Services"
                 tag="h2"
                 className="sec-title mb-20 heading text-anime-style-3"
                 width="100%"

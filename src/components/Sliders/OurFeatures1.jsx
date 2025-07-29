@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import icon from "../../Images/icon/1.png";
 import icon1 from "../../Images/icon/2.png";
 import icon2 from "../../Images/icon/3.png";
-import DSC_9355 from "../../Images/HomeImgs/DSC_9355.png";
+import DSC_9355 from "../../Images/HomeImgs/DSC_6873.jpg";
 import DSC_3158 from "../../Images/HomeImgs/DSC_3796.jpg";
 import DSC_1362 from "../../Images/HomeImgs/DSC_7813.jpg";
 import "./OurFeatures.css";
@@ -11,25 +11,22 @@ const featuresData = [
   {
     image: DSC_9355,
     icon: icon,
-    title: "Premium Cattle Feed",
-    subtitle:
-      "Nutritionally balanced feed for dairy cattle, enhancing milk production and animal health.",
+    title: "A bond beyond words, built on trust",
+    subtitle: "",
     link: "/",
   },
   {
     image: DSC_1362,
     icon: icon1,
-    title: "Dairy Mineral Mixture",
-    subtitle:
-      "Essential mineral supplement for dairy animals to improve overall health and productivity.",
+    title: "Strong women, stronger communities",
+    subtitle: "",
     link: "/",
   },
   {
     image: DSC_3158,
     icon: icon2,
-    title: "Calf Starter Feed",
-    subtitle:
-      "Specially formulated feed for calves to ensure proper growth and development.",
+    title: "United in purpose, unstoppable in spirit",
+    subtitle: "",
     link: "/",
   },
 ];

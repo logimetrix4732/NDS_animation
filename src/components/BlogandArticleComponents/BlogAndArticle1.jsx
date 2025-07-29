@@ -4,7 +4,7 @@ import video07 from "../../Images/Videos/video07.mp4";
 import { useMediaQuery, useTheme } from "@mui/material";
 import DrawerModal from "../DrawerModal";
 import AnimalNutrition from "../../Images/OurExpertiesImg/AnimalNutrition.JPG";
-import checkMarkIcon from "../../Images/checkMarkIcon.jpg";
+import checkMarkIcon from "../../Images/HomeImgs/checkMarkIcon.png";
 
 const BlogAndArticle1 = () => {
   const [open, setOpen] = React.useState(false);
@@ -71,7 +71,7 @@ const BlogAndArticle1 = () => {
             <div className="ps-xl-3 ms-xl-3 ps-xl-5 ms-xxl-5">
               <div className="title-area about-7-titlebox mb-20">
                 <p
-                  className="sec-text mb-15 mt-20  wow fadeInUp"
+                  className="sec-text mb-15 mt-30  wow fadeInUp"
                   data-wow-delay=".4s"
                 >
                   Ensuring proper animal nutrition is fundamental to improve
@@ -94,7 +94,12 @@ const BlogAndArticle1 = () => {
                             style={{ width: "26px", height: "22px" }}
                           />
                         </span>
-                        Heat stress mitigation techniques during summer
+                        <p
+                          className="sec-text mb-15 mt-20  wow fadeInUp"
+                          data-wow-delay=".4s"
+                        >
+                          Heat stress mitigation techniques during summer
+                        </p>
                       </li>
                       <li class="wow fadeInUp" data-wow-delay=".5s">
                         <span class="about-feature-icon">
@@ -104,7 +109,12 @@ const BlogAndArticle1 = () => {
                             style={{ width: "26px", height: "22px" }}
                           />
                         </span>
-                        Mastitis prevention and udder hygiene practices
+                        <p
+                          className="sec-text mb-15 mt-20  wow fadeInUp"
+                          data-wow-delay=".4s"
+                        >
+                          Mastitis prevention and udder hygiene practices
+                        </p>
                       </li>
                       <li class="wow fadeInUp" data-wow-delay=".5s">
                         <span class="about-feature-icon">
@@ -114,7 +124,12 @@ const BlogAndArticle1 = () => {
                             style={{ width: "26px", height: "22px" }}
                           />
                         </span>
-                        Calf and heifer management for future productivity
+                        <p
+                          className="sec-text mb-15 mt-20  wow fadeInUp"
+                          data-wow-delay=".4s"
+                        >
+                          Calf and heifer management for future productivity
+                        </p>
                       </li>
                       <li class="wow fadeInUp" data-wow-delay=".5s">
                         <span class="about-feature-icon">
@@ -124,8 +139,13 @@ const BlogAndArticle1 = () => {
                             style={{ width: "26px", height: "22px" }}
                           />
                         </span>
-                        Preventive healthcare including vaccination and
-                        deworming schedules 
+                        <p
+                          className="sec-text mb-15 mt-20  wow fadeInUp"
+                          data-wow-delay=".4s"
+                        >
+                          Preventive healthcare including vaccination and
+                          deworming schedules 
+                        </p>
                       </li>
                     </ul>
                   </div>

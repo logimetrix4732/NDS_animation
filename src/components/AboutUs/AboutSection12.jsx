@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AnimatedText from "../AnimatedText";
+import DSC_8407 from "../../Images/OurExpertiesImg/DSC_8407.jpg";
 import DSC_1967 from "../../Images/OurExpertiesImg/DSC_1967.jpg";
+import DSC_6949 from "../../Images/OurExpertiesImg/DSC_6949.jpg";
 const AboutSection12 = () => {
   return (
     <div className="choose-area space">
@@ -60,15 +62,27 @@ const AboutSection12 = () => {
                     <div className="img2 mb-25">
                       <img
                         className="th-radius"
-                        src="assets/img/normal/about_10_2.jpg"
+                        src={DSC_8407}
                         alt="About"
+                        style={{
+                          width: "245px",
+                          height: "245px",
+                          objectFit: "cover",
+                          borderRadius: "25px",
+                        }}
                       />
                     </div>
                     <div className="img3 wow fadeInRight" data-wow-delay=".3s">
                       <img
                         className="th-radius"
-                        src="assets/img/normal/about_10_3.jpg"
+                        src={DSC_6949}
                         alt="About"
+                        style={{
+                          width: "245px",
+                          height: "245px",
+                          objectFit: "cover",
+                          borderRadius: "25px",
+                        }}
                       />
                     </div>
                   </div>
