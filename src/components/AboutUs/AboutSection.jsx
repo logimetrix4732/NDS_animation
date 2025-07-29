@@ -45,7 +45,11 @@ const AboutSection = () => {
                   className="sec-title mb-10 heading text-anime-style-3"
                   width="100%"
                 />
-                <p className="sec-text mb-30 wow fadeInUp" data-wow-delay=".1s">
+                <p
+                  className="sec-text wow fadeInUp"
+                  data-wow-delay=".1s"
+                  style={{ marginBottom: "-14px" }}
+                >
                   NDDB Dairy Services (NDS), a Section 8 company registered
                   under the Companies Act, is a wholly owned subsidiary of the
                   National Dairy Development Board (NDDB). It functions as the
@@ -66,9 +70,14 @@ const AboutSection = () => {
                   Technologies such as Embryo Transfer and AI have improved the
                   birth rate of female calves, enhancing gene quality and milk
                   output.
+                  <br />
+                  Committed to inclusive growth, NDS empowers smallholder dairy
+                  farmers, especially women, and facilitates access to markets,
+                  technology, and capacity building contributing to a
+                  self-reliant and robust rural dairy sector.
                 </p>
               </div>
-              <div className="mt-20 wow fadeInUp">
+              <div className="mt-10 wow fadeInUp" style={{ marginTop: "0px" }}>
                 <Link to="/aboutUs" className="th-btn th-icon">
                   Learn more <i className="fa-light fa-arrow-right-long" />
                 </Link>

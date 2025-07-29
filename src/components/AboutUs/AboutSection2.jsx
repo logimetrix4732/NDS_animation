@@ -6,6 +6,7 @@ import empoweringWomen1 from "../../Images/empoweringWomen1.jpg";
 import DSC_4156 from "../../Images/HomeImgs/DSC_4156.jpg";
 import DSC_9821 from "../../Images/HomeImgs/DSC_9821.jpg";
 import checkMarkIcon from "../../Images/checkMarkIcon.jpg";
+import { Link } from "react-router-dom";
 const AboutSection2 = () => {
   return (
     <div
@@ -15,20 +16,14 @@ const AboutSection2 = () => {
       <div className="container">
         <div className="row">
           <div className="col-xl-6 col-lg-6">
-            <div className="title-area mb-20">
-              <span
-                className="sub-title style1 text-anime-style-2 wow fadeInUp"
-                data-wow-delay=".4s"
-              >
-                Who We Are
-              </span>
+            <div className="title-area mb-20 mt-35">
               <AnimatedText
                 text="Success Stories"
                 tag="h2"
                 className="sec-title mb-20 heading text-anime-style-3"
                 width="100%"
               />
-              <p className="sec-text  wow fadeInUp" data-wow-delay=".2s">
+              <p className="sec-text mb-40  wow fadeInUp" data-wow-delay=".2s">
                 Real-life success stories showcasing how our programs and
                 partnerships have empowered rural communities, enhanced milk
                 productivity, created sustainable income sources, and uplifted
@@ -112,7 +107,7 @@ const AboutSection2 = () => {
           </div>
           <div className="col-xl-6 col-lg-6 mb-4 mb-lg-0">
             <div className="img-box8 ms-xl-5 mt-40">
-              <div className="img3 reveal">
+              <div className="reveal">
                 <video
                   src={video}
                   autoPlay
@@ -126,30 +121,34 @@ const AboutSection2 = () => {
                   }}
                 ></video>
               </div>
-              <div className="about-item-wrap">
+              <div className="about-item-wrap mt-2">
                 <div className="about-item wow fadeInUp" data-wow-delay=".3s">
                   <div className="about-item_img">
                     <img src="assets/img/icon/shield.svg" alt="" />
                   </div>
                   <div className="about-item_centent">
-                    <h5 className="box-title">Empowering Women Farmers</h5>
+                    <h5 className="box-title mt-0">Empowering Women Farmers</h5>
                     <p className="about-item_text">
-                      Women-led dairy initiatives brought financial growth and
-                      social change in villages.
+                      Women-led dairy initiatives brought financial growth,
+                      confidence, leadership, and social change in villages
+                      through skill-building, training, self-reliance, and
+                      collective efforts.
                     </p>
                   </div>
                 </div>
-                <div className="about-item wow fadeInUp" data-wow-delay=".4s">
+                <div className="about-item wow fadeInUp " data-wow-delay=".4s">
                   <div className="about-item_img">
                     <img src="assets/img/icon/shield.svg" alt="" />
                   </div>
                   <div className="about-item_centent">
-                    <h5 className="box-title">
+                    <h5 className="box-title mt-1">
                       Transforming Rural Livelihoods
                     </h5>
                     <p className="about-item_text">
                       A small village in Gujarat boosted incomes by 300% through
-                      modern dairy practices.
+                      modern dairy practices, better animal healthcare, cold
+                      storage, training, digital payment systems, innovation,
+                      sustainability, efficiency, and empowerment.
                     </p>
                   </div>
                 </div>
