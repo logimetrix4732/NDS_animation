@@ -8,7 +8,7 @@ import aboutImg3 from "../../Images/AboutUsImg/aboutImg3.png";
 
 const AboutSection14 = () => {
   const [open, setOpen] = React.useState(false);
-
+  console.log("nds");
   const toggleDrawer = (state) => () => {
     setOpen(state);
   };
@@ -43,6 +43,7 @@ const AboutSection14 = () => {
         toggleDrawer={toggleDrawer}
         title={chairmanMessage.title}
         content={chairmanMessage.content}
+        width="37%"
       />
       <div
         className="about-area position-relative overflow-hidden space"
@@ -107,9 +108,8 @@ const AboutSection14 = () => {
                 </p>
                 <p className="sec-text  wow fadeInUp" data-wow-delay=".2s">
                   Looking back at the work done in the sector is comforting but
-                  it does not entitle us to rest. Increasingly there are newer
-                  themes emerging that compel us to play a bigger role in the
-                  global dairy landscape and set
+                  it does not entitle us to rest. Increasingly there are
+                  newer...
                 </p>
               </div>
               <div className="about-12-item-wrap">

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const AboutSection2 = () => {
   return (
     <div
-      className="about-area position-relative overflow-hidden space-top"
+      className="about-area position-relative overflow-hidden"
       id="about-sec"
     >
       <div className="container">
@@ -41,8 +41,7 @@ const AboutSection2 = () => {
                         style={{ width: "26px", height: "22px" }}
                       />
                     </span>
-                    Over 50,000 farmers impacted through sustainable dairy
-                    programs.
+                    50,000+ farmers empowered via dairy programs.
                   </li>
                   <li className="wow fadeInUp" data-wow-delay=".5s">
                     <span className="about-feature-icon">
@@ -62,8 +61,7 @@ const AboutSection2 = () => {
                         style={{ width: "26px", height: "22px" }}
                       />
                     </span>
-                    Women-led dairy cooperatives are driving socio-economic
-                    change.
+                    Women-led dairies driving change.
                   </li>
                 </ul>
               </div>
@@ -116,7 +114,7 @@ const AboutSection2 = () => {
                   playsInline
                   style={{
                     width: "100%",
-                    height: "auto",
+                    height: "100%",
                     borderRadius: "40px",
                   }}
                 ></video>
@@ -144,7 +142,7 @@ const AboutSection2 = () => {
                     <h5 className="box-title mt-1">
                       Transforming Rural Livelihoods
                     </h5>
-                    <p className="about-item_text">
+                    <p className="sec-text  wow fadeInUp" data-wow-delay=".2s">
                       A small village in Gujarat boosted incomes by 300% through
                       modern dairy practices, better animal healthcare, cold
                       storage, training, digital payment systems, innovation,

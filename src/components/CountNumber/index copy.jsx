@@ -6,30 +6,30 @@ import AnimatedText from "../AnimatedText";
 
 const countData = [
   {
-    number: 11,
-    suffix: "",
-    title: "States Covered",
+    number: 20,
+    suffix: "+",
+    title: "Producer Organization Development",
     description:
       "Established over 23 Milk Producer Organizations benefiting more than 800,000 dairy farmers across India.",
   },
   {
-    number: 162,
-    suffix: "",
-    title: "Districts Covered",
+    number: 60,
+    suffix: "Lac +",
+    title: "Quality Enhancement Programs",
     description:
       "Implemented quality testing and assurance systems that have improved milk quality by 40% in partner regions.",
   },
   {
-    number: 35822,
-    suffix: "+",
-    title: "Villages Covered",
+    number: 4900,
+    suffix: "Cr+",
+    title: "Transformative Economic Impact",
     description:
       "Helped increase farmer incomes by an average of 35% through improved productivity and market access.",
   },
   {
-    number: 12.5,
-    suffix: "Lac +",
-    title: "Associated Dairy Farmers (Lakh)",
+    number: 300,
+    suffix: "K +",
+    title: "Farmer Training Initiatives",
     description:
       "Conducted 5,000+ training programs reaching over 300,000 dairy farmers with modern practices and techniques.",
   },
@@ -78,7 +78,7 @@ const CountNumber = () => {
                   <div className="counter-shape">
                     <span />
                   </div>
-                  <div className="media-body mt-50">
+                  <div className="media-body">
                     <h3
                       className="box-number wow fadeInUp"
                       data-wow-delay=".4s"
@@ -96,6 +96,12 @@ const CountNumber = () => {
                     >
                       {item.title}
                     </h6>
+                    <span
+                      className="paraFontSize wow fadeInUp"
+                      data-wow-delay=".4s"
+                    >
+                      {item.description}
+                    </span>
                   </div>
                 </div>
               </div>
