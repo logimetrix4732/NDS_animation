@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import AnimatedText from "../AnimatedText";
 import DSC_8407 from "../../Images/OurExpertiesImg/DSC_8407.jpg";
 import DSC_1967 from "../../Images/OurExpertiesImg/DSC_1967.jpg";
-import DSC_6949 from "../../Images/OurExpertiesImg/DSC_6949.jpg";
+import DSC_6949 from "../../Images/OurExpertiesImg/DSC_6949.JPG";
 const AboutSection12 = () => {
   return (
     <div className="choose-area space">

@@ -200,7 +200,6 @@ const OurExperties7 = () => {
                         bottom: "2%",
                         left: 0,
                         right: 0,
-                        bottom: 1,
                         zIndex: 10,
                         animation: animateClose
                           ? "slideDown 0.5s ease forwards"
