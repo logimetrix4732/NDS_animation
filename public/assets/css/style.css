@@ -2514,7 +2514,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   border: none;
   font-size: 16px;
   font-weight: 400;
-  padding: 12px 22px;
+  padding: 14px 27px;
   border-radius: 10px;
   -webkit-transition: all 0.3s 0s ease-out;
   transition: all 0.3s 0s ease-out;
