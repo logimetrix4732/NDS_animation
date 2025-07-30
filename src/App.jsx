@@ -16,7 +16,6 @@ import SemenStations from "./Pages/SemenStations";
 import NewInitiative from "./Pages/NewInitiative";
 import ContactUs from "./Pages/ContactUs";
 
-// 👇 ScrollToTop logic inside App.js
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -28,9 +27,14 @@ const ScrollToTop = () => {
 };
 
 const App = () => {
+  const location = useLocation();
+
+  // agar home page par ho, toh Header render na ho
+  const isHomePage = location.pathname === "/";
+
   return (
     <>
-      <Header />
+      {!isHomePage && <Header />}
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />

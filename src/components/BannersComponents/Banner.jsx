@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
-import cta6shape from "../../assets/img/shape/cta6-shape.png";
+import cta6shape from "../../Images/MilkProducerImg/cta6shape.png";
 import ctaimg6 from "../../assets/img/normal/cta-img-6.jpg";
 import AnimatedText from "../AnimatedText";
 import DSC_1059 from "../../Images/MilkProducerImg/DSC_1059.jpg";
@@ -37,16 +37,12 @@ const Banner = () => {
                     tag="h3"
                     className="sec-title mb-10 heading text-anime-style-3"
                     width="100%"
-                    style={{ color: "white", marginBottom: "10px" }}
+                    style={{
+                      color: "white",
+                      marginBottom: "10px",
+                      fontSize: "4rem",
+                    }}
                   />
-                  <p
-                    className="text-white wow fadeInUp"
-                    data-wow-delay=".4s"
-                    style={{ marginTop: "0" }}
-                  >
-                    Vectors and number driven (also we can put the map of India)
-                  </p>
-
                   <Swiper
                     direction="vertical"
                     autoplay={{ delay: 2000, disableOnInteraction: false }}

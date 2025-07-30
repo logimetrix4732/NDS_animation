@@ -1,44 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footage from "../../Images/Videos/Footage.mp4";
-import { Menu, X, Play, Pause, Volume2, VolumeX, Maximize } from "lucide-react";
+import SideMenu from "../SideMenu";
+import nds_logo from "../../assets/img/nds_logo.png";
+import { Link, useLocation } from "react-router-dom";
 import "./dashboard.css";
 
 const Dashboard = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
+  const [openRight, setOpenRight] = useState(false);
+  const [openLeft, setOpenLeft] = useState(false);
+  const location = useLocation();
+  const [isSticky, setIsSticky] = useState(false);
 
-  const togglePlayPause = () => {
-    const video = document.getElementById("dashboard-video");
-    if (video) {
-      if (isPlaying) {
-        video.pause();
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsSticky(true);
       } else {
-        video.play();
+        setIsSticky(false);
       }
-      setIsPlaying(!isPlaying);
-    }
-  };
+    };
 
-  const toggleMute = () => {
-    const video = document.getElementById("dashboard-video");
-    if (video) {
-      video.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
-  };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const toggleFullscreen = () => {
-    const video = document.getElementById("dashboard-video");
-    if (video && video.requestFullscreen) {
-      video.requestFullscreen();
-    }
-  };
+  const currentPath = location.pathname;
   return (
     <div
       className="th-hero-wrapper hero-1"
       id="hero"
-      style={{ position: "relative", height: "92vh", overflow: "hidden" }}
+      style={{ position: "relative", height: "100vh", overflow: "hidden" }}
     >
       <video
         src={Footage}
@@ -56,7 +47,173 @@ const Dashboard = () => {
           zIndex: -1,
         }}
       />
-
+      <header
+        className="th-header header-layout1 header-layout2"
+        style={{
+          backgroundColor: "transparent",
+          position: "relative",
+          zIndex: 1,
+        }}
+      >
+        <SideMenu
+          openRight={openRight}
+          openLeft={openLeft}
+          setOpenLeft={setOpenLeft}
+          setOpenRight={setOpenRight}
+        />
+        <div className="sticky-wrapper">
+          <div
+            className="menu-area"
+            data-bg-src="assets/img/bg/line-pattern.png"
+          >
+            <div className="th-container">
+              <div className="row no-horizontal-gutter align-items-center justify-content-between small-screen-padding">
+                <div className="col-xl-2 col-xxl-2 col-auto text-center">
+                  <div className="header-logo">
+                    <a href="/">
+                      <img
+                        src={nds_logo}
+                        alt="NDDB"
+                        style={{ width: "148px", height: "65px" }}
+                      />
+                    </a>
+                  </div>
+                </div>
+                <div className="col-xl-8 col-xxl-7 col-auto text-center">
+                  <nav className="main-menu d-none d-xl-inline-block">
+                    <ul>
+                      <li>
+                        <Link
+                          className={`${currentPath === "/" ? "active" : ""} ${
+                            isSticky ? "" : "white-link"
+                          }`}
+                          to="/"
+                        >
+                          Home
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className={`${
+                            currentPath === "/aboutUs" ? "active" : ""
+                          } ${isSticky ? "" : "white-link"}`}
+                          to="/aboutUs"
+                        >
+                          About Us
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className={`${
+                            currentPath === "/ourExperties" ? "active" : ""
+                          } ${isSticky ? "" : "white-link"}`}
+                          to="/ourExperties"
+                        >
+                          Our Expertise
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className={`${
+                            currentPath === "/milkproducer" ? "active" : ""
+                          } ${isSticky ? "" : "white-link"}`}
+                          to="/milkproducer"
+                        >
+                          Milk Producer Org.
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className={`${
+                            currentPath === "/animalProductivity"
+                              ? "active"
+                              : ""
+                          } ${isSticky ? "" : "white-link"}`}
+                          to="/animalProductivity"
+                        >
+                          Animal Productivity
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className={`${
+                            currentPath === "/newInitiative" ? "active" : ""
+                          } ${isSticky ? "" : "white-link"}`}
+                          to="/newInitiative"
+                        >
+                          New Initiative
+                        </Link>
+                      </li>
+                      <li className="menu-item-has-children">
+                        <a
+                          className={`${isSticky ? "" : "white-link"}`}
+                          href="contact.html"
+                        >
+                          More
+                        </a>
+                        <ul className="sub-menu">
+                          <li>
+                            <a href="contact.html">Publications</a>
+                          </li>
+                          <li>
+                            <Link to="/carrer">Careers</Link>
+                          </li>
+                          <li>
+                            <a href="contact-2.html">Tenders</a>
+                          </li>
+                          <li>
+                            <Link to="/contactUs">Contact Us</Link>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </nav>
+                  <button
+                    type="button"
+                    className="th-menu-toggle d-block d-xl-none"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#mobileMenu"
+                    aria-controls="mobileMenu"
+                    onClick={() => setOpenLeft(true)}
+                  >
+                    <i className="fa-solid fa-bars"></i>
+                  </button>
+                </div>
+                <div className="col-xl-2 col-xxl-3 col-auto d-none d-xl-block text-center">
+                  <div
+                    className="header-button"
+                    style={{
+                      marginLeft: "65px",
+                    }}
+                  >
+                    <a
+                      href="/contactUs"
+                      className="th-btn th-icon d-none d-xxl-block"
+                    >
+                      Contact Us
+                      <i className="fa-light fa-arrow-right-long"></i>
+                    </a>
+                    <button
+                      type="button"
+                      className={`icon-btn ${isSticky ? "" : "white-link"}`}
+                      data-bs-toggle="offcanvas"
+                      data-bs-target="#desktopMenu"
+                      aria-controls="desktopMenu"
+                      style={{
+                        borderRadius: "8px",
+                        textDecoration: "none",
+                      }}
+                      onClick={() => setOpenRight(true)}
+                    >
+                      <i className="fa-solid fa-bars"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
       <div
         style={{
           position: "absolute",
@@ -64,11 +221,10 @@ const Dashboard = () => {
           left: "0",
         }}
       >
-        <h1
+        <h4
           style={{
             color: "#fff",
-            fontSize: "2.2rem",
-            fontWeight: "bold",
+            fontSize: "1.6rem",
             backgroundColor: "rgba(0, 0, 0, 0.5)",
             padding: "12px 20px",
             borderRadius: "0px 10px 10px 0px",
@@ -77,7 +233,7 @@ const Dashboard = () => {
           }}
         >
           Purposeful Growth, <br /> Meaningful Impact
-        </h1>
+        </h4>
       </div>
     </div>
   );

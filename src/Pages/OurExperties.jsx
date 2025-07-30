@@ -123,7 +123,6 @@ const OurExperties = () => {
         </div>
       </section>
       <AboutSection9 />
-      <AboutSection10 />
       <AboutSection11 />
       <AboutSection16 />
     </React.Fragment>

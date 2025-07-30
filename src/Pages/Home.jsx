@@ -22,7 +22,7 @@ const Home = () => {
       <Dashboard />
       <AboutSection />
       <div
-        className="about-area position-relative overflow-hidden space"
+        className="about-area position-relative overflow-hidden space-bottom"
         id="about-sec"
         style={{ backgroundColor: "white" }}
       >
@@ -30,19 +30,26 @@ const Home = () => {
           <div className="row justify-content-center">
             <div className="col-lg-8">
               <div className="title-area text-center">
-                <AnimatedText
-                  text="Why NDDB Dairy Services "
-                  tag="h2"
-                  className="sec-title mb-10 heading"
-                  width="100%"
-                  style={{ justifyContent: "center" }}
-                />
                 <span
                   className="sub-title text-anime-style-2 wow fadeInUp"
-                  style={{ color: "#bd8f59" }}
+                  style={{
+                    color: "#bd8f59",
+                    fontSize: "22px",
+                    display: "block",
+                  }}
                 >
-                  Aligned with the United Nations Sustainable Development Goals
-                  (SDGs)
+                  We align our strategies with
+                </span>
+                <span
+                  className="sub-title text-anime-style-2 wow fadeInUp mt-10"
+                  style={{
+                    color: "#bd8f59",
+                    fontSize: "30px",
+                    fontWeight: "600",
+                    display: "block",
+                  }}
+                >
+                  United Nations Sustainable Development Goals (SDGs)
                 </span>
               </div>
             </div>

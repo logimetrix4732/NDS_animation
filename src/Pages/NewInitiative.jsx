@@ -1,6 +1,7 @@
 import React from "react";
 import AboutSection13 from "../components/AboutUs/AboutSection13";
 import CommonBanner from "../components/BannersComponents/CommonBanner";
+import AboutSection10 from "../components/AboutUs/AboutSection10";
 
 const NewInitiative = () => {
   return (
@@ -12,7 +13,7 @@ const NewInitiative = () => {
           { label: "New Initiative" },
         ]}
       />
-      <AboutSection13 />
+      <AboutSection10 />
     </div>
   );
 };

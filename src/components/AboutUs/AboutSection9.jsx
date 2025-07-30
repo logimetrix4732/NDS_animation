@@ -4,8 +4,8 @@ import DrawerModal from "../DrawerModal";
 import { useMediaQuery, useTheme } from "@mui/material";
 import AnimatedText from "../AnimatedText";
 import ClimateSustainabilityImg from "../../Images/OurExpertiesImg/ClimateSustainabilityImg.JPG";
-import finalcover from "../../Images/OurExpertiesImg/finalcover.jpg";
-import DSC_2582 from "../../Images/OurExpertiesImg/DSC_2582.JPG";
+import finalcover from "../../Images/OurExpertiesImg/DSC_9992.JPG";
+import DSC_2582 from "../../Images/OurExpertiesImg/DSC_9845.JPG";
 const AboutSection9 = () => {
   const [open, setOpen] = React.useState(false);
 

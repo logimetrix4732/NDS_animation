@@ -17,33 +17,37 @@ const strategies = [
   {
     title: "Strategy to Success",
     title1: "Strategy to Success",
-    desc: "Strategic Planning for Sustainable Foundations We begin by assessing the existing dairy ecosystem- milk production potential, infrastructure and socio-economic context...",
+    subtitle: "Strategic Planning for Sustainable Foundations",
+    desc: "We begin by assessing the existing dairy ecosystem- milk production potential, infrastructure and socio-economic context...",
     mainDesc:
-      "Strategic Planning for Sustainable Foundations We begin by assessing the existing dairy ecosystem- milk production potential, infrastructure and socio-economic context of farmers. Based on this, a detailed project plan is developed covering financial modelling, infrastructure requirements, human resource needs, and institutional goals. Our planning approach ensures alignment with local aspirations and national economic goals while maintaining financial and operational sustainability. We ensure cohesive implementation by integrating the efforts of field teams, local institutions, partner organisations and producer members. Our monitoring framework uses digital tools and periodic field reviews to track progress, resolve bottlenecks and adapt strategies swiftly. ",
+      "We begin by assessing the existing dairy ecosystem- milk production potential, infrastructure and socio-economic context of farmers. Based on this, a detailed project plan is developed covering financial modelling, infrastructure requirements, human resource needs, and institutional goals. Our planning approach ensures alignment with local aspirations and national economic goals while maintaining financial and operational sustainability. We ensure cohesive implementation by integrating the efforts of field teams, local institutions, partner organisations and producer members. Our monitoring framework uses digital tools and periodic field reviews to track progress, resolve bottlenecks and adapt strategies swiftly. ",
     img: StrategySuccess,
   },
   {
     title: "Strong Roots, Shared Vision",
     title1: "Strong Roots, Shared Vision",
-    desc: "Institution Building with Member Centricity at its Core We support the formation and registration of MPOs as producer companies under the Companies Act ensuring legal...",
+    subtitle: "Institution Building with Member Centricity at its Core",
+    desc: "We support the formation and registration of MPOs as producer companies under the Companies Act ensuring legal...",
     mainDesc:
-      "Institution Building with Member Centricity at its Core We support the formation and registration of MPOs as producer companies under the Companies Act ensuring legal compliance and inclusivity. A key focus of our work is the active mobilisation of women milk producers and marginal farmers, fostering equitable participation across all segments of the community. NDS has developed a multi-modular intervention model to promote a shared vision of ownership, core values, participation and accountability. It engages all key stakeholders of the MPO ecosystem, including board members, professionals, field functionaries, members, Village Contact Groups (VCGs), and Member Relation Groups (MRGs), etc.",
+      "We support the formation and registration of MPOs as producer companies under the Companies Act ensuring legal compliance and inclusivity. A key focus of our work is the active mobilisation of women milk producers and marginal farmers, fostering equitable participation across all segments of the community. NDS has developed a multi-modular intervention model to promote a shared vision of ownership, core values, participation and accountability. It engages all key stakeholders of the MPO ecosystem, including board members, professionals, field functionaries, members, Village Contact Groups (VCGs), and Member Relation Groups (MRGs), etc.",
     img: StrongRoots,
   },
   {
     title: "Beyond Collection",
     title1: "Beyond Collection: Strengthening the Dairy Ecosystem",
-    desc: "Enabling End-to-End Dairy Value Chain integration Setting up of a robust value chain network from milk procurement (backward linkage) to market access (forward linkage)...",
+    subtitle: "Enabling End-to-End Dairy Value Chain integration",
+    desc: "Setting up of a robust value chain network from milk procurement (backward linkage) to market access (forward linkage)...",
     mainDesc:
-      "Enabling End-to-End Dairy Value Chain integration Setting up of a robust value chain network from milk procurement (backward linkage) to market access (forward linkage) is integral to the success of MPO. We support MPOs in establishing infrastructure for milk collection, chilling and quality testing while providing them with assured markets. Through fair and transparent procurement systems, quality incentives and assured timely payments, we help farmers to realise the full value of their produce. Robust Standard Operating Procedures (SOPs) are implemented across all critical functions of the MPO including milk collection, quality control, weighing, member enrollment, payment processing and record maintenance etc. These SOPs ensure consistency, reduce errors and build trust among producer members.",
+      "Setting up of a robust value chain network from milk procurement (backward linkage) to market access (forward linkage) is integral to the success of MPO. We support MPOs in establishing infrastructure for milk collection, chilling and quality testing while providing them with assured markets. Through fair and transparent procurement systems, quality incentives and assured timely payments, we help farmers to realise the full value of their produce. Robust Standard Operating Procedures (SOPs) are implemented across all critical functions of the MPO including milk collection, quality control, weighing, member enrollment, payment processing and record maintenance etc. These SOPs ensure consistency, reduce errors and build trust among producer members.",
     img: BeyondCollection,
   },
   {
     title: "Governance that fosters Trust",
     title1: "Governance that fosters Trust",
-    desc: "Transparent and Participative Decision-Making Governance defines how decisions are made and implemented—and ultimately, how trust is built within an organisation At NDS, we...",
+    subtitle: "Transparent and Participative Decision-Making ",
+    desc: "Governance defines how decisions are made and implemented—and ultimately, how trust is built within an organisation At NDS, we...",
     mainDesc:
-      "Transparent and Participative Decision-Making Governance defines how decisions are made and implemented—and ultimately, how trust is built within an organisation. At NDS, we support Producer Organisations in establishing strong and effective governance structures, such as well-functioning Boards that act in the best interests of their members.",
+      "Governance defines how decisions are made and implemented—and ultimately, how trust is built within an organisation. At NDS, we support Producer Organisations in establishing strong and effective governance structures, such as well-functioning Boards that act in the best interests of their members.",
     spacingDesc:
       "We promote good governance through participation, transparency, accountability, predictability and rule of law. Our approach helps Producer Organisations use resources efficiently, reduce conflicts and monitor their activities effectively. By encouraging practices like member representation, apolitical boards, expert directors and policy-based decision-making, NDS supports Producer Organisations in building credibility and long-term success.",
     img: Governancethat,
@@ -51,17 +55,19 @@ const strategies = [
   {
     title: "People First",
     title1: "People First: Training & Leadership Development",
-    desc: "Capacity Building across the Organisational Spectrum Customised training modules are provided to all stakeholders like milk producers, board members, extension officers, and milk...",
+    subtitle: "Capacity Building across the Organisational Spectrum",
+    desc: "Customised training modules are provided to all stakeholders like milk producers, board members, extension officers, and milk...",
     mainDesc:
-      "Capacity Building across the Organisational Spectrum Customised training modules are provided to all stakeholders like milk producers, board members, extension officers, and milk quality testing and administrative staff. These sessions cover a wide range of training modules aimed at enhancing knowledge, skills, and mindset across key areas such as cooperative principles, financial literacy, gender inclusion, leadership, and operational management. The training process ensures that the board of each MPO evolves a shared set of organisational values and clearly defines the Mission and Vision of the organisation.",
+      "Customised training modules are provided to all stakeholders like milk producers, board members, extension officers, and milk quality testing and administrative staff. These sessions cover a wide range of training modules aimed at enhancing knowledge, skills, and mindset across key areas such as cooperative principles, financial literacy, gender inclusion, leadership, and operational management. The training process ensures that the board of each MPO evolves a shared set of organisational values and clearly defines the Mission and Vision of the organisation.",
     img: PeopleFirst,
   },
   {
     title: "Digital Efficiency",
     title1: "Driving Efficiency through Automation and Digital Tools",
-    desc: "Automation and Digitalisation Information and Communication Technology ensures transparent, real-time milk data tracking, automated member payments and centralized...",
+    subtitle: "Automation and Digitalisation",
+    desc: "Information and Communication Technology ensures transparent, real-time milk data tracking, automated member payments and centralized...",
     mainDesc:
-      "Automation and Digitalisation Information and Communication Technology ensures transparent, real-time milk data tracking, automated member payments and centralized updates. MPOs use SAP-based ERP systems for efficient management of finance, HR, production and quality, enabling timely decisions, cost optimization and better returns for farmer members. We embed digital systems from the beginning of operations such as automated milk testing, cloud-based MIS, mobile application to facilitate VCG meetings and direct bank payment solutions. These tools bring efficiency, transparency and traceability, while also building data-driven decision-making capability within the MPO.",
+      "Information and Communication Technology ensures transparent, real-time milk data tracking, automated member payments and centralized updates. MPOs use SAP-based ERP systems for efficient management of finance, HR, production and quality, enabling timely decisions, cost optimization and better returns for farmer members. We embed digital systems from the beginning of operations such as automated milk testing, cloud-based MIS, mobile application to facilitate VCG meetings and direct bank payment solutions. These tools bring efficiency, transparency and traceability, while also building data-driven decision-making capability within the MPO.",
     img: DrivingEfficiency,
   },
 ];
@@ -189,6 +195,19 @@ const OurExperties7 = () => {
                       </div>
                       <div className="service-content">
                         <h3 class="box-title ellipsis-1">{item.title}</h3>
+                        <Typography
+                          variant="subtitle1"
+                          sx={{
+                            color: "grey", // a green tone that matches the theme
+                            fontWeight: 600,
+                            fontSize: "1rem",
+                            mb: 1,
+                            mt: 1,
+                          }}
+                        >
+                          {item.subtitle}
+                        </Typography>
+
                         <p className="service-box_text wow fadeInUp ellipsis-3">
                           {item.desc}
                         </p>
@@ -211,7 +230,7 @@ const OurExperties7 = () => {
                       onMouseLeave={handleClose}
                       sx={{
                         position: "absolute",
-                        bottom: "2%",
+                        bottom: "0.1%",
                         left: 0,
                         right: 0,
                         zIndex: 10,
@@ -296,16 +315,28 @@ const OurExperties7 = () => {
                               },
                               "&::-webkit-scrollbar-thumb": {
                                 background:
-                                  "linear-gradient(45deg, #404a3d, #5b8c51)",
+                                  "linear-gradient(45deg, #a46c35, #bd8f59)",
 
                                 borderRadius: "3px",
                               },
                               "&::-webkit-scrollbar-thumb:hover": {
                                 background:
-                                  "linear-gradient(45deg, #5b8c51, #404a3d)",
+                                  "linear-gradient(45deg, #bd8f59, #a46c35)",
                               },
                             }}
                           >
+                            <Typography
+                              variant="subtitle1"
+                              sx={{
+                                color: "grey", // a green tone that matches the theme
+                                fontWeight: 600,
+                                fontSize: "1rem",
+                                mb: 1,
+                                mt: 1,
+                              }}
+                            >
+                              {item.subtitle}
+                            </Typography>
                             <Typography
                               variant="body1"
                               color="text.secondary"
