@@ -1,7 +1,7 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
 import aboutImg3 from "../../Images/AboutUsImg/IMG_4071.JPG";
-import aboutImg4 from "../../Images/aboutImg4.jpg";
+import aboutImg4 from "../../Images/HomeImgs/DSC_3158.jpg";
 import DrawerModal from "../DrawerModal";
 import { useMediaQuery, useTheme } from "@mui/material";
 import "./AboutSection.css";

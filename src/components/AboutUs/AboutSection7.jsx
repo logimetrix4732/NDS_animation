@@ -2,10 +2,9 @@ import React from "react";
 import AnimatedText from "../AnimatedText";
 import { Link } from "react-router-dom";
 import ME7A8877 from "../../Images/AnimalProductivityImg/ME7A8877.JPG";
-import _SUN7366 from "../../Images/AnimalProductivityImg/_SUN7366.JPG";
-import DSC_0492 from "../../Images/AnimalProductivityImg/DSC_0492.JPG";
+import _SUN7366 from "../../Images/AnimalProductivityImg/sag.JPG";
+import DSC_0492 from "../../Images/AnimalProductivityImg/sag1.JPG";
 import checkMarkIcon from "../../Images/checkMarkIcon.jpg";
-
 const AboutSection7 = () => {
   return (
     <div

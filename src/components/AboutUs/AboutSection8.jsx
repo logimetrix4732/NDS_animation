@@ -1,7 +1,7 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
 import DSC_3464 from "../../Images/MilkProducerImg/DSC_2883.jpg";
-import DSC_3523 from "../../Images/MilkProducerImg/DSC_3523.jpg";
+import womanfarmer from "../../Images/MilkProducerImg/womanfarmer.jpg";
 
 const AboutSection8 = () => {
   return (
@@ -31,7 +31,7 @@ const AboutSection8 = () => {
               </div>
               <div className="img2 wow fadeInRight">
                 <img
-                  src={DSC_3523}
+                  src={womanfarmer}
                   alt="About"
                   style={{
                     width: "320px",

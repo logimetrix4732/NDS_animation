@@ -4,7 +4,7 @@ import icon1 from "../../Images/icon/2.png";
 import icon2 from "../../Images/icon/3.png";
 import DSC_9355 from "../../Images/HomeImgs/DSC_6873.jpg";
 import DSC_3158 from "../../Images/HomeImgs/DSC_3796.jpg";
-import DSC_1362 from "../../Images/HomeImgs/DSC_7813.jpg";
+import DSC_3464 from "../../Images/HomeImgs/DSC_3464.jpg";
 import "./OurFeatures.css";
 
 const featuresData = [
@@ -16,7 +16,7 @@ const featuresData = [
     link: "/",
   },
   {
-    image: DSC_1362,
+    image: DSC_3464,
     icon: icon1,
     title: "Strong women, stronger communities",
     subtitle: "",

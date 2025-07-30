@@ -1,17 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import AnimatedText from "../AnimatedText";
 import DSC_2883 from "../../Images/MilkProducerImg/DSC_2883.jpg";
+
 const AboutSection1 = () => {
-  const [showFullText, setShowFullText] = useState(false);
-
-  const handleMouseEnter = () => {
-    setShowFullText(true);
-  };
-
-  const handleMouseLeave = () => {
-    setShowFullText(false);
-  };
-
   const textContent = (
     <React.Fragment>
       The MPO model has had a profound and far-reaching impact on the rural
@@ -57,29 +48,10 @@ const AboutSection1 = () => {
       id="about-sec"
       data-bg-src="assets/img/bg/shape_bg_1.png"
     >
-      <style>{`
-        .ellipsis-container {
-          display: -webkit-box;
-          -webkit-line-clamp: 18;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          transition: all 0.4s ease;
-        }
-        .ellipsis-container.expanded {
-          -webkit-line-clamp: unset;
-          overflow: visible;
-          display: block;
-        }
-      `}</style>
-
       <div className="container">
         <div className="row gy-4 align-items-center no-gutter-x">
           <div className="col-xl-4 order-1 order-xl-0">
-            <div
-              className="about-area6 text-center text-md-start"
-              onMouseLeave={handleMouseLeave}
-            >
+            <div className="about-area6 text-center text-md-start">
               <div className="title-area mb-20">
                 <AnimatedText
                   text="Impact of MPOs"
@@ -90,25 +62,8 @@ const AboutSection1 = () => {
               </div>
 
               <div className="sec-text mb-30 wow fadeInUp" data-wow-delay=".2s">
-                <div
-                  className={`ellipsis-container ${
-                    showFullText ? "expanded" : ""
-                  }`}
-                >
-                  {textContent}
-                </div>
+                <div>{textContent}</div>
               </div>
-
-              {!showFullText && (
-                <div className="wow fadeInUp" data-wow-delay=".5s">
-                  <button
-                    className="th-btn th-icon"
-                    onClick={() => setShowFullText(true)}
-                  >
-                    Learn More <i className="fa-light fa-arrow-right-long"></i>
-                  </button>
-                </div>
-              )}
             </div>
           </div>
 

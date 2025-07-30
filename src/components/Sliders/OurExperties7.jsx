@@ -4,6 +4,12 @@ import { Autoplay, Navigation } from "swiper/modules";
 import { Close as CloseIcon } from "@mui/icons-material";
 import service_bg_1 from "../../assets/img/bg/service_bg_1.jpg";
 import { Typography, Box, IconButton, Paper } from "@mui/material";
+import StrategySuccess from "../../Images/MilkProducerImg/StrategySuccess.jpg";
+import BeyondCollection from "../../Images/MilkProducerImg/BeyondCollection.jpg";
+import Governancethat from "../../Images/MilkProducerImg/Governancethat.jpg";
+import PeopleFirst from "../../Images/MilkProducerImg/PeopleFirst.jpg";
+import StrongRoots from "../../Images/MilkProducerImg/StrongRoots.JPG";
+import DrivingEfficiency from "../../Images/MilkProducerImg/DrivingEfficiency.JPG";
 import "swiper/css";
 import "swiper/css/navigation";
 import AnimatedText from "../AnimatedText";
@@ -14,7 +20,7 @@ const strategies = [
     desc: "Strategic Planning for Sustainable Foundations We begin by assessing the existing dairy ecosystem- milk production potential, infrastructure and socio-economic context...",
     mainDesc:
       "Strategic Planning for Sustainable Foundations We begin by assessing the existing dairy ecosystem- milk production potential, infrastructure and socio-economic context of farmers. Based on this, a detailed project plan is developed covering financial modelling, infrastructure requirements, human resource needs, and institutional goals. Our planning approach ensures alignment with local aspirations and national economic goals while maintaining financial and operational sustainability. We ensure cohesive implementation by integrating the efforts of field teams, local institutions, partner organisations and producer members. Our monitoring framework uses digital tools and periodic field reviews to track progress, resolve bottlenecks and adapt strategies swiftly. ",
-    img: "assets/img/service/service_img_1.jpg",
+    img: StrategySuccess,
   },
   {
     title: "Strong Roots, Shared Vision",
@@ -22,7 +28,7 @@ const strategies = [
     desc: "Institution Building with Member Centricity at its Core We support the formation and registration of MPOs as producer companies under the Companies Act ensuring legal...",
     mainDesc:
       "Institution Building with Member Centricity at its Core We support the formation and registration of MPOs as producer companies under the Companies Act ensuring legal compliance and inclusivity. A key focus of our work is the active mobilisation of women milk producers and marginal farmers, fostering equitable participation across all segments of the community. NDS has developed a multi-modular intervention model to promote a shared vision of ownership, core values, participation and accountability. It engages all key stakeholders of the MPO ecosystem, including board members, professionals, field functionaries, members, Village Contact Groups (VCGs), and Member Relation Groups (MRGs), etc.",
-    img: "assets/img/service/service_img_2.jpg",
+    img: StrongRoots,
   },
   {
     title: "Beyond Collection",
@@ -30,7 +36,7 @@ const strategies = [
     desc: "Enabling End-to-End Dairy Value Chain integration Setting up of a robust value chain network from milk procurement (backward linkage) to market access (forward linkage)...",
     mainDesc:
       "Enabling End-to-End Dairy Value Chain integration Setting up of a robust value chain network from milk procurement (backward linkage) to market access (forward linkage) is integral to the success of MPO. We support MPOs in establishing infrastructure for milk collection, chilling and quality testing while providing them with assured markets. Through fair and transparent procurement systems, quality incentives and assured timely payments, we help farmers to realise the full value of their produce. Robust Standard Operating Procedures (SOPs) are implemented across all critical functions of the MPO including milk collection, quality control, weighing, member enrollment, payment processing and record maintenance etc. These SOPs ensure consistency, reduce errors and build trust among producer members.",
-    img: "assets/img/service/service_img_3.jpg",
+    img: BeyondCollection,
   },
   {
     title: "Governance that fosters Trust",
@@ -40,7 +46,7 @@ const strategies = [
       "Transparent and Participative Decision-Making Governance defines how decisions are made and implemented—and ultimately, how trust is built within an organisation. At NDS, we support Producer Organisations in establishing strong and effective governance structures, such as well-functioning Boards that act in the best interests of their members.",
     spacingDesc:
       "We promote good governance through participation, transparency, accountability, predictability and rule of law. Our approach helps Producer Organisations use resources efficiently, reduce conflicts and monitor their activities effectively. By encouraging practices like member representation, apolitical boards, expert directors and policy-based decision-making, NDS supports Producer Organisations in building credibility and long-term success.",
-    img: "assets/img/service/service_img_4.jpg",
+    img: Governancethat,
   },
   {
     title: "People First",
@@ -48,7 +54,7 @@ const strategies = [
     desc: "Capacity Building across the Organisational Spectrum Customised training modules are provided to all stakeholders like milk producers, board members, extension officers, and milk...",
     mainDesc:
       "Capacity Building across the Organisational Spectrum Customised training modules are provided to all stakeholders like milk producers, board members, extension officers, and milk quality testing and administrative staff. These sessions cover a wide range of training modules aimed at enhancing knowledge, skills, and mindset across key areas such as cooperative principles, financial literacy, gender inclusion, leadership, and operational management. The training process ensures that the board of each MPO evolves a shared set of organisational values and clearly defines the Mission and Vision of the organisation.",
-    img: "assets/img/service/service_img_2.jpg",
+    img: PeopleFirst,
   },
   {
     title: "Digital Efficiency",
@@ -56,7 +62,7 @@ const strategies = [
     desc: "Automation and Digitalisation Information and Communication Technology ensures transparent, real-time milk data tracking, automated member payments and centralized...",
     mainDesc:
       "Automation and Digitalisation Information and Communication Technology ensures transparent, real-time milk data tracking, automated member payments and centralized updates. MPOs use SAP-based ERP systems for efficient management of finance, HR, production and quality, enabling timely decisions, cost optimization and better returns for farmer members. We embed digital systems from the beginning of operations such as automated milk testing, cloud-based MIS, mobile application to facilitate VCG meetings and direct bank payment solutions. These tools bring efficiency, transparency and traceability, while also building data-driven decision-making capability within the MPO.",
-    img: "assets/img/service/service_img_1.jpg",
+    img: DrivingEfficiency,
   },
 ];
 
@@ -170,7 +176,15 @@ const OurExperties7 = () => {
                     <div className="service-box service-style-1 gsap-cursor">
                       <div className="service-img">
                         <a href="#">
-                          <img src={item.img} alt={item.title} />
+                          <img
+                            src={item.img}
+                            alt={item.title}
+                            style={{
+                              width: "400px",
+                              height: "307.69px",
+                              objectFit: "cover",
+                            }}
+                          />
                         </a>
                       </div>
                       <div className="service-content">

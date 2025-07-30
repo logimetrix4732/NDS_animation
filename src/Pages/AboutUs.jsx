@@ -4,7 +4,6 @@ import AboutSection4 from "../components/AboutUs/AboutSection4";
 import AboutSection14 from "../components/AboutUs/AboutSection14";
 import CommonBanner from "../components/BannersComponents/CommonBanner";
 import OurFeatures5 from "../components/Sliders/OurFeatures5";
-import AboutSection15 from "../components/AboutUs/AboutSection15";
 
 const AboutUs = () => {
   return (
