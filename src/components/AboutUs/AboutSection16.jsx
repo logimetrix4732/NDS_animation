@@ -6,8 +6,12 @@ import AnimatedText from "../AnimatedText";
 const AboutSection16 = () => {
   const [open, setOpen] = React.useState(false);
 
-  const toggleDrawer = (state) => () => {
-    setOpen(state);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -24,10 +28,10 @@ const AboutSection16 = () => {
       <DrawerModal
         isMobile={isMobile}
         open={open}
-        anchor="left"
-        toggleDrawer={toggleDrawer}
+        handleClose={handleClose}
         title={ClimateSustainability.title}
         content={ClimateSustainability.content}
+        width="60%"
       />
       <div className="container">
         <div className="row gy-30 mb-60 align-items-center">
@@ -61,10 +65,7 @@ const AboutSection16 = () => {
                   reducing input.
                 </p>
                 <div className=" wow fadeInUp" data-wow-delay=".4s">
-                  <button
-                    onClick={toggleDrawer(true)}
-                    className="th-btn th-icon"
-                  >
+                  <button onClick={handleClickOpen} className="th-btn th-icon">
                     Learn more <i className="fa-light fa-arrow-right-long" />
                   </button>
                 </div>

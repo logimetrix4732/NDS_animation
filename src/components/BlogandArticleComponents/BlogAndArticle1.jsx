@@ -9,8 +9,12 @@ import checkMarkIcon from "../../Images/HomeImgs/checkMarkIcon.png";
 const BlogAndArticle1 = () => {
   const [open, setOpen] = React.useState(false);
 
-  const toggleDrawer = (state) => () => {
-    setOpen(state);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -34,9 +38,10 @@ const BlogAndArticle1 = () => {
       <DrawerModal
         isMobile={isMobile}
         open={open}
-        toggleDrawer={toggleDrawer}
+        handleClose={handleClose}
         title={AboutUsContent.title}
         content={AboutUsContent.content}
+        width="60%"
       />
       <div className="container">
         <div className="row">
@@ -151,10 +156,7 @@ const BlogAndArticle1 = () => {
                   </div>
                 </div>
                 <div className="wow fadeInUp" data-wow-delay=".4s">
-                  <button
-                    onClick={toggleDrawer(true)}
-                    className="th-btn th-icon"
-                  >
+                  <button onClick={handleClickOpen} className="th-btn th-icon">
                     Learn more <i className="fa-light fa-arrow-right-long" />
                   </button>
                 </div>

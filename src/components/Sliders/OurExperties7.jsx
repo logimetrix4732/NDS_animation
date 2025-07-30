@@ -99,7 +99,7 @@ const OurExperties7 = () => {
       <div className="container">
         <div className="row justify-content-between">
           <div className="col-xl-6">
-            <div className="title-area service-3-titlebox text-center text-md-start">
+            <div className="title-area service-3-titlebox text-center text-md-start mt-40">
               <AnimatedText
                 text="Setting Up MPOs"
                 tag="h2"

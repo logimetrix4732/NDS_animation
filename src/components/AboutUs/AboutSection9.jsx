@@ -9,8 +9,12 @@ import DSC_2582 from "../../Images/OurExpertiesImg/DSC_2582.JPG";
 const AboutSection9 = () => {
   const [open, setOpen] = React.useState(false);
 
-  const toggleDrawer = (state) => () => {
-    setOpen(state);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -31,9 +35,10 @@ const AboutSection9 = () => {
       <DrawerModal
         isMobile={isMobile}
         open={open}
-        toggleDrawer={toggleDrawer}
+        handleClose={handleClose}
         title={ClimateSustainability.title}
         content={ClimateSustainability.content}
+        width="60%"
       />
       <div className="container">
         <div className="row">
@@ -106,10 +111,7 @@ const AboutSection9 = () => {
                   milk collection and logistics.
                 </p>
                 <div className=" wow fadeInUp" data-wow-delay=".4s">
-                  <button
-                    onClick={toggleDrawer(true)}
-                    className="th-btn th-icon"
-                  >
+                  <button onClick={handleClickOpen} className="th-btn th-icon">
                     Learn more <i className="fa-light fa-arrow-right-long" />
                   </button>
                 </div>

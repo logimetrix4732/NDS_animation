@@ -1,6 +1,6 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
-import aboutImg3 from "../../Images/aboutImg3.jpg";
+import aboutImg3 from "../../Images/AboutUsImg/IMG_4071.JPG";
 import aboutImg4 from "../../Images/aboutImg4.jpg";
 import DrawerModal from "../DrawerModal";
 import { useMediaQuery, useTheme } from "@mui/material";
@@ -58,7 +58,7 @@ const AboutSection4 = () => {
                   style={{ width: "393px", height: "352px" }}
                 />
                 <a
-                  href="https://youtu.be/KvoAbuVT7SE?si=ZJWHA8cbOcAQqzcj"
+                  href="https://www.youtube.com/watch?v=JguJ1DYD1G8&t=13s"
                   className="play-btn popup-video"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -96,9 +96,6 @@ const AboutSection4 = () => {
                 By facilitating the establishment of Milk Producer Organisations
                 (MPOs) and thereafter providing them technical support and an
                 assured market for their surplus produce in the form of strong
-                forward institutional linkages, dairy farmers benefit with
-                improved livelihoods through fair and transparent pricing and
-                direct payments into their bank accounts.
               </p>
               <div className="mt-20 wow fadeInUp">
                 <button onClick={handleClickOpen} className="th-btn th-icon">

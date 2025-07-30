@@ -1,6 +1,6 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
-import DSC_3464 from "../../Images/MilkProducerImg/DSC_3464.jpg";
+import DSC_3464 from "../../Images/MilkProducerImg/DSC_2883.jpg";
 import DSC_3523 from "../../Images/MilkProducerImg/DSC_3523.jpg";
 
 const AboutSection8 = () => {
@@ -39,12 +39,6 @@ const AboutSection8 = () => {
                     objectFit: "cover",
                   }}
                 />
-                <a
-                  href="https://www.youtube.com/watch?v=pQpFebyALV0"
-                  className="play-btn popup-video"
-                >
-                  <i className="fa-sharp fa-solid fa-play" />
-                </a>
               </div>
             </div>
           </div>

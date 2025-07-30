@@ -17,8 +17,12 @@ import ProjectImplementation from "../Images/OurExpertiesImg/ProjectImplementati
 const OurExperties = () => {
   const [open, setOpen] = React.useState(false);
 
-  const toggleDrawer = (state) => () => {
-    setOpen(state);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -38,10 +42,10 @@ const OurExperties = () => {
       <DrawerModal
         isMobile={isMobile}
         open={open}
-        anchor="left"
-        toggleDrawer={toggleDrawer}
+        handleClose={handleClose}
         title={ProjectImplementationCon.title}
         content={ProjectImplementationCon.content}
+        width="60%"
       />
       <CommonBanner
         title="Our Areas of Expertise"
@@ -77,7 +81,7 @@ const OurExperties = () => {
                 Vidarbha–Marathwada belt.
               </p>
               <div className="mt-35 wow fadeInUp" data-wow-delay=".4s">
-                <button onClick={toggleDrawer(true)} className="th-btn th-icon">
+                <button onClick={handleClickOpen} className="th-btn th-icon">
                   Learn more <i className="fa-light fa-arrow-right-long" />
                 </button>
               </div>

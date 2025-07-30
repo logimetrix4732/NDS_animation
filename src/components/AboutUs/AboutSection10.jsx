@@ -5,8 +5,12 @@ import { useMediaQuery, useTheme } from "@mui/material";
 const AboutSection10 = () => {
   const [open, setOpen] = React.useState(false);
 
-  const toggleDrawer = (state) => () => {
-    setOpen(state);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -23,10 +27,10 @@ const AboutSection10 = () => {
       <DrawerModal
         isMobile={isMobile}
         open={open}
-        anchor="left"
-        toggleDrawer={toggleDrawer}
+        handleClose={handleClose}
         title={ClimateSustainability.title}
         content={ClimateSustainability.content}
+        width="60%"
       />
       <div className="container">
         <div className="row gy-4 align-items-center">
@@ -64,7 +68,7 @@ const AboutSection10 = () => {
                 birth of superior calves right at the doorstep.
               </p>
               <div className="mt-0 wow fadeInUp" data-wow-delay=".4s">
-                <button onClick={toggleDrawer(true)} className="th-btn th-icon">
+                <button onClick={handleClickOpen} className="th-btn th-icon">
                   Learn more <i className="fa-light fa-arrow-right-long" />
                 </button>
               </div>

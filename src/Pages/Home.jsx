@@ -22,7 +22,7 @@ const Home = () => {
       <Dashboard />
       <AboutSection />
       <div
-        className="about-area position-relative overflow-hidden"
+        className="about-area position-relative overflow-hidden space"
         id="about-sec"
         style={{ backgroundColor: "white" }}
       >
