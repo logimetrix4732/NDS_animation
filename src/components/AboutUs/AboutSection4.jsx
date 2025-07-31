@@ -48,14 +48,14 @@ const AboutSection4 = () => {
                 <img
                   src={aboutImg3}
                   alt="About"
-                  style={{ width: "585px", height: "600px" }}
+                  style={{ width: "650px", height: "600px" }}
                 />
               </div>
               <div className="img2 wow fadeInUp" data-wow-delay=".4s">
                 <img
                   src={aboutImg4}
                   alt="About"
-                  style={{ width: "393px", height: "352px" }}
+                  style={{ width: "393px", height: "302px" }}
                 />
                 <a
                   href="https://www.youtube.com/watch?v=JguJ1DYD1G8&t=13s"

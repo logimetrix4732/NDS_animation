@@ -1,23 +1,58 @@
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import AnimatedText from "../AnimatedText";
+import { Swiper, SwiperSlide } from "swiper/react";
+import cta6shape from "../../Images/MilkProducerImg/cta6shape.png";
+import DSC_1059 from "../../Images/MilkProducerImg/DSC_1059.jpg";
 import "swiper/css";
 import "swiper/css/autoplay";
-import cta6shape from "../../Images/MilkProducerImg/cta6shape.png";
-import ctaimg6 from "../../assets/img/normal/cta-img-6.jpg";
-import AnimatedText from "../AnimatedText";
-import DSC_1059 from "../../Images/MilkProducerImg/DSC_1059.jpg";
+import mapIcon from "../../Images/MilkProducerImg/mapIcon.png";
+import milkIcon from "../../Images/MilkProducerImg/milkIcon.png";
+import downturn from "../../Images/MilkProducerImg/downturn.png";
+import biogasplant from "../../Images/MilkProducerImg/biogasplant.png";
+import teamIcon from "../../Images/MilkProducerImg/teamIcon.png";
+import farmerIcon from "../../Images/MilkProducerImg/farmerIcon.png";
+import indianwoman from "../../Images/MilkProducerImg/indianwoman.png";
+import investorIcon from "../../Images/MilkProducerImg/investorIcon.png";
+import violenceagainst from "../../Images/MilkProducerImg/violenceagainst.png";
 
 const highlights = [
-  "37,000+ Villages across 206 Districts",
-  "Combined turnover of MPOs ₹9,637 crore",
-  "60 lakh kg Milk Collected Daily",
-  "₹50,773 crore distributed to farmers since inception",
-  "12 lakh+ farmers linked to markets, lifted by cooperatives",
-  "Empowering 9 lakh+ women to lead India’s dairy revolution",
-  "18 out of 23 MPOs led by women",
-  "1 lakh+ Lakhpati Didis transforming rural economies",
-  "5,000 flexi biogas plants installed in farmers’ backyard",
+  {
+    text: "37,000+ Villages across 206 Districts",
+    icon: mapIcon,
+  },
+  {
+    text: "Combined turnover of MPOs ₹9,637 crore",
+    icon: downturn,
+  },
+  {
+    text: "60 lakh kg Milk Collected Daily",
+    icon: milkIcon,
+  },
+  {
+    text: "₹50,773 crore distributed to farmers since inception",
+    icon: farmerIcon,
+  },
+  {
+    text: "12 lakh+ farmers linked to markets, lifted by cooperatives",
+    icon: teamIcon,
+  },
+  {
+    text: "Empowering 9 lakh+ women to lead India's dairy revolution",
+    icon: indianwoman,
+  },
+  {
+    text: "18 out of 23 MPOs led by women",
+    icon: violenceagainst,
+  },
+  {
+    text: "1 lakh+ Lakhpati Didis transforming rural economies",
+    icon: investorIcon,
+  },
+  {
+    text: "5,000 flexi biogas plants installed in farmers' backyard",
+    icon: biogasplant,
+  },
 ];
 
 const Banner = () => {
@@ -33,7 +68,7 @@ const Banner = () => {
               >
                 <div className="title-area mb-0">
                   <AnimatedText
-                    text="Highlights of MPOs"
+                    text="Our Footprint"
                     tag="h3"
                     className="sec-title mb-10 heading text-anime-style-3"
                     width="100%"
@@ -55,10 +90,23 @@ const Banner = () => {
                     {highlights.map((item, index) => (
                       <SwiperSlide key={index}>
                         <h2
-                          className="sec-title text-white pe-xl-5 me-xl-4 text-anime-style-2 d-flex align-items-start gap-2"
+                          className="sec-title text-white pe-xl-5 me-xl-4 text-anime-style-2 d-flex align-items-center gap-3"
                           style={{ marginTop: "10px" }}
                         >
-                          <span>{item}</span>
+                          <img
+                            src={item.icon}
+                            alt="icon"
+                            style={{
+                              width: "80px",
+                              height: "80px",
+                              flexShrink: 0,
+                            }}
+                          />
+                          <span
+                            style={{ fontSize: "2.5rem", lineHeight: "1.3" }}
+                          >
+                            {item.text}
+                          </span>
                         </h2>
                       </SwiperSlide>
                     ))}

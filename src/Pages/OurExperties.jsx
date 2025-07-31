@@ -9,8 +9,6 @@ import AboutSection9 from "../components/AboutUs/AboutSection9";
 import { useMediaQuery, useTheme } from "@mui/material";
 import DrawerModal from "../components/DrawerModal";
 import AnimatedText from "../components/AnimatedText";
-import video from "../Images/Videos/video1.mp4";
-import OurEx from "../Images/OurExpertiesImg/OurEx1.jpg";
 import BlogAndArticle1 from "../components/BlogandArticleComponents/BlogAndArticle1";
 import finalcover from "../Images/OurExpertiesImg/finalcover.jpg";
 import ProjectImplementation from "../Images/OurExpertiesImg/ProjectImplementation.JPG";

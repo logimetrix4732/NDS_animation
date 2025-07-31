@@ -1,6 +1,5 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
-import video07 from "../../Images/Videos/video07.mp4";
 import { useMediaQuery, useTheme } from "@mui/material";
 import DrawerModal from "../DrawerModal";
 import AnimalNutrition from "../../Images/OurExpertiesImg/AnimalNutrition.JPG";

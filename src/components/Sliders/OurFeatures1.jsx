@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import icon from "../../Images/icon/1.png";
-import icon1 from "../../Images/icon/2.png";
-import icon2 from "../../Images/icon/3.png";
 import DSC_9355 from "../../Images/HomeImgs/DSC_6873.jpg";
 import DSC_3158 from "../../Images/HomeImgs/DSC_3796.jpg";
 import DSC_3464 from "../../Images/HomeImgs/DSC_3464.jpg";
+import icon from "../../Images/HomeImgs/deal.png";
+import icon1 from "../../Images/HomeImgs/group.png";
+import icon2 from "../../Images/HomeImgs/hands.png";
+
 import "./OurFeatures.css";
 
 const featuresData = [
@@ -69,7 +70,15 @@ const OurFeatures1 = () => {
                   }}
                 >
                   <span className="service-icon">
-                    <img src={item.icon} alt="" />
+                    <img
+                      src={item.icon}
+                      alt=""
+                      style={{
+                        width: "55px",
+                        height: "55px",
+                        objectFit: "cover", // or "contain"
+                      }}
+                    />
                   </span>
                   <div className="service-content service-content-main">
                     <h4 className="box-title">{item.title}</h4>

@@ -24,7 +24,7 @@ const Home = () => {
       <div
         className="about-area position-relative overflow-hidden space-bottom"
         id="about-sec"
-        style={{ backgroundColor: "white" }}
+        style={{ backgroundColor: "white", zIndex: 1 }}
       >
         <div className="container">
           <div className="row justify-content-center">

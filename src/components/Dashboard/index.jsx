@@ -13,7 +13,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 200) {
         setIsSticky(true);
       } else {
         setIsSticky(false);
@@ -145,12 +145,12 @@ const Dashboard = () => {
                         </Link>
                       </li>
                       <li className="menu-item-has-children">
-                        <a
+                        <Link
                           className={`${isSticky ? "" : "white-link"}`}
-                          href="contact.html"
+                          to="/contactUs"
                         >
                           More
-                        </a>
+                        </Link>
                         <ul className="sub-menu">
                           <li>
                             <a href="contact.html">Publications</a>

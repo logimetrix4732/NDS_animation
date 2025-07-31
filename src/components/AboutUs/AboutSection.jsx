@@ -48,11 +48,7 @@ const AboutSection = () => {
                   className="sec-title heading text-anime-style-3"
                   width="100%"
                 />
-                <p
-                  className="sec-text wow fadeInUp"
-                  data-wow-delay=".1s"
-                  style={{ marginBottom: "-14px" }}
-                >
+                <p className="sec-text wow fadeInUp" data-wow-delay=".1s">
                   NDDB Dairy Services (NDS), a Section 8 company registered
                   under the Companies Act, is a wholly owned subsidiary of the
                   National Dairy Development Board (NDDB). It functions as the
@@ -80,7 +76,7 @@ const AboutSection = () => {
                   self-reliant and robust rural dairy sector.
                 </p>
               </div>
-              <div className="mt-10 wow fadeInUp" style={{ marginTop: "0px" }}>
+              <div className="mt-20 wow fadeInUp">
                 <Link to="/aboutUs" className="th-btn th-icon">
                   Learn more <i className="fa-light fa-arrow-right-long" />
                 </Link>

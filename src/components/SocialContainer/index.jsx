@@ -82,6 +82,7 @@ const SocialContainer = () => {
         flexWrap: "wrap",
         alignItems: "flex-end",
         justifyContent: "flex-end",
+        zIndex: 1,
       }}
     >
       {/* Left Side Content */}

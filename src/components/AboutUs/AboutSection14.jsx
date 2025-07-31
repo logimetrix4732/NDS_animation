@@ -73,7 +73,7 @@ const ChairmanSection = () => {
             building and digitisation.
           </p>
           <button className="chairman-button" onClick={handleClickOpen}>
-            Full Profile
+            Read More
           </button>
         </div>
       </div>

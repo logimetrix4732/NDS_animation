@@ -135,7 +135,7 @@ const serviceItems = [
       "An alumnus of IIT Kanpur in Electrical Engineering, he also holds an MBA from the University of Western Sydney and a diploma in Public Policy from The Hague. He has widely published, hand has represented India at numerous global platforms. A strong advocate of good governance, he is also passionate about trekking, tourism, and teaching, he has also served as visiting faculty at the University of Guelph, Canada. ",
   },
   {
-    img: TrivediSir,
+    img: dummyImg,
     icon: service_4_2Icon,
     title: "Shri Kamlesh Trivedi",
     author: "",

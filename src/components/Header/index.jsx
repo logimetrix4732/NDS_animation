@@ -47,36 +47,67 @@ const Header = () => {
                           Home
                         </Link>
                       </li>
-                      <li
-                        className={currentPath === "/aboutUs" ? "active" : ""}
-                      >
-                        <Link to="/aboutUs">About Us</Link>
+                      <li className="">
+                        <Link
+                          className={currentPath === "/aboutUs" ? "active" : ""}
+                          to="/aboutUs"
+                        >
+                          About Us
+                        </Link>
                       </li>
                       <li className="">
-                        <Link to="/ourExperties">Our Expertise</Link>
+                        <Link
+                          className={
+                            currentPath === "/ourExperties" ? "active" : ""
+                          }
+                          to="/ourExperties"
+                        >
+                          Our Expertise
+                        </Link>
                       </li>
                       <li className="">
-                        <Link to="/milkproducer">Milk Producer Org.</Link>
+                        <Link
+                          className={
+                            currentPath === "/milkproducer" ? "active" : ""
+                          }
+                          to="/milkproducer"
+                        >
+                          Milk Producer Org.
+                        </Link>
                       </li>
                       <li className="">
-                        <Link to="/animalProductivity">
+                        <Link
+                          className={
+                            currentPath === "/animalProductivity"
+                              ? "active"
+                              : ""
+                          }
+                          to="/animalProductivity"
+                        >
                           Animal Productivity
                         </Link>
                       </li>
                       <li className="">
-                        <Link to="/newInitiative">New Initiative</Link>
+                        <Link
+                          className={
+                            currentPath === "/newInitiative" ? "active" : ""
+                          }
+                          to="/newInitiative"
+                        >
+                          New Initiatives
+                        </Link>
                       </li>
                       <li className="menu-item-has-children">
-                        <a href="contact.html">More</a>
+                        <Link to="/contactUs">More</Link>
                         <ul className="sub-menu">
                           <li>
-                            <a href="contact.html">Publications</a>
+                            <a href="/contactUs">Publications</a>
                           </li>
                           <li>
                             <Link to="/carrer">Careers</Link>
                           </li>
                           <li>
-                            <a href="contact-2.html">Tenders</a>
+                            <a href="/contactUs">Tenders</a>
                           </li>
                           <li>
                             <Link to="/contactUs">Contact Us</Link>

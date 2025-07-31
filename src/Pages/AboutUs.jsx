@@ -4,6 +4,7 @@ import AboutSection4 from "../components/AboutUs/AboutSection4";
 import AboutSection14 from "../components/AboutUs/AboutSection14";
 import CommonBanner from "../components/BannersComponents/CommonBanner";
 import OurFeatures5 from "../components/Sliders/OurFeatures5";
+import BoardOfDirectors from "../components/BoardofDirectors";
 
 const AboutUs = () => {
   return (
@@ -15,7 +16,7 @@ const AboutUs = () => {
       <AboutSection4 />
       <AboutSection14 />
       <OurFeatures5 />
-      <OurFeatures2 />
+      <BoardOfDirectors />
     </React.Fragment>
   );
 };

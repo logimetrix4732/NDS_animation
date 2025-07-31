@@ -10,6 +10,7 @@ const AboutSection2 = () => {
     <div
       className="about-area position-relative overflow-hidden"
       id="about-sec"
+      style={{ zIndex: 1 }}
     >
       <div className="container">
         <div className="row">
@@ -94,7 +95,7 @@ const AboutSection2 = () => {
                       <img
                         src={checkMarkIcon}
                         alt=""
-                        style={{ width: "26px", height: "22px" }}
+                        style={{ width: "28px", height: "24px" }}
                       />
                     </span>
                     <p className="sec-text wow fadeInUp" data-wow-delay=".2s">
@@ -107,7 +108,7 @@ const AboutSection2 = () => {
                       <img
                         src={checkMarkIcon}
                         alt=""
-                        style={{ width: "26px", height: "22px" }}
+                        style={{ width: "28px", height: "24px" }}
                       />
                     </span>
                     <p className="sec-text wow fadeInUp" data-wow-delay=".2s">
@@ -120,7 +121,7 @@ const AboutSection2 = () => {
                       <img
                         src={checkMarkIcon}
                         alt=""
-                        style={{ width: "26px", height: "22px" }}
+                        style={{ width: "28px", height: "24px" }}
                       />
                     </span>
                     <p className="sec-text wow fadeInUp" data-wow-delay=".2s">
@@ -133,7 +134,7 @@ const AboutSection2 = () => {
                       <img
                         src={checkMarkIcon}
                         alt=""
-                        style={{ width: "26px", height: "22px" }}
+                        style={{ width: "28px", height: "24px" }}
                       />
                     </span>
                     <p className="sec-text wow fadeInUp" data-wow-delay=".2s">
@@ -146,7 +147,7 @@ const AboutSection2 = () => {
                       <img
                         src={checkMarkIcon}
                         alt=""
-                        style={{ width: "26px", height: "22px" }}
+                        style={{ width: "28px", height: "24px" }}
                       />
                     </span>
                     <p className="sec-text wow fadeInUp" data-wow-delay=".2s">

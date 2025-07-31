@@ -2,7 +2,6 @@ import React from "react";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import "./CountNumber.css";
-import AnimatedText from "../AnimatedText";
 
 const countData = [
   {
@@ -45,6 +44,7 @@ const CountNumber = () => {
     <div
       className="counter-area space space-extra3-bottom overflow-hidden background-wrapper"
       ref={ref}
+      style={{ zIndex: 1 }}
     >
       <div className="container">
         <div className="counter-wrap1">

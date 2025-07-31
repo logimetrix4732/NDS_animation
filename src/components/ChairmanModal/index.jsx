@@ -151,7 +151,7 @@ const ChairmanModal = ({
           <Box
             sx={{
               flexShrink: 0,
-              width: fullScreen ? "100%" : 250,
+              width: fullScreen ? "100%" : 350,
             }}
           >
             <img

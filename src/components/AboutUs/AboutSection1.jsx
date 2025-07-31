@@ -74,7 +74,7 @@ const AboutSection1 = () => {
                   src={DSC_2883}
                   alt="About"
                   style={{
-                    width: "802px",
+                    width: "620px",
                     height: "860px",
                     objectFit: "cover",
                   }}
