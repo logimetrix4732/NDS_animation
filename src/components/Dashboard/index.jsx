@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Footage from "../../Images/Videos/Footage.mp4";
+import Footage from "../../Images/Videos/dashboardFootage.mp4";
 import SideMenu from "../SideMenu";
 import nds_logo from "../../assets/img/nds_logo.png";
 import { Link, useLocation } from "react-router-dom";
