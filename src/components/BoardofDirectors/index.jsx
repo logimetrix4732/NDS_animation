@@ -234,7 +234,6 @@ const directors = [
     joinedYear: "2016",
   },
 ];
-
 const StyledCard = styled(Card)(({ backgroundImage }) => ({
   backgroundColor: "#1e1e1e",
   border: "1px solid #333333",
@@ -266,6 +265,13 @@ const StyledCard = styled(Card)(({ backgroundImage }) => ({
     "&:before": {
       opacity: 0.2,
     },
+    "& img": {
+      filter: "grayscale(0%)", // show color on card hover
+    },
+  },
+  "& img": {
+    filter: "grayscale(100%)", // default black and white
+    transition: "all 0.4s ease",
   },
   "& .MuiCardContent-root": {
     position: "relative",
@@ -279,8 +285,11 @@ const DirectorImage = styled("img")({
   objectFit: "cover",
   borderRadius: "8px",
   marginBottom: "20px",
-  filter: "grayscale(10%)",
-  transition: "all 0.3s ease",
+  filter: "grayscale(100%)", // black & white by default
+  transition: "all 0.4s ease",
+  "&:hover": {
+    filter: "grayscale(0%)", // full color on hover
+  },
 });
 
 const ArrowButton = styled(IconButton)({

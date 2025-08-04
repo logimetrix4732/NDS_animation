@@ -141,7 +141,7 @@ const Dashboard = () => {
                           } ${isSticky ? "" : "white-link"}`}
                           to="/newInitiative"
                         >
-                          New Initiative
+                          New Initiatives
                         </Link>
                       </li>
                       <li className="menu-item-has-children">
