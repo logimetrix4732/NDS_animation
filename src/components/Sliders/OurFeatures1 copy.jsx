@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import icon from "../../Images/icon/1.png";
-import icon1 from "../../Images/icon/2.png";
-import icon2 from "../../Images/icon/3.png";
-import DSC_9355 from "../../Images/HomeImgs/DSC_9355.png";
+import DSC_9355 from "../../Images/HomeImgs/DSC_6873.jpg";
 import DSC_3158 from "../../Images/HomeImgs/DSC_3796.jpg";
-import DSC_1362 from "../../Images/HomeImgs/DSC_7813.jpg";
+import DSC_3464 from "../../Images/HomeImgs/DSC_3464.jpg";
+import icon from "../../Images/HomeImgs/deal.png";
+import icon1 from "../../Images/HomeImgs/group.png";
+import icon2 from "../../Images/HomeImgs/hands.png";
+
 import "./OurFeatures.css";
 
 const featuresData = [
@@ -12,18 +13,21 @@ const featuresData = [
     image: DSC_9355,
     icon: icon,
     title: "A bond beyond words, built on trust",
+    subtitle: "",
     link: "/",
   },
   {
-    image: DSC_1362,
+    image: DSC_3464,
     icon: icon1,
     title: "Strong women, stronger communities",
+    subtitle: "",
     link: "/",
   },
   {
     image: DSC_3158,
     icon: icon2,
     title: "United in purpose, unstoppable in spirit",
+    subtitle: "",
     link: "/",
   },
 ];
@@ -39,6 +43,7 @@ const OurFeatures1 = () => {
         setActiveIndex((prevIndex) => (prevIndex + 1) % featuresData.length);
       }, 2000);
     }
+
     return () => {
       if (interval) clearInterval(interval);
     };
@@ -63,14 +68,27 @@ const OurFeatures1 = () => {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
-                  onMouseEnter={() => setIsHovered(true)}
-                  onMouseLeave={() => setIsHovered(false)}
                 >
                   <span className="service-icon">
-                    <img src={item.icon} alt="icon" />
+                    <img
+                      src={item.icon}
+                      alt=""
+                      style={{
+                        width: "55px",
+                        height: "55px",
+                        objectFit: "cover", // or "contain"
+                      }}
+                    />
                   </span>
                   <div className="service-content service-content-main">
                     <h4 className="box-title">{item.title}</h4>
+
+                    <span
+                      className="service-subtitle wow fadeInUp"
+                      data-wow-delay=".4s"
+                    >
+                      {item.subtitle}
+                    </span>
                   </div>
                 </div>
               </div>
