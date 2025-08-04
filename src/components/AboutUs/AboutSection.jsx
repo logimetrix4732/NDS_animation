@@ -38,7 +38,7 @@ const AboutSection = () => {
               className="ps-xl-4 ms-xxl-4 position-relative"
               style={{ zIndex: 1 }}
             >
-              <div className="title-area about1-title-box mb-20 pe-xxl-5 me-xxl-5">
+              <div className="title-area about1-title-box mb-10 pe-xxl-5 me-xxl-5">
                 <AnimatedText
                   text="NDDB Dairy Services"
                   tag="h2"
@@ -89,7 +89,7 @@ const AboutSection = () => {
                   alt="About"
                   style={{
                     width: "325px",
-                    height: "630px",
+                    height: "650px",
                     objectFit: "cover",
                   }}
                 />
@@ -100,7 +100,7 @@ const AboutSection = () => {
                   alt="About"
                   style={{
                     width: "312px",
-                    height: "315px",
+                    height: "325px",
                     objectFit: "cover",
                   }}
                 />
@@ -111,7 +111,7 @@ const AboutSection = () => {
                   alt="About"
                   style={{
                     width: "312px",
-                    height: "315px",
+                    height: "325px",
                     objectFit: "cover",
                   }}
                 />

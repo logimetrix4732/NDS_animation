@@ -47,7 +47,7 @@ const AboutSection2 = () => {
                       alt="About"
                       style={{
                         width: "312px",
-                        height: "331.05px",
+                        height: "280px",
                         objectFit: "cover",
                       }}
                     />
@@ -63,7 +63,7 @@ const AboutSection2 = () => {
                       alt="About"
                       style={{
                         width: "312px",
-                        height: "331.05px",
+                        height: "280px",
                         objectFit: "cover",
                       }}
                     />

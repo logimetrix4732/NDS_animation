@@ -3,6 +3,7 @@ import nds_logo from "../../assets/img/nds_logo.png";
 import CallIcon from "@mui/icons-material/Call";
 import MailIcon from "@mui/icons-material/Mail";
 import LocationPinIcon from "@mui/icons-material/LocationPin";
+import footerIcon from "../../Images/footerIcon1.svg";
 import "./Footer.css";
 const Footer = () => {
   return (
@@ -54,7 +55,6 @@ const Footer = () => {
               </div>
             </div>
           </div>
-
           <div className="col-md-3 col-xl-auto">
             <div className="widget footer-widget">
               <h3 className="widget_title">Get In Touch</h3>
@@ -127,17 +127,16 @@ const Footer = () => {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        background: "#a46c35ff",
                       }}
                     >
-                      <img src="assets/img/icon/plane.svg" alt="" />
+                      <img src={footerIcon} alt="" />
                     </button>
                   </form>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-md-3 col-xl-auto"></div>
-          <div className="col-md-3 col-xl-auto"></div>
         </div>
       </div>
       <div className="copyright-wrap">
