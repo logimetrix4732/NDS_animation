@@ -17,6 +17,9 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import CallIcon from "@mui/icons-material/Call";
+import MailIcon from "@mui/icons-material/Mail";
+import LocationPinIcon from "@mui/icons-material/LocationPin";
 import { Link } from "react-router-dom";
 
 const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
@@ -29,7 +32,7 @@ const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
     { text: "New Initiative", to: "/newInitiative" },
     { text: "Publications", to: "/publications" },
     { text: "Careers", to: "/carrer" },
-    { text: "Tenders", to: "/tenders" },
+    { text: "Tenders", to: "/tender" },
     { text: "Contact Us", to: "/contactUs" },
   ];
 
@@ -84,12 +87,12 @@ const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
                 justifyContent: "center",
                 transition: "0.3s",
                 "&:hover": {
-                  bgcolor: "#5b8c51",
+                  bgcolor: "#bd8f59",
                   color: "#fff",
-                  borderColor: "#5b8c51",
+                  borderColor: "#bd8f59",
                 },
                 cursor: "pointer",
-                color: "#0b1422",
+                color: "#7a7d7d",
               }}
               className="th-social"
             >
@@ -98,52 +101,13 @@ const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
           )
         )}
       </Box>
-
-      <Box mb={3}>
-        <Typography variant="h6" fontWeight={600} mb={2}>
-          Recent Posts
-        </Typography>
-        {[1, 2].map((item) => (
-          <Box key={item} display="flex" mb={2}>
-            <Box
-              component="img"
-              src={`/assets/img/blog/recent-post-1-${item}.jpg`}
-              alt={`Post ${item}`}
-              sx={{
-                width: 85,
-                borderRadius: 2,
-                objectFit: "cover",
-                mr: 2,
-              }}
-            />
-            <Box>
-              <Typography
-                variant="caption"
-                color="text.secondary"
-                display="flex"
-                alignItems="center"
-                mb={0.5}
-              >
-                <i className="far fa-calendar" style={{ marginRight: 5 }}></i>
-                {item === 1 ? "24 Jun , 2025" : "22 Jun , 2025"}
-              </Typography>
-              <h6>
-                {item === 1
-                  ? "Where Vision Meets Concrete Reality"
-                  : "Raising The Bar In Construction."}
-              </h6>
-            </Box>
-          </Box>
-        ))}
-      </Box>
-
       <Box>
         <Typography variant="h6" fontWeight={600} mb={2}>
           Get In Touch
         </Typography>
 
         <Box display="flex" alignItems="flex-start" mb={2}>
-          <PhoneIcon sx={{ color: "#5b8c51", mr: 1 }} />
+          <PhoneIcon sx={{ color: "#bd8f59", mr: 1 }} />
           <Box>
             <Typography className="about-text">+01 234 567 890</Typography>
             <Typography variant="body2">+09 876 543 210</Typography>
@@ -151,7 +115,7 @@ const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
         </Box>
 
         <Box display="flex" alignItems="flex-start" mb={2}>
-          <EmailIcon sx={{ color: "#5b8c51", mr: 1 }} />
+          <EmailIcon sx={{ color: "#bd8f59", mr: 1 }} />
           <Box>
             <Typography variant="body2">mailinfo00@atek.com</Typography>
             <Typography variant="body2">support24@atek.com</Typography>
@@ -159,7 +123,7 @@ const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
         </Box>
 
         <Box display="flex" alignItems="flex-start">
-          <LocationOnIcon sx={{ color: "#5b8c51", mr: 1 }} />
+          <LocationOnIcon sx={{ color: "#bd8f59", mr: 1 }} />
           <Typography variant="body2">
             789 Inner Lane, Holy park, <br />
             California, USA

@@ -15,6 +15,9 @@ import Errors from "./Errors";
 import SemenStations from "./Pages/SemenStations";
 import NewInitiative from "./Pages/NewInitiative";
 import ContactUs from "./Pages/ContactUs";
+import GalleryPage from "./Pages/GalleryPage";
+import MilkIndiaMap from "./components/MapComponent/MilkIndiaMap";
+import TenderPage from "./Pages/TenderPage";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -47,6 +50,9 @@ const App = () => {
         <Route path="/animalProductivity" element={<SemenStations />} />
         <Route path="/newInitiative" element={<NewInitiative />} />
         <Route path="/contactUs" element={<ContactUs />} />
+        <Route path="/gallery" element={<GalleryPage />} />
+        <Route path="/MilkIndiaMap" element={<MilkIndiaMap />} />
+        <Route path="/tender" element={<TenderPage />} />
         <Route path="*" element={<Errors />} />
       </Routes>
       <Footer />

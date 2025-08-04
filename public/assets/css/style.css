@@ -3119,10 +3119,9 @@ hr.title-line {
 }
 
 @media (min-width: 1199px) and (max-width: 1300px) {
-    .header-layout1 .main-menu > ul > li
- {
+  .header-layout1 .main-menu > ul > li {
     margin: 0px 8px !important;
-}
+  }
 }
 
 @media (max-width: 1700px) {
@@ -3529,7 +3528,7 @@ hr.title-line {
   );
 }
 .black-bg {
-  background-color: var(--title-color) !important;
+  background-color: var(--primary-color) !important;
 }
 .light-bg {
   background-color: var(--light-bg-color) !important;
@@ -7507,8 +7506,7 @@ ol.wp-block-rss {
 @media (max-width: 1199px) {
   .header-layout1 .th-container {
     max-width: 100%;
-        margin: 0 5px 0px 0px !important; 
-
+    margin: 0 5px 0px 0px !important;
   }
 }
 .header-layout1 .header-top {
@@ -8551,7 +8549,7 @@ ol.wp-block-rss {
 }
 .copyright-wrap {
   padding: 12px 0;
-  background-color: #bd8f59;
+  background-color: #a46c35ff;
 }
 .copyright-wrap .copyright-text {
   color: var(--white-color);
@@ -19054,7 +19052,7 @@ span.select2-selection.select2-selection--single:focus {
 }
 @media (max-width: 1199px) {
   .counter-card_wrapp .counter-card .counter-shape::before {
-    background: var(--theme-color);
+    background: var(--primary-color);
   }
 }
 .contact-4-titlebox .th-btn {
@@ -25200,7 +25198,7 @@ span.select2-selection.select2-selection--single:focus {
   height: 24px;
   display: block;
   border-radius: 50%;
-  background-color: rgba(28, 168, 203, 0.2);
+  background-color: rgba(189, 143, 89, 0.2);
   z-index: 2;
 }
 @media (max-width: 767px) {
@@ -25219,10 +25217,10 @@ span.select2-selection.select2-selection--single:focus {
   height: 10px;
   border-radius: 50%;
   box-sizing: content-box;
-  background-color: var(--theme-color);
+  background-color: var(--primary-color);
 }
 .counter-card .counter-shape:after {
-  background-color: var(--theme-color);
+  background-color: var(--primary-color);
 }
 .counter-card-wrap {
   margin: 50px 0 25px 0;
@@ -30500,7 +30498,7 @@ span.select2-selection.select2-selection--single:focus {
   position: relative;
   font-size: 14px;
   display: flex;
-  align-items: flex-start; 
+  align-items: flex-start;
   gap: 6px;
 }
 
@@ -30525,7 +30523,7 @@ span.select2-selection.select2-selection--single:focus {
   position: relative;
   font-size: 14px;
   display: flex;
-  align-items: flex-start; 
+  align-items: flex-start;
   gap: 6px;
 }
 

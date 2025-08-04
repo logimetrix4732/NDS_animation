@@ -152,14 +152,28 @@ const Dashboard = () => {
                           More
                         </Link>
                         <ul className="sub-menu">
-                          <li>
-                            <a href="contact.html">Publications</a>
+                          <li class="menu-item-has-children">
+                            <a href="#">Publications</a>
+                            <ul class="sub-menu">
+                              <li>
+                                <a href="checkout.html">HR Compliances</a>
+                              </li>
+                              <li>
+                                <a href="shop-details.html">Annual Reports</a>
+                              </li>
+                              <li>
+                                <a href="cart.html">Policies</a>
+                              </li>
+                              <li>
+                                <a href="checkout.html">Others</a>
+                              </li>
+                            </ul>
                           </li>
                           <li>
                             <Link to="/carrer">Careers</Link>
                           </li>
                           <li>
-                            <a href="contact-2.html">Tenders</a>
+                            <Link to="/tender">Tenders</Link>
                           </li>
                           <li>
                             <Link to="/contactUs">Contact Us</Link>

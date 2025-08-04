@@ -38,10 +38,7 @@ const AboutSection = () => {
               className="ps-xl-4 ms-xxl-4 position-relative"
               style={{ zIndex: 1 }}
             >
-              <div
-                className="title-area about1-title-box mb-20 pe-xxl-5 me-xxl-5"
-                style={{ marginTop: "-20px" }}
-              >
+              <div className="title-area about1-title-box mb-20 pe-xxl-5 me-xxl-5">
                 <AnimatedText
                   text="NDDB Dairy Services"
                   tag="h2"

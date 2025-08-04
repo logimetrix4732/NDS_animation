@@ -1,5 +1,4 @@
 import React from "react";
-import DrawerModal from "../DrawerModal";
 import chairmanImg from "../../Images/AboutUsImg/DSC_1321_1_new.jpg";
 import chairmanImg1 from "../../Images/AboutUsImg/DSC_1329_1.jpg";
 import "./AboutSection.css";
@@ -21,9 +20,9 @@ const ChairmanSection = () => {
   const chairmanMessage = {
     title: "Chairman’s Message",
     subtext:
-      "As the largest producer and consumer of dairy in the world, India’s pole position is well established. The efforts of last five - six decades, centered around making India successful and self-reliant focused on innovation, operational excellence, scale, capacity building and digitisation. ",
+      "As the largest producer and consumer of dairy in the world, India’s pole position is well established. The efforts of last five - six decades, centered around making India successful and self-reliant focused on innovation, operational excellence, scale, capacity building and digitisation. Looking back at the work done in the sector is comforting but it does not entitle us to rest. Increasingly there are newer themes emerging that compel us to play a bigger role in the global dairy landscape and set benchmarks for the industry, whether it is productivity enhancement through genetic improvement or converting the challenge of greenhouse gas emissions into the next big opportunity. As we rally these ideas, I believe that NDDB Dairy Services (NDS) is well placed to play a decisive role in how the industry shapes over the next 25 years.",
     content: [
-      "Looking back at the work done in the sector is comforting but it does not entitle us to rest. Increasingly there are newer themes emerging that compel us to play a bigger role in the global dairy landscape and set benchmarks for the industry, whether it is productivity enhancement through genetic improvement or converting the challenge of greenhouse gas emissions into the next big opportunity. As we rally these ideas, I believe that NDDB Dairy Services (NDS) is well placed to play a decisive role in how the industry shapes over the next 25 years. From its humble beginnings in 2009, in just fourteen years NDS has managed to transform itself to the changing needs. Starting with just two verticals of facilitating Producer Organizations and Productivity Enhancement Services, today the mandate of NDS has expanded to supply of Animal Nutrition products, implementation of Artificial Insemination (AI)/ Embryo Transfer (ET) projects and initiatives around sustainability.",
+      "From its humble beginnings in 2009, in just fourteen years NDS has managed to transform itself to the changing needs. Starting with just two verticals of facilitating Producer Organizations and Productivity Enhancement Services, today the mandate of NDS has expanded to supply of Animal Nutrition products, implementation of Artificial Insemination (AI)/ Embryo Transfer (ET) projects and initiatives around sustainability.",
       "As on 31st March 2024, the 21 MPOs facilitated by NDS were covering over 24000 villages in 155 districts spread across ten States, having a membership base of 10.05 lakh and procuring an average volume of around 47 lakh kg per day of milk during the year. With a firm commitment to inclusion and women led development, 15 out of the 21 MPOs have an all-women membership and all the producer–Directors on their respective Boards are women. The chairperson of 17 of the 21 MPOs are women and women members constitute 74% of the total membership base of all the MPOs put together. Plans are also in place to cover an additional 7000 villages next year increasing the milk procurement by 8 lakh litres per day from an additional 2 lakh members, 1.56 lakh of whom will be women.",
       "NDS also played a pivotal role in facilitating 12 of these MPOs to promote Fodder Plus (FPOs). These FPOs collectively enrolled over 2,000 members across 430 villages, with women comprising 34% of the total membership with over 1,100 acres dedicated to fodder production.",
       "The Member-owned and member-controlled organizations facilitated by NDS are offering farmers the best path to a better life. It is worth highlighting that the work of these Organizations are now garnering attention on the world stage. At the International Dairy Federation World Dairy Summit, USA 2023 Maahi MPO's work was shortlisted in the category Innovation in Sustainable Farming Practices. Asha and Shreeja MPOs were shortlisted in the Innovation in Women Empowerment in the Dairy Sector with Shreeja, the world’s largest women organization, winning the award.",
@@ -60,7 +59,7 @@ const ChairmanSection = () => {
           style={{
             width: "100%",
             height: "90vh",
-            objectFit: "cover", // or "contain"
+            objectFit: "cover",
           }}
         />
         <div className="chairman-overlay">

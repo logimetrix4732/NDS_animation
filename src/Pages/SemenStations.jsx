@@ -15,6 +15,7 @@ const SemenStations = () => {
       />
       <AboutSection17 />
       <AboutSection7 />
+      <MapComponent />
     </div>
   );
 };

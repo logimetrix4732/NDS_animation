@@ -48,6 +48,8 @@ const ChairmanModal = ({
       to: { opacity: 1, transform: "translateY(0)" },
     },
     animation: "fadeIn 450ms ease forwards",
+    fontSize: "1rem",
+    lineHeight: 1.5,
   };
 
   return (
@@ -129,8 +131,7 @@ const ChairmanModal = ({
           sx={{
             display: "flex",
             flexDirection: fullScreen ? "column" : "row",
-            gap: 3,
-            mb: 3,
+            gap: 2,
           }}
         >
           <Box
@@ -140,13 +141,7 @@ const ChairmanModal = ({
               alignItems: "center",
             }}
           >
-            <p
-              style={{
-                fontSize: "18px",
-              }}
-            >
-              {subtext}
-            </p>
+            <p style={fadeStyles}>{subtext}</p>
           </Box>
           <Box
             sx={{
@@ -170,7 +165,7 @@ const ChairmanModal = ({
         {content.map((para, idx) => (
           <Typography
             key={idx}
-            variant="body2"
+            variant="body1"
             gutterBottom
             sx={fadeStyles}
             style={{ animationDelay: `${idx * 80}ms` }} // stagger effect

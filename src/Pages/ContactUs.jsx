@@ -1,9 +1,44 @@
 import React from "react";
 import CommonBanner from "../components/BannersComponents/CommonBanner";
-
+import ContactGif from "../Images/ContactUs.gif";
+import EmailGif from "../Images/Email.gif";
 const ContactUs = () => {
   return (
     <React.Fragment>
+      <style>
+        {`
+          .contact-infobox-bottom {
+            display: flex !important;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0;
+          }
+          .contact-infobox-bottom .about-contact-grid {
+            flex: 1;
+            text-align: center;
+            padding: 40px 20px;
+          }
+          .contact-infobox-bottom .about-contact-grid:not(:last-child) {
+            border-right: 3px solid var(--white-color);
+            padding-right: 40px;
+          }
+          .contact-infobox-bottom .about-contact-grid:last-child {
+            padding-left: 40px;
+          }
+          @media (max-width: 1199px) {
+            .contact-infobox-bottom .about-contact-grid:not(:last-child) {
+              border-right: 0;
+              border-bottom: 3px solid var(--white-color);
+              padding-right: 0;
+              padding-bottom: 20px;
+            }
+            .contact-infobox-bottom .about-contact-grid:last-child {
+              padding-left: 0;
+              padding-top: 20px;
+            }
+          }
+        `}
+      </style>
       <CommonBanner
         title="Contact Us"
         breadcrumbs={[{ label: "Home", path: "/" }, { label: "Contact Us" }]}
@@ -15,22 +50,33 @@ const ContactUs = () => {
               <div className="row align-items-center justify-content-between text-center">
                 <div className="col-xl-3 col-lg-3">
                   <div className="contact-shape-left text-sm-start">
-                    <img src="assets/img/shape/contact-shape_2_1.png" alt="" />
+                    <img
+                      src={ContactGif}
+                      alt=""
+                      style={{
+                        width: "157px",
+                        height: "143px",
+                        objectFit: "cover",
+                      }}
+                    />
                   </div>
                 </div>
                 <div className="col-xl-6 col-lg-6">
                   <div className="title-area contact-titlebox2 text-center">
-                    <span className="sub-title">Work With Us</span>
                     <h3 className="sec-title">Contact Information</h3>
-                    <p className="sec-text">
-                      Thank you for your interest in Attach Web Agency. We're
-                      excited to hear from you and discuss...
-                    </p>
                   </div>
                 </div>
                 <div className="col-xl-3 col-lg-3">
                   <div className="contact-shape-right text-sm-end">
-                    <img src="assets/img/shape/contact-shape_2_2.png" alt="" />
+                    <img
+                      src={EmailGif}
+                      alt=""
+                      style={{
+                        width: "157px",
+                        height: "143px",
+                        objectFit: "cover",
+                      }}
+                    />
                   </div>
                 </div>
               </div>
@@ -55,19 +101,8 @@ const ContactUs = () => {
                   <span className="sec-text">Email Us Anytime</span>
                   <p className="about-contact-details-text">
                     <a href="mailto:enquiry@nddbdairyservices.com">
-                      enquiry@nddbdairy..
+                      enquiry@nddbdairyservices.com
                     </a>
-                  </p>
-                </div>
-              </div>
-              <div className="about-contact-grid inner-style">
-                <span className="about-contact-icon">
-                  <i className="fa-thin fa-map-location-dot" />
-                </span>
-                <div className="about-contact-details">
-                  <span className="sec-text">Visit Our Office</span>
-                  <p className="about-contact-details-text">
-                    <a href="#">NDDB House, New Delhi</a>
                   </p>
                 </div>
               </div>
@@ -77,11 +112,7 @@ const ContactUs = () => {
             <div className="row">
               <div className="col-xl-7 order-1 order-xl-0">
                 <div className="contact-formbox">
-                  <form
-                    action="https://html.themeholy.com/atek/demo/mail.php"
-                    method="POST"
-                    className="contact-form ajax-contact"
-                  >
+                  <form className="contact-form ajax-contact">
                     <div className="row">
                       <div className="col-sm-6 form-group">
                         <input
@@ -90,6 +121,16 @@ const ContactUs = () => {
                           name="name"
                           id="name3"
                           placeholder="Your Name"
+                        />
+                        <img src="assets/img/icon/user.svg" alt="" />
+                      </div>
+                      <div className="col-sm-6 form-group">
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="lastName"
+                          id="name3"
+                          placeholder="Last Name"
                         />
                         <img src="assets/img/icon/user.svg" alt="" />
                       </div>
@@ -113,34 +154,6 @@ const ContactUs = () => {
                         />
                         <img src="assets/img/icon/call.svg" alt="" />
                       </div>
-                      <div className="col-sm-6 form-group">
-                        <select
-                          name="subject"
-                          id="subject"
-                          className="form-select nice-select"
-                        >
-                          <option
-                            value="Select Subject"
-                            selected="selected"
-                            disabled="disabled"
-                          >
-                            Select Subject
-                          </option>
-                          <option value="Django Development">
-                            Django Development
-                          </option>
-                          <option value="JavaScript Development">
-                            JavaScript Development
-                          </option>
-                          <option value="Uixi Design">Uixi Design</option>
-                          <option value="App Development">
-                            App Development
-                          </option>
-                          <option value="Software Management">
-                            Software Management
-                          </option>
-                        </select>
-                      </div>
                       <div className="form-group col-12">
                         <textarea
                           name="message"
@@ -155,7 +168,7 @@ const ContactUs = () => {
                       </div>
                       <div className="form-btn col-12">
                         <button type="submit" className="th-btn">
-                          Subscribe Now
+                          Send
                           <img src="assets/img/icon/plane4.svg" alt="" />
                         </button>
                       </div>
@@ -173,17 +186,34 @@ const ContactUs = () => {
           </div>
         </div>
       </div>
-      <div className="">
+      <div style={{ position: "relative" }}>
         <div className="contact-map style2">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14016.5391435256!2d77.18471097824284!3d28.562741329218497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1dbdb8b80cb5%3A0x8e28fc89e0106b70!2sNDDB%20House%2C%20Safdarjung%20Enclave%2C%20New%20Delhi%2C%20Delhi%20110029!5e0!3m2!1sen!2sin!4v1721731078653!5m2!1sen!2sin"
-            width="600"
+            src="https://www.google.com/maps?q=NDDB+House,+Safdarjung+Enclave,+New+Delhi,+Delhi+110029&output=embed"
+            width="100%"
             height="450"
             style={{ border: 0 }}
-            allowfullscreen=""
+            allowFullScreen=""
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          />
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+
+          {/* Clickable layer that opens exact location in new tab */}
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=NDDB+House,+Safdarjung+Enclave,+New+Delhi,+Delhi+110029"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              zIndex: 2,
+              cursor: "pointer",
+            }}
+            title="Open in Google Maps"
+          ></a>
         </div>
       </div>
     </React.Fragment>
