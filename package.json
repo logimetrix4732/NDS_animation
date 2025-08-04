@@ -26,6 +26,7 @@
     "react-is": "^19.1.1",
     "react-router-dom": "^7.6.2",
     "react-router-hash-link": "^2.4.3",
+    "react-simple-maps": "^3.0.0",
     "remixicon": "^4.6.0",
     "swiper": "^11.2.8",
     "wowjs": "^1.1.3"

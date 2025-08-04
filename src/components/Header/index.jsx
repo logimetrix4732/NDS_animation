@@ -72,7 +72,7 @@ const Header = () => {
                           }
                           to="/milkproducer"
                         >
-                          Milk Producer Org.
+                          Milk Producer Organisations
                         </Link>
                       </li>
                       <li className="">
@@ -84,7 +84,7 @@ const Header = () => {
                           }
                           to="/animalProductivity"
                         >
-                          Animal Productivity
+                          Animal Productivity Services
                         </Link>
                       </li>
                       <li className="">

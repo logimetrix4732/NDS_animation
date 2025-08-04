@@ -51,7 +51,6 @@ const App = () => {
         <Route path="/newInitiative" element={<NewInitiative />} />
         <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/gallery" element={<GalleryPage />} />
-        <Route path="/MilkIndiaMap" element={<MilkIndiaMap />} />
         <Route path="/tender" element={<TenderPage />} />
         <Route path="*" element={<Errors />} />
       </Routes>
