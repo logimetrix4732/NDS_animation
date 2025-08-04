@@ -63,8 +63,6 @@ const OurFeatures1 = () => {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
-                  onMouseEnter={() => setIsHovered(true)}
-                  onMouseLeave={() => setIsHovered(false)}
                 >
                   <span className="service-icon">
                     <img src={item.icon} alt="icon" />
