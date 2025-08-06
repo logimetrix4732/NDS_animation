@@ -95,7 +95,7 @@ const SocialContainer = () => {
                   className="sub-title text-white text-anime-style-2 wow fadeInUp"
                   data-wow-delay=".4s"
                 >
-                  Connect With Us
+                  Connect with Us
                 </span>
                 <h2
                   className="sec-title text-white text-anime-style-2"
@@ -109,9 +109,6 @@ const SocialContainer = () => {
                     "Dairy",
                     "Excellence",
                     "with",
-                    "NDDB",
-                    "Dairy",
-                    "Services",
                   ].map((word, index) => (
                     <span
                       key={index}
@@ -120,19 +117,35 @@ const SocialContainer = () => {
                       style={{
                         display: "inline-block",
                         fontWeight: "bold",
+                        textTransform: "none",
                       }}
                     >
                       {word}
                     </span>
                   ))}
+
+                  {/* Animated "NDDB Dairy Services" together */}
+                  <span
+                    className="wow fadeInUp"
+                    data-wow-delay={`${7 * 0.2}s`} // 1.4s delay after last word
+                    style={{
+                      display: "inline-block",
+                      fontWeight: "bold",
+                      whiteSpace: "nowrap",
+                      textTransform: "none",
+                    }}
+                  >
+                    NDDB Dairy Services
+                  </span>
                 </h2>
+
                 <p
                   className="contact-text2 text-white wow fadeInUp"
                   data-wow-delay=".3s"
                 >
-                  Stay connected through our social channels and be a part of
-                  the innovations, stories, and progress shaping India's dairy
-                  future.
+                  Stay connected through our social media channels and be a part
+                  of the innovations, stories, and progress shaping India's
+                  dairy future.
                 </p>
               </div>
             </div>

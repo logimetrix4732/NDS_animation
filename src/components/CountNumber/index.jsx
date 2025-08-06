@@ -49,37 +49,45 @@ const CountNumber = () => {
       <div className="container">
         <div className="counter-wrap1">
           <div className="row">
-            {countData.map((item, index) => (
-              <div
-                className="col-md-6 col-xl-3 counter-card-wrap wow fadeInRight"
-                key={index}
-              >
-                <div className="counter-card">
-                  <div className="counter-shape">
-                    <span />
-                  </div>
-                  <div className="media-body mt-50">
-                    <h3
-                      className="box-number wow fadeInUp"
-                      data-wow-delay=".4s"
-                    >
-                      {inView ? (
-                        <CountUp end={item.number} duration={6} separator="," />
-                      ) : (
-                        0
-                      )}
-                      {item.suffix}
-                    </h3>
-                    <h6
-                      className="titleFontSize wow fadeInLeft"
-                      data-wow-delay=".4s"
-                    >
-                      {item.title}
-                    </h6>
+            {countData.map((item, index) => {
+              const hasDecimal = String(item.number).includes(".");
+              return (
+                <div
+                  className="col-md-6 col-xl-3 counter-card-wrap wow fadeInRight"
+                  key={index}
+                >
+                  <div className="counter-card">
+                    <div className="counter-shape">
+                      <span />
+                    </div>
+                    <div className="media-body mt-50">
+                      <h3
+                        className="box-number wow fadeInUp"
+                        data-wow-delay=".4s"
+                      >
+                        {inView ? (
+                          <CountUp
+                            end={item.number}
+                            duration={6}
+                            separator=","
+                            decimals={hasDecimal ? 1 : 0}
+                          />
+                        ) : (
+                          0
+                        )}
+                        {item.suffix}
+                      </h3>
+                      <h6
+                        className="titleFontSize wow fadeInLeft"
+                        data-wow-delay=".4s"
+                      >
+                        {item.title}
+                      </h6>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

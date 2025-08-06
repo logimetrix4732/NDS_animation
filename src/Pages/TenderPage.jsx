@@ -1,7 +1,20 @@
 import React from "react";
+import { ThemeProvider } from "@mui/material/styles";
+import { CssBaseline } from "@mui/material";
+import { theme } from "../theme";
+import HeroSection from "../components/components/HeroSection";
+import AvailableTenders from "../components/components/AvailableTenders";
 
-const TenderPage = () => {
-  return <div>TenderPage</div>;
-};
+function TenderPage() {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div>
+        <HeroSection />
+        <AvailableTenders />
+      </div>
+    </ThemeProvider>
+  );
+}
 
 export default TenderPage;

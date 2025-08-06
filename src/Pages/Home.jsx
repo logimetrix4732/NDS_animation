@@ -22,13 +22,13 @@ const Home = () => {
       <Dashboard />
       <AboutSection />
       <div
-        className="about-area position-relative overflow-hidden "
+        className="about-area position-relative overflow-hidden space-top"
         id="about-sec"
         style={{ backgroundColor: "white", zIndex: 1 }}
       >
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-lg-8">
+            <div className="col-lg-12">
               <div className="title-area text-center">
                 <span
                   className="sub-title text-anime-style-2 wow fadeInUp"
@@ -41,7 +41,7 @@ const Home = () => {
                   We align our strategies with
                 </span>
                 <span
-                  className="sub-title text-anime-style-2 wow fadeInUp mt-10"
+                  className="sub-title text-anime-style-2 wow fadeInUp"
                   style={{
                     color: "#bd8f59",
                     fontSize: "30px",
@@ -54,7 +54,10 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="row align-items-center">
+          <div
+            className="row align-items-center"
+            style={{ marginTop: "-100px" }}
+          >
             <div className="col-xl-12 order-1 order-xl-2 position-relative wow fadeInUp">
               <img src={sdgImg} alt="" />
             </div>

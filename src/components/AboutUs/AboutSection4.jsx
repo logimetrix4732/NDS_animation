@@ -58,7 +58,7 @@ const AboutSection4 = () => {
                   style={{ width: "393px", height: "302px" }}
                 />
                 <a
-                  href="https://www.youtube.com/watch?v=JguJ1DYD1G8&t=13s"
+                  href="https://www.youtube.com/watch?v=uyhR4nGIefA"
                   className="play-btn popup-video"
                   target="_blank"
                   rel="noopener noreferrer"

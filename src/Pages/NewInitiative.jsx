@@ -7,10 +7,10 @@ const NewInitiative = () => {
   return (
     <div>
       <CommonBanner
-        title="New Initiative"
+        title="New Initiatives"
         breadcrumbs={[
           { label: "Home", path: "/" },
-          { label: "New Initiative" },
+          { label: "New Initiatives" },
         ]}
       />
       <AboutSection10 />
