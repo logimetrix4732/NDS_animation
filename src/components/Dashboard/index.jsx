@@ -228,22 +228,30 @@ const Dashboard = () => {
           </div>
         </div>
       </header>
+
       <div
         style={{
           position: "absolute",
           bottom: "190px",
           left: "0",
+          display: "flex",
+          justifyContent: "flex-start",
+          width: "100%",
+          animation: "fadeInLeft 1s ease-out",
         }}
       >
         <h4
           style={{
             color: "#fff",
-            fontSize: "1.6rem",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            padding: "12px 20px",
+            fontSize: "1.8rem",
+            background:
+              "linear-gradient(to left, rgba(0,0,0,0.6), rgba(0,0,0,0.3))",
+            padding: "16px 28px",
             borderRadius: "0px 10px 10px 0px",
             width: "fit-content",
             textAlign: "left",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)",
+            backdropFilter: "blur(4px)",
           }}
         >
           Purposeful Growth, <br /> Meaningful Impact

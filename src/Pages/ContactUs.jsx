@@ -2,6 +2,8 @@ import React from "react";
 import CommonBanner from "../components/BannersComponents/CommonBanner";
 import ContactGif from "../Images/ContactUs.gif";
 import EmailGif from "../Images/Email.gif";
+import contactUsImg from "../Images/contactUsImg.jpg";
+
 const ContactUs = () => {
   return (
     <React.Fragment>
@@ -179,7 +181,15 @@ const ContactUs = () => {
               </div>
               <div className="col-xl-5 order-0 order-xl-1">
                 <div className="contact-thumb">
-                  <img src="assets/img/normal/contact-2-img.jpg" alt="" />
+                  <img
+                    src={contactUsImg}
+                    alt=""
+                    style={{
+                      width: "100%",
+                      height: "605px",
+                      objectFit: "cover",
+                    }}
+                  />
                 </div>
               </div>
             </div>

@@ -43,7 +43,7 @@ const OurFeatures1 = () => {
       if (interval) clearInterval(interval);
     };
   }, [isHovered]);
-
+  console.log(activeIndex, "==activeIndex");
   return (
     <div className="service-area" id="service-sec">
       <div className="container">
@@ -64,12 +64,27 @@ const OurFeatures1 = () => {
                     backgroundPosition: "center",
                   }}
                 >
-                  <span className="service-icon">
-                    <img src={item.icon} alt="icon" />
-                  </span>
+                  {index !== activeIndex && (
+                    <span
+                      className="service-icon wow fadeInLeft"
+                      data-wow-delay=".1s"
+                    >
+                      <img src={item.icon} alt="icon" />
+                    </span>
+                  )}
+
                   <div className="service-content service-content-main">
                     <h4 className="box-title">{item.title}</h4>
                   </div>
+
+                  {index === activeIndex && (
+                    <span
+                      className="th-btn style2 wow fadeInRight"
+                      data-wow-delay=".1s"
+                    >
+                      <img src={item.icon} alt="icon" />
+                    </span>
+                  )}
                 </div>
               </div>
             ))}

@@ -2580,11 +2580,15 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   filter: contrast(0) brightness(0);
 }
 .th-btn.style2 {
-  background-color: transparent;
+ background-color: var(--primary-color);
   color: var(--white-color);
-  border: 1px solid var(--white-color);
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  -webkit-transition: all 0.8s ease-in-out;
+  transition: all 0.8s ease-in-out;
 }
-.th-btn.style2:hover {
+/* .th-btn.style2:hover {
   color: var(--black-color2);
   border: 1px solid var(--white-color);
 }
@@ -2593,7 +2597,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 .th-btn.style2:before {
   background-color: var(--white-color);
-}
+} */
 .th-btn.style3 {
   background-color: var(--theme-color);
   color: var(--white-color);

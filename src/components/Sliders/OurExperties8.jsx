@@ -1,0 +1,106 @@
+import React from "react";
+
+// Import Background
+import linePatternBg from "../../assets/img/bg/line-pattern2.png";
+
+// Import Service Background Images
+import serviceBg1 from "../../assets/img/service/service_2_1.jpg";
+import serviceBg2 from "../../assets/img/service/service_2_2.jpg";
+import serviceBg3 from "../../assets/img/service/service_2_3.jpg";
+import serviceBg4 from "../../assets/img/service/service_2_4.jpg";
+
+// Import Service Icons
+import icon1 from "../../assets/img/icon/service-2-1.svg";
+import icon2 from "../../assets/img/icon/service-2-2.svg";
+import icon3 from "../../assets/img/icon/service-2-3.svg";
+import icon4 from "../../assets/img/icon/service-2-4.svg";
+
+const services = [
+  {
+    title: "Cloud Security",
+    subtitle: "Secure authentication and role-based access controls.",
+    icon: icon1,
+    bg: serviceBg1,
+    link: "service-details.html",
+  },
+  {
+    title: "Data Recovery",
+    subtitle:
+      "Salvage critical data efficiently with our reliable recovery solutions",
+    icon: icon2,
+    bg: serviceBg2,
+    link: "service-details.html",
+  },
+  {
+    title: "System Integration",
+    subtitle: "Seamlessly meld disparate systems for unified operations",
+    icon: icon3,
+    bg: serviceBg3,
+    link: "service-details.html",
+  },
+  {
+    title: "Hosting Solution",
+    subtitle: "Experience uptime and performance with our premier hosting",
+    icon: icon4,
+    bg: serviceBg4,
+    link: "service-details.html",
+  },
+];
+
+const OurExperties8 = () => {
+  return (
+    <div
+      className="service-area bg-top-center position-relative space-top overflow-hidden"
+      id="service-sec"
+      style={{ backgroundImage: `url(${linePatternBg})` }}
+    >
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-xl-8">
+            <div className="title-area text-center">
+              <span className="sub-title text-anime-style-2">
+                Services We’re Offering
+              </span>
+              <h2 className="sec-title text-anime-style-3">
+                We Provide our Clients Best Cloud Computing Solution
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="service-list-area">
+            {services.map((service, index) => (
+              <div
+                className={`service-list-wrap sv-list2 ${
+                  index === 3 ? "active" : ""
+                }`}
+                key={index}
+              >
+                <div
+                  className="service-list"
+                  style={{
+                    backgroundImage: `url(${service.bg})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                >
+                  <span className="service-icon">
+                    <img src={service.icon} alt="icon" />
+                  </span>
+                  <div className="service-content">
+                    <h4 className="box-title">
+                      <a href={service.link}>{service.title}</a>
+                    </h4>
+                    <span className="service-subtitle">{service.subtitle}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default OurExperties8;
