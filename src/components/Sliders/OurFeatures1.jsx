@@ -43,7 +43,7 @@ const OurFeatures1 = () => {
       if (interval) clearInterval(interval);
     };
   }, [isHovered]);
-  console.log(activeIndex, "==activeIndex");
+
   return (
     <div className="service-area" id="service-sec">
       <div className="container">
@@ -55,6 +55,7 @@ const OurFeatures1 = () => {
                   index === activeIndex ? "active" : ""
                 }`}
                 key={index}
+                onClick={() => setActiveIndex(index)}
               >
                 <div
                   className="service-list"
@@ -69,7 +70,7 @@ const OurFeatures1 = () => {
                       className="service-icon wow fadeInLeft"
                       data-wow-delay=".1s"
                     >
-                      <img src={item.icon} alt="icon" />
+                      <img src={item.icon} alt="icon" loading="lazy" />
                     </span>
                   )}
 
@@ -82,7 +83,7 @@ const OurFeatures1 = () => {
                       className="th-btn style2 wow fadeInRight"
                       data-wow-delay=".1s"
                     >
-                      <img src={item.icon} alt="icon" />
+                      <img src={item.icon} alt="icon" loading="lazy" />
                     </span>
                   )}
                 </div>

@@ -45,6 +45,7 @@ const AboutSection2 = () => {
                     <img
                       src={DSC_4156}
                       alt="About"
+                      loading="lazy"
                       style={{
                         width: "312px",
                         height: "280px",
@@ -61,6 +62,7 @@ const AboutSection2 = () => {
                     <img
                       src={DSC_9821}
                       alt="About"
+                      loading="lazy"
                       style={{
                         width: "312px",
                         height: "280px",
@@ -95,6 +97,7 @@ const AboutSection2 = () => {
                       <img
                         src={checkMarkIcon}
                         alt=""
+                        loading="lazy"
                         style={{ width: "28px", height: "24px" }}
                       />
                     </span>
@@ -108,6 +111,7 @@ const AboutSection2 = () => {
                       <img
                         src={checkMarkIcon}
                         alt=""
+                        loading="lazy"
                         style={{ width: "28px", height: "24px" }}
                       />
                     </span>
@@ -121,6 +125,7 @@ const AboutSection2 = () => {
                       <img
                         src={checkMarkIcon}
                         alt=""
+                        loading="lazy"
                         style={{ width: "28px", height: "24px" }}
                       />
                     </span>
@@ -134,6 +139,7 @@ const AboutSection2 = () => {
                       <img
                         src={checkMarkIcon}
                         alt=""
+                        loading="lazy"
                         style={{ width: "28px", height: "24px" }}
                       />
                     </span>
@@ -147,6 +153,7 @@ const AboutSection2 = () => {
                       <img
                         src={checkMarkIcon}
                         alt=""
+                        loading="lazy"
                         style={{ width: "28px", height: "24px" }}
                       />
                     </span>

@@ -73,6 +73,7 @@ const AboutSection1 = () => {
                 <img
                   src={DSC_2883}
                   alt="About"
+                  loading="lazy"
                   style={{
                     width: "620px",
                     height: "860px",

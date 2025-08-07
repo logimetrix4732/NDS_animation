@@ -8,19 +8,16 @@ import {
   Typography,
   ListItemText,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import nds_logo from "../../assets/img/nds_logo.png";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import YouTubeIcon from "@mui/icons-material/YouTube";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import CallIcon from "@mui/icons-material/Call";
-import MailIcon from "@mui/icons-material/Mail";
-import LocationPinIcon from "@mui/icons-material/LocationPin";
-import { Link } from "react-router-dom";
 
 const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
   const menuItems = [
@@ -74,10 +71,32 @@ const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
       </p>
 
       <Box display="flex" gap={1.5} mb={3}>
-        {[FacebookIcon, TwitterIcon, WhatsAppIcon, LinkedInIcon, EmailIcon].map(
-          (Icon, idx) => (
+        {[
+          {
+            icon: FacebookIcon,
+            link: "https://www.facebook.com/people/NDDB-Dairy-Services/61557086137103/",
+          },
+          {
+            icon: TwitterIcon,
+            link: "https://x.com/NDDBDairyServ",
+          },
+          {
+            icon: LinkedInIcon,
+            link: "https://www.linkedin.com/company/yourcompany",
+          },
+          {
+            icon: YouTubeIcon,
+            link: "https://www.youtube.com/@nddbdairyservices6754",
+          },
+        ].map(({ icon: Icon, link }, idx) => (
+          <a
+            key={idx}
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: "none" }}
+          >
             <Box
-              key={idx}
               sx={{
                 border: "1px solid #ccc",
                 borderRadius: "50%",
@@ -98,9 +117,10 @@ const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
             >
               <Icon sx={{ fontSize: "20px" }} />
             </Box>
-          )
-        )}
+          </a>
+        ))}
       </Box>
+
       <Box>
         <Typography variant="h6" fontWeight={600} mb={2}>
           Get In Touch
@@ -109,24 +129,24 @@ const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
         <Box display="flex" alignItems="flex-start" mb={2}>
           <PhoneIcon sx={{ color: "#bd8f59", mr: 1 }} />
           <Box>
-            <Typography className="about-text">+01 234 567 890</Typography>
-            <Typography variant="body2">+09 876 543 210</Typography>
+            <Typography className="about-text">+91 7092922421</Typography>
           </Box>
         </Box>
 
         <Box display="flex" alignItems="flex-start" mb={2}>
           <EmailIcon sx={{ color: "#bd8f59", mr: 1 }} />
           <Box>
-            <Typography variant="body2">mailinfo00@atek.com</Typography>
-            <Typography variant="body2">support24@atek.com</Typography>
+            <Typography variant="body2">
+              enquiry@nddbdairyservices.com
+            </Typography>
           </Box>
         </Box>
 
         <Box display="flex" alignItems="flex-start">
           <LocationOnIcon sx={{ color: "#bd8f59", mr: 1 }} />
           <Typography variant="body2">
-            789 Inner Lane, Holy park, <br />
-            California, USA
+            NDDB House, Safdarjung Enclave, <br />
+            New Delhi, Southwest Delhi, Delhi 110029
           </Typography>
         </Box>
       </Box>

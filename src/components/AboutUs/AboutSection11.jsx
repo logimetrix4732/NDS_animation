@@ -19,6 +19,7 @@ const AboutSection11 = () => {
                 <img
                   src={SAGLiveImg1}
                   alt="About"
+                  loading="lazy"
                   style={{
                     width: "480px",
                     height: "480px",
@@ -33,6 +34,7 @@ const AboutSection11 = () => {
                 <img
                   src={SAGLiveImg}
                   alt="About"
+                  loading="lazy"
                   style={{
                     width: "354px",
                     height: "354px",

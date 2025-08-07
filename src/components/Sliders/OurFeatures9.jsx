@@ -11,9 +11,16 @@ import carImg2 from "../../Images/CarrerImg/276A2799.jpg";
 import carImg3 from "../../Images/CarrerImg/276A8941.jpg";
 import carImg4 from "../../Images/CarrerImg/276A8967.jpg";
 import carImg5 from "../../Images/CarrerImg/276A8976.jpg";
-import carImg6 from "../../Images/CarrerImg/1749901853899.jpg";
-import carImg7 from "../../Images/CarrerImg/IMG_0113.jpg";
-import carImg8 from "../../Images/CarrerImg/IMG_0262.jpg";
+import carImg6 from "../../Images/CarrerImg/IMG_0113.jpg";
+import carImg7 from "../../Images/CarrerImg/IMG_0262.jpg";
+import IMG_20190610_123604 from "../../Images/CarrerImg/IMG_20190610_123604.jpg";
+import IMG_20190723_173443 from "../../Images/CarrerImg/IMG_20190723_173443.jpg";
+import IMG_20200312 from "../../Images/CarrerImg/IMG_20200312.jpg";
+import IMG20200311174755 from "../../Images/CarrerImg/IMG20200311174755.jpg";
+import SUN_7255 from "../../Images/CarrerImg/SUN_7255.jpg";
+import SUN_7267 from "../../Images/CarrerImg/SUN_7267.jpg";
+import WhatsApp_imgCar from "../../Images/CarrerImg/WhatsApp_imgCar.jpg";
+import WhatsApp_imgCar1 from "../../Images/CarrerImg/WhatsApp_imgCar1.jpg";
 
 const slideData = [
   {
@@ -59,13 +66,52 @@ const slideData = [
     title: "End-to-End Support",
     subtitle: "We provide 24/7 monitoring and support to ensure your systems.",
   },
+];
+const slideData1 = [
   {
-    img: carImg8,
+    img: IMG_20190610_123604,
+    title: "Seamless Integration",
+    subtitle: "We ensure that our cloud solutions integrate smoothly.",
+  },
+  {
+    img: IMG_20190723_173443,
+    title: "Cost Efficiency",
+    subtitle:
+      "Reduce your IT overhead with our cost effective cloud solutions.",
+  },
+  {
+    img: IMG_20200312,
+    title: "Expertise You Can Trust",
+    subtitle:
+      "We stay ahead of industry trends and implement cutting-edge tools.",
+  },
+  {
+    img: IMG20200311174755,
+    title: "Customized Solutions",
+    subtitle:
+      "We understand that every business is unique. Our cloud solutions.",
+  },
+  {
+    img: SUN_7255,
+    title: "End-to-End Support",
+    subtitle: "We provide 24/7 monitoring and support to ensure your systems.",
+  },
+  {
+    img: SUN_7267,
+    title: "End-to-End Support",
+    subtitle: "We provide 24/7 monitoring and support to ensure your systems.",
+  },
+  {
+    img: WhatsApp_imgCar,
+    title: "End-to-End Support",
+    subtitle: "We provide 24/7 monitoring and support to ensure your systems.",
+  },
+  {
+    img: WhatsApp_imgCar1,
     title: "End-to-End Support",
     subtitle: "We provide 24/7 monitoring and support to ensure your systems.",
   },
 ];
-
 const OurExperties9 = () => {
   return (
     <>
@@ -102,6 +148,7 @@ const OurExperties9 = () => {
           992: { slidesPerView: 3 },
           1200: { slidesPerView: 4 },
           1400: { slidesPerView: 4 },
+          1400: { slidesPerView: 5 },
         }}
         className="th-slider whySlider2"
       >
@@ -118,6 +165,7 @@ const OurExperties9 = () => {
                   <img
                     src={slide.img}
                     alt={slide.title}
+                    loading="lazy"
                     style={{
                       width: "100%",
                       height: "250px",
@@ -150,12 +198,13 @@ const OurExperties9 = () => {
           992: { slidesPerView: 3 },
           1200: { slidesPerView: 4 },
           1400: { slidesPerView: 4 },
+          1400: { slidesPerView: 5 },
         }}
         className="th-slider whySlider2"
-        dir="rtl" // RTL for reversing direction visually
+        dir="rtl"
       >
         {Array(3)
-          .fill(slideData)
+          .fill(slideData1)
           .flat()
           .map((slide, index) => (
             <SwiperSlide key={index}>
@@ -167,6 +216,7 @@ const OurExperties9 = () => {
                   <img
                     src={slide.img}
                     alt={slide.title}
+                    loading="lazy"
                     style={{
                       width: "100%",
                       height: "250px",

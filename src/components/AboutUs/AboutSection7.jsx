@@ -56,6 +56,7 @@ const AboutSection7 = () => {
                 <img
                   src={sag}
                   alt="About"
+                  loading="lazy"
                   style={{
                     width: "424px",
                     height: "432px",
@@ -67,6 +68,7 @@ const AboutSection7 = () => {
                 <img
                   src={ME7A8877}
                   alt="About"
+                  loading="lazy"
                   style={{
                     width: "434px",
                     height: "448px",
@@ -78,6 +80,7 @@ const AboutSection7 = () => {
                 <img
                   src={_SUN7366}
                   alt="About"
+                  loading="lazy"
                   style={{
                     width: "434px",
                     height: "330px",
@@ -135,6 +138,7 @@ const AboutSection7 = () => {
                         <img
                           src={checkMarkIcon}
                           alt=""
+                          loading="lazy"
                           style={{
                             width: "26px",
                             height: "22px",
@@ -152,6 +156,7 @@ const AboutSection7 = () => {
                         <img
                           src={checkMarkIcon}
                           alt=""
+                          loading="lazy"
                           style={{ width: "26px", height: "22px" }}
                         />
                       </span>
@@ -166,6 +171,7 @@ const AboutSection7 = () => {
                         <img
                           src={checkMarkIcon}
                           alt=""
+                          loading="lazy"
                           style={{ width: "26px", height: "22px" }}
                         />
                       </span>
@@ -179,6 +185,7 @@ const AboutSection7 = () => {
                         <img
                           src={checkMarkIcon}
                           alt=""
+                          loading="lazy"
                           style={{ width: "26px", height: "22px" }}
                         />
                       </span>

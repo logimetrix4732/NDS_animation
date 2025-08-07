@@ -16,6 +16,7 @@ const CarrerVideoSection = () => {
           loop
           muted
           playsInline
+          preload="none"
           style={{
             position: "absolute",
             width: "100%",
@@ -30,7 +31,7 @@ const CarrerVideoSection = () => {
           style={{
             position: "absolute",
             bottom: "190px",
-            right: "0", // changed from left to right
+            right: "0",
             display: "flex",
             justifyContent: "flex-end",
             width: "100%",
@@ -70,7 +71,6 @@ const CarrerVideoSection = () => {
           backgroundSize: "cover",
         }}
       >
-        {/* Dark Overlay */}
         <Box
           sx={{
             position: "absolute",
@@ -82,15 +82,13 @@ const CarrerVideoSection = () => {
             zIndex: 1,
           }}
         />
-
-        {/* Content */}
         <Box sx={{ zIndex: 2, maxWidth: "800px", px: 2 }}>
           <Typography variant="h5" color="white" fontWeight={600}>
-            <strong> People at the Core of Our Purpose -</strong> on white
-            background At NDDB Dairy Services (NDS), people are not just part of
-            the organization — they are the driving force behind everything we
-            do. They embody our mission, fuel innovation, and enable us to make
-            a lasting impact on India’s dairy sector.
+            <strong> People at the Core of Our Purpose</strong> <br /> At NDDB
+            Dairy Services (NDS), people are not just part of the organization —
+            they are the driving force behind everything we do. They embody our
+            mission, fuel innovation, and enable us to make a lasting impact on
+            India’s dairy sector.
           </Typography>
         </Box>
       </Box>

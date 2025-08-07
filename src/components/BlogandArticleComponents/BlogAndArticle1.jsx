@@ -59,6 +59,7 @@ const BlogAndArticle1 = () => {
                   <img
                     src={AnimalNutrition}
                     alt="Animal Productivity Services 2"
+                    loading="lazy"
                     style={{
                       width: "672px",
                       height: "367px",
@@ -95,6 +96,7 @@ const BlogAndArticle1 = () => {
                           <img
                             src={checkMarkIcon}
                             alt=""
+                            loading="lazy"
                             style={{ width: "26px", height: "22px" }}
                           />
                         </span>
@@ -110,6 +112,7 @@ const BlogAndArticle1 = () => {
                           <img
                             src={checkMarkIcon}
                             alt=""
+                            loading="lazy"
                             style={{ width: "26px", height: "22px" }}
                           />
                         </span>
@@ -125,6 +128,7 @@ const BlogAndArticle1 = () => {
                           <img
                             src={checkMarkIcon}
                             alt=""
+                            loading="lazy"
                             style={{ width: "26px", height: "22px" }}
                           />
                         </span>
@@ -140,6 +144,7 @@ const BlogAndArticle1 = () => {
                           <img
                             src={checkMarkIcon}
                             alt=""
+                            loading="lazy"
                             style={{ width: "26px", height: "22px" }}
                           />
                         </span>

@@ -55,6 +55,7 @@ const ChairmanSection = () => {
         <img
           src={chairmanImg}
           alt="Chairman"
+          loading="lazy"
           className="chairman-image"
           style={{
             width: "100%",

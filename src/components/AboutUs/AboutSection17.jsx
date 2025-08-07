@@ -15,6 +15,7 @@ const AboutSection17 = () => {
                 <img
                   src={GroupPhoto}
                   alt="About"
+                  loading="lazy"
                   style={{
                     width: "576px",
                     height: "430px",

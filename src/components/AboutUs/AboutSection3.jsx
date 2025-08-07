@@ -46,6 +46,7 @@ const AboutSection3 = () => {
                   <img
                     src={animalImg}
                     alt="Animal Productivity Services 1"
+                    loading="lazy"
                     style={{
                       width: "302px",
                       height: "268px",
@@ -59,6 +60,7 @@ const AboutSection3 = () => {
                   <img
                     src={SemenStationsImg}
                     alt="Animal Productivity Services 2"
+                    loading="lazy"
                     style={{
                       width: "672px",
                       height: "487px",
@@ -73,6 +75,7 @@ const AboutSection3 = () => {
                   <img
                     src={IMG_6393}
                     alt="Animal Productivity Services 3"
+                    loading="lazy"
                     style={{
                       width: "506px",
                       height: "251px",

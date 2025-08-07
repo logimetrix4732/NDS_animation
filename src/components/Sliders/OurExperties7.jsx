@@ -185,6 +185,7 @@ const OurExperties7 = () => {
                           <img
                             src={item.img}
                             alt={item.title}
+                            loading="lazy"
                             style={{
                               width: "400px",
                               height: "307.69px",

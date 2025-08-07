@@ -48,6 +48,7 @@ const AboutSection12 = () => {
                       className="w-100"
                       src={DSC_1967}
                       alt="About"
+                      loading="lazy"
                       style={{
                         width: "368px",
                         height: "512.64px",
@@ -64,6 +65,7 @@ const AboutSection12 = () => {
                         className="th-radius"
                         src={DSC_8407}
                         alt="About"
+                        loading="lazy"
                         style={{
                           width: "245px",
                           height: "245px",
@@ -77,6 +79,7 @@ const AboutSection12 = () => {
                         className="th-radius"
                         src={DSC_6949}
                         alt="About"
+                        loading="lazy"
                         style={{
                           width: "245px",
                           height: "245px",

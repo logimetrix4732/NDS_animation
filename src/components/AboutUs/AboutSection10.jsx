@@ -79,10 +79,11 @@ const AboutSection10 = () => {
                 <img
                   src={DSC_3601}
                   alt="Choose"
+                  loading="lazy"
                   style={{
                     width: "312px",
                     height: "312px",
-                    objectFit: "cover", // or "contain"
+                    objectFit: "cover",
                   }}
                 />
               </div>
@@ -90,10 +91,11 @@ const AboutSection10 = () => {
                 <img
                   src={FVF02218}
                   alt="Choose"
+                  loading="lazy"
                   style={{
                     width: "312px",
                     height: "312px",
-                    objectFit: "cover", // or "contain"
+                    objectFit: "cover",
                   }}
                 />
               </div>
@@ -101,10 +103,11 @@ const AboutSection10 = () => {
                 <img
                   src={FVF02761}
                   alt="Choose"
+                  loading="lazy"
                   style={{
                     width: "312px",
                     height: "312px",
-                    objectFit: "cover", // or "contain"
+                    objectFit: "cover",
                   }}
                 />
               </div>
@@ -112,10 +115,11 @@ const AboutSection10 = () => {
                 <img
                   src={mangosgrowing}
                   alt="Choose"
+                  loading="lazy"
                   style={{
                     width: "312px",
                     height: "312px",
-                    objectFit: "cover", // or "contain"
+                    objectFit: "cover",
                   }}
                 />
               </div>

@@ -37,6 +37,7 @@ const Dashboard = () => {
         loop
         muted
         playsInline
+        preload="none"
         style={{
           position: "absolute",
           width: "100%",
@@ -75,6 +76,7 @@ const Dashboard = () => {
                         src={nds_logo}
                         alt="NDDB"
                         style={{ width: "148px", height: "65px" }}
+                        loading="lazy"
                       />
                     </a>
                   </div>

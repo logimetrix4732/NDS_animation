@@ -77,6 +77,7 @@ const AboutSection16 = () => {
               <img
                 src={SmartDairySolutionImg}
                 alt=""
+                loading="lazy"
                 style={{
                   width: "648px",
                   height: "541.33px",

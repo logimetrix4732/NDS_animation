@@ -96,6 +96,7 @@ const Banner = () => {
                           <img
                             src={item.icon}
                             alt="icon"
+                            loading="lazy"
                             style={{
                               width: "80px",
                               height: "80px",
@@ -114,7 +115,7 @@ const Banner = () => {
                 </div>
 
                 <div className="cta6-shape">
-                  <img src={cta6shape} alt="" />
+                  <img src={cta6shape} alt="" loading="lazy" />
                 </div>
               </div>
             </div>
@@ -127,6 +128,7 @@ const Banner = () => {
           <img
             src={DSC_1059}
             alt=""
+            loading="lazy"
             style={{
               width: "780px",
               height: "527.29px",

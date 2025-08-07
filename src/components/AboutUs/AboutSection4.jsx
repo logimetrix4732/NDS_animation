@@ -49,6 +49,7 @@ const AboutSection4 = () => {
                   src={aboutImg3}
                   alt="About"
                   style={{ width: "650px", height: "600px" }}
+                  loading="lazy"
                 />
               </div>
               <div className="img2 wow fadeInUp" data-wow-delay=".4s">
@@ -56,6 +57,7 @@ const AboutSection4 = () => {
                   src={aboutImg4}
                   alt="About"
                   style={{ width: "393px", height: "302px" }}
+                  loading="lazy"
                 />
                 <a
                   href="https://www.youtube.com/watch?v=uyhR4nGIefA"

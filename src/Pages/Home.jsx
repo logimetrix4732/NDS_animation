@@ -12,11 +12,19 @@ const Home = () => {
     <React.Fragment>
       <div className="slider-drag-cursor d-flex align-items-center justify-content-between">
         <span className="drag-icon-left">
-          <img src="assets/img/icon/drag-arrow-left.svg" alt="" />
+          <img
+            src="assets/img/icon/drag-arrow-left.svg"
+            alt=""
+            loading="lazy"
+          />
         </span>
         DRAG
         <span className="drag-icon-right">
-          <img src="assets/img/icon/drag-arrow-right.svg" alt="" />
+          <img
+            src="assets/img/icon/drag-arrow-right.svg"
+            alt=""
+            loading="lazy"
+          />
         </span>
       </div>
       <Dashboard />
@@ -59,7 +67,7 @@ const Home = () => {
             style={{ marginTop: "-100px" }}
           >
             <div className="col-xl-12 order-1 order-xl-2 position-relative wow fadeInUp">
-              <img src={sdgImg} alt="" />
+              <img src={sdgImg} alt="" loading="lazy" />
             </div>
           </div>
         </div>

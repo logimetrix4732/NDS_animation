@@ -11,7 +11,7 @@ const Card = () => {
         <div className="wave" />
         <div className="wave" />
         <div className="infotop">
-          <img src={hr} alt="hr" className="icon" />
+          <img src={hr} alt="hr" className="icon" loading="lazy" />
           <br />
           Our HR Philosophy
           <br />
@@ -29,7 +29,12 @@ const Card = () => {
         <div className="wave" />
         <div className="wave" />
         <div className="infotop">
-          <img src={empowerment} alt="empowerment" className="icon" />
+          <img
+            src={empowerment}
+            alt="empowerment"
+            className="icon"
+            loading="lazy"
+          />
           <br />
           Empowering Growth & Excellence
           <br />

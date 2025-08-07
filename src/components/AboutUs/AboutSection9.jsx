@@ -48,6 +48,7 @@ const AboutSection9 = () => {
                 <img
                   src={finalcover}
                   alt="About"
+                  loading="lazy"
                   style={{
                     width: "328px",
                     height: "606px",
@@ -60,6 +61,7 @@ const AboutSection9 = () => {
                 <img
                   src={ClimateSustainabilityImg}
                   alt="About"
+                  loading="lazy"
                   style={{
                     width: "328px",
                     height: "291px",
@@ -72,6 +74,7 @@ const AboutSection9 = () => {
                 <img
                   src={DSC_2582}
                   alt="About"
+                  loading="lazy"
                   style={{
                     width: "328px",
                     height: "291px",

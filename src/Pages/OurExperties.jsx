@@ -92,6 +92,7 @@ const OurExperties = () => {
                     <img
                       src={finalcover}
                       alt="Animal Productivity Services 2"
+                      loading="lazy"
                       style={{
                         width: "302px",
                         height: "268px",
@@ -106,6 +107,7 @@ const OurExperties = () => {
                     <img
                       src={ProjectImplementation}
                       alt="Animal Productivity Services 2"
+                      loading="lazy"
                       style={{
                         width: "672px",
                         height: "450px",

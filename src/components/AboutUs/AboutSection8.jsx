@@ -22,6 +22,7 @@ const AboutSection8 = () => {
                 <img
                   src={DSC_3464}
                   alt="About"
+                  loading="lazy"
                   style={{
                     width: "608px",
                     height: "580px",
@@ -33,6 +34,7 @@ const AboutSection8 = () => {
                 <img
                   src={womanfarmer}
                   alt="About"
+                  loading="lazy"
                   style={{
                     width: "320px",
                     height: "243px",

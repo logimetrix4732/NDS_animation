@@ -31,7 +31,12 @@ const AboutSection = () => {
                 pointerEvents: "none",
               }}
             >
-              <img src={bgCow} alt="Background Cow" style={{ width: "100%" }} />
+              <img
+                src={bgCow}
+                alt="Background Cow"
+                style={{ width: "100%" }}
+                loading="lazy"
+              />
             </div>
 
             <div
@@ -87,6 +92,7 @@ const AboutSection = () => {
                 <img
                   src={DSC_7694}
                   alt="About"
+                  loading="lazy"
                   style={{
                     width: "325px",
                     height: "650px",
@@ -98,6 +104,7 @@ const AboutSection = () => {
                 <img
                   src={DSC_2802}
                   alt="About"
+                  loading="lazy"
                   style={{
                     width: "312px",
                     height: "325px",
@@ -109,6 +116,7 @@ const AboutSection = () => {
                 <img
                   src={DSC_0344}
                   alt="About"
+                  loading="lazy"
                   style={{
                     width: "312px",
                     height: "325px",
@@ -134,7 +142,12 @@ const AboutSection = () => {
             opacity: 0,
           }}
         >
-          <img src={bgCow} alt="shape" style={{ width: "100%" }} />
+          <img
+            src={bgCow}
+            alt="shape"
+            style={{ width: "100%" }}
+            loading="lazy"
+          />
           <style>
             {`
       @keyframes fadeInLight {

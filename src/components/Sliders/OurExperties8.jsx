@@ -85,7 +85,7 @@ const OurExperties8 = () => {
                   }}
                 >
                   <span className="service-icon">
-                    <img src={service.icon} alt="icon" />
+                    <img src={service.icon} alt="icon" loading="lazy" />
                   </span>
                   <div className="service-content">
                     <h4 className="box-title">
