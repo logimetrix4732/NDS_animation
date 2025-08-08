@@ -2,26 +2,25 @@ import React, { useEffect, useState } from "react";
 import icon from "../../Images/icon/1.png";
 import icon1 from "../../Images/icon/2.png";
 import icon2 from "../../Images/icon/3.png";
-import DSC_9355 from "../../Images/HomeImgs/DSC_9355.png";
-import DSC_3158 from "../../Images/HomeImgs/DSC_3796.jpg";
-import DSC_1362 from "../../Images/HomeImgs/DSC_7813.jpg";
+import succesStoriesImg from "../../Images/HomeImgs/succesStoriesImg.png";
+import succesStoriesImg1 from "../../Images/HomeImgs/succesStoriesImg1.png";
+import succesStoriesImg2 from "../../Images/HomeImgs/succesStoriesImg2.png";
 import "./OurFeatures.css";
-
 const featuresData = [
   {
-    image: DSC_9355,
+    image: succesStoriesImg,
     icon: icon,
     title: "A bond beyond words, built on trust",
     link: "/",
   },
   {
-    image: DSC_1362,
+    image: succesStoriesImg1,
     icon: icon1,
     title: "Strong women, stronger communities",
     link: "/",
   },
   {
-    image: DSC_3158,
+    image: succesStoriesImg2,
     icon: icon2,
     title: "United in purpose, unstoppable in spirit",
     link: "/",
@@ -76,10 +75,7 @@ const OurFeatures1 = () => {
                 >
                   {/* Upar wala icon - hamesha dikhna chahiye */}
                   {index !== activeIndex && (
-                    <span
-                      className="service-icon wow fadeInLeft"
-                      data-wow-delay=".3s"
-                    >
+                    <span className="service-icon wow fadeInLeft">
                       <img src={item.icon} alt="icon" loading="lazy" />
                     </span>
                   )}
@@ -91,10 +87,7 @@ const OurFeatures1 = () => {
                   {/* Niche wala icon - sirf desktop me */}
                   {index === activeIndex &&
                     !isMobile && ( // NEW condition
-                      <span
-                        className="th-btn style2 wow fadeInRight"
-                        data-wow-delay=".3s"
-                      >
+                      <span className="th-btn style2 wow fadeInRight">
                         <img src={item.icon} alt="icon" />
                       </span>
                     )}

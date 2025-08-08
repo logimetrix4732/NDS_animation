@@ -17,32 +17,21 @@ import icon4 from "../../assets/img/icon/service-2-4.svg";
 
 const services = [
   {
-    title: "Cloud Security",
-    subtitle: "Secure authentication and role-based access controls.",
+    title: "A bond beyond words, built on trust",
     icon: icon1,
     bg: serviceBg1,
     link: "service-details.html",
   },
   {
-    title: "Data Recovery",
-    subtitle:
-      "Salvage critical data efficiently with our reliable recovery solutions",
+    title: "Strong women, stronger communities",
     icon: icon2,
     bg: serviceBg2,
     link: "service-details.html",
   },
   {
-    title: "System Integration",
-    subtitle: "Seamlessly meld disparate systems for unified operations",
+    title: "United in purpose, unstoppable in spirit",
     icon: icon3,
     bg: serviceBg3,
-    link: "service-details.html",
-  },
-  {
-    title: "Hosting Solution",
-    subtitle: "Experience uptime and performance with our premier hosting",
-    icon: icon4,
-    bg: serviceBg4,
     link: "service-details.html",
   },
 ];
@@ -101,7 +90,7 @@ const OurExperties8 = () => {
                     <h4 className="box-title">
                       <a href={service.link}>{service.title}</a>
                     </h4>
-                    <span className="service-subtitle">{service.subtitle}</span>
+                    {/* Subtitle removed */}
                   </div>
                 </div>
               </div>
