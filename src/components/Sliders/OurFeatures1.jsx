@@ -31,6 +31,15 @@ const featuresData = [
 const OurFeatures1 = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // NEW
+
+  useEffect(() => {
+    // Listen for screen resize
+    const handleResize = () => setIsMobile(window.innerWidth <= 768); // NEW
+    window.addEventListener("resize", handleResize); // NEW
+
+    return () => window.removeEventListener("resize", handleResize); // NEW
+  }, []);
 
   useEffect(() => {
     let interval = null;
@@ -65,15 +74,30 @@ const OurFeatures1 = () => {
                     backgroundPosition: "center",
                   }}
                 >
-                  <span
-                    className="service-icon wow fadeInLeft"
-                    data-wow-delay=".1s"
-                  >
-                    <img src={item.icon} alt="icon" loading="lazy" />
-                  </span>
+                  {/* Upar wala icon - hamesha dikhna chahiye */}
+                  {index !== activeIndex && (
+                    <span
+                      className="service-icon wow fadeInLeft"
+                      data-wow-delay=".3s"
+                    >
+                      <img src={item.icon} alt="icon" loading="lazy" />
+                    </span>
+                  )}
+
                   <div className="service-content service-content-main">
                     <h4 className="box-title">{item.title}</h4>
                   </div>
+
+                  {/* Niche wala icon - sirf desktop me */}
+                  {index === activeIndex &&
+                    !isMobile && ( // NEW condition
+                      <span
+                        className="th-btn style2 wow fadeInRight"
+                        data-wow-delay=".3s"
+                      >
+                        <img src={item.icon} alt="icon" />
+                      </span>
+                    )}
                 </div>
               </div>
             ))}

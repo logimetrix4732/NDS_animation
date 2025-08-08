@@ -120,10 +120,7 @@ const OurExperties9 = () => {
           <div className="row justify-content-center">
             <div className="col-xxl-6 col-xl-9 col-lg-8">
               <div className="title-area text-center">
-                <span className="sub-title text-anime-style-2">Life @ NDS</span>
-                <h2 className="sec-title text-anime-style-3">
-                  Unlocking Growth Potential with Advanced Cloud Solutions
-                </h2>
+                <h2 className="sec-title text-anime-style-3">Life @ NDS</h2>
               </div>
             </div>
           </div>

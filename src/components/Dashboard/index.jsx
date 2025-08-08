@@ -10,6 +10,20 @@ const Dashboard = () => {
   const [openLeft, setOpenLeft] = useState(false);
   const location = useLocation();
   const [isSticky, setIsSticky] = useState(false);
+  const [showContact, setShowContact] = useState(window.innerWidth > 1533);
+  const [showDesktopMenu, setShowDesktopMenu] = useState(
+    window.innerWidth > 1417
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setShowContact(window.innerWidth > 1533);
+      setShowDesktopMenu(window.innerWidth > 1417);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -121,7 +135,7 @@ const Dashboard = () => {
                           } ${isSticky ? "" : "white-link"}`}
                           to="/milkproducer"
                         >
-                          Milk Producer Org.
+                          Milk Producer Organisations
                         </Link>
                       </li>
                       <li>
@@ -133,7 +147,7 @@ const Dashboard = () => {
                           } ${isSticky ? "" : "white-link"}`}
                           to="/animalProductivity"
                         >
-                          Animal Productivity
+                          Animal Productivity Services
                         </Link>
                       </li>
                       <li>
@@ -199,30 +213,34 @@ const Dashboard = () => {
                   <div
                     className="header-button"
                     style={{
-                      marginLeft: "65px",
+                      marginLeft: "100px",
                     }}
                   >
-                    <a
-                      href="/contactUs"
-                      className="th-btn th-icon d-none d-xxl-block"
-                    >
-                      Contact Us
-                      <i className="fa-light fa-arrow-right-long"></i>
-                    </a>
-                    <button
-                      type="button"
-                      className={`icon-btn ${isSticky ? "" : "white-link"}`}
-                      data-bs-toggle="offcanvas"
-                      data-bs-target="#desktopMenu"
-                      aria-controls="desktopMenu"
-                      style={{
-                        borderRadius: "8px",
-                        textDecoration: "none",
-                      }}
-                      onClick={() => setOpenRight(true)}
-                    >
-                      <i className="fa-solid fa-bars"></i>
-                    </button>
+                    {showContact && (
+                      <a
+                        href="/contactUs"
+                        className="th-btn th-icon d-none d-xxl-block"
+                      >
+                        Contact Us
+                        <i className="fa-light fa-arrow-right-long"></i>
+                      </a>
+                    )}
+
+                    {showDesktopMenu && (
+                      <button
+                        type="button"
+                        className="icon-btn"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#desktopMenu"
+                        aria-controls="desktopMenu"
+                        style={{
+                          borderRadius: "8px",
+                        }}
+                        onClick={() => setOpenRight(true)}
+                      >
+                        <i className="fa-solid fa-bars"></i>
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

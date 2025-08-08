@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideMenu from "../SideMenu";
 import nds_logo from "../../assets/img/nds_logo.png";
 import { Link, useLocation } from "react-router-dom";
@@ -9,6 +9,21 @@ const Header = () => {
   const [openLeft, setOpenLeft] = useState(false);
   const location = useLocation();
   const currentPath = location.pathname;
+  const [showContact, setShowContact] = useState(window.innerWidth > 1533);
+  const [showDesktopMenu, setShowDesktopMenu] = useState(
+    window.innerWidth > 1417
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setShowContact(window.innerWidth > 1533);
+      setShowDesktopMenu(window.innerWidth > 1417);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <React.Fragment>
       <header className="th-header header-layout1 header-layout2">
@@ -72,7 +87,7 @@ const Header = () => {
                           }
                           to="/milkproducer"
                         >
-                          Milk Producer Org.
+                          Milk Producer Organisations
                         </Link>
                       </li>
                       <li className="">
@@ -84,7 +99,7 @@ const Header = () => {
                           }
                           to="/animalProductivity"
                         >
-                          Animal Productivity
+                          Animal Productivity Services
                         </Link>
                       </li>
                       <li className="">
@@ -145,29 +160,34 @@ const Header = () => {
                   <div
                     className="header-button"
                     style={{
-                      marginLeft: "65px",
+                      marginLeft: "100px",
                     }}
                   >
-                    <a
-                      href="/contactUs"
-                      className="th-btn th-icon d-none d-xxl-block"
-                    >
-                      Contact Us
-                      <i className="fa-light fa-arrow-right-long"></i>
-                    </a>
-                    <button
-                      type="button"
-                      className="icon-btn"
-                      data-bs-toggle="offcanvas"
-                      data-bs-target="#desktopMenu"
-                      aria-controls="desktopMenu"
-                      style={{
-                        borderRadius: "8px",
-                      }}
-                      onClick={() => setOpenRight(true)}
-                    >
-                      <i className="fa-solid fa-bars"></i>
-                    </button>
+                    {showContact && (
+                      <a
+                        href="/contactUs"
+                        className="th-btn th-icon d-none d-xxl-block"
+                      >
+                        Contact Us
+                        <i className="fa-light fa-arrow-right-long"></i>
+                      </a>
+                    )}
+
+                    {showDesktopMenu && (
+                      <button
+                        type="button"
+                        className="icon-btn"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#desktopMenu"
+                        aria-controls="desktopMenu"
+                        style={{
+                          borderRadius: "8px",
+                        }}
+                        onClick={() => setOpenRight(true)}
+                      >
+                        <i className="fa-solid fa-bars"></i>
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

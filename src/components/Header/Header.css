@@ -1,3 +1,37 @@
+.main-menu {
+  /* overflow-x: auto; */
+  flex-grow: 1;
+}
+
+.main-menu ul {
+  /* display: flex; */
+  flex-wrap: nowrap;
+  /* overflow-x: auto; */
+  white-space: nowrap;
+  scrollbar-width: none; /* Firefox */
+}
+
+.main-menu ul::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.main-menu ul li {
+  flex-shrink: 0;
+  padding: 0 10px;
+}
+
+/* Default: hide the button */
+.hide-below-1508 {
+  display: none !important;
+}
+
+/* Show the button only when screen is ≥1508px */
+@media (min-width: 1508px) {
+  .hide-below-1508 {
+    display: inline-block !important;
+  }
+}
+
 a {
   text-decoration: none !important;
 }
