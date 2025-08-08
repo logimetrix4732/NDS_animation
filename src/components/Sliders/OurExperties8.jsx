@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // Import Background
 import linePatternBg from "../../assets/img/bg/line-pattern2.png";
@@ -48,6 +48,16 @@ const services = [
 ];
 
 const OurExperties8 = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prevIndex) => (prevIndex + 1) % services.length);
+    }, 3000); // Change service every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div
       className="service-area bg-top-center position-relative space-top overflow-hidden"
@@ -72,7 +82,7 @@ const OurExperties8 = () => {
             {services.map((service, index) => (
               <div
                 className={`service-list-wrap sv-list2 ${
-                  index === 3 ? "active" : ""
+                  index === activeIndex ? "active" : ""
                 }`}
                 key={index}
               >

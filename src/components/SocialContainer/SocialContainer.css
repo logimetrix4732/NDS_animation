@@ -7,6 +7,18 @@
     overflow-x: hidden;
   }
 }
+@media (max-height: 650px) {
+  .LeftSideContent .sec-title {
+    font-size: 1.4rem !important;
+  }
+  .LeftSideContent .contact-text2 {
+    font-size: 0.85rem !important;
+  }
+  .LeftSideContent .sub-title {
+    font-size: 0.8rem !important;
+  }
+}
+
 /* ------------------------------------------------------------- major highlight */
 .card-box {
   transition: transform 0.3s ease, box-shadow 0.3s ease,

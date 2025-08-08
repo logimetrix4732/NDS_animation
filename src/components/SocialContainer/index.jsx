@@ -87,19 +87,35 @@ const SocialContainer = () => {
     >
       {/* Left Side Content */}
       <div className="container LeftSideContent">
-        <div className="row gy-4 justify-content-between align-items-center">
+        <div className="row gy-4 justify-content-start align-items-start">
           <div className="col-lg-6 col-xl-6">
-            <div className="text-center text-lg-start">
-              <div className="title-area contact6-title pe-xl-5 me-xl-5">
+            <div className="text-lg-start">
+              <div
+                className="title-area contact6-title pe-xl-5 me-xl-5"
+                style={{
+                  paddingBottom: "2rem",
+                }}
+              >
                 <span
-                  className="sub-title text-white text-anime-style-2 wow fadeInUp"
-                  data-wow-delay=".4s"
+                  className="sub-title text-white"
+                  style={{
+                    fontSize: "1rem",
+                    display: "block",
+                    marginBottom: "0.5rem",
+                  }}
                 >
                   Connect with Us
                 </span>
+
                 <h2
-                  className="sec-title text-white text-anime-style-2"
-                  style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}
+                  className="sec-title text-white"
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "6px",
+                    fontSize: "2.2rem",
+                    lineHeight: 1.2,
+                  }}
                 >
                   {[
                     "Join",
@@ -112,8 +128,6 @@ const SocialContainer = () => {
                   ].map((word, index) => (
                     <span
                       key={index}
-                      className="wow fadeInUp"
-                      data-wow-delay={`${index * 0.2}s`}
                       style={{
                         display: "inline-block",
                         fontWeight: "bold",
@@ -123,16 +137,11 @@ const SocialContainer = () => {
                       {word}
                     </span>
                   ))}
-
-                  {/* Animated "NDDB Dairy Services" together */}
                   <span
-                    className="wow fadeInUp"
-                    data-wow-delay={`${7 * 0.2}s`} // 1.4s delay after last word
                     style={{
                       display: "inline-block",
                       fontWeight: "bold",
                       whiteSpace: "nowrap",
-                      textTransform: "none",
                     }}
                   >
                     NDDB Dairy Services
@@ -140,8 +149,11 @@ const SocialContainer = () => {
                 </h2>
 
                 <p
-                  className="contact-text2 text-white wow fadeInUp"
-                  data-wow-delay=".3s"
+                  className="contact-text2 text-white"
+                  style={{
+                    fontSize: "1rem",
+                    marginTop: "0.75rem",
+                  }}
                 >
                   Stay connected through our social media channels and be a part
                   of the innovations, stories, and progress shaping India's
