@@ -154,9 +154,9 @@ const SocialContainer = () => {
                     marginTop: "0.75rem",
                   }}
                 >
-                  Stay connected through our social media channels and be a part
-                  of the innovations, stories, and progress shaping India's
-                  dairy future.
+                  Follow us on social media to stay updated on the innovations,
+                  inspiring stories and milestones shaping the future of dairy
+                  in India.
                 </p>
               </div>
             </div>
