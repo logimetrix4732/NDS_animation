@@ -98,6 +98,7 @@ const SemenStations = () => {
                   selectedState={selectedState}
                   hoveredState={hoveredState}
                   coveredStates={coveredStates}
+                  title="Animal Productivity Services"
                 />
               </Box>
             </Fade>
@@ -167,7 +168,7 @@ const SemenStations = () => {
                             marginTop: "8px",
                           }}
                         >
-                          Milk Producer Organisations
+                          Animal Productivity Services
                         </Typography>
                       </Box>
 

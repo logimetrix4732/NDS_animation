@@ -10,6 +10,7 @@ const MilkIndiaMap = ({
   selectedState,
   hoveredState,
   coveredStates,
+  title,
 }) => {
   const getColor = (stateName) => {
     return coveredStates.includes(stateName) ? "#daafa9" : "#87CEFA";
@@ -69,7 +70,7 @@ const MilkIndiaMap = ({
                   onMouseEnter={() => {
                     if (isCovered) {
                       onStateHover(stateName);
-                      setTooltip(`${stateName}: Milk Producer Organisation`);
+                      setTooltip(`${stateName}:${title}`);
                     }
                   }}
                   onMouseLeave={() => {

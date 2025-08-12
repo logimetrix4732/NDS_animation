@@ -147,6 +147,7 @@ const MilkProducer = () => {
                   selectedState={selectedState}
                   hoveredState={hoveredState}
                   coveredStates={coveredStates}
+                  title="Milk Producer Organisation"
                 />
               </Box>
             </Fade>
