@@ -14,12 +14,12 @@ const AboutSection1 = () => {
       grassroots entrepreneurship across underserved regions of the country.
       Through collective ownership, access to transparent milk pricing and
       regular income flows, member farmers have gained greater financial
-      stability. The consistent availability of productivity services - such as
-      Artificial Insemination, cattle feed and fodder - has led to improved
-      animal health, increased milk yields and enhanced profitability at the
-      farm level. Moreover, MPOs have acted as local hubs of knowledge transfer,
-      capacity building and veterinary care bringing long-term benefits to both
-      farmers and their animals.
+      stability. The consistent availability of productivity enhancement
+      services - such as Artificial Insemination, cattle feed and fodder - has
+      led to improved animal health, increased milk yields and enhanced
+      profitability at the farm level. Moreover, MPOs have acted as local hubs
+      of knowledge transfer, capacity building and veterinary care delivering
+      long-term benefits to both farmers and their animals.
       <br />
       <br />
       A defining hallmark of the MPO movement is its deep-rooted commitment to

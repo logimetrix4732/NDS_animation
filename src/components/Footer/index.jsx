@@ -35,7 +35,7 @@ const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className="fab fa-twitter" />
+                    <i className="ri-twitter-x-fill" />
                   </a>
                   <a
                     href="https://www.linkedin.com/company/nddb-dairy-services/"

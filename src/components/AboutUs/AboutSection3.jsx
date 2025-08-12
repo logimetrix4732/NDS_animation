@@ -20,17 +20,17 @@ const AboutSection3 = () => {
             </div>
             <p className="sec-text mb-10 wow fadeInUp">
               Improving animal productivity and advancing breed quality is a key
-              objective of NDS. We owned and managed the four major semen
-              stations in the country – Sabarmati Ashram Gaushala in Bidaj
-              (Gujarat); Animal Breeding Centre, Salon (Uttar Pradesh); Alamadhi
-              Semen Station (Tamil Nadu); and Rahuri Semen Station
-              (Maharashtra), that produce and supply high-quality bovine semen
-              under the ‘SAG’ (Superior Animal Genetics) brand, to promote
-              genetic improvement in milch animals. Collectively catering over
-              35% of the country’s semen dose requirement, these stations form
-              the backbone of our genetic improvement programmes with a strong
-              focus on enhancing productivity, fertility, and overall
-              profitability in the dairy sector.
+              objective of NDS. We own and manage the four major semen stations
+              in the country – Sabarmati Ashram Gaushala in Bidaj (Gujarat);
+              Animal Breeding Centre, Salon (Uttar Pradesh); Alamadhi Semen
+              Station (Tamil Nadu); and Rahuri Semen Station (Maharashtra), that
+              produce and supply high-quality bovine semen under the ‘SAG’
+              (Superior Animal Genetics) brand, to promote genetic improvement
+              in milch animals. Collectively catering over 35% of the country’s
+              semen dose requirement, these stations form the backbone of our
+              genetic improvement programmes with a strong focus on enhancing
+              productivity, fertility, and overall profitability in the dairy
+              sector.
             </p>
             <div className="mt-30 wow fadeInUp" data-wow-delay=".4s">
               <Link to="/animalProductivity" className="th-btn th-icon">

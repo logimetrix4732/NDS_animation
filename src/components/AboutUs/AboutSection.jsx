@@ -59,7 +59,7 @@ const AboutSection = () => {
                   Enhancement Services for milch animals.
                   <br />
                   NDS works towards enhancing rural livelihoods by assisting
-                  farmers in establishing ‘Producer owned enterprises’ (POEs)
+                  farmers in establishing ‘Producer Owned Enterprises’ (POEs)
                   which are incorporated under provisions of Part XXI A of the
                   Companies Act. These enterprises run on the principles of
                   mutual assistance.
@@ -74,7 +74,7 @@ const AboutSection = () => {
                   <br />
                   Committed to inclusive growth, NDS empowers smallholder dairy
                   farmers, especially women, and facilitates access to markets,
-                  technology, and capacity building contributing to a
+                  technology, and capacity building, contributing to a
                   self-reliant and robust rural dairy sector.
                 </p>
               </div>

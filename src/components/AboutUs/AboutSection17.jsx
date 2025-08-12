@@ -40,9 +40,9 @@ const AboutSection17 = () => {
                 (Gujarat); Animal Breeding Centre, Salon (Uttar Pradesh);
                 Alamadhi Semen Station (Tamil Nadu); and Rahuri Semen Station
                 (Maharashtra), that produce and supply high-quality bovine semen
-                under the SAG (Superior Animal Genetics) brand, to promote
+                under the SAG (Superior Animal Genetics) brand to promote
                 genetic improvement in milch animals. Collectively catering over
-                35% of the country’s semen dose requirement, these station form
+                35% of the country’s semen dose requirement these stations form
                 the backbone of our genetic improvement programmes with a strong
                 focus on enhancing productivity, fertility and overall
                 profitability in the dairy sector.

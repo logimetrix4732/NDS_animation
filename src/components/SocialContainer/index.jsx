@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import SocialContainerImg from "../../Images/SocialContainerImg1.jpg";
-import "./SocialContainer.css";
 import DSC_0344 from "../../Images/HomeImgs/DSC_0271.JPG";
+import "./SocialContainer.css";
 const icons = [
   {
     class: "ri-youtube-fill",
@@ -14,7 +13,7 @@ const icons = [
     color: "#0077B5",
   },
   {
-    class: "ri-twitter-line",
+    class: "ri-twitter-x-fill",
     url: "https://x.com/NDDBDairyServ",
     color: "#1DA1F2",
   },

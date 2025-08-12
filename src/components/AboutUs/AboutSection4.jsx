@@ -84,7 +84,7 @@ const AboutSection4 = () => {
                 NDDB Dairy Services (NDS) is a Section 8 company registered
                 under the Companies Act, 2013. It is a wholly-owned subsidiary
                 of the National Dairy Development Board (NDDB), and plays a
-                pivotal role in strengthening the dairy sector in India through
+                pivotal role in strengthening India’s dairy sector through
                 innovative, sustainable, and inclusive development models.
                 <br />
                 Established to operationalize NDDB’s vision of creating a

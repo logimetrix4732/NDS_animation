@@ -32,7 +32,7 @@ const AboutSection2 = () => {
                 opportunities, financial independence and community leadership.
                 Here we share real stories of courage, resilience and
                 transformation directly from the women who are redefining rural
-                India
+                India.
               </p>
             </div>
             <div className="img-box8">
@@ -144,7 +144,7 @@ const AboutSection2 = () => {
                       />
                     </span>
                     <p className="sec-text wow fadeInUp" data-wow-delay=".2s">
-                      From milking to managing, Women are leading dairy
+                      From milking to managing, women are leading dairy
                       cooperatives with confidence.
                     </p>
                   </li>

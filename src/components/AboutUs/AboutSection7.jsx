@@ -28,7 +28,7 @@ const AboutSection7 = () => {
       "Our semen stations together produce and distribute about 50 million semen doses annually. Across India, the widespread use of SAG Frozen Semen Doses (FSD) leads to the birth of a high genetic merit calf every two seconds. NDS managed semen stations are graded ‘A’ by the Central Monitoring Unit (CMU), Government of India and have been consistently ranked among the top semen stations in the country.",
       "A key technological advancement is the introduction of indigenous sex sorted semen technology called Gausort. Developed by NDDB with support from the DAHD, GoI, this innovation envisions to transform the country’s dairy ecosystem by increasing the birth of female calves and enhancing the genetic quality and productivity of dairy herds. NDS by contributions to the commercialisation is making cost effective sex-sorted semen accessible for farmers, Gausort will help improve farm profitability and contribute to sustainable dairy development across India.",
       "We focus on -  ",
-      "♦ Genetic Selection - Sourcing and breeding genetically superior bulls through structured Progeny Testing and Pedigree Selection programs",
+      "♦ Genetic Selection - Sourcing and breeding genetically superior bulls through structured Progeny Testing and Pedigree Selection programs.",
       "♦ Biosecurity & Welfare - Ensuring animal health, comfort and biosecurity through high-standard management practices. ",
       "♦ Technology Integration - Using digital platforms for semen inventory, traceability and performance tracking. ",
       "♦ Farmer Access - Facilitating seamless access to quality semen through Producer Organisations and field AI networks. ",

@@ -13,7 +13,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import nds_logo from "../../assets/img/nds_logo.png";
-import TwitterIcon from "@mui/icons-material/Twitter";
+import XIcon from "@mui/icons-material/X";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import YouTubeIcon from "@mui/icons-material/YouTube";
@@ -77,7 +77,7 @@ const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
             link: "https://www.facebook.com/people/NDDB-Dairy-Services/61557086137103/",
           },
           {
-            icon: TwitterIcon,
+            icon: XIcon,
             link: "https://x.com/NDDBDairyServ",
           },
           {

@@ -18,9 +18,9 @@ const strategies = [
     title: "Strategy to Success",
     title1: "Strategy to Success",
     subtitle: "Strategic Planning for Sustainable Foundations",
-    desc: "We begin by assessing the existing dairy ecosystem- milk production potential, infrastructure and socio-economic context...",
+    desc: "We begin by assessing the existing dairy ecosystem-including its milk production potential, infrastructure and socio-economic...",
     mainDesc:
-      "We begin by assessing the existing dairy ecosystem- milk production potential, infrastructure and socio-economic context of farmers. Based on this, a detailed project plan is developed covering financial modelling, infrastructure requirements, human resource needs, and institutional goals. Our planning approach ensures alignment with local aspirations and national economic goals while maintaining financial and operational sustainability. We ensure cohesive implementation by integrating the efforts of field teams, local institutions, partner organisations and producer members. Our monitoring framework uses digital tools and periodic field reviews to track progress, resolve bottlenecks and adapt strategies swiftly. ",
+      "We begin by assessing the existing dairy ecosystem-including its milk production potential, infrastructure and socio-economic context of farmers. Based on this, a detailed project plan is developed covering financial modelling, infrastructure requirements, human resource needs, and institutional goals. Our planning approach ensures alignment with local aspirations and national economic goals while maintaining financial and operational sustainability. We ensure cohesive implementation by integrating the efforts of field teams, local institutions, partner organisations and producer members. Our monitoring framework uses digital tools and periodic field reviews to track progress, resolve bottlenecks and adapt strategies swiftly. ",
     img: StrategySuccess,
   },
   {
@@ -45,9 +45,9 @@ const strategies = [
     title: "Governance that fosters Trust",
     title1: "Governance that fosters Trust",
     subtitle: "Transparent and Participative Decision-Making ",
-    desc: "Governance defines how decisions are made and implemented—and ultimately, how trust is built within an organisation At NDS, we...",
+    desc: "Governance defines how decisions are made and implemented and ultimately, how trust is built within an organisation At NDS, we...",
     mainDesc:
-      "Governance defines how decisions are made and implemented—and ultimately, how trust is built within an organisation. At NDS, we support Producer Organisations in establishing strong and effective governance structures, such as well-functioning Boards that act in the best interests of their members.",
+      "Governance defines how decisions are made and implemented and ultimately, how trust is built within an organisation. At NDS, we support Producer Organisations in establishing strong and effective governance structures, such as well-functioning Boards that act in the best interests of their members.",
     spacingDesc:
       "We promote good governance through participation, transparency, accountability, predictability and rule of law. Our approach helps Producer Organisations use resources efficiently, reduce conflicts and monitor their activities effectively. By encouraging practices like member representation, apolitical boards, expert directors and policy-based decision-making, NDS supports Producer Organisations in building credibility and long-term success.",
     img: Governancethat,
@@ -131,7 +131,7 @@ const OurExperties7 = () => {
               self-reliance, and rural resilience. Through structured processes,
               scalable systems, and assured market access, we empower dairy
               farmers and help transition them from informal milk suppliers to
-              organised stakeholders—strengthening the cooperative movement
+              organised stakeholders strengthening the cooperative movement
               across India.
             </p>
           </div>

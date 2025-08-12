@@ -280,11 +280,11 @@ const MilkProducer = () => {
                                 </Typography>
 
                                 {/* Read More link */}
-                                <Link
+                                <a
                                   href={link}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  sx={{
+                                  style={{
                                     color: "white",
                                     textDecoration: "none",
                                     fontSize: "13px",
@@ -296,29 +296,34 @@ const MilkProducer = () => {
                                     background:
                                       "linear-gradient(145deg, var(--primary-color) 0%, var(--title-color) 100%)",
                                     transition: "all 0.3s ease",
-                                    "&:hover": {
-                                      background:
-                                        "linear-gradient(145deg, var(--title-color) 0%, var(--primary-color) 100%)",
-                                      color: "white",
-                                      transform: "scale(1.05)",
-                                      boxShadow:
-                                        "0 4px 12px rgba(164, 108, 53, 0.4)",
-                                    },
+                                  }}
+                                  onMouseOver={(e) => {
+                                    e.currentTarget.style.background =
+                                      "linear-gradient(145deg, var(--title-color) 0%, var(--primary-color) 100%)";
+                                    e.currentTarget.style.transform =
+                                      "scale(1.05)";
+                                    e.currentTarget.style.boxShadow =
+                                      "0 4px 12px rgba(164, 108, 53, 0.4)";
+                                  }}
+                                  onMouseOut={(e) => {
+                                    e.currentTarget.style.background =
+                                      "linear-gradient(145deg, var(--primary-color) 0%, var(--title-color) 100%)";
+                                    e.currentTarget.style.transform =
+                                      "scale(1)";
+                                    e.currentTarget.style.boxShadow = "none";
                                   }}
                                 >
                                   Read More
-                                  <Box
-                                    component="span"
-                                    sx={{
+                                  <span
+                                    style={{
                                       marginLeft: "6px",
                                       fontSize: "14px",
                                       fontWeight: "bold",
-                                      transition: "transform 0.3s ease",
                                     }}
                                   >
                                     →
-                                  </Box>
-                                </Link>
+                                  </span>
+                                </a>
                               </Box>
                             </Fade>
                           )
