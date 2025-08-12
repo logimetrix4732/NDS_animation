@@ -11,23 +11,23 @@ const SemenStations = () => {
   const dummyCompanyData = {
     "Uttar Pradesh": [
       {
-        "Animal Breeding Centre": "https://rahurisemenstation.com",
+        "Animal Breeding Centre": "https://abcsalon.org/",
       },
     ],
 
     Gujarat: [
       {
-        "Sabarmati Ashram Gaushala": "https://alamadhisemenstation.com",
+        "Sabarmati Ashram Gaushala": "https://sagbidaj.org/",
       },
     ],
     Maharashtra: [
       {
-        "Rahuri Semen Station": "https://abcsalon.org",
+        "Rahuri Semen Station": "https://rahurisemenstation.com",
       },
     ],
     "Tamil Nadu": [
       {
-        "Alamadhi Semen Station": "https://sagbidaj.org",
+        "Alamadhi Semen Station": "https://alamadhisemenstation.com",
       },
     ],
   };
