@@ -2,22 +2,6 @@ import React, { useState } from "react";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import indiaGeoJson from "../../india-states.geojson.json";
 
-const coveredStates = [
-  "Punjab",
-  "Haryana",
-  "Uttar Pradesh",
-  "Rajasthan",
-  "Madhya Pradesh",
-  "Gujarat",
-  "Maharashtra",
-  "Bihar",
-  "Andhra Pradesh",
-];
-
-const getColor = (stateName) => {
-  return coveredStates.includes(stateName) ? "#daafa9" : "#87CEFA";
-};
-
 const MilkIndiaMap = ({
   setHoveredState,
   onStateClick,
@@ -25,7 +9,11 @@ const MilkIndiaMap = ({
   onMapMouseLeave,
   selectedState,
   hoveredState,
+  coveredStates,
 }) => {
+  const getColor = (stateName) => {
+    return coveredStates.includes(stateName) ? "#daafa9" : "#87CEFA";
+  };
   const [tooltip, setTooltip] = useState("");
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
 

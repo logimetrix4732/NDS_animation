@@ -77,7 +77,17 @@ const MilkProducer = () => {
       },
     ],
   };
-
+  const coveredStates = [
+    "Punjab",
+    "Haryana",
+    "Uttar Pradesh",
+    "Rajasthan",
+    "Madhya Pradesh",
+    "Gujarat",
+    "Maharashtra",
+    "Bihar",
+    "Andhra Pradesh",
+  ];
   const handleStateClick = (stateName) => {
     if (selectedState === stateName) {
       setSelectedState(null);
@@ -136,6 +146,7 @@ const MilkProducer = () => {
                   onMapMouseLeave={handleMapMouseLeave}
                   selectedState={selectedState}
                   hoveredState={hoveredState}
+                  coveredStates={coveredStates}
                 />
               </Box>
             </Fade>
