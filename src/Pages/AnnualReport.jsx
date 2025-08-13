@@ -1,10 +1,15 @@
 import React from "react";
-import AnnualReportList from "../components/AnnualReportComponents/AnnualReportList";
+import CommonBanner from "../components/BannersComponents/CommonBanner";
+import ReportsSection from "../components/AnnualReportComponents/ReportsSection";
 
 const AnnualReport = () => {
   return (
     <div>
-      <AnnualReportList />
+      <CommonBanner
+        title="Annual Report"
+        breadcrumbs={[{ label: "Home", path: "/" }, { label: "About Us" }]}
+      />
+      <ReportsSection />
     </div>
   );
 };

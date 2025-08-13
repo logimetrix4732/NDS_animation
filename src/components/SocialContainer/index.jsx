@@ -33,7 +33,7 @@ const SocialContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
 
-  const radius = 200; // reduced from 262
+  const radius = 200;
   const startAngle = 180;
   const stepAngle = 25;
 
@@ -84,7 +84,6 @@ const SocialContainer = () => {
         zIndex: 1,
       }}
     >
-      {/* Left Side Content */}
       <div className="container LeftSideContent">
         <div className="row gy-4 justify-content-start align-items-start">
           <div className="col-lg-6 col-xl-6">
@@ -164,7 +163,6 @@ const SocialContainer = () => {
         </div>
       </div>
 
-      {/* Decorative Circles */}
       <div
         style={{
           position: "absolute",
@@ -210,7 +208,6 @@ const SocialContainer = () => {
         }}
       />
 
-      {/* Social Icons */}
       <div
         className="social-wrapper"
         style={{
