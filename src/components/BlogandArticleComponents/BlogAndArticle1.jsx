@@ -21,7 +21,7 @@ const BlogAndArticle1 = () => {
   const AboutUsContent = {
     title: "Animal Nutrition",
     content: [
-      "Ensuring proper animal nutrition is fundamental to improve milk productivity, animal health and farm profitability. Recognizing this need, NDS strategically entered the cattle feed market under the ‘SAG’ brand to strengthen the availability of scientifically formulated feed for dairy farmers across the country. By leveraging the network of MPOs and general trade channels, NDS ensures that quality inputs like cattle feed, mineral mixtures and high-yielding and nutritious fodder seeds reach efficiently to the farmers. These inputs play a vital role in addressing the widespread nutritional deficiencies commonly seen in dairy animals in rural India, ultimately supporting better milk yields and healthier livestock at the grassroots level.",
+      "Ensuring proper animal nutrition is fundamental to improve milk productivity, animal health and farm profitability. Recognizing this need, NDS strategically entered the cattle feed market under the ‘SAG’ brand to strengthen the availability of scientifically formulated feed for dairy farmers across the country. By leveraging the network of MPOs and general trade channels, NDS ensures that quality inputs like cattle feed and mineral mixture and high-yielding and nutritious fodder seeds reach efficiently to the farmers. These inputs play a vital role in addressing the widespread nutritional deficiencies commonly seen in dairy animals in rural India, ultimately supporting better milk yields and healthier livestock at the grassroots level.",
       "To promote balanced feeding practices, NDS guides Producer Organisation in implementing Ration Balancing Services. These services are designed to educate farmers on optimizing available feed resources to meet the specific nutritional needs of their animals based on age, breed and stage of lactation.   ",
       "Key focus areas include :-",
       "♦ Heat stress mitigation techniques during summer ",
@@ -86,7 +86,7 @@ const BlogAndArticle1 = () => {
                   availability of scientifically formulated feed for dairy
                   farmers across the country. By leveraging the network of MPOs
                   and general trade channels, NDS ensures that quality inputs
-                  like cattle feed, mineral mixtures
+                  like cattle feed and mineral mixture.
                 </p>
                 <div class="about-feature-wrap">
                   <div class="about-feature-list">

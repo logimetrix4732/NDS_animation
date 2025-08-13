@@ -9,7 +9,7 @@ import BeyondCollection from "../../Images/MilkProducerImg/BeyondCollection.jpg"
 import Governancethat from "../../Images/MilkProducerImg/Governancethat.jpg";
 import PeopleFirst from "../../Images/MilkProducerImg/PeopleFirst.jpg";
 import StrongRoots from "../../Images/MilkProducerImg/StrongRoots.JPG";
-import DrivingEfficiency from "../../Images/MilkProducerImg/DrivingEfficiency.JPG";
+import DrivingEfficiency from "../../Images/MilkProducerImg/DrivingEfficiency1.jpg";
 import "swiper/css";
 import "swiper/css/navigation";
 import AnimatedText from "../AnimatedText";
@@ -18,9 +18,9 @@ const strategies = [
     title: "Strategy to Success",
     title1: "Strategy to Success",
     subtitle: "Strategic Planning for Sustainable Foundations",
-    desc: "We begin by assessing the existing dairy ecosystem-including its milk production potential, infrastructure and socio-economic...",
+    desc: "We begin by assessing the existing dairy its milk production potential, infrastructure and socio-economic...",
     mainDesc:
-      "We begin by assessing the existing dairy ecosystem-including its milk production potential, infrastructure and socio-economic context of farmers. Based on this, a detailed project plan is developed covering financial modelling, infrastructure requirements, human resource needs, and institutional goals. Our planning approach ensures alignment with local aspirations and national economic goals while maintaining financial and operational sustainability. We ensure cohesive implementation by integrating the efforts of field teams, local institutions, partner organisations and producer members. Our monitoring framework uses digital tools and periodic field reviews to track progress, resolve bottlenecks and adapt strategies swiftly. ",
+      "We begin by assessing the existing dairy its milk production potential, infrastructure and socio-economic context of farmers. Based on this, a detailed project plan is developed covering financial modelling, infrastructure requirements, human resource needs, and institutional goals. Our planning approach ensures alignment with local aspirations and national economic goals while maintaining financial and operational sustainability. We ensure cohesive implementation by integrating the efforts of field teams, local institutions, partner organisations and producer members. Our monitoring framework uses digital tools and periodic field reviews to track progress, resolve bottlenecks and adapt strategies swiftly. ",
     img: StrategySuccess,
   },
   {

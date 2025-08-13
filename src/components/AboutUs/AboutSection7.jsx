@@ -148,7 +148,7 @@ const AboutSection7 = () => {
                       <p className="sec-text wow fadeInUp" data-wow-delay=".2s">
                         Genetic Selection - Sourcing and breeding genetically
                         superior bulls through structured Progeny Testing and
-                        Pedigree Selection programs
+                        Pedigree Selection programs.
                       </p>
                     </li>
                     <li class="wow fadeInUp" data-wow-delay=".5s">

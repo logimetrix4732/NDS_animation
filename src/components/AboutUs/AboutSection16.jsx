@@ -62,13 +62,12 @@ const AboutSection16 = () => {
                   <br />
                   Smart Dairy Solutions is more than just a procurement channel,
                   it is a strategic step towards modernising rural dairying,
-                  reducing input.
+                  reducing input costs and empowering producers with tools that
+                  enhance productivity, animal welfare and operational
+                  efficiency. As a trusted partner in dairy excellence, NDS
+                  remains committed to support producer owned organisations
+                  through innovative, transparent and value driven solutions.
                 </p>
-                <div className=" wow fadeInUp" data-wow-delay=".4s">
-                  <button onClick={handleClickOpen} className="th-btn th-icon">
-                    Learn more <i className="fa-light fa-arrow-right-long" />
-                  </button>
-                </div>
               </div>
             </div>
           </div>

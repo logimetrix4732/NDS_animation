@@ -35,7 +35,7 @@ const AboutSection17 = () => {
               />
               <p className="sec-text mb-30 wow fadeInUp">
                 Improving animal productivity and advancing breed quality is a
-                key objective of NDS. We own/manage the four major semen
+                key objective of NDS. We own and manage the four major semen
                 stations in the country – Sabarmati Ashram Gaushala in Bidaj
                 (Gujarat); Animal Breeding Centre, Salon (Uttar Pradesh);
                 Alamadhi Semen Station (Tamil Nadu); and Rahuri Semen Station
