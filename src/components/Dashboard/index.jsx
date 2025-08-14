@@ -178,7 +178,7 @@ const Dashboard = () => {
                                 <Link to="/annualReport">Annual Reports</Link>
                               </li>
                               <li>
-                                <a href="cart.html">Policies</a>
+                                <Link to="/policies">Policies</Link>
                               </li>
                               <li>
                                 <a href="checkout.html">Others</a>
