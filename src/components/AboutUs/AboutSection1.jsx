@@ -1,6 +1,6 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
-import DSC_2883 from "../../Images/MilkProducerImg/DSC_6949.jpg";
+import DSC_2883 from "../../Images/MilkProducerImg/DSC_69494.jpg";
 
 const AboutSection1 = () => {
   const textContent = (

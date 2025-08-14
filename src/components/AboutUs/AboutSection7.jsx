@@ -3,7 +3,7 @@ import AnimatedText from "../AnimatedText";
 import { Link } from "react-router-dom";
 import DrawerModal from "../DrawerModal";
 import ME7A8877 from "../../Images/AnimalProductivityImg/ME7A8877.JPG";
-import sag from "../../Images/AnimalProductivityImg/sag.jpg";
+import sag from "../../Images/AnimalProductivityImg/semonStationApp.jpg";
 import _SUN7366 from "../../Images/AnimalProductivityImg/_SUN7366.JPG";
 import checkMarkIcon from "../../Images/HomeImgs/checkMarkIcon.png";
 import { useTheme, useMediaQuery } from "@mui/material";
