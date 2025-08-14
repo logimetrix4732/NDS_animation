@@ -18,7 +18,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-
+import InstagramIcon from "@mui/icons-material/Instagram";
 const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
   const menuItems = [
     { text: "Home", to: "/" },
@@ -74,7 +74,7 @@ const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
         {[
           {
             icon: FacebookIcon,
-            link: "https://www.facebook.com/people/NDDB-Dairy-Services/61557086137103/",
+            link: "https://www.facebook.com/SuperiorAnimalGenetics",
           },
           {
             icon: XIcon,
@@ -87,6 +87,10 @@ const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
           {
             icon: YouTubeIcon,
             link: "https://www.youtube.com/@nddbdairyservices6754",
+          },
+          {
+            icon: InstagramIcon,
+            link: "https://www.instagram.com/sag_superioranimalgenetics/",
           },
         ].map(({ icon: Icon, link }, idx) => (
           <a

@@ -172,7 +172,7 @@ const Dashboard = () => {
                             <a href="#">Publications</a>
                             <ul class="sub-menu">
                               <li>
-                                <a href="checkout.html">HR Compliances</a>
+                                <Link to="/HR">HR Compliances</Link>
                               </li>
                               <li>
                                 <Link to="/annualReport">Annual Reports</Link>

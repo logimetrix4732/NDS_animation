@@ -6,9 +6,14 @@ import {
   CardMedia,
   Typography,
   Button,
-  Grid,
 } from "@mui/material";
-import { Download, Language } from "@mui/icons-material";
+import { Download } from "@mui/icons-material";
+import annualreport5 from "../../Images/AnnualReportImg/cover.jpg";
+import annualreport4 from "../../Images/AnnualReportImg/cover-1.jpg";
+import annualreport from "../../Images/AnnualReportImg/annual-report-2015-16.jpg";
+import annualreport1 from "../../Images/AnnualReportImg/annual-report-2016-17.jpg";
+import annualreport2 from "../../Images/AnnualReportImg/annual-report-2017-18.jpg";
+import annualreport3 from "../../Images/AnnualReportImg/annual-report-2018-19.jpg";
 import "./ReportsSection.css";
 const reports = [
   {
@@ -16,42 +21,42 @@ const reports = [
     title: "Purposeful Growth, Meaningful Impact",
     description:
       "Annual Report showcasing our commitment to sustainable growth and community impact.",
-    image: "https://images.pexels.com/photos/3184302/pexels-photo-3184302.jpeg",
+    image: annualreport,
   },
   {
     year: "2022-23",
     title: "Innovation & Excellence",
     description:
       "Comprehensive overview of our technological advancements and market achievements.",
-    image: "https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg",
+    image: annualreport1,
   },
   {
     year: "2021-22",
     title: "Empowering Communities",
     description:
       "Highlighting our social initiatives and community development programs.",
-    image: "https://images.pexels.com/photos/3182753/pexels-photo-3182753.jpeg",
+    image: annualreport2,
   },
   {
-    year: "2023-24",
+    year: "2020-21",
     title: "Purposeful Growth, Meaningful Impact",
     description:
       "Annual Report showcasing our commitment to sustainable growth and community impact.",
-    image: "https://images.pexels.com/photos/3184302/pexels-photo-3184302.jpeg",
+    image: annualreport3,
   },
   {
-    year: "2022-23",
+    year: "2019-20",
     title: "Innovation & Excellence",
     description:
       "Comprehensive overview of our technological advancements and market achievements.",
-    image: "https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg",
+    image: annualreport4,
   },
   {
-    year: "2021-22",
+    year: "2018-19",
     title: "Empowering Communities",
     description:
       "Highlighting our social initiatives and community development programs.",
-    image: "https://images.pexels.com/photos/3182753/pexels-photo-3182753.jpeg",
+    image: annualreport5,
   },
 ];
 
@@ -103,7 +108,7 @@ export default function ReportsSection() {
                   <Typography
                     variant="body2"
                     sx={{
-                      backgroundColor: "#d9c0a2",
+                      backgroundColor: "#a97b4b",
                       display: "inline-block",
                       px: 1.5,
                       py: 0.5,
@@ -121,13 +126,6 @@ export default function ReportsSection() {
                     sx={{ mt: 1.5, fontWeight: "bold", color: "#8B5E34" }}
                   >
                     {report.title}
-                  </Typography>
-
-                  <Typography
-                    variant="body2"
-                    sx={{ mt: 1, color: "#555", lineHeight: 1.5 }}
-                  >
-                    {report.description}
                   </Typography>
                 </Box>
 
@@ -147,7 +145,7 @@ export default function ReportsSection() {
                   </Button>
                   <Button
                     variant="outlined"
-                    startIcon={<Language />}
+                    startIcon={<Download />}
                     sx={{
                       color: "#bd8f59",
                       borderColor: "#bd8f59",

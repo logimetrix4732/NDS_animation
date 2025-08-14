@@ -24,6 +24,8 @@ const MilkProducer = () => {
         "Srijanee Milk Producer Organisation": "https://www.srijaneemilk.com",
         "Saamarthya Milk Producer Organisation":
           "https://www.saamarthyamilk.com",
+        "Shri Baba Gorakhnath Kripaa Milk Producer Organisation":
+          "https://shrigorakhmilk.com",
       },
     ],
     "Madhya Pradesh": [
@@ -43,6 +45,7 @@ const MilkProducer = () => {
         "Bapudham Milk Producer Organisation": "https://www.bapudhammilk.com",
         "Kaushikee Mahila Milk Producer Organisation":
           "https://www.kaushikeemilk.com",
+        "Dudhshree Milk Producer Organisation": "https://www.dudhshreemilk.com",
       },
     ],
     Rajasthan: [

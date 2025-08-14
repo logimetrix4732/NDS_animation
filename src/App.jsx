@@ -19,6 +19,7 @@ import GalleryPage from "./Pages/GalleryPage";
 import MilkIndiaMap from "./components/MapComponent/MilkIndiaMap";
 import TenderPage from "./Pages/TenderPage";
 import AnnualReport from "./Pages/AnnualReport";
+import HRCompliances from "./Pages/HRCompliances";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -54,6 +55,7 @@ const App = () => {
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/tender" element={<TenderPage />} />
         <Route path="/annualReport" element={<AnnualReport />} />
+        <Route path="/HR" element={<HRCompliances />} />
         <Route path="*" element={<Errors />} />
       </Routes>
       <Footer />

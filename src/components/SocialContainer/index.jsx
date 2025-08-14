@@ -19,12 +19,12 @@ const icons = [
   },
   {
     class: "ri-facebook-fill",
-    url: "https://www.facebook.com/people/NDDB-Dairy-Services/61557086137103/",
+    url: "https://www.facebook.com/SuperiorAnimalGenetics",
     color: "#1877F2",
   },
   {
     class: "ri-instagram-line",
-    url: "https://www.instagram.com/dudh.nddb/",
+    url: "https://www.instagram.com/sag_superioranimalgenetics/",
     color: "#E1306C",
   },
 ];

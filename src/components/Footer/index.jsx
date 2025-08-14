@@ -24,7 +24,7 @@ const Footer = () => {
                 </p>
                 <div className="th-social">
                   <a
-                    href="https://www.facebook.com/people/NDDB-Dairy-Services/61557086137103/"
+                    href="https://www.facebook.com/SuperiorAnimalGenetics"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -50,6 +50,13 @@ const Footer = () => {
                     rel="noopener noreferrer"
                   >
                     <i className="fab fa-youtube" />
+                  </a>
+                  <a
+                    href="https://www.youtube.com/@nddbdairyservices6754"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="ri-instagram-line" />
                   </a>
                 </div>
               </div>
