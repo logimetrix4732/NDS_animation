@@ -21,6 +21,7 @@ import TenderPage from "./Pages/TenderPage";
 import AnnualReport from "./Pages/AnnualReport";
 import HRCompliances from "./Pages/HRCompliances";
 import PoliciesPage from "./Pages/PoliciesPage";
+import AdminPage from "./Pages/AdminPage";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -58,6 +59,7 @@ const App = () => {
         <Route path="/annualReport" element={<AnnualReport />} />
         <Route path="/HR" element={<HRCompliances />} />
         <Route path="/policies" element={<PoliciesPage />} />
+        <Route path="/AdminPage" element={<AdminPage />} />
         <Route path="*" element={<Errors />} />
       </Routes>
       <Footer />
