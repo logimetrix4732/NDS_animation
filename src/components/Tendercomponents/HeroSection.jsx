@@ -122,7 +122,7 @@ const HeroSection = () => {
                   lineHeight: 1.1,
                 }}
               >
-                Modern Tender Management
+                Tender Details
               </Typography>
 
               <Typography

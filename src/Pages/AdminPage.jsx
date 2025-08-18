@@ -69,8 +69,8 @@ const getDesignTokens = (mode) => ({
     primary: { main: mode === "dark" ? "#90caf9" : "#1565c0" },
     secondary: { main: mode === "dark" ? "#ffb74d" : "#ef6c00" },
     background: {
-      default: mode === "dark" ? "#0b1020" : "#f6f8fc",
-      paper: mode === "dark" ? "#0f1629" : "#ffffff",
+      default: mode === "dark" ? "#f6f8fc" : "#f6f8fc",
+      paper: mode === "dark" ? "#ffffff" : "#ffffff",
     },
   },
   shape: { borderRadius: 16 },
@@ -175,105 +175,6 @@ export default function AdminPage() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box sx={{ display: "flex", minHeight: "100vh" }}>
-        {/* AppBar */}
-        <AppBar
-          position="fixed"
-          elevation={0}
-          sx={{
-            backdropFilter: "blur(8px)",
-            backgroundColor: (t) =>
-              t.palette.mode === "dark"
-                ? "rgba(10, 14, 25, 0.7)"
-                : "rgba(255,255,255,0.7)",
-            borderBottom: 1,
-            borderColor: "divider",
-          }}
-        >
-          <Toolbar>
-            <IconButton
-              edge="start"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              sx={{ mr: 1 }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <DashboardIcon sx={{ mr: 1 }} />
-            <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700 }}>
-              Pro Dashboard
-            </Typography>
-
-            <Paper
-              component="form"
-              onSubmit={(e) => e.preventDefault()}
-              sx={{
-                display: { xs: "none", md: "flex" },
-                alignItems: "center",
-                px: 1,
-                py: 0.5,
-                mr: 2,
-                width: 360,
-              }}
-              elevation={0}
-            >
-              <IconButton>
-                <SearchIcon />
-              </IconButton>
-              <TextField
-                variant="standard"
-                placeholder="Search companies, owners, status…"
-                fullWidth
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                InputProps={{ disableUnderline: true }}
-              />
-            </Paper>
-
-            <Stack direction="row" spacing={1} alignItems="center">
-              <Tooltip title="Toggle theme">
-                <IconButton
-                  onClick={() =>
-                    setMode((m) => (m === "light" ? "dark" : "light"))
-                  }
-                >
-                  {mode === "light" ? <DarkMode /> : <LightMode />}
-                </IconButton>
-              </Tooltip>
-              <IconButton>
-                <Notifications />
-              </IconButton>
-              <Avatar sx={{ width: 34, height: 34 }}>AS</Avatar>
-            </Stack>
-          </Toolbar>
-        </AppBar>
-
-        {/* Drawer */}
-        <Drawer
-          variant="temporary"
-          open={mobileOpen}
-          onClose={() => setMobileOpen(false)}
-          ModalProps={{ keepMounted: true }}
-          sx={{
-            display: { xs: "block", md: "none" },
-            "& .MuiDrawer-paper": { width: drawerWidth },
-          }}
-        >
-          <Sidebar />
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: "none", md: "block" },
-            "& .MuiDrawer-paper": {
-              width: drawerWidth,
-              boxSizing: "border-box",
-            },
-          }}
-          open
-        >
-          <Sidebar />
-        </Drawer>
-
-        {/* Main */}
         <Box
           component="main"
           sx={{
@@ -282,69 +183,7 @@ export default function AdminPage() {
             ml: { md: `${drawerWidth}px` },
           }}
         >
-          <Toolbar />
           <Stack spacing={2}>
-            {/* Breadcrumbs */}
-            <Breadcrumbs aria-label="breadcrumb">
-              <MUILink underline="hover" color="inherit" href="#">
-                Home
-              </MUILink>
-              <MUILink underline="hover" color="inherit" href="#">
-                Analytics
-              </MUILink>
-              <Typography color="text.primary">Overview</Typography>
-            </Breadcrumbs>
-
-            {/* Filters */}
-            <Card>
-              <CardContent>
-                <Grid container spacing={2} alignItems="center">
-                  <Grid size={{ xs: 12, md: 3 }}>
-                    <TextField
-                      fullWidth
-                      select
-                      label="Time Range"
-                      defaultValue="90"
-                    >
-                      <MenuItem value="7">Last 7 days</MenuItem>
-                      <MenuItem value="30">Last 30 days</MenuItem>
-                      <MenuItem value="90">Last 90 days</MenuItem>
-                      <MenuItem value="365">Last 12 months</MenuItem>
-                    </TextField>
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 3 }}>
-                    <TextField
-                      fullWidth
-                      select
-                      label="Segment"
-                      defaultValue="all"
-                    >
-                      <MenuItem value="all">All users</MenuItem>
-                      <MenuItem value="pro">Pro</MenuItem>
-                      <MenuItem value="trial">Trial</MenuItem>
-                    </TextField>
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 4 }}>
-                    <TextField
-                      fullWidth
-                      label="Search"
-                      value={search}
-                      onChange={(e) => setSearch(e.target.value)}
-                    />
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 2 }}>
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      startIcon={<SearchIcon />}
-                    >
-                      Apply
-                    </Button>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-
             {/* KPIs */}
             <Grid container spacing={2}>
               {kpis.map((k) => (
@@ -500,7 +339,6 @@ export default function AdminPage() {
               </CardContent>
             </Card>
 
-            {/* Activity */}
             <Grid container spacing={2}>
               <Grid size={{ xs: 12, md: 8 }}>
                 <Card>
@@ -528,25 +366,6 @@ export default function AdminPage() {
                   </CardContent>
                 </Card>
               </Grid>
-              <Grid size={{ xs: 12, md: 4 }}>
-                <Card>
-                  <CardContent>
-                    <Typography variant="h6" gutterBottom>
-                      System Status
-                    </Typography>
-                    <Stack spacing={1}>
-                      <StatusBar label="API" value={99} />
-                      <StatusBar label="Auth" value={97} />
-                      <StatusBar label="DB" value={92} />
-                    </Stack>
-                  </CardContent>
-                  <CardActions>
-                    <Button fullWidth variant="contained">
-                      View Health
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
             </Grid>
           </Stack>
         </Box>
@@ -555,60 +374,6 @@ export default function AdminPage() {
   );
 }
 
-function Sidebar() {
-  return (
-    <Box sx={{ p: 2 }}>
-      <Stack
-        direction="row"
-        spacing={1}
-        alignItems="center"
-        sx={{ px: 1, py: 1.5 }}
-      >
-        <Avatar>PD</Avatar>
-        <Box>
-          <Typography variant="subtitle1" fontWeight={700}>
-            ProDash
-          </Typography>
-          <Typography variant="caption" color="text.secondary">
-            v1.0
-          </Typography>
-        </Box>
-      </Stack>
-      <Divider />
-      <List>
-        {[
-          { text: "Overview", icon: <DashboardIcon /> },
-          { text: "Analytics", icon: <BarChartIcon /> },
-          { text: "Data", icon: <TableChartIcon /> },
-          { text: "Settings", icon: <SettingsIcon /> },
-        ].map((item) => (
-          <ListItem key={item.text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
-}
-
-function StatusBar({ label, value }) {
-  return (
-    <Box>
-      <Stack direction="row" justifyContent="space-between">
-        <Typography variant="body2">{label}</Typography>
-        <Typography variant="body2" fontWeight={600}>
-          {value}%
-        </Typography>
-      </Stack>
-      <LinearProgress variant="determinate" value={value} sx={{ mt: 0.5 }} />
-    </Box>
-  );
-}
-
-// Ad-hoc icon fix for PersonAdd (kept near bottom to avoid import ordering issues)
 function PersonAddIcon(props) {
   return (
     <svg
