@@ -69,7 +69,7 @@ const TenderCard = ({
   isOpen,
   onToggle,
 }) => {
-  console.log(tender)
+  console.log(tender);
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -110,7 +110,7 @@ const TenderCard = ({
                 sx={{
                   ...getStatusColor(tender.status),
                   fontWeight: 600,
-                  fontSize: "0.75rem",
+                  fontSize: "0.95rem",
                   height: 24,
                 }}
               />
@@ -160,16 +160,6 @@ const TenderCard = ({
                       sx={{ display: "flex", justifyContent: "space-between" }}
                     >
                       <Typography variant="body2" color="text.secondary">
-                        Published Date:
-                      </Typography>
-                      <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                        {formatDate(tender.endDate)}
-                      </Typography>
-                    </Box>
-                    <Box
-                      sx={{ display: "flex", justifyContent: "space-between" }}
-                    >
-                      <Typography variant="body2" color="text.secondary">
                         Estimated Value:
                       </Typography>
                       <Typography variant="body2" sx={{ fontWeight: 500 }}>
@@ -200,17 +190,6 @@ const TenderCard = ({
                     <Typography variant="body2" color="text.secondary">
                       {tender.participants} Participants
                     </Typography>
-                    <Chip
-                      label={tender.category}
-                      size="small"
-                      sx={{
-                        ml: 1,
-                        bgcolor: "#e3f2fd",
-                        color: "#1976d2",
-                        fontSize: "0.75rem",
-                        height: 20,
-                      }}
-                    />
                   </Box>
                 </Grid>
 
@@ -256,17 +235,7 @@ const TenderCard = ({
                       sx={{ display: "flex", justifyContent: "space-between" }}
                     >
                       <Typography variant="body2" color="text.secondary">
-                        Technical Bid Opening:
-                      </Typography>
-                      <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                        {formatDate(tender.endDate)} 18:00
-                      </Typography>
-                    </Box>
-                    <Box
-                      sx={{ display: "flex", justifyContent: "space-between" }}
-                    >
-                      <Typography variant="body2" color="text.secondary">
-                        Financial Bid Opening:
+                        Bid Opening:
                       </Typography>
                       <Typography variant="body2" sx={{ fontWeight: 500 }}>
                         {formatDate(tender.endDate)} 18:00
