@@ -22,15 +22,13 @@ import {
   CardActions,
   Button,
   TextField,
-  MenuItem,
   Stack,
   Chip,
   Avatar,
   useMediaQuery,
   Tooltip,
   LinearProgress,
-  Breadcrumbs,
-  Link as MUILink,
+  Link,
   Paper,
 } from "@mui/material";
 import {
@@ -49,6 +47,9 @@ import {
   ArrowDownward,
 } from "@mui/icons-material";
 import { DataGrid } from "@mui/x-data-grid";
+import nds_logo from "../assets/img/nds_logo.png";
+import ReportIcon from "@mui/icons-material/Report";
+import Diversity2Icon from "@mui/icons-material/Diversity2";
 import {
   LineChart,
   Line,
@@ -69,8 +70,8 @@ const getDesignTokens = (mode) => ({
     primary: { main: mode === "dark" ? "#90caf9" : "#1565c0" },
     secondary: { main: mode === "dark" ? "#ffb74d" : "#ef6c00" },
     background: {
-      default: mode === "dark" ? "#f6f8fc" : "#f6f8fc",
-      paper: mode === "dark" ? "#ffffff" : "#ffffff",
+      default: mode === "dark" ? "#0b1020" : "#f6f8fc",
+      paper: mode === "dark" ? "#0f1629" : "#ffffff",
     },
   },
   shape: { borderRadius: 16 },
@@ -175,6 +176,104 @@ export default function AdminPage() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box sx={{ display: "flex", minHeight: "100vh" }}>
+        <AppBar
+          position="fixed"
+          elevation={0}
+          sx={{
+            backdropFilter: "blur(8px)",
+            backgroundColor: (t) =>
+              t.palette.mode === "dark"
+                ? "rgba(10, 14, 25, 0.7)"
+                : "rgba(255,255,255,0.7)",
+            borderBottom: 1,
+            borderColor: "divider",
+          }}
+        >
+          <Toolbar sx={{ minHeight: { xs: 64, md: 89 } }}>
+            <IconButton
+              edge="start"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              sx={{ mr: 1 }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700 }}>
+              <img
+                src={nds_logo}
+                alt="NDDB"
+                style={{ width: "138px", height: "55px" }}
+                loading="lazy"
+              />
+            </Typography>
+
+            <Paper
+              component="form"
+              onSubmit={(e) => e.preventDefault()}
+              sx={{
+                display: { xs: "none", md: "flex" },
+                alignItems: "center",
+                px: 1,
+                py: 0.5,
+                mr: 2,
+                width: 360,
+              }}
+              elevation={0}
+            >
+              <IconButton>
+                <SearchIcon />
+              </IconButton>
+              <TextField
+                variant="standard"
+                placeholder="Search companies, owners, status…"
+                fullWidth
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                InputProps={{ disableUnderline: true }}
+              />
+            </Paper>
+
+            <Stack direction="row" spacing={1} alignItems="center">
+              <Tooltip title="Toggle theme">
+                <IconButton
+                  onClick={() =>
+                    setMode((m) => (m === "light" ? "dark" : "light"))
+                  }
+                >
+                  {mode === "light" ? <DarkMode /> : <LightMode />}
+                </IconButton>
+              </Tooltip>
+              <IconButton>
+                <Notifications />
+              </IconButton>
+              <Avatar sx={{ width: 34, height: 34 }}>AS</Avatar>
+            </Stack>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={() => setMobileOpen(false)}
+          ModalProps={{ keepMounted: true }}
+          sx={{
+            display: { xs: "block", md: "none" },
+            "& .MuiDrawer-paper": { width: drawerWidth },
+          }}
+        >
+          <Sidebar />
+        </Drawer>
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: "none", md: "block" },
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+            },
+          }}
+          open
+        >
+          <Sidebar />
+        </Drawer>
         <Box
           component="main"
           sx={{
@@ -183,7 +282,8 @@ export default function AdminPage() {
             ml: { md: `${drawerWidth}px` },
           }}
         >
-          <Stack spacing={2}>
+          <Toolbar />
+          <Stack spacing={2} mt={2}>
             {/* KPIs */}
             <Grid container spacing={2}>
               {kpis.map((k) => (
@@ -339,6 +439,7 @@ export default function AdminPage() {
               </CardContent>
             </Card>
 
+            {/* Activity */}
             <Grid container spacing={2}>
               <Grid size={{ xs: 12, md: 8 }}>
                 <Card>
@@ -366,11 +467,82 @@ export default function AdminPage() {
                   </CardContent>
                 </Card>
               </Grid>
+              <Grid size={{ xs: 12, md: 4 }}>
+                <Card>
+                  <CardContent>
+                    <Typography variant="h6" gutterBottom>
+                      System Status
+                    </Typography>
+                    <Stack spacing={1}>
+                      <StatusBar label="API" value={99} />
+                      <StatusBar label="Auth" value={97} />
+                      <StatusBar label="DB" value={92} />
+                    </Stack>
+                  </CardContent>
+                  <CardActions>
+                    <Button fullWidth variant="contained">
+                      View Health
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
             </Grid>
           </Stack>
         </Box>
       </Box>
     </ThemeProvider>
+  );
+}
+
+function Sidebar() {
+  return (
+    <Box sx={{ pl: 2 }}>
+      <Stack
+        direction="row"
+        spacing={1}
+        alignItems="center"
+        sx={{ px: 1, py: 1.5 }}
+      >
+        <img
+          src={nds_logo}
+          alt="NDDB"
+          style={{ width: "148px", height: "65px", marginLeft: "15px" }}
+          loading="lazy"
+        />
+      </Stack>
+      <Divider />
+      <List>
+        {[
+          { text: "Overview", icon: <DashboardIcon /> },
+          { text: "Tender", icon: <SettingsIcon /> },
+          { text: "Career", icon: <BarChartIcon /> },
+          { text: "HR Compliances", icon: <TableChartIcon /> },
+          { text: "Annual Reports", icon: <ReportIcon /> },
+          { text: "Logs", icon: <Diversity2Icon /> },
+        ].map((item) => (
+          <ListItem key={item.text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+}
+
+function StatusBar({ label, value }) {
+  return (
+    <Box>
+      <Stack direction="row" justifyContent="space-between">
+        <Typography variant="body2">{label}</Typography>
+        <Typography variant="body2" fontWeight={600}>
+          {value}%
+        </Typography>
+      </Stack>
+      <LinearProgress variant="determinate" value={value} sx={{ mt: 0.5 }} />
+    </Box>
   );
 }
 

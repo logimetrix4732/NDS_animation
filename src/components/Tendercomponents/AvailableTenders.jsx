@@ -120,36 +120,6 @@ const AvailableTenders = () => {
   return (
     <Box sx={{ py: 8, bgcolor: "#fafafa", minHeight: "100vh" }}>
       <Container maxWidth="xl">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <Box sx={{ textAlign: "center", mb: 6 }}>
-            <Typography
-              variant="h2"
-              sx={{
-                mb: 2,
-                fontSize: { xs: "2rem", md: "2.5rem" },
-                background: "linear-gradient(135deg, #a46c35 0%, #bd8f59 100%)",
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              Tenders
-            </Typography>
-            <Typography
-              variant="body1"
-              color="text.secondary"
-              sx={{ fontSize: "1.1rem", maxWidth: "600px", mx: "auto" }}
-            >
-              Browse through our current tender opportunities and find the
-              perfect project for your organization.
-            </Typography>
-          </Box>
-        </motion.div>
-
         <TenderFilters
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}

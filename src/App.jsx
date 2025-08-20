@@ -38,10 +38,10 @@ const App = () => {
 
   // agar home page par ho, toh Header render na ho
   const isHomePage = location.pathname === "/";
-
+  const isAdminPage = location.pathname === "/AdminPage";
   return (
     <>
-      {!isHomePage && <Header />}
+      {!isHomePage && !isAdminPage && <Header />}
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -62,7 +62,7 @@ const App = () => {
         <Route path="/AdminPage" element={<AdminPage />} />
         <Route path="*" element={<Errors />} />
       </Routes>
-      <Footer />
+      {!isAdminPage && <Footer />}
       <div className="scroll-top">
         <svg
           className="progress-circle svg-content"
