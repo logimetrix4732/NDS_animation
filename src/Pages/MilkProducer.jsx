@@ -6,6 +6,7 @@ import AboutSection8 from "../components/AboutUs/AboutSection8";
 import CommonBanner from "../components/BannersComponents/CommonBanner";
 import MilkIndiaMap from "../components/MapComponent/MilkIndiaMap";
 import { useState } from "react";
+import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import { Box, Fade, Grid, Slide, Typography } from "@mui/material";
 const MilkProducer = () => {
   const [hoveredState, setHoveredState] = useState(null);
@@ -50,10 +51,10 @@ const MilkProducer = () => {
     ],
     Rajasthan: [
       {
-        "Asha Mahila Milk Producer Company": "https://www.ashamilk.com",
-        "Paayas Milk Producer Company": "https://www.paayasmilk.com",
-        "Sakhi Mahila Milk Producer Company": "https://www.sakhimilk.com",
-        "Ujalaa Milk Producer Company": "https://www.ujalaamilk.com",
+        "Asha Mahila Milk Producer Organisation": "https://www.ashamilk.com",
+        "Paayas Milk Producer Organisation": "https://www.paayasmilk.com",
+        "Sakhi Mahila Milk Producer Organisation": "https://www.sakhimilk.com",
+        "Ujalaa Milk Producer Organisation": "https://www.ujalaamilk.com",
       },
     ],
     "Andhra Pradesh": [
@@ -350,66 +351,81 @@ const MilkProducer = () => {
                     <Box
                       sx={{
                         textAlign: "center",
-                        padding: "60px 20px",
+                        padding: "50px 20px",
                         color: "#7f8c8d",
+                        position: "relative",
                       }}
                     >
+                      {/* Icon Container */}
                       <Box
                         sx={{
-                          width: "80px",
-                          height: "80px",
-                          borderRadius: "50%",
-                          background:
-                            "linear-gradient(145deg, #ecf0f1 0%, #bdc3c7 100%)",
+                          width: "70px",
+                          height: "70px",
+                          borderRadius: "16px",
                           margin: "0 auto 20px",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
-                          animation: "float 3s ease-in-out infinite",
+                          background:
+                            "linear-gradient(135deg, #bd8f59, #2a5298)",
+                          boxShadow: "0 6px 18px rgba(0,0,0,0.25)",
+
+                          // Animations
+                          animation:
+                            "float 4s ease-in-out infinite, zoomIn 1s ease",
                           "@keyframes float": {
-                            "0%, 100%": {
-                              transform: "translateY(0px)",
-                            },
-                            "50%": {
-                              transform: "translateY(-10px)",
-                            },
+                            "0%, 100%": { transform: "translateY(0px)" },
+                            "50%": { transform: "translateY(-10px)" },
+                          },
+                          "@keyframes zoomIn": {
+                            "0%": { transform: "scale(0.5)", opacity: 0 },
+                            "100%": { transform: "scale(1)", opacity: 1 },
                           },
                         }}
                       >
-                        <Typography variant="h4" sx={{ color: "#95a5a6" }}>
-                          🗺️
-                        </Typography>
+                        <TravelExploreIcon
+                          sx={{ fontSize: 36, color: "white" }}
+                        />
                       </Box>
+
+                      {/* Title */}
                       <Typography
                         variant="h6"
                         sx={{
-                          color: "#34495e",
-                          fontWeight: 600,
-                          marginBottom: "10px",
+                          fontSize: "28px",
+                          color: "#2c3e50",
+                          fontWeight: 700,
+                          letterSpacing: "0.5px",
+                          position: "relative",
+                          display: "inline-block",
+                          animation: "fadeUp 1s ease forwards",
+
+                          "&::after": {
+                            content: '""',
+                            position: "absolute",
+                            left: "50%",
+                            bottom: "-6px",
+                            transform: "translateX(-50%)",
+                            width: "0px", // start small
+                            height: "2px",
+                            borderRadius: "2px",
+                            background:
+                              "linear-gradient(90deg, #1e3c72, #2a5298)",
+                            animation: "underlineGrow 1s ease forwards",
+                            animationDelay: "1s",
+                          },
+
+                          "@keyframes fadeUp": {
+                            "0%": { opacity: 0, transform: "translateY(20px)" },
+                            "100%": { opacity: 1, transform: "translateY(0)" },
+                          },
+                          "@keyframes underlineGrow": {
+                            "0%": { width: "0px" },
+                            "100%": { width: "36px" },
+                          },
                         }}
                       >
-                        Explore the Map
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          color: "#7f8c8d",
-                          lineHeight: 1.6,
-                        }}
-                      >
-                        Hover over any state to discover milk producer
-                        Organisations
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          color: "#95a5a6",
-                          fontSize: "12px",
-                          marginTop: "10px",
-                          fontStyle: "italic",
-                        }}
-                      >
-                        Click on a state to keep it selected
+                        Presence in India
                       </Typography>
                     </Box>
                   </Fade>

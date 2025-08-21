@@ -113,7 +113,7 @@ const OurExperties7 = () => {
           <div className="col-xl-6">
             <div className="title-area service-3-titlebox text-center text-md-start mt-40">
               <AnimatedText
-                text="Setting Up MPOs"
+                text="Setting up MPOs"
                 tag="h2"
                 className="sec-title mb-10 heading text-anime-style-3"
                 width="100%"
