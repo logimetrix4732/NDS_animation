@@ -120,13 +120,7 @@ const AboutSection7 = () => {
                   across various regions of the country.
                 </span>
                 <span style={{ display: "block", marginTop: "5px" }}>
-                  Our semen stations together produce and distribute about 50
-                  million semen doses annually. Across India, the widespread use
-                  of SAG Frozen Semen Doses (FSD) leads to the birth of a high
-                  genetic merit calf every two seconds. NDS managed semen
-                  stations are graded ‘A’ by the Central Monitoring Unit (CMU),
-                  Government of India and have been consistently ranked among
-                  the top semen stations in the country.
+                  We focus on -  
                 </span>
               </p>
 

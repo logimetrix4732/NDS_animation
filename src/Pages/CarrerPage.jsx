@@ -14,7 +14,6 @@ const CarrerPage = () => {
       <CarrerVideoSection />
       <CarrerCardSection />
       <EmployeeBenefitsGrid />
-      <OurExperties8 />
       <OurExperties />
       <Box
         sx={{
@@ -33,12 +32,16 @@ const CarrerPage = () => {
             flexWrap: "wrap",
           }}
         >
-          <Typography variant="h4" fontWeight="bold">
+          <Typography variant="h3" fontWeight="bold">
             Current Openings
           </Typography>
 
           <div className="mt-35 wow fadeInUp" data-wow-delay=".5s">
-            <Link to="/carrer" className="th-btn th-icon">
+            <Link
+              to="/carrer"
+              className="th-btn th-icon"
+              style={{ width: "200px", height: "60px" }}
+            >
               Apply Now <i className="fa-light fa-arrow-right-long"></i>
             </Link>
           </div>

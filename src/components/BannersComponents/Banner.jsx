@@ -76,6 +76,7 @@ const Banner = () => {
                       color: "white",
                       marginBottom: "10px",
                       fontSize: "4rem",
+                      textTransform: "none", // ✅ text jaisa likha hai waisa hi dikhayega
                     }}
                   />
                   <Swiper
@@ -91,7 +92,10 @@ const Banner = () => {
                       <SwiperSlide key={index}>
                         <h2
                           className="sec-title text-white pe-xl-5 me-xl-4 text-anime-style-2 d-flex align-items-center gap-3"
-                          style={{ marginTop: "10px" }}
+                          style={{
+                            marginTop: "10px",
+                            textTransform: "none", // ✅ force case preserve
+                          }}
                         >
                           <img
                             src={item.icon}
@@ -104,7 +108,11 @@ const Banner = () => {
                             }}
                           />
                           <span
-                            style={{ fontSize: "2.5rem", lineHeight: "1.3" }}
+                            style={{
+                              fontSize: "2.5rem",
+                              lineHeight: "1.3",
+                              textTransform: "none", // ✅ ye bhi same case maintain karega
+                            }}
                           >
                             {item.text}
                           </span>

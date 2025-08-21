@@ -12,23 +12,23 @@ const countData = [
       "Established over 23 Milk Producer Organizations benefiting more than 800,000 dairy farmers across India.",
   },
   {
-    number: 162,
+    number: 206,
     suffix: "",
-    title: "Districts Covered",
+    title: "Districts Served",
     description:
       "Implemented quality testing and assurance systems that have improved milk quality by 40% in partner regions.",
   },
   {
-    number: 35822,
+    number: 37375,
     suffix: "",
-    title: "Villages Covered",
+    title: "Villages Reached",
     description:
       "Helped increase farmer incomes by an average of 35% through improved productivity and market access.",
   },
   {
-    number: 12.5,
+    number: 12.7,
     suffix: "Lac ",
-    title: "Associated Dairy Farmers",
+    title: "Lac Associated Dairy Farmers",
     description:
       "Conducted 5,000+ training programs reaching over 300,000 dairy farmers with modern practices and techniques.",
   },

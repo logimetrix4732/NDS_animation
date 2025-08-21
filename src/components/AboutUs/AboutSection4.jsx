@@ -1,7 +1,7 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
-import aboutImg3 from "../../Images/AboutUsImg/IMG_4071.jpg";
-import aboutImg4 from "../../Images/AboutUsImg/childrenfuture.jpg";
+import aboutImg3 from "../../Images/AboutUsImg/IMG_40713.jpg";
+import aboutImg4 from "../../Images/AboutUsImg/IMG_40712.jpg";
 import DrawerModal from "../DrawerModal";
 import { useMediaQuery, useTheme } from "@mui/material";
 import "./AboutSection.css";
@@ -19,9 +19,9 @@ const AboutSection4 = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const AboutUsContent = {
-    title: "Empowering India's Dairy Farmers",
+    title: "NDDB Dairy Services",
     content: [
-      "NDDB Dairy Services (NDS) is a Section 8 company registered under the Companies Act, 2013. It is a wholly-owned subsidiary of the National Dairy Development Board (NDDB), and plays a pivotal role in strengthening the dairy sector in India through innovative, sustainable, and inclusive development models.",
+      "A Section 8 company registered under the Companies Act, 2013. It is a wholly-owned subsidiary of the National Dairy Development Board (NDDB), and plays a pivotal role in strengthening the dairy sector in India through innovative, sustainable, and inclusive development models.",
       "Established to operationalize NDDB’s vision of creating a vibrant rural dairying ecosystem, NDS, since its inception has been assisting dairy farmers with a range of initiatives throughout the dairy value chain. Our comprehensive approach, aimed at improving breed quality and boosting animal productivity, has resulted in the increase of the surplus and marketable milk available with farmers.  ",
       "By facilitating the establishment of Milk Producer Organisations (MPOs) and thereafter providing them technical support and an assured market for their surplus produce in the form of strong forward institutional linkages, dairy farmers benefit with improved livelihoods through fair and transparent pricing and direct payments into their bank accounts.",
       "For long-term sustainability, NDS prioritises training and capacity building for dairy farmers to ensure they can manage these (producer owned) organizations effectively. Gender inclusion remains a key focal area, hence our interventions provide a platform to women dairy farmers, empowering them to excel in the remotest regions of India and make significant contributions to the dairy sector of the country.",
@@ -74,18 +74,18 @@ const AboutSection4 = () => {
             <div className="">
               <div className="title-area about4-titlebox mb-20">
                 <AnimatedText
-                  text="Empowering India's Dairy Farmers"
+                  text="NDDB Dairy Services"
                   tag="h2"
                   className="sec-title mb-10 heading text-anime-style-3"
                   width="100%"
                 />
               </div>
               <p className="about-item_text wow fadeInUp about-ellipsis mb-10">
-                NDDB Dairy Services (NDS) is a Section 8 company registered
-                under the Companies Act, 2013. It is a wholly-owned subsidiary
-                of the National Dairy Development Board (NDDB), and plays a
-                pivotal role in strengthening India’s dairy sector through
-                innovative, sustainable, and inclusive development models.
+                A Section 8 company registered under the Companies Act, 2013. It
+                is a wholly-owned subsidiary of the National Dairy Development
+                Board (NDDB), and plays a pivotal role in strengthening India’s
+                dairy sector through innovative, sustainable, and inclusive
+                development models.
                 <br />
                 Established to operationalize NDDB’s vision of creating a
                 vibrant rural dairying ecosystem, NDS, since its inception has
@@ -98,6 +98,7 @@ const AboutSection4 = () => {
                 By facilitating the establishment of Milk Producer Organisations
                 (MPOs) and thereafter providing them technical support and an
                 assured market for their surplus produce in the form of strong
+                forward institutional linkages, dairy farmers benefit with
               </p>
               <div className="mt-20 wow fadeInUp">
                 <button onClick={handleClickOpen} className="th-btn th-icon">

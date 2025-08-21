@@ -35,15 +35,15 @@ const strategies = [
   {
     title: "Beyond Collection",
     title1: "Beyond Collection: Strengthening the Dairy Ecosystem",
-    subtitle: "Enabling End-to-End Dairy Value Chain integration",
+    subtitle: "Enabling End-to-End Dairy Value Chain Integration",
     desc: "Setting up of a robust value chain network from milk procurement (backward linkage) to market access (forward linkage)...",
     mainDesc:
       "Setting up of a robust value chain network from milk procurement (backward linkage) to market access (forward linkage) is integral to the success of MPO. We support MPOs in establishing infrastructure for milk collection, chilling and quality testing while providing them with assured markets. Through fair and transparent procurement systems, quality incentives and assured timely payments, we help farmers to realise the full value of their produce. Robust Standard Operating Procedures (SOPs) are implemented across all critical functions of the MPO including milk collection, quality control, weighing, member enrollment, payment processing and record maintenance etc. These SOPs ensure consistency, reduce errors and build trust among producer members.",
     img: BeyondCollection,
   },
   {
-    title: "Governance that fosters Trust",
-    title1: "Governance that fosters Trust",
+    title: "Governance that Fosters Trust",
+    title1: "Governance that Fosters Trust",
     subtitle: "Transparent and Participative Decision-Making ",
     desc: "Governance defines how decisions are made and implemented and ultimately, how trust is built within an organisation At NDS, we...",
     mainDesc:

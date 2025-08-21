@@ -85,14 +85,14 @@ const Dashboard = () => {
               <div className="row no-horizontal-gutter align-items-center justify-content-between small-screen-padding">
                 <div className="col-xl-2 col-xxl-2 col-auto text-center">
                   <div className="header-logo">
-                    <a href="/">
+                    <Link to="/">
                       <img
                         src={nds_logo}
                         alt="NDDB"
                         style={{ width: "148px", height: "65px" }}
                         loading="lazy"
                       />
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <div className="col-xl-8 col-xxl-7 col-auto text-center">
@@ -179,9 +179,6 @@ const Dashboard = () => {
                               </li>
                               <li>
                                 <Link to="/policies">Policies</Link>
-                              </li>
-                              <li>
-                                <a href="checkout.html">Others</a>
                               </li>
                             </ul>
                           </li>

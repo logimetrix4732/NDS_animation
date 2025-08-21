@@ -100,7 +100,7 @@ const OurFeatures4 = () => {
                   </div>
                   <div className="box-content">
                     <h3 className="box-title">
-                      <a href="project-details.html">{slide.title}</a>
+                      <Link to="/">{slide.title}</Link>
                     </h3>
                     <p className="box-text">{slide.text}</p>
                   </div>

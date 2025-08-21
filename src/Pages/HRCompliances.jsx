@@ -106,22 +106,6 @@ export default function HRCompliances() {
                 >
                   <Box>
                     <Typography
-                      variant="body2"
-                      sx={{
-                        backgroundColor: "#d9c0a2",
-                        display: "inline-block",
-                        px: 1.5,
-                        py: 0.5,
-                        borderRadius: "6px",
-                        fontWeight: 500,
-                        fontSize: "0.8rem",
-                        color: "#fff",
-                      }}
-                    >
-                      Annual Report {report.year}
-                    </Typography>
-
-                    <Typography
                       variant="h6"
                       sx={{ mt: 1.5, fontWeight: "bold", color: "#8B5E34" }}
                     >

@@ -18,7 +18,7 @@ const mockTenders = [
     participants: 24,
     category: "Technology",
     estimatedValue: "$2,500,000",
-    location: "Springfield City Hall",
+    location: "Reference ID",
     documentsCount: 8,
   },
   {
@@ -33,7 +33,7 @@ const mockTenders = [
     participants: 18,
     category: "Construction",
     estimatedValue: "$850,000",
-    location: "Municipal Corporation",
+    location: "Reference ID",
     documentsCount: 5,
   },
   {
@@ -48,23 +48,8 @@ const mockTenders = [
     participants: 15,
     category: "Technology",
     estimatedValue: "$1,200,000",
-    location: "Department of Transportation",
+    location: "Reference ID",
     documentsCount: 6,
-  },
-  {
-    id: "4",
-    title: "Green Energy Initiative - Solar Panel Installation",
-    status: "Upcoming",
-    description:
-      "Large-scale solar panel installation across government buildings and public facilities.",
-    startDate: "2024-04-15",
-    endDate: "2024-05-20",
-    lastDate: "2024-05-15",
-    participants: 8,
-    category: "Energy",
-    estimatedValue: "$3,400,000",
-    location: "Energy Department",
-    documentsCount: 10,
   },
 ];
 

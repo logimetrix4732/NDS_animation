@@ -78,6 +78,7 @@ const TenderCard = ({
       whileHover={{ y: -2 }}
     >
       <Card
+        onClick={onToggle}
         sx={{
           height: "100%",
           border: "1px solid #e0e0e0",
@@ -88,6 +89,7 @@ const TenderCard = ({
           "&:hover": {
             boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
             borderColor: "#bd8f59",
+            cursor: "pointer",
           },
         }}
       >
@@ -111,7 +113,8 @@ const TenderCard = ({
                   ...getStatusColor(tender.status),
                   fontWeight: 600,
                   fontSize: "0.95rem",
-                  height: 24,
+                  height: 30,
+                  width: 100,
                 }}
               />
               <IconButton onClick={onToggle} size="small">

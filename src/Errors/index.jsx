@@ -48,9 +48,9 @@ const Errors = () => {
                   It looks like nothing was found at this location. Maybe try
                   one of the links below or a search?
                 </p>
-                <a href="index.html" className="th-btn">
+                <Link to="/" className="th-btn">
                   <i className="fa-regular fa-house" /> Back to Home
-                </a>
+                </Link>
               </div>
             </div>
           </div>

@@ -5,6 +5,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import LocationPinIcon from "@mui/icons-material/LocationPin";
 import footerIcon from "../../Images/footerIcon1.svg";
 import "./Footer.css";
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="footer-wrapper footer-layout1 black-bg pt-50">
@@ -14,9 +15,9 @@ const Footer = () => {
             <div className="widget footer-widget">
               <div className="th-widget-about">
                 <div className="about-logo">
-                  <a href="index.html">
+                  <Link to="/">
                     <img src={nds_logo} alt="NDDB" width="168" height="46" />
-                  </a>
+                  </Link>
                 </div>
                 <p className="about-text" style={{ color: "#ffffff" }}>
                   Empowering India’s dairy sector with sustainable solutions and
@@ -112,35 +113,42 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-3 col-xl-auto">
-            <div className="widget footer-widget">
-              <h3 className="widget_title">Email Address</h3>
-              <div className="row gy-4 align-items-center">
-                <div className="col-lg-12">
-                  <form className="newsletter-form">
-                    <input
-                      className="form-control"
-                      type="email"
-                      placeholder="Enter Email"
-                      required=""
-                    />
-                    <button
-                      type="submit"
-                      className="th-btn style3"
-                      style={{
-                        padding: "24px 26px",
-                        fontSize: "14px",
-                        minWidth: "auto",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        background: "#a46c35ff",
-                      }}
+
+          <div className="col-md-6 col-xl-auto">
+            <div className="widget widget_nav_menu footer-widget">
+              <h3 className="widget_title" style={{ color: "white" }}>
+                Useful Link
+              </h3>
+              <div className="menu-all-pages-container">
+                <ul
+                  className="menu"
+                  style={{ listStyle: "none", padding: 0, margin: 0 }}
+                >
+                  <li>
+                    <a
+                      href="index.html"
+                      style={{ color: "white", textDecoration: "none" }}
                     >
-                      <img src={footerIcon} alt="" />
-                    </button>
-                  </form>
-                </div>
+                      Privacy Policy
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="about.html"
+                      style={{ color: "white", textDecoration: "none" }}
+                    >
+                      Return Policy
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="service.html"
+                      style={{ color: "white", textDecoration: "none" }}
+                    >
+                      Terms &amp; Conditions
+                    </a>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -151,24 +159,9 @@ const Footer = () => {
           <div className="row justify-content-lg-between align-items-center">
             <div className="col-lg-6">
               <p className="copyright-text">
-                © 2025 – <a href="index.html">NDDB Dairy Services</a>. All
-                rights reserved.
+                © 2025 – <Link to="/">NDDB Dairy Services</Link>. All rights
+                reserved.
               </p>
-            </div>
-            <div className="col-lg-6 text-center text-lg-end">
-              <div className="footer-links">
-                <ul>
-                  <li>
-                    <a href="about.html">Privacy Policy</a>
-                  </li>
-                  <li>
-                    <a href="about.html">Return Policy</a>
-                  </li>
-                  <li>
-                    <a href="about.html">Terms &amp; Conditions</a>
-                  </li>
-                </ul>
-              </div>
             </div>
           </div>
         </div>
