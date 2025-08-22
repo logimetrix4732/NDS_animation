@@ -5,7 +5,38 @@ import TenderFilters from "./TenderFilters";
 import TenderCard from "./TenderCard";
 import LoginModal from "./LoginModal";
 
-const mockTenders = [];
+const mockTenders = [
+  {
+    id: "1",
+    title: "Digital Infrastructure Modernization Project",
+    status: "Active",
+    description:
+      "Comprehensive upgrade of city digital infrastructure including network modernization, cloud migration, and cybersecurity implementation.",
+    startDate: "2024-02-01",
+    endDate: "2024-03-15",
+    lastDate: "2024-03-10",
+    participants: 24,
+    category: "Technology",
+    estimatedValue: "$2,500,000",
+    location: "Reference ID",
+    documentsCount: 8,
+  },
+  {
+    id: "2",
+    title: "City Hall Renovation and Modernization",
+    status: "Active",
+    description:
+      "Complete renovation of the main city hall building including structural improvements and modern facilities.",
+    startDate: "2024-04-22",
+    endDate: "2024-05-16",
+    lastDate: "2024-05-10",
+    participants: 18,
+    category: "Construction",
+    estimatedValue: "$850,000",
+    location: "Reference ID",
+    documentsCount: 5,
+  },
+];
 
 const AvailableTenders = () => {
   const [searchTerm, setSearchTerm] = useState("");

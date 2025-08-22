@@ -24,6 +24,8 @@ import AdminPage from "./Pages/AdminPage";
 import AdminLogin from "./AdminComponents/AdminLogin";
 import AdminTender from "./AdminComponents/AdminTender";
 import AdminCareer from "./AdminComponents/AdminCareer";
+import AdminPublication from "./AdminComponents/AdminPublication";
+import AdminLogs from "./AdminComponents/AdminLogs";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -39,7 +41,13 @@ const App = () => {
   const location = useLocation();
 
   const isHomePage = location.pathname === "/";
-  const adminRoutes = ["/AdminPage", "/AdminLogin", "/AdminTender"];
+  const adminRoutes = [
+    "/AdminPage",
+    "/AdminLogin",
+    "/AdminTender",
+    "/AdminPublication",
+    "/AdminLogs",
+  ];
   const isAdminRoute = adminRoutes.includes(location.pathname);
   return (
     <>
@@ -67,6 +75,8 @@ const App = () => {
         <Route path="/AdminLogin" element={<AdminLogin />} />
         <Route path="/AdminTender" element={<AdminTender />} />
         <Route path="/AdminCareer" element={<AdminCareer />} />
+        <Route path="/AdminPublication" element={<AdminPublication />} />
+        <Route path="/AdminLogs" element={<AdminLogs />} />
 
         <Route path="*" element={<Errors />} />
       </Routes>

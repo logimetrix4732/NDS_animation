@@ -28,19 +28,13 @@ const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
 
   const menuItems = [
     { text: "Overview", icon: <DashboardIcon />, path: "/AdminPage" },
-    { text: "Tender", icon: <SettingsIcon />, path: "/AdminTender" },
-    { text: "Career", icon: <BarChartIcon />, path: "/admin/career" },
     {
-      text: "HR Compliances",
+      text: "Publication",
       icon: <TableChartIcon />,
-      path: "/admin/hr-compliances",
+      path: "/AdminPublication",
     },
-    {
-      text: "Annual Reports",
-      icon: <ReportIcon />,
-      path: "/admin/annual-reports",
-    },
-    { text: "Logs", icon: <Diversity2Icon />, path: "/admin/logs" },
+    { text: "Tender", icon: <SettingsIcon />, path: "/AdminTender" },
+    { text: "Logs", icon: <Diversity2Icon />, path: "/AdminLogs" },
   ];
 
   const sidebarContent = (
