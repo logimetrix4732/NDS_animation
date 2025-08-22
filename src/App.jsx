@@ -23,6 +23,7 @@ import PoliciesPage from "./Pages/PoliciesPage";
 import AdminPage from "./Pages/AdminPage";
 import AdminLogin from "./AdminComponents/AdminLogin";
 import AdminTender from "./AdminComponents/AdminTender";
+import AdminCareer from "./AdminComponents/AdminCareer";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -65,6 +66,7 @@ const App = () => {
         <Route path="/AdminPage" element={<AdminPage />} />
         <Route path="/AdminLogin" element={<AdminLogin />} />
         <Route path="/AdminTender" element={<AdminTender />} />
+        <Route path="/AdminCareer" element={<AdminCareer />} />
 
         <Route path="*" element={<Errors />} />
       </Routes>
