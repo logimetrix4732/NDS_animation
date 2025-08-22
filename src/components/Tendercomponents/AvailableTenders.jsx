@@ -81,25 +81,17 @@ const AvailableTenders = () => {
   const handleViewDetails = (tender) => {
     if (!isLoggedIn) {
       setLoginModalOpen(true);
-    } else {
-      // Show tender details
-      console.log("Viewing details for:", tender.title);
     }
   };
 
   const handleDownloadDocuments = (tender) => {
     if (!isLoggedIn) {
       setLoginModalOpen(true);
-    } else {
-      // Download documents
-      console.log("Downloading documents for:", tender.title);
     }
   };
 
   const handleLogin = (email, password) => {
-    // Simple login simulation
     setIsLoggedIn(true);
-    console.log("Logged in with:", email);
   };
 
   return (

@@ -16,12 +16,13 @@ import SemenStations from "./Pages/SemenStations";
 import NewInitiative from "./Pages/NewInitiative";
 import ContactUs from "./Pages/ContactUs";
 import GalleryPage from "./Pages/GalleryPage";
-import MilkIndiaMap from "./components/MapComponent/MilkIndiaMap";
 import TenderPage from "./Pages/TenderPage";
 import AnnualReport from "./Pages/AnnualReport";
 import HRCompliances from "./Pages/HRCompliances";
 import PoliciesPage from "./Pages/PoliciesPage";
 import AdminPage from "./Pages/AdminPage";
+import AdminLogin from "./AdminComponents/AdminLogin";
+import AdminTender from "./AdminComponents/AdminTender";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -36,12 +37,13 @@ const ScrollToTop = () => {
 const App = () => {
   const location = useLocation();
 
-  // agar home page par ho, toh Header render na ho
   const isHomePage = location.pathname === "/";
-  const isAdminPage = location.pathname === "/AdminPage";
+  const adminRoutes = ["/AdminPage", "/AdminLogin", "/AdminTender"];
+  const isAdminRoute = adminRoutes.includes(location.pathname);
   return (
     <>
-      {!isHomePage && !isAdminPage && <Header />}
+      {!isHomePage && !isAdminRoute && <Header />}
+
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -59,10 +61,14 @@ const App = () => {
         <Route path="/annualReport" element={<AnnualReport />} />
         <Route path="/HR" element={<HRCompliances />} />
         <Route path="/policies" element={<PoliciesPage />} />
+
         <Route path="/AdminPage" element={<AdminPage />} />
+        <Route path="/AdminLogin" element={<AdminLogin />} />
+        <Route path="/AdminTender" element={<AdminTender />} />
+
         <Route path="*" element={<Errors />} />
       </Routes>
-      {!isAdminPage && <Footer />}
+      {!isAdminRoute && <Footer />}
       <div className="scroll-top">
         <svg
           className="progress-circle svg-content"

@@ -125,28 +125,28 @@ const Footer = () => {
                   style={{ listStyle: "none", padding: 0, margin: 0 }}
                 >
                   <li>
-                    <a
-                      href="index.html"
+                    <Link
+                      to="/"
                       style={{ color: "white", textDecoration: "none" }}
                     >
                       Privacy Policy
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="about.html"
+                    <Link
+                      to="/"
                       style={{ color: "white", textDecoration: "none" }}
                     >
                       Return Policy
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="service.html"
+                    <Link
+                      to="/"
                       style={{ color: "white", textDecoration: "none" }}
                     >
                       Terms &amp; Conditions
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>

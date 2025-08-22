@@ -141,7 +141,7 @@ const columns = [
 // --------- LAYOUT ---------
 const drawerWidth = 260;
 
-export default function AdminPage() {
+export default function AdminTender() {
   const prefersDark = useMediaQuery("(prefers-color-scheme: dark)");
   const [mode, setMode] = useState(prefersDark ? "dark" : "light");
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -243,149 +243,7 @@ export default function AdminPage() {
       >
         <Toolbar />
         <Stack spacing={2} mt={2}>
-          {/* KPIs */}
-          <Grid container spacing={2}>
-            {kpis.map((k) => (
-              <Grid key={k.label} size={{ xs: 12, sm: 6, md: 3 }}>
-                <Card sx={{ position: "relative" }}>
-                  <CardContent>
-                    <Stack
-                      direction="row"
-                      justifyContent="space-between"
-                      alignItems="flex-start"
-                    >
-                      <Box>
-                        <Typography variant="overline" color="text.secondary">
-                          {k.label}
-                        </Typography>
-                        <Typography variant="h4" sx={{ mt: 0.5 }}>
-                          {k.value}
-                        </Typography>
-                        <Stack
-                          direction="row"
-                          spacing={0.5}
-                          alignItems="center"
-                          sx={{ mt: 1 }}
-                        >
-                          {k.up ? (
-                            <ArrowUpward fontSize="small" color="success" />
-                          ) : (
-                            <ArrowDownward fontSize="small" color="error" />
-                          )}
-                          <Typography
-                            variant="body2"
-                            color={k.up ? "success.main" : "error.main"}
-                          >
-                            {k.delta}
-                          </Typography>
-                          <Typography variant="caption" color="text.secondary">
-                            vs last period
-                          </Typography>
-                        </Stack>
-                      </Box>
-                      <Chip
-                        icon={<CheckCircle />}
-                        label="Healthy"
-                        color={k.up ? "success" : "default"}
-                        size="small"
-                      />
-                    </Stack>
-                    <LinearProgress
-                      variant="determinate"
-                      value={k.up ? 70 : 35}
-                      sx={{ mt: 2 }}
-                    />
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-
-          {/* Charts */}
-          <Grid container spacing={2}>
-            <Grid size={{ xs: 12, md: 7 }}>
-              <Card sx={{ height: 360 }}>
-                <CardContent sx={{ height: 320 }}>
-                  <Typography variant="h6" gutterBottom>
-                    Revenue & Users
-                  </Typography>
-                  <ResponsiveContainer width="100%" height="85%">
-                    <LineChart
-                      data={lineData}
-                      margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
-                    >
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="month" />
-                      <YAxis yAxisId="left" orientation="left" />
-                      <YAxis yAxisId="right" orientation="right" />
-                      <ReTooltip />
-                      <Legend />
-                      <Line
-                        yAxisId="left"
-                        type="monotone"
-                        dataKey="revenue"
-                        strokeWidth={2}
-                        dot={false}
-                      />
-                      <Line
-                        yAxisId="right"
-                        type="monotone"
-                        dataKey="users"
-                        strokeWidth={2}
-                        dot={false}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid size={{ xs: 12, md: 5 }}>
-              <Card sx={{ height: 360 }}>
-                <CardContent sx={{ height: 320 }}>
-                  <Typography variant="h6" gutterBottom>
-                    Sales vs Profit
-                  </Typography>
-                  <ResponsiveContainer width="100%" height="85%">
-                    <BarChart data={barData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="name" />
-                      <YAxis />
-                      <ReTooltip />
-                      <Legend />
-                      <Bar dataKey="sales" />
-                      <Bar dataKey="profit" />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-
-          {/* Table */}
-          <Card>
-            <CardContent>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-                sx={{ mb: 1 }}
-              >
-                <Typography variant="h6">Accounts</Typography>
-              </Stack>
-              <div style={{ width: "100%", height: 420 }}>
-                <DataGrid
-                  rows={filteredRows}
-                  columns={columns}
-                  pageSizeOptions={[5, 10]}
-                  initialState={{
-                    pagination: {
-                      paginationModel: { page: 0, pageSize: 10 },
-                    },
-                  }}
-                />
-              </div>
-            </CardContent>
-          </Card>
+          <Typography>Tender</Typography>
         </Stack>
       </Box>
     </Box>

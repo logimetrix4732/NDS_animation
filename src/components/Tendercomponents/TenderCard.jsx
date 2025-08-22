@@ -69,7 +69,6 @@ const TenderCard = ({
   isOpen,
   onToggle,
 }) => {
-  console.log(tender);
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
