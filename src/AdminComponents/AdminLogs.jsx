@@ -21,6 +21,27 @@ import {
   Tooltip,
   LinearProgress,
   Paper,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TablePagination,
+  Badge,
+  Divider,
+  Alert,
+  Switch,
+  FormControlLabel,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
@@ -31,6 +52,20 @@ import {
   CheckCircle,
   ArrowUpward,
   ArrowDownward,
+  FilterList,
+  Download,
+  Refresh,
+  Visibility,
+  Edit,
+  Delete,
+  Warning,
+  Info,
+  Error,
+  CalendarToday,
+  Person,
+  Computer,
+  Security,
+  Upload,
 } from "@mui/icons-material";
 import { DataGrid } from "@mui/x-data-grid";
 import nds_logo from "../assets/img/nds_logo.png";
@@ -71,72 +106,60 @@ const getDesignTokens = (mode) => ({
   },
 });
 
-// --------- MOCK DATA ---------
-const kpis = [
-  { label: "Revenue", value: "$82.4k", delta: "+12.3%", up: true },
-  { label: "Active Users", value: "12,980", delta: "+5.1%", up: true },
-  { label: "Churn", value: "2.1%", delta: "-0.3%", up: false },
-  { label: "Tickets", value: "184", delta: "+9", up: true },
-];
+// --------- MOCK LOGS DATA ---------
+const generateLogsData = () => {
+  const actions = [
+    "LOGIN",
+    "LOGOUT",
+    "CREATE",
+    "UPDATE",
+    "DELETE",
+    "VIEW",
+    "DOWNLOAD",
+    "UPLOAD",
+  ];
+  const statuses = ["SUCCESS", "ERROR", "WARNING", "INFO"];
+  const users = [
+    "admin@nddb.com",
+    "user1@nddb.com",
+    "manager@nddb.com",
+    "analyst@nddb.com",
+  ];
+  const modules = [
+    "User Management",
+    "Reports",
+    "Dashboard",
+    "Settings",
+    "Data Export",
+    "Analytics",
+  ];
+  const ipAddresses = [
+    "192.168.1.100",
+    "10.0.0.50",
+    "172.16.0.25",
+    "203.0.113.10",
+  ];
 
-const lineData = [
-  { month: "Jan", revenue: 42, users: 6.1 },
-  { month: "Feb", revenue: 44, users: 6.6 },
-  { month: "Mar", revenue: 48, users: 7.2 },
-  { month: "Apr", revenue: 53, users: 7.8 },
-  { month: "May", revenue: 58, users: 8.3 },
-  { month: "Jun", revenue: 62, users: 8.9 },
-  { month: "Jul", revenue: 66, users: 9.5 },
-  { month: "Aug", revenue: 70, users: 10.2 },
-  { month: "Sep", revenue: 73, users: 10.8 },
-  { month: "Oct", revenue: 76, users: 11.1 },
-  { month: "Nov", revenue: 79, users: 11.6 },
-  { month: "Dec", revenue: 82, users: 12.2 },
-];
+  return Array.from({ length: 150 }, (_, i) => ({
+    id: i + 1,
+    timestamp: new Date(
+      Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000
+    ).toISOString(),
+    action: actions[Math.floor(Math.random() * actions.length)],
+    status: statuses[Math.floor(Math.random() * statuses.length)],
+    user: users[Math.floor(Math.random() * users.length)],
+    module: modules[Math.floor(Math.random() * modules.length)],
+    ipAddress: ipAddresses[Math.floor(Math.random() * ipAddresses.length)],
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    sessionId: `sess_${Math.random().toString(36).substr(2, 9)}`,
+    details: `Action performed on ${
+      modules[Math.floor(Math.random() * modules.length)]
+    } module`,
+    duration: Math.floor(Math.random() * 5000),
+  }));
+};
 
-const barData = [
-  { name: "A", sales: 4000, profit: 2400 },
-  { name: "B", sales: 3000, profit: 1398 },
-  { name: "C", sales: 2000, profit: 9800 },
-  { name: "D", sales: 2780, profit: 3908 },
-  { name: "E", sales: 1890, profit: 4800 },
-  { name: "F", sales: 2390, profit: 3800 },
-  { name: "G", sales: 3490, profit: 4300 },
-];
-
-const rows = Array.from({ length: 18 }).map((_, i) => ({
-  id: i + 1,
-  name: ["Acme Inc.", "Globex", "Umbrella", "Hooli", "Soylent"][i % 5],
-  owner: ["Aman", "Shradha", "Rohit", "Priya"][i % 4],
-  status: ["Active", "Pending", "Paused"][i % 3],
-  mrr: Math.round(1000 + Math.random() * 9000),
-  tickets: Math.round(5 + Math.random() * 40),
-}));
-
-const columns = [
-  { field: "name", headerName: "Company", flex: 1, minWidth: 150 },
-  { field: "owner", headerName: "Owner", width: 120 },
-  {
-    field: "status",
-    headerName: "Status",
-    width: 130,
-    renderCell: (p) => (
-      <Chip
-        size="small"
-        label={p.value}
-        color={
-          p.value === "Active"
-            ? "success"
-            : p.value === "Pending"
-            ? "warning"
-            : "default"
-        }
-      />
-    ),
-  },
-  { field: "mrr", headerName: "MRR ($)", width: 120, type: "number" },
-  { field: "tickets", headerName: "Open Tickets", width: 130, type: "number" },
-];
+const logsData = generateLogsData();
 
 // --------- LAYOUT ---------
 const drawerWidth = 260;
@@ -146,16 +169,128 @@ export default function AdminLogs() {
   const [mode, setMode] = useState(prefersDark ? "dark" : "light");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("ALL");
+  const [actionFilter, setActionFilter] = useState("ALL");
+  const [moduleFilter, setModuleFilter] = useState("ALL");
+  const [dateRange, setDateRange] = useState({
+    startDate: "",
+    endDate: "",
+  });
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
+  const [showFilters, setShowFilters] = useState(false);
+  const [realTimeMode, setRealTimeMode] = useState(false);
+  const [selectedLogs, setSelectedLogs] = useState([]);
+
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
-  const filteredRows = useMemo(() => {
-    const s = search.toLowerCase();
-    return rows.filter((r) =>
-      [r.name, r.owner, r.status].some((v) =>
-        String(v).toLowerCase().includes(s)
-      )
+  // Filter logs based on all criteria
+  const filteredLogs = useMemo(() => {
+    let filtered = logsData.filter((log) => {
+      const matchesSearch =
+        search === "" ||
+        log.user.toLowerCase().includes(search.toLowerCase()) ||
+        log.action.toLowerCase().includes(search.toLowerCase()) ||
+        log.module.toLowerCase().includes(search.toLowerCase()) ||
+        log.ipAddress.includes(search) ||
+        log.details.toLowerCase().includes(search.toLowerCase());
+
+      const matchesStatus =
+        statusFilter === "ALL" || log.status === statusFilter;
+      const matchesAction =
+        actionFilter === "ALL" || log.action === actionFilter;
+      const matchesModule =
+        moduleFilter === "ALL" || log.module === moduleFilter;
+
+      const matchesDate =
+        !dateRange.startDate ||
+        !dateRange.endDate ||
+        (new Date(log.timestamp) >= new Date(dateRange.startDate) &&
+          new Date(log.timestamp) <= new Date(dateRange.endDate));
+
+      return (
+        matchesSearch &&
+        matchesStatus &&
+        matchesAction &&
+        matchesModule &&
+        matchesDate
+      );
+    });
+
+    // Sort by timestamp (newest first)
+    return filtered.sort(
+      (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
     );
-  }, [search]);
+  }, [search, statusFilter, actionFilter, moduleFilter, dateRange]);
+
+  // Get unique values for filters
+  const uniqueStatuses = [...new Set(logsData.map((log) => log.status))];
+  const uniqueActions = [...new Set(logsData.map((log) => log.action))];
+  const uniqueModules = [...new Set(logsData.map((log) => log.module))];
+
+  // Get status color
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "SUCCESS":
+        return "success";
+      case "ERROR":
+        return "error";
+      case "WARNING":
+        return "warning";
+      case "INFO":
+        return "info";
+      default:
+        return "default";
+    }
+  };
+
+  // Get action icon
+  const getActionIcon = (action) => {
+    switch (action) {
+      case "LOGIN":
+        return <Security />;
+      case "LOGOUT":
+        return <Security />;
+      case "CREATE":
+        return <Edit />;
+      case "UPDATE":
+        return <Edit />;
+      case "DELETE":
+        return <Delete />;
+      case "VIEW":
+        return <Visibility />;
+      case "DOWNLOAD":
+        return <Download />;
+      case "UPLOAD":
+        return <Upload />;
+      default:
+        return <Info />;
+    }
+  };
+
+  // Format timestamp
+  const formatTimestamp = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleString("en-IN", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+  };
+
+  // Handle bulk actions
+  const handleBulkAction = (action) => {
+    if (action === "export") {
+      // Export selected logs
+      console.log("Exporting logs:", selectedLogs);
+    } else if (action === "delete") {
+      // Delete selected logs
+      console.log("Deleting logs:", selectedLogs);
+    }
+  };
 
   return (
     <Box sx={{ display: "flex", minHeight: "100vh" }}>
@@ -207,7 +342,7 @@ export default function AdminLogs() {
             </IconButton>
             <TextField
               variant="standard"
-              placeholder="Search companies, owners, status…"
+              placeholder="Search logs, users, actions..."
               fullWidth
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -232,7 +367,9 @@ export default function AdminLogs() {
           </Stack>
         </Toolbar>
       </AppBar>
+
       <AdminSidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+
       <Box
         component="main"
         sx={{
@@ -242,8 +379,460 @@ export default function AdminLogs() {
         }}
       >
         <Toolbar />
-        <Stack spacing={2} mt={2}>
-          <Typography>Logs</Typography>
+
+        {/* Header Section */}
+        <Stack spacing={3} mt={2}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: 2,
+            }}
+          >
+            <Box>
+              <Typography variant="h4" sx={{ fontWeight: 700, mb: 1 }}>
+                System Logs
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Monitor and analyze system activities, user actions, and
+                security events
+              </Typography>
+            </Box>
+
+            <Stack direction="row" spacing={2} alignItems="center">
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={realTimeMode}
+                    onChange={(e) => setRealTimeMode(e.target.checked)}
+                    color="primary"
+                  />
+                }
+                label="Real-time"
+              />
+              <Button
+                variant="outlined"
+                startIcon={<FilterList />}
+                onClick={() => setShowFilters(!showFilters)}
+              >
+                Filters
+              </Button>
+              <Button
+                variant="contained"
+                startIcon={<Download />}
+                onClick={() => handleBulkAction("export")}
+                disabled={selectedLogs.length === 0}
+              >
+                Export
+              </Button>
+            </Stack>
+          </Box>
+
+          {/* Stats Cards */}
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6} md={3}>
+              <Card sx={{ height: "100%" }}>
+                <CardContent>
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Box>
+                      <Typography color="text.secondary" variant="body2">
+                        Total Logs
+                      </Typography>
+                      <Typography variant="h4" sx={{ fontWeight: 700 }}>
+                        {filteredLogs.length}
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        backgroundColor: "primary.main",
+                        borderRadius: "50%",
+                        p: 1.5,
+                        color: "white",
+                      }}
+                    >
+                      <Computer />
+                    </Box>
+                  </Stack>
+                </CardContent>
+              </Card>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={3}>
+              <Card sx={{ height: "100%" }}>
+                <CardContent>
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Box>
+                      <Typography color="text.secondary" variant="body2">
+                        Active Users
+                      </Typography>
+                      <Typography variant="h4" sx={{ fontWeight: 700 }}>
+                        {
+                          new Set(
+                            filteredLogs
+                              .filter((log) => log.action === "LOGIN")
+                              .map((log) => log.user)
+                          ).size
+                        }
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        backgroundColor: "success.main",
+                        borderRadius: "50%",
+                        p: 1.5,
+                        color: "white",
+                      }}
+                    >
+                      <Person />
+                    </Box>
+                  </Stack>
+                </CardContent>
+              </Card>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={3}>
+              <Card sx={{ height: "100%" }}>
+                <CardContent>
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Box>
+                      <Typography color="text.secondary" variant="body2">
+                        Errors
+                      </Typography>
+                      <Typography
+                        variant="h4"
+                        sx={{ fontWeight: 700, color: "error.main" }}
+                      >
+                        {
+                          filteredLogs.filter((log) => log.status === "ERROR")
+                            .length
+                        }
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        backgroundColor: "error.main",
+                        borderRadius: "50%",
+                        p: 1.5,
+                        color: "white",
+                      }}
+                    >
+                      <Error />
+                    </Box>
+                  </Stack>
+                </CardContent>
+              </Card>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={3}>
+              <Card sx={{ height: "100%" }}>
+                <CardContent>
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Box>
+                      <Typography color="text.secondary" variant="body2">
+                        Warnings
+                      </Typography>
+                      <Typography
+                        variant="h4"
+                        sx={{ fontWeight: 700, color: "warning.main" }}
+                      >
+                        {
+                          filteredLogs.filter((log) => log.status === "WARNING")
+                            .length
+                        }
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        backgroundColor: "warning.main",
+                        borderRadius: "50%",
+                        p: 1.5,
+                        color: "white",
+                      }}
+                    >
+                      <Warning />
+                    </Box>
+                  </Stack>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+
+          {/* Filters Section */}
+          {showFilters && (
+            <Card>
+              <CardContent>
+                <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+                  Advanced Filters
+                </Typography>
+                <Grid container spacing={3}>
+                  <Grid item xs={12} sm={6} md={3}>
+                    <FormControl fullWidth>
+                      <InputLabel>Status</InputLabel>
+                      <Select
+                        value={statusFilter}
+                        label="Status"
+                        onChange={(e) => setStatusFilter(e.target.value)}
+                      >
+                        <MenuItem value="ALL">All Statuses</MenuItem>
+                        {uniqueStatuses.map((status) => (
+                          <MenuItem key={status} value={status}>
+                            {status}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item xs={12} sm={6} md={3}>
+                    <FormControl fullWidth>
+                      <InputLabel>Action</InputLabel>
+                      <Select
+                        value={actionFilter}
+                        label="Action"
+                        onChange={(e) => setActionFilter(e.target.value)}
+                      >
+                        <MenuItem value="ALL">All Actions</MenuItem>
+                        {uniqueActions.map((action) => (
+                          <MenuItem key={action} value={action}>
+                            {action}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item xs={12} sm={6} md={3}>
+                    <FormControl fullWidth>
+                      <InputLabel>Module</InputLabel>
+                      <Select
+                        value={moduleFilter}
+                        label="Module"
+                        onChange={(e) => setModuleFilter(e.target.value)}
+                      >
+                        <MenuItem value="ALL">All Modules</MenuItem>
+                        {uniqueModules.map((module) => (
+                          <MenuItem key={module} value={module}>
+                            {module}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item xs={12} sm={6} md={3}>
+                    <TextField
+                      fullWidth
+                      type="date"
+                      label="Start Date"
+                      value={dateRange.startDate}
+                      onChange={(e) =>
+                        setDateRange({
+                          ...dateRange,
+                          startDate: e.target.value,
+                        })
+                      }
+                      InputLabelProps={{ shrink: true }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={12} sm={6} md={3}>
+                    <TextField
+                      fullWidth
+                      type="date"
+                      label="End Date"
+                      value={dateRange.endDate}
+                      onChange={(e) =>
+                        setDateRange({ ...dateRange, endDate: e.target.value })
+                      }
+                      InputLabelProps={{ shrink: true }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={12} sm={6} md={3}>
+                    <Button
+                      variant="outlined"
+                      startIcon={<Refresh />}
+                      onClick={() => {
+                        setStatusFilter("ALL");
+                        setActionFilter("ALL");
+                        setModuleFilter("ALL");
+                        setDateRange({ startDate: "", endDate: "" });
+                      }}
+                      fullWidth
+                    >
+                      Clear Filters
+                    </Button>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Logs Table */}
+          <Card>
+            <CardContent sx={{ p: 0 }}>
+              <TableContainer>
+                <Table>
+                  <TableHead>
+                    <TableRow sx={{ backgroundColor: "background.default" }}>
+                      <TableCell padding="checkbox">
+                        <input
+                          type="checkbox"
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setSelectedLogs(
+                                filteredLogs.map((log) => log.id)
+                              );
+                            } else {
+                              setSelectedLogs([]);
+                            }
+                          }}
+                          checked={
+                            selectedLogs.length === filteredLogs.length &&
+                            filteredLogs.length > 0
+                          }
+                        />
+                      </TableCell>
+                      <TableCell sx={{ fontWeight: 600 }}>Timestamp</TableCell>
+                      <TableCell sx={{ fontWeight: 600 }}>Action</TableCell>
+                      <TableCell sx={{ fontWeight: 600 }}>Status</TableCell>
+                      <TableCell sx={{ fontWeight: 600 }}>User</TableCell>
+                      <TableCell sx={{ fontWeight: 600 }}>Module</TableCell>
+                      <TableCell sx={{ fontWeight: 600 }}>IP Address</TableCell>
+                      <TableCell sx={{ fontWeight: 600 }}>Details</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {filteredLogs
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((log) => (
+                        <TableRow key={log.id} hover>
+                          <TableCell padding="checkbox">
+                            <input
+                              type="checkbox"
+                              checked={selectedLogs.includes(log.id)}
+                              onChange={(e) => {
+                                if (e.target.checked) {
+                                  setSelectedLogs([...selectedLogs, log.id]);
+                                } else {
+                                  setSelectedLogs(
+                                    selectedLogs.filter((id) => id !== log.id)
+                                  );
+                                }
+                              }}
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <Typography
+                              variant="body2"
+                              sx={{ fontFamily: "monospace" }}
+                            >
+                              {formatTimestamp(log.timestamp)}
+                            </Typography>
+                          </TableCell>
+                          <TableCell>
+                            <Stack
+                              direction="row"
+                              alignItems="center"
+                              spacing={1}
+                            >
+                              {getActionIcon(log.action)}
+                              <Typography
+                                variant="body2"
+                                sx={{ fontWeight: 500 }}
+                              >
+                                {log.action}
+                              </Typography>
+                            </Stack>
+                          </TableCell>
+                          <TableCell>
+                            <Chip
+                              label={log.status}
+                              color={getStatusColor(log.status)}
+                              size="small"
+                              variant="outlined"
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <Typography
+                              variant="body2"
+                              sx={{ fontFamily: "monospace" }}
+                            >
+                              {log.user}
+                            </Typography>
+                          </TableCell>
+                          <TableCell>
+                            <Typography variant="body2">
+                              {log.module}
+                            </Typography>
+                          </TableCell>
+                          <TableCell>
+                            <Typography
+                              variant="body2"
+                              sx={{ fontFamily: "monospace" }}
+                            >
+                              {log.ipAddress}
+                            </Typography>
+                          </TableCell>
+                          <TableCell>
+                            <Typography
+                              variant="body2"
+                              color="text.secondary"
+                              sx={{ maxWidth: 200 }}
+                            >
+                              {log.details}
+                            </Typography>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+
+              <TablePagination
+                component="div"
+                count={filteredLogs.length}
+                page={page}
+                onPageChange={(event, newPage) => setPage(newPage)}
+                rowsPerPage={rowsPerPage}
+                onRowsPerPageChange={(event) => {
+                  setRowsPerPage(parseInt(event.target.value, 10));
+                  setPage(0);
+                }}
+                rowsPerPageOptions={[10, 25, 50, 100]}
+                labelRowsPerPage="Rows per page:"
+              />
+            </CardContent>
+          </Card>
+
+          {/* Real-time Indicator */}
+          {realTimeMode && (
+            <Alert severity="info" icon={<Info />}>
+              Real-time monitoring is active. New logs will appear
+              automatically.
+            </Alert>
+          )}
         </Stack>
       </Box>
     </Box>

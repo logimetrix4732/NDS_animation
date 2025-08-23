@@ -22,26 +22,26 @@ import {
   LinearProgress,
   Paper,
   Button,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  FormControlLabel,
-  Switch,
-  InputAdornment,
-  Tabs,
-  Tab,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  IconButton as MuiIconButton,
+  TablePagination,
+  Checkbox,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  InputAdornment,
+  Divider,
+  Badge,
+  Fade,
+  Grow,
+  Zoom,
+  Alert,
+  Snackbar,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
@@ -53,145 +53,496 @@ import {
   ArrowUpward,
   ArrowDownward,
   Add as AddIcon,
-  Edit as EditIcon,
-  Delete as DeleteIcon,
   Download as DownloadIcon,
-  Visibility as ViewIcon,
-  CloudUpload as UploadIcon,
-  CalendarToday as CalendarIcon,
+  ViewModule as ViewModuleIcon,
+  MoreVert as MoreVertIcon,
+  Cancel as CancelIcon,
+  Done as DoneIcon,
+  Schedule as ScheduleIcon,
+  RadioButtonUnchecked as RadioButtonUncheckedIcon,
+  Help as HelpIcon,
+  TrendingUp as TrendingUpIcon,
+  Book as BookIcon,
+  Article as ArticleIcon,
+  Description as DescriptionIcon,
 } from "@mui/icons-material";
 import { DataGrid } from "@mui/x-data-grid";
 import nds_logo from "../assets/img/nds_logo.png";
 import AdminSidebar from "../AdminComponents/AdminSidebar";
+import AdminPublicationForm from "./AdminPublicationForm";
+import { postFetch } from "../Api/Api";
+
+// --------- API CONFIGURATION ---------
 
 // --------- THEME ---------
 const getDesignTokens = (mode) => ({
   palette: {
     mode,
-    primary: { main: mode === "dark" ? "#90caf9" : "#1565c0" },
-    secondary: { main: mode === "dark" ? "#ffb74d" : "#ef6c00" },
+    primary: {
+      main: mode === "dark" ? "#90caf9" : "#1565c0",
+      light: mode === "dark" ? "#e3f2fd" : "#bbdefb",
+      dark: mode === "dark" ? "#42a5f5" : "#0d47a1",
+    },
+    secondary: {
+      main: mode === "dark" ? "#ffb74d" : "#ef6c00",
+      light: mode === "dark" ? "#ffe0b2" : "#ffcc02",
+      dark: mode === "dark" ? "#f57c00" : "#e65100",
+    },
     background: {
-      default: mode === "dark" ? "#0b1020" : "#f6f8fc",
+      default: mode === "dark" ? "#0b1020" : "#f8fafc",
       paper: mode === "dark" ? "#0f1629" : "#ffffff",
     },
+    success: {
+      main: mode === "dark" ? "#66bb6a" : "#2e7d32",
+      light: mode === "dark" ? "#c8e6c9" : "#a5d6a7",
+    },
+    warning: {
+      main: mode === "dark" ? "#ffa726" : "#f57c00",
+      light: mode === "dark" ? "#ffe0b2" : "#ffb74d",
+    },
+    error: {
+      main: mode === "dark" ? "#ef5350" : "#d32f2f",
+      light: mode === "dark" ? "#ffcdd2" : "#f44336",
+    },
+    info: {
+      main: mode === "dark" ? "#42a5f5" : "#1976d2",
+      light: mode === "dark" ? "#bbdefb" : "#64b5f6",
+    },
   },
-  shape: { borderRadius: 16 },
+  shape: { borderRadius: 20 },
   typography: {
     fontFamily:
       "Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
-    h4: { fontWeight: 700 },
-    h6: { fontWeight: 600 },
+    h4: {
+      fontWeight: 800,
+      background:
+        mode === "dark"
+          ? "linear-gradient(45deg, #90caf9 30%, #42a5f5 90%)"
+          : "linear-gradient(45deg, #1565c0 30%, #42a5f5 90%)",
+      backgroundClip: "text",
+      WebkitBackgroundClip: "text",
+      WebkitTextFillColor: "transparent",
+      textShadow:
+        mode === "dark" ? "0 0 20px rgba(144, 202, 249, 0.3)" : "none",
+    },
+    h6: { fontWeight: 700 },
+    body1: { fontWeight: 500 },
+    body2: { fontWeight: 400 },
   },
   components: {
-    MuiCard: { styleOverrides: { root: { overflow: "hidden" } } },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          overflow: "hidden",
+          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+          "&:hover": {
+            transform: "translateY(-4px)",
+            boxShadow:
+              mode === "dark"
+                ? "0 20px 40px rgba(0, 0, 0, 0.4)"
+                : "0 20px 40px rgba(0, 0, 0, 0.1)",
+          },
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 12,
+          textTransform: "none",
+          fontWeight: 600,
+          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+          "&:hover": {
+            transform: "translateY(-2px)",
+            boxShadow:
+              mode === "dark"
+                ? "0 8px 25px rgba(0, 0, 0, 0.3)"
+                : "0 8px 25px rgba(0, 0, 0, 0.15)",
+          },
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+        },
+      },
+    },
   },
 });
 
 // --------- MOCK DATA ---------
-const publicationData = [
+const publications = [
   {
-    id: 1,
-    name: "Employee Handbook 2024",
+    id: "PUB-9366",
+    title: "HR Policy Compliance Guidelines 2024",
     type: "HR Compliances",
-    status: "Active",
-    lastUpdate: "2024-12-15",
-    createdBy: "HR Department",
-    size: "2.5 MB",
-    downloads: 45,
-  },
-  {
-    id: 2,
-    name: "Annual Report 2023-24",
-    type: "Annual Reports",
-    status: "Active",
-    lastUpdate: "2024-11-20",
-    createdBy: "Finance Team",
-    size: "15.2 MB",
+    status: "Published",
+    priority: "High",
+    date: "2024-01-15",
+    author: "Dr. Amit Kumar",
+    category: "HR",
+    views: 1247,
     downloads: 89,
+    rating: 4.8,
   },
   {
-    id: 3,
-    name: "Data Privacy Policy",
-    type: "Policies",
-    status: "Active",
-    lastUpdate: "2024-10-10",
-    createdBy: "Legal Team",
-    size: "1.8 MB",
-    downloads: 67,
-  },
-  {
-    id: 4,
-    name: "Safety Guidelines",
-    type: "HR Compliances",
-    status: "Inactive",
-    lastUpdate: "2024-09-15",
-    createdBy: "Safety Officer",
-    size: "3.1 MB",
-    downloads: 23,
-  },
-  {
-    id: 5,
-    name: "Sustainability Report 2024",
+    id: "PUB-5736",
+    title: "Annual Report 2023-24: Dairy Development",
     type: "Annual Reports",
-    status: "Active",
-    lastUpdate: "2024-12-01",
-    createdBy: "ESG Team",
-    size: "8.7 MB",
-    downloads: 34,
+    status: "Draft",
+    priority: "Medium",
+    date: "2024-01-10",
+    author: "Dr. Priya Sharma",
+    category: "Reports",
+    views: 567,
+    downloads: 23,
+    rating: 4.2,
+  },
+  {
+    id: "PUB-7918",
+    title: "Employee Safety Policy Document",
+    type: "Policies",
+    status: "Under Review",
+    priority: "High",
+    date: "2024-01-08",
+    author: "Dr. Rajesh Patel",
+    category: "Policy",
+    views: 892,
+    downloads: 156,
+    rating: 4.9,
+  },
+  {
+    id: "PUB-6498",
+    title: "Workplace Ethics Compliance Manual",
+    type: "HR Compliances",
+    status: "Published",
+    priority: "Low",
+    date: "2024-01-05",
+    author: "HR Team",
+    category: "HR",
+    views: 2341,
+    downloads: 445,
+    rating: 4.5,
+  },
+  {
+    id: "PUB-7138",
+    title: "Annual Report 2022-23: Financial Performance",
+    type: "Annual Reports",
+    status: "Published",
+    priority: "High",
+    date: "2024-01-03",
+    author: "Finance Division",
+    category: "Reports",
+    views: 1789,
+    downloads: 234,
+    rating: 4.7,
+  },
+  {
+    id: "PUB-3344",
+    title: "Data Privacy Policy Framework",
+    type: "Policies",
+    status: "In Progress",
+    priority: "Medium",
+    date: "2024-01-01",
+    author: "IT Department",
+    category: "Policy",
+    views: 456,
+    downloads: 67,
+    rating: 4.3,
+  },
+  {
+    id: "PUB-4455",
+    title: "Labor Law Compliance Handbook",
+    type: "HR Compliances",
+    status: "Draft",
+    priority: "Low",
+    date: "2023-12-28",
+    author: "Legal Team",
+    category: "HR",
+    views: 678,
+    downloads: 89,
+    rating: 4.1,
+  },
+  {
+    id: "PUB-5566",
+    title: "Annual Report 2021-22: Strategic Overview",
+    type: "Annual Reports",
+    status: "Published",
+    priority: "High",
+    date: "2023-12-25",
+    author: "Strategy Division",
+    category: "Reports",
+    views: 1567,
+    downloads: 123,
+    rating: 4.6,
   },
 ];
 
+const getStatusIcon = (status) => {
+  switch (status) {
+    case "Published":
+      return <CheckCircle sx={{ color: "success.main", fontSize: 20 }} />;
+    case "Draft":
+      return (
+        <RadioButtonUncheckedIcon
+          sx={{ color: "warning.main", fontSize: 20 }}
+        />
+      );
+    case "Under Review":
+      return <ScheduleIcon sx={{ color: "info.main", fontSize: 20 }} />;
+    case "In Progress":
+      return <ScheduleIcon sx={{ color: "primary.main", fontSize: 20 }} />;
+    default:
+      return <HelpIcon sx={{ color: "text.secondary", fontSize: 20 }} />;
+  }
+};
+
+const getPriorityIcon = (priority) => {
+  switch (priority) {
+    case "High":
+      return <ArrowUpward sx={{ color: "error.main", fontSize: 16 }} />;
+    case "Medium":
+      return <ArrowDownward sx={{ color: "warning.main", fontSize: 16 }} />;
+    case "Low":
+      return <ArrowDownward sx={{ color: "success.main", fontSize: 16 }} />;
+    default:
+      return <ArrowDownward sx={{ color: "text.secondary", fontSize: 16 }} />;
+  }
+};
+
+const getTypeColor = (type) => {
+  switch (type) {
+    case "HR Compliances":
+      return "primary";
+    case "Annual Reports":
+      return "secondary";
+    case "Policies":
+      return "success";
+    default:
+      return "default";
+  }
+};
+
+const getTypeIcon = (type) => {
+  switch (type) {
+    case "HR Compliances":
+      return <BookIcon sx={{ fontSize: 16 }} />;
+    case "Annual Reports":
+      return <DescriptionIcon sx={{ fontSize: 16 }} />;
+    case "Policies":
+      return <ArticleIcon sx={{ fontSize: 16 }} />;
+    default:
+      return <ArticleIcon sx={{ fontSize: 16 }} />;
+  }
+};
+
 // --------- LAYOUT ---------
 const drawerWidth = 260;
-
-// Tab Panel Component
-function TabPanel({ children, value, index, ...other }) {
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`publication-tabpanel-${index}`}
-      aria-labelledby={`publication-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
-  );
-}
 
 export default function AdminPublication() {
   const prefersDark = useMediaQuery("(prefers-color-scheme: dark)");
   const [mode, setMode] = useState(prefersDark ? "dark" : "light");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const [tabValue, setTabValue] = useState(0);
-  const [openDialog, setOpenDialog] = useState(false);
-  const [selectedType, setSelectedType] = useState("");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [selectedStatus, setSelectedStatus] = useState("");
+  const [selectedPriority, setSelectedPriority] = useState("");
+  const [formOpen, setFormOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
+  const [formData, setFormData] = useState({
+    name: "",
+    publicationType: "HR Compliances",
+    year: "",
+    description: "",
+    pdfFile: null,
+    thumbnail: null,
+    pdfHindi: null,
+    pdfEnglish: null,
+  });
+
+  const [errors, setErrors] = useState({});
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
-  const handleTabChange = (event, newValue) => {
-    setTabValue(newValue);
+  const filteredPublications = useMemo(() => {
+    let filtered = publications.filter((pub) => {
+      const matchesSearch =
+        search === "" ||
+        pub.title.toLowerCase().includes(search.toLowerCase()) ||
+        pub.id.toLowerCase().includes(search.toLowerCase()) ||
+        pub.author.toLowerCase().includes(search.toLowerCase());
+
+      const matchesType = selectedStatus === "" || pub.type === selectedStatus;
+      const matchesStatus =
+        selectedPriority === "" || pub.status === selectedPriority;
+
+      return matchesSearch && matchesType && matchesStatus;
+    });
+    return filtered;
+  }, [search, selectedStatus, selectedPriority]);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
   };
 
-  const handleCreatePublication = (type) => {
-    setSelectedType(type);
-    setOpenDialog(true);
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
   };
 
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-    setSelectedType("");
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSuccessMessage("");
+    setErrorMessage("");
   };
 
-  const filteredData = useMemo(() => {
-    const s = search.toLowerCase();
-    return publicationData.filter((item) =>
-      [item.name, item.type, item.status, item.createdBy].some((v) =>
-        String(v).toLowerCase().includes(s)
-      )
-    );
-  }, [search]);
+  const paginatedPublications = filteredPublications.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
+  );
+
+  const handleFormOpen = () => {
+    setFormOpen(true);
+    setFormData({
+      name: "",
+      publicationType: "HR Compliances",
+      year: "",
+      description: "",
+      pdfFile: null,
+      thumbnail: null,
+      pdfHindi: null,
+      pdfEnglish: null,
+    });
+    setErrors({});
+    setSelectedFile(null);
+  };
+
+  const handleFormClose = () => {
+    setFormOpen(false);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleFileChange = (e, fieldName) => {
+    const file = e.target.files[0];
+    setFormData((prev) => ({
+      ...prev,
+      [fieldName]: file,
+    }));
+  };
+
+  const handleSubmit = async () => {
+    console.log("=== HANDLE SUBMIT CALLED ===");
+    console.log("Preventing default behavior...");
+
+    // Check if token exists
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.log("No token found, showing error message");
+      setErrorMessage("Please login first. No authentication token found.");
+      return;
+    }
+
+    // Simple validation
+    if (!formData.name.trim()) {
+      setErrorMessage("Name is required");
+      return;
+    }
+
+    if (!formData.pdfFile) {
+      setErrorMessage("PDF file is required");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const formDataToSend = new FormData();
+
+      // Basic fields
+      formDataToSend.append("name", formData.name);
+      formDataToSend.append("publicationType", formData.publicationType);
+
+      // Optional fields
+      if (formData.year) {
+        formDataToSend.append("year", formData.year);
+      }
+
+      if (formData.description) {
+        formDataToSend.append("description", formData.description);
+      }
+
+      // Files
+      formDataToSend.append("pdfFile", formData.pdfFile);
+
+      if (formData.thumbnail) {
+        formDataToSend.append("thumbnail", formData.thumbnail);
+      }
+
+      if (formData.pdfHindi) {
+        formDataToSend.append("pdfHindi", formData.pdfHindi);
+      }
+
+      if (formData.pdfEnglish) {
+        formDataToSend.append("pdfEnglish", formData.pdfEnglish);
+      }
+
+      const response = await postFetch(
+        `${import.meta.env.VITE_API_BASE_URL}/createPublications`,
+        formDataToSend
+      );
+
+      console.log("API Response:", response);
+
+      if (response && response.status === 200) {
+        console.log("Success! Closing modal...");
+        setSuccessMessage("Publication created successfully!");
+        setFormOpen(false);
+
+        // Reset form
+        setFormData({
+          name: "",
+          publicationType: "HR Compliances",
+          year: "",
+          description: "",
+          pdfFile: null,
+          thumbnail: null,
+          pdfHindi: null,
+          pdfEnglish: null,
+        });
+      } else {
+        console.log("Error response:", response);
+        if (response && response.status === 401) {
+          setErrorMessage("Authentication failed. Please login again.");
+        } else {
+          setErrorMessage("Error creating publication. Please try again.");
+        }
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      if (error.status === 401) {
+        setErrorMessage("Authentication failed. Please login again.");
+      } else {
+        setErrorMessage("Error creating publication. Please try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Box sx={{ display: "flex", minHeight: "100vh" }}>
@@ -199,13 +550,17 @@ export default function AdminPublication() {
         position="fixed"
         elevation={0}
         sx={{
-          backdropFilter: "blur(8px)",
+          backdropFilter: "blur(20px)",
           backgroundColor: (t) =>
             t.palette.mode === "dark"
-              ? "rgba(10, 14, 25, 0.7)"
-              : "rgba(255,255,255,0.7)",
+              ? "rgba(10, 14, 25, 0.8)"
+              : "rgba(255,255,255,0.9)",
           borderBottom: 1,
           borderColor: "divider",
+          background: (t) =>
+            t.palette.mode === "dark"
+              ? "linear-gradient(135deg, rgba(10, 14, 25, 0.9) 0%, rgba(15, 22, 41, 0.9) 100%)"
+              : "linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.95) 100%)",
         }}
       >
         <Toolbar sx={{ minHeight: { xs: 64, md: 89 } }}>
@@ -235,6 +590,15 @@ export default function AdminPublication() {
               py: 0.5,
               mr: 2,
               width: 360,
+              borderRadius: 3,
+              background: (t) =>
+                t.palette.mode === "dark"
+                  ? "rgba(255,255,255,0.05)"
+                  : "rgba(0,0,0,0.02)",
+              border: (t) =>
+                t.palette.mode === "dark"
+                  ? "1px solid rgba(255,255,255,0.1)"
+                  : "1px solid rgba(0,0,0,0.08)",
             }}
             elevation={0}
           >
@@ -243,7 +607,7 @@ export default function AdminPublication() {
             </IconButton>
             <TextField
               variant="standard"
-              placeholder="Search publications..."
+              placeholder="Search publications, authors, status…"
               fullWidth
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -257,783 +621,422 @@ export default function AdminPublication() {
                 onClick={() =>
                   setMode((m) => (m === "light" ? "dark" : "light"))
                 }
+                sx={{
+                  background: (t) =>
+                    t.palette.mode === "dark"
+                      ? "rgba(255,255,255,0.05)"
+                      : "rgba(0,0,0,0.04)",
+                  "&:hover": {
+                    background: (t) =>
+                      t.palette.mode === "dark"
+                        ? "rgba(255,255,255,0.1)"
+                        : "rgba(0,0,0,0.08)",
+                  },
+                }}
               >
                 {mode === "light" ? <DarkMode /> : <LightMode />}
               </IconButton>
             </Tooltip>
-            <IconButton>
-              <Notifications />
+            <IconButton
+              sx={{
+                background: (t) =>
+                  t.palette.mode === "dark"
+                    ? "rgba(255,255,255,0.05)"
+                    : "rgba(0,0,0,0.04)",
+                "&:hover": {
+                  background: (t) =>
+                    t.palette.mode === "dark"
+                      ? "rgba(255,255,255,0.1)"
+                      : "rgba(0,0,0,0.08)",
+                },
+              }}
+            >
+              <Badge badgeContent={3} color="error">
+                <Notifications />
+              </Badge>
             </IconButton>
-            <Avatar sx={{ width: 34, height: 34 }}>AS</Avatar>
+            <Avatar
+              sx={{
+                width: 40,
+                height: 40,
+                background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                fontWeight: 600,
+              }}
+            >
+              AS
+            </Avatar>
           </Stack>
         </Toolbar>
       </AppBar>
-
       <AdminSidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
-
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-          p: { xs: 2, md: 3 },
+          p: { xs: 1, md: 2 },
           ml: { md: `${drawerWidth}px` },
+          background: (t) =>
+            t.palette.mode === "dark"
+              ? "linear-gradient(135deg, #0b1020 0%, #0f1629 100%)"
+              : "linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)",
+          minHeight: "100vh",
+          width: "100%",
         }}
       >
         <Toolbar />
 
-        <Stack spacing={3} mt={2}>
-          {/* Publication Type Cards */}
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={4}>
-              <Card
+        {/* Main Content */}
+        <Box sx={{ mt: 2, width: "100%" }}>
+          {/* Header Section */}
+          <Grow in timeout={800}>
+            <Box sx={{ mb: 4, width: "100%" }}>
+              {/* Top Row - Title and Action Buttons */}
+              <Box
                 sx={{
-                  cursor: "pointer",
-                  transition: "all 0.3s ease",
-                  "&:hover": { transform: "translateY(-4px)", boxShadow: 4 },
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  mb: 2,
+                  width: "100%",
                 }}
               >
-                <CardContent sx={{ textAlign: "center", p: 3 }}>
+                {/* Left Side - Title with Accent Bar */}
+                <Box sx={{ display: "flex", alignItems: "center" }}>
                   <Box
                     sx={{
-                      width: 80,
-                      height: 80,
-                      borderRadius: "50%",
-                      bgcolor: "primary.light",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      mx: "auto",
-                      mb: 2,
+                      width: 8,
+                      height: 40,
+                      background:
+                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                      borderRadius: 4,
+                      mr: 2,
                     }}
-                  >
-                    <Typography variant="h4" sx={{ color: "white" }}>
-                      👥
-                    </Typography>
-                  </Box>
-                  <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
-                    HR Compliances
+                  />
+                  <Typography variant="h4" sx={{ fontWeight: 800 }}>
+                    Publications
                   </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ mb: 3 }}
-                  >
-                    Manage employee handbooks, safety guidelines, and compliance
-                    documents
-                  </Typography>
+                </Box>
+
+                {/* Right Side - Action Buttons */}
+                <Stack direction="row" spacing={2}>
                   <Button
-                    variant="contained"
-                    fullWidth
-                    onClick={() => handleCreatePublication("HR Compliances")}
+                    variant="outlined"
+                    startIcon={<DownloadIcon />}
                     sx={{
-                      borderRadius: 2,
+                      borderRadius: 3,
+                      px: 3,
                       py: 1.5,
-                      textTransform: "none",
+                      borderWidth: 2,
                       fontWeight: 600,
-                      boxShadow: "0 4px 12px rgba(25, 118, 210, 0.3)",
+                      background: (t) =>
+                        t.palette.mode === "dark"
+                          ? "rgba(255,255,255,0.05)"
+                          : "rgba(0,0,0,0.02)",
                       "&:hover": {
-                        boxShadow: "0 6px 20px rgba(25, 118, 210, 0.4)",
-                        transform: "translateY(-2px)",
+                        borderWidth: 2,
+                        background: (t) =>
+                          t.palette.mode === "dark"
+                            ? "rgba(255,255,255,0.1)"
+                            : "rgba(0,0,0,0.05)",
                       },
                     }}
                   >
-                    Create New
+                    Import
                   </Button>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} md={4}>
-              <Card
-                sx={{
-                  cursor: "pointer",
-                  transition: "all 0.3s ease",
-                  "&:hover": { transform: "translateY(-4px)", boxShadow: 4 },
-                }}
-              >
-                <CardContent sx={{ textAlign: "center", p: 3 }}>
-                  <Box
-                    sx={{
-                      width: 80,
-                      height: 80,
-                      borderRadius: "50%",
-                      bgcolor: "secondary.light",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      mx: "auto",
-                      mb: 2,
-                    }}
-                  >
-                    <Typography variant="h4" sx={{ color: "white" }}>
-                      📊
-                    </Typography>
-                  </Box>
-                  <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
-                    Annual Reports
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ mb: 3 }}
-                  >
-                    Upload yearly reports in both Hindi and English languages
-                  </Typography>
                   <Button
                     variant="contained"
-                    fullWidth
-                    onClick={() => handleCreatePublication("Annual Reports")}
+                    startIcon={<AddIcon />}
+                    onClick={() => setFormOpen(true)}
                     sx={{
-                      borderRadius: 2,
+                      borderRadius: 3,
+                      px: 3,
                       py: 1.5,
-                      textTransform: "none",
                       fontWeight: 600,
-                      bgcolor: "secondary.main",
-                      boxShadow: "0 4px 12px rgba(239, 108, 0, 0.3)",
+                      background:
+                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                      boxShadow: "0 8px 25px rgba(102, 126, 234, 0.3)",
                       "&:hover": {
-                        bgcolor: "secondary.dark",
-                        boxShadow: "0 6px 20px rgba(239, 108, 0, 0.4)",
-                        transform: "translateY(-2px)",
+                        background:
+                          "linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%)",
+                        boxShadow: "0 12px 35px rgba(102, 126, 234, 0.4)",
                       },
                     }}
                   >
-                    Create New
+                    Create +
                   </Button>
-                </CardContent>
-              </Card>
-            </Grid>
+                </Stack>
+              </Box>
 
-            <Grid item xs={12} md={4}>
-              <Card
+              {/* Bottom Row - Subtitle */}
+              <Typography
+                variant="body1"
+                color="text.secondary"
                 sx={{
-                  cursor: "pointer",
-                  transition: "all 0.3s ease",
-                  "&:hover": { transform: "translateY(-4px)", boxShadow: 4 },
+                  fontSize: "1.1rem",
+                  opacity: 0.8,
                 }}
               >
-                <CardContent sx={{ textAlign: "center", p: 3 }}>
-                  <Box
-                    sx={{
-                      width: 80,
-                      height: 80,
-                      borderRadius: "50%",
-                      bgcolor: "success.light",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      mx: "auto",
-                      mb: 2,
-                    }}
-                  >
-                    <Typography variant="h4" sx={{ color: "white" }}>
-                      📋
-                    </Typography>
-                  </Box>
-                  <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
-                    Policies
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ mb: 3 }}
-                  >
-                    Manage company policies, guidelines, and procedural
-                    documents
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    fullWidth
-                    onClick={() => handleCreatePublication("Policies")}
-                    sx={{
-                      borderRadius: 2,
-                      py: 1.5,
-                      textTransform: "none",
-                      fontWeight: 600,
-                      bgcolor: "success.main",
-                      boxShadow: "0 4px 12px rgba(76, 175, 80, 0.3)",
-                      "&:hover": {
-                        bgcolor: "success.dark",
-                        boxShadow: "0 6px 20px rgba(76, 175, 80, 0.4)",
-                        transform: "translateY(-2px)",
-                      },
-                    }}
-                  >
-                    Create New
-                  </Button>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-
-          {/* Publications Table */}
-          <Card>
-            <CardContent>
-              <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
-                All Publications
-              </Typography>
-              <TableContainer>
-                <Table>
-                  <TableHead>
-                    <TableRow sx={{ bgcolor: "grey.100" }}>
-                      <TableCell sx={{ fontWeight: 600 }}>Name</TableCell>
-                      <TableCell sx={{ fontWeight: 600 }}>Type</TableCell>
-                      <TableCell sx={{ fontWeight: 600 }}>Status</TableCell>
-                      <TableCell sx={{ fontWeight: 600 }}>
-                        Last Update
-                      </TableCell>
-                      <TableCell sx={{ fontWeight: 600 }}>Created By</TableCell>
-                      <TableCell sx={{ fontWeight: 600 }}>Size</TableCell>
-                      <TableCell sx={{ fontWeight: 600 }}>Downloads</TableCell>
-                      <TableCell sx={{ fontWeight: 600 }}>Actions</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {filteredData.map((row) => (
-                      <TableRow key={row.id} hover>
-                        <TableCell>{row.name}</TableCell>
-                        <TableCell>
-                          <Chip
-                            label={row.type}
-                            size="small"
-                            color={
-                              row.type === "HR Compliances"
-                                ? "primary"
-                                : row.type === "Annual Reports"
-                                ? "secondary"
-                                : "success"
-                            }
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <Chip
-                            label={row.status}
-                            size="small"
-                            color={
-                              row.status === "Active" ? "success" : "default"
-                            }
-                          />
-                        </TableCell>
-                        <TableCell>{row.lastUpdate}</TableCell>
-                        <TableCell>{row.createdBy}</TableCell>
-                        <TableCell>{row.size}</TableCell>
-                        <TableCell>{row.downloads}</TableCell>
-                        <TableCell>
-                          <Stack direction="row" spacing={1}>
-                            <Tooltip title="View">
-                              <IconButton size="small" color="primary">
-                                <ViewIcon />
-                              </IconButton>
-                            </Tooltip>
-                            <Tooltip title="Edit">
-                              <IconButton size="small" color="secondary">
-                                <EditIcon />
-                              </IconButton>
-                            </Tooltip>
-                            <Tooltip title="Download">
-                              <IconButton size="small" color="success">
-                                <DownloadIcon />
-                              </IconButton>
-                            </Tooltip>
-                            <Tooltip title="Delete">
-                              <IconButton size="small" color="error">
-                                <DeleteIcon />
-                              </IconButton>
-                            </Tooltip>
-                          </Stack>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </CardContent>
-          </Card>
-        </Stack>
-
-        {/* Create Publication Dialog */}
-        <Dialog
-          open={openDialog}
-          onClose={handleCloseDialog}
-          maxWidth="md"
-          fullWidth
-          PaperProps={{
-            sx: {
-              borderRadius: 3,
-              boxShadow: "0 20px 60px rgba(0,0,0,0.15)",
-            },
-          }}
-        >
-          <DialogTitle
-            sx={{
-              pb: 1,
-              background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-              color: "white",
-              borderRadius: "12px 12px 0 0",
-              position: "relative",
-              overflow: "hidden",
-              "&::before": {
-                content: '""',
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                background:
-                  "linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)",
-                zIndex: 1,
-              },
-            }}
-          >
-            <Box sx={{ position: "relative", zIndex: 2 }}>
-              <Typography variant="h5" sx={{ fontWeight: 700, mb: 0.5 }}>
-                ✨ Create New {selectedType}
-              </Typography>
-              <Typography variant="body2" sx={{ opacity: 0.9 }}>
-                Fill in the details below to create a new publication
+                Here's a comprehensive overview of your publications for this
+                month!
               </Typography>
             </Box>
-          </DialogTitle>
+          </Grow>
 
-          <DialogContent sx={{ p: 4, pt: 3 }}>
-            {selectedType === "HR Compliances" && (
-              <Stack spacing={3}>
-                <Box sx={{ position: "relative" }}>
-                  <TextField
-                    fullWidth
-                    label="Document Name"
-                    placeholder="Enter document name"
-                    variant="outlined"
+          {/* Publications Table */}
+          <Paper
+            sx={{
+              borderRadius: 4,
+              overflow: "hidden",
+              background: (t) =>
+                t.palette.mode === "dark"
+                  ? "linear-gradient(135deg, #0f1629 0%, #1a2332 100%)"
+                  : "linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)",
+              border: (t) =>
+                t.palette.mode === "dark"
+                  ? "1px solid rgba(255,255,255,0.1)"
+                  : "1px solid rgba(0,0,0,0.08)",
+              boxShadow: (t) =>
+                t.palette.mode === "dark"
+                  ? "0 8px 32px rgba(0, 0, 0, 0.3)"
+                  : "0 8px 32px rgba(0, 0, 0, 0.08)",
+            }}
+          >
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow
                     sx={{
-                      "& .MuiOutlinedInput-root": {
-                        borderRadius: 2,
-                        "&:hover .MuiOutlinedInput-notchedOutline": {
-                          borderColor: "primary.main",
-                          borderWidth: 2,
+                      background: (t) =>
+                        t.palette.mode === "dark"
+                          ? "rgba(255,255,255,0.05)"
+                          : "rgba(0,0,0,0.02)",
+                      "& th": {
+                        borderBottom: "2px solid",
+                        borderColor: (t) =>
+                          t.palette.mode === "dark"
+                            ? "rgba(255,255,255,0.1)"
+                            : "rgba(0,0,0,0.08)",
+                      },
+                    }}
+                  >
+                    <TableCell>S.No</TableCell>
+                    <TableCell sx={{ fontWeight: 700, fontSize: "0.95rem" }}>
+                      Publication ID
+                    </TableCell>
+                    <TableCell sx={{ fontWeight: 700, fontSize: "0.95rem" }}>
+                      Title & Details
+                    </TableCell>
+                    <TableCell sx={{ fontWeight: 700, fontSize: "0.95rem" }}>
+                      Type
+                    </TableCell>
+                    <TableCell sx={{ fontWeight: 700, fontSize: "0.95rem" }}>
+                      Status
+                    </TableCell>
+                    <TableCell sx={{ fontWeight: 700, fontSize: "0.95rem" }}>
+                      Priority
+                    </TableCell>
+                    <TableCell sx={{ fontWeight: 700, fontSize: "0.95rem" }}>
+                      Actions
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {paginatedPublications.map((pub, index) => (
+                    <TableRow
+                      key={pub.id}
+                      hover
+                      sx={{
+                        transition: "all 0.2s ease-in-out",
+                        "&:hover": {
+                          background: (t) =>
+                            t.palette.mode === "dark"
+                              ? "rgba(255,255,255,0.05)"
+                              : "rgba(0,0,0,0.02)",
+                          transform: "scale(1.01)",
                         },
-                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                          borderColor: "primary.main",
-                          borderWidth: 2,
+                        animation: `fadeInUp 0.5s ease-out ${
+                          index * 0.1
+                        }s both`,
+                        "@keyframes fadeInUp": {
+                          "0%": {
+                            opacity: 0,
+                            transform: "translateY(20px)",
+                          },
+                          "100%": {
+                            opacity: 1,
+                            transform: "translateY(0)",
+                          },
                         },
-                      },
-                    }}
-                  />
-                </Box>
+                      }}
+                    >
+                      <TableCell>{index + 1}</TableCell>
+                      <TableCell>
+                        <Box>
+                          <Typography
+                            variant="body2"
+                            sx={{ fontWeight: 600, mb: 1 }}
+                          >
+                            {pub.id}
+                          </Typography>
+                        </Box>
+                      </TableCell>
+                      <TableCell>
+                        <Box>
+                          <Typography
+                            variant="body2"
+                            sx={{ maxWidth: 300, fontWeight: 500, mb: 1 }}
+                          >
+                            {pub.title}
+                          </Typography>
+                        </Box>
+                      </TableCell>
+                      <TableCell>
+                        <Chip
+                          icon={getTypeIcon(pub.type)}
+                          label={pub.type}
+                          size="small"
+                          color={getTypeColor(pub.type)}
+                          sx={{
+                            borderRadius: 2,
+                            fontWeight: 600,
+                            "& .MuiChip-icon": {
+                              color: "inherit",
+                            },
+                          }}
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 1,
+                            p: 1,
+                            borderRadius: 2,
+                            background: (t) =>
+                              t.palette.mode === "dark"
+                                ? "rgba(255,255,255,0.05)"
+                                : "rgba(0,0,0,0.02)",
+                          }}
+                        >
+                          {getStatusIcon(pub.status)}
+                          <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                            {pub.status}
+                          </Typography>
+                        </Box>
+                      </TableCell>
+                      <TableCell>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 1,
+                            p: 1,
+                            borderRadius: 2,
+                            background: (t) =>
+                              t.palette.mode === "dark"
+                                ? "rgba(255,255,255,0.05)"
+                                : "rgba(0,0,0,0.02)",
+                          }}
+                        >
+                          {getPriorityIcon(pub.priority)}
+                          <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                            {pub.priority}
+                          </Typography>
+                        </Box>
+                      </TableCell>
+                      <TableCell>
+                        <IconButton
+                          size="small"
+                          sx={{
+                            background: (t) =>
+                              t.palette.mode === "dark"
+                                ? "rgba(255,255,255,0.05)"
+                                : "rgba(0,0,0,0.02)",
+                            "&:hover": {
+                              background: (t) =>
+                                t.palette.mode === "dark"
+                                  ? "rgba(255,255,255,0.1)"
+                                  : "rgba(0,0,0,0.08)",
+                              transform: "scale(1.1)",
+                            },
+                          }}
+                        >
+                          <MoreVertIcon />
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
 
-                <FormControl fullWidth>
-                  <InputLabel>Status</InputLabel>
-                  <Select
-                    label="Status"
-                    defaultValue="active"
-                    sx={{
-                      borderRadius: 2,
-                      "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "grey.300",
-                      },
-                      "&:hover .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "primary.main",
-                        borderWidth: 2,
-                      },
-                    }}
-                  >
-                    <MenuItem value="active">Active</MenuItem>
-                    <MenuItem value="inactive">Inactive</MenuItem>
-                  </Select>
-                </FormControl>
-
-                <TextField
-                  fullWidth
-                  label="Last Update Date"
-                  type="date"
-                  InputLabelProps={{ shrink: true }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <CalendarIcon color="primary" />
-                      </InputAdornment>
-                    ),
-                  }}
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 2,
-                      "&:hover .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "primary.main",
-                        borderWidth: 2,
-                      },
-                    },
-                  }}
-                />
-
-                <Box>
-                  <Typography
-                    variant="body2"
-                    sx={{ mb: 1, fontWeight: 600, color: "text.primary" }}
-                  >
-                    📷 Thumbnail Photo
-                  </Typography>
-                  <Button
-                    variant="outlined"
-                    component="label"
-                    startIcon={<UploadIcon />}
-                    fullWidth
-                    sx={{
-                      py: 3,
-                      borderStyle: "dashed",
-                      borderRadius: 2,
-                      borderWidth: 2,
-                      borderColor: "primary.light",
-                      color: "primary.main",
-                      "&:hover": {
-                        borderColor: "primary.main",
-                        backgroundColor: "primary.50",
-                        borderWidth: 2,
-                      },
-                    }}
-                  >
-                    <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                      Click to upload thumbnail image
-                    </Typography>
-                    <input type="file" hidden accept="image/*" />
-                  </Button>
-                </Box>
-
-                <Box>
-                  <Typography
-                    variant="body2"
-                    sx={{ mb: 1, fontWeight: 600, color: "text.primary" }}
-                  >
-                    📄 PDF Document
-                  </Typography>
-                  <Button
-                    variant="outlined"
-                    component="label"
-                    startIcon={<UploadIcon />}
-                    fullWidth
-                    sx={{
-                      py: 3,
-                      borderStyle: "dashed",
-                      borderRadius: 2,
-                      borderWidth: 2,
-                      borderColor: "secondary.light",
-                      color: "secondary.main",
-                      "&:hover": {
-                        borderColor: "secondary.main",
-                        backgroundColor: "secondary.50",
-                        borderWidth: 2,
-                      },
-                    }}
-                  >
-                    <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                      Click to upload PDF document
-                    </Typography>
-                    <input type="file" hidden accept=".pdf" />
-                  </Button>
-                </Box>
-              </Stack>
-            )}
-
-            {selectedType === "Annual Reports" && (
-              <Stack spacing={3}>
-                <Box sx={{ position: "relative" }}>
-                  <TextField
-                    fullWidth
-                    label="Report Name"
-                    placeholder="Enter report name"
-                    variant="outlined"
-                    sx={{
-                      "& .MuiOutlinedInput-root": {
-                        borderRadius: 2,
-                        "&:hover .MuiOutlinedInput-notchedOutline": {
-                          borderColor: "primary.main",
-                          borderWidth: 2,
-                        },
-                      },
-                    }}
-                  />
-                </Box>
-
-                <TextField
-                  fullWidth
-                  label="Year"
-                  type="number"
-                  placeholder="2024"
-                  variant="outlined"
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 2,
-                      "&:hover .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "primary.main",
-                        borderWidth: 2,
-                      },
-                    },
-                  }}
-                />
-
-                <Box>
-                  <Typography
-                    variant="body2"
-                    sx={{ mb: 1, fontWeight: 600, color: "text.primary" }}
-                  >
-                    🇮🇳 Hindi PDF
-                  </Typography>
-                  <Button
-                    variant="outlined"
-                    component="label"
-                    startIcon={<UploadIcon />}
-                    fullWidth
-                    sx={{
-                      py: 3,
-                      borderStyle: "dashed",
-                      borderRadius: 2,
-                      borderWidth: 2,
-                      borderColor: "#FF6B6B",
-                      color: "#FF6B6B",
-                      "&:hover": {
-                        borderColor: "#FF5252",
-                        backgroundColor: "#FFEBEE",
-                        borderWidth: 2,
-                      },
-                    }}
-                  >
-                    <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                      Upload Hindi PDF Report
-                    </Typography>
-                    <input type="file" hidden accept=".pdf" />
-                  </Button>
-                </Box>
-
-                <Box>
-                  <Typography
-                    variant="body2"
-                    sx={{ mb: 1, fontWeight: 600, color: "text.primary" }}
-                  >
-                    🇬🇧 English PDF
-                  </Typography>
-                  <Button
-                    variant="outlined"
-                    component="label"
-                    startIcon={<UploadIcon />}
-                    fullWidth
-                    sx={{
-                      py: 3,
-                      borderStyle: "dashed",
-                      borderRadius: 2,
-                      borderWidth: 2,
-                      borderColor: "#4ECDC4",
-                      color: "#4ECDC4",
-                      "&:hover": {
-                        borderColor: "#26A69A",
-                        backgroundColor: "#E0F2F1",
-                        borderWidth: 2,
-                      },
-                    }}
-                  >
-                    <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                      Upload English PDF Report
-                    </Typography>
-                    <input type="file" hidden accept=".pdf" />
-                  </Button>
-                </Box>
-
-                <Box>
-                  <Typography
-                    variant="body2"
-                    sx={{ mb: 1, fontWeight: 600, color: "text.primary" }}
-                  >
-                    📷 Thumbnail Photo
-                  </Typography>
-                  <Button
-                    variant="outlined"
-                    component="label"
-                    startIcon={<UploadIcon />}
-                    fullWidth
-                    sx={{
-                      py: 3,
-                      borderStyle: "dashed",
-                      borderRadius: 2,
-                      borderWidth: 2,
-                      borderColor: "primary.light",
-                      color: "primary.main",
-                      "&:hover": {
-                        borderColor: "primary.main",
-                        backgroundColor: "primary.50",
-                        borderWidth: 2,
-                      },
-                    }}
-                  >
-                    <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                      Upload Report Thumbnail
-                    </Typography>
-                    <input type="file" hidden accept="image/*" />
-                  </Button>
-                </Box>
-              </Stack>
-            )}
-
-            {selectedType === "Policies" && (
-              <Stack spacing={3}>
-                <Box sx={{ position: "relative" }}>
-                  <TextField
-                    fullWidth
-                    label="Policy Name"
-                    placeholder="Enter policy name"
-                    variant="outlined"
-                    sx={{
-                      "& .MuiOutlinedInput-root": {
-                        borderRadius: 2,
-                        "&:hover .MuiOutlinedInput-notchedOutline": {
-                          borderColor: "primary.main",
-                          borderWidth: 2,
-                        },
-                      },
-                    }}
-                  />
-                </Box>
-
-                <TextField
-                  fullWidth
-                  label="Created Date"
-                  type="date"
-                  InputLabelProps={{ shrink: true }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <CalendarIcon color="primary" />
-                      </InputAdornment>
-                    ),
-                  }}
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 2,
-                      "&:hover .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "primary.main",
-                        borderWidth: 2,
-                      },
-                    },
-                  }}
-                />
-
-                <TextField
-                  fullWidth
-                  label="Updated Date"
-                  type="date"
-                  InputLabelProps={{ shrink: true }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <CalendarIcon color="primary" />
-                      </InputAdornment>
-                    ),
-                  }}
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: 2,
-                      "&:hover .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "primary.main",
-                        borderWidth: 2,
-                      },
-                    },
-                  }}
-                />
-
-                <Box>
-                  <Typography
-                    variant="body2"
-                    sx={{ mb: 1, fontWeight: 600, color: "text.primary" }}
-                  >
-                    📋 Policy Document
-                  </Typography>
-                  <Button
-                    variant="outlined"
-                    component="label"
-                    startIcon={<UploadIcon />}
-                    fullWidth
-                    sx={{
-                      py: 3,
-                      borderStyle: "dashed",
-                      borderRadius: 2,
-                      borderWidth: 2,
-                      borderColor: "success.light",
-                      color: "success.main",
-                      "&:hover": {
-                        borderColor: "success.main",
-                        backgroundColor: "success.50",
-                        borderWidth: 2,
-                      },
-                    }}
-                  >
-                    <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                      Upload Policy Document (PDF, DOC, DOCX)
-                    </Typography>
-                    <input type="file" hidden accept=".pdf,.doc,.docx" />
-                  </Button>
-                </Box>
-
-                <Box
-                  sx={{
-                    p: 2,
-                    bgcolor: "grey.50",
-                    borderRadius: 2,
-                    border: "1px solid",
-                    borderColor: "grey.200",
-                  }}
-                >
-                  <FormControlLabel
-                    control={<Switch defaultChecked color="success" />}
-                    label={
-                      <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                        Enable Download Option for Users
-                      </Typography>
-                    }
-                  />
-                  <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    sx={{ ml: 4, display: "block" }}
-                  >
-                    Users will be able to download this policy document
-                  </Typography>
-                </Box>
-              </Stack>
-            )}
-          </DialogContent>
-
-          <DialogActions sx={{ p: 4, pt: 2, gap: 2 }}>
-            <Button
-              onClick={handleCloseDialog}
-              variant="outlined"
+            {/* Pagination */}
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={filteredPublications.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              labelRowsPerPage="Rows per page"
               sx={{
-                borderRadius: 2,
-                px: 4,
-                py: 1.5,
-                textTransform: "none",
-                fontWeight: 600,
-                borderWidth: 2,
+                borderTop: 1,
+                borderColor: (t) =>
+                  t.palette.mode === "dark"
+                    ? "rgba(255,255,255,0.1)"
+                    : "rgba(0,0,0,0.08)",
+                background: (t) =>
+                  t.palette.mode === "dark"
+                    ? "rgba(255,255,255,0.02)"
+                    : "rgba(0,0,0,0.01)",
               }}
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="contained"
-              onClick={handleCloseDialog}
-              sx={{
-                borderRadius: 2,
-                px: 4,
-                py: 1.5,
-                textTransform: "none",
-                fontWeight: 600,
-                background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                boxShadow: "0 4px 12px rgba(102, 126, 234, 0.4)",
-                "&:hover": {
-                  boxShadow: "0 6px 20px rgba(102, 126, 234, 0.6)",
-                  transform: "translateY(-2px)",
-                },
-              }}
-            >
-              ✨ Create Publication
-            </Button>
-          </DialogActions>
-        </Dialog>
+            />
+          </Paper>
+        </Box>
       </Box>
+
+      {/* Publication Form Drawer */}
+      <AdminPublicationForm
+        open={formOpen}
+        onClose={handleFormClose}
+        loading={loading}
+        formData={formData}
+        handleChange={handleChange}
+        handleFileChange={handleFileChange}
+        handleSubmit={handleSubmit}
+      />
+
+      {/* Snackbar for success/error messages */}
+      <Snackbar
+        open={!!successMessage}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          {successMessage}
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={!!errorMessage}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          {errorMessage}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }

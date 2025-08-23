@@ -9,12 +9,14 @@ import {
   ListItemText,
   Stack,
   Drawer,
+  Button,
 } from "@mui/material";
 import {
   Dashboard as DashboardIcon,
   BarChart as BarChartIcon,
   TableChart as TableChartIcon,
   Settings as SettingsIcon,
+  Logout as LogoutIcon,
 } from "@mui/icons-material";
 import nds_logo from "../assets/img/nds_logo.png";
 import ReportIcon from "@mui/icons-material/Report";
@@ -25,6 +27,16 @@ const drawerWidth = 240;
 
 const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear all admin data
+    localStorage.removeItem("token");
+    localStorage.removeItem("user_role");
+    localStorage.removeItem("remembered_email");
+
+    // Redirect to login
+    navigate("/AdminLogin");
+  };
 
   const menuItems = [
     { text: "Overview", icon: <DashboardIcon />, path: "/AdminPage" },
@@ -38,7 +50,9 @@ const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
   ];
 
   const sidebarContent = (
-    <Box sx={{ pl: 2 }}>
+    <Box
+      sx={{ pl: 2, height: "100%", display: "flex", flexDirection: "column" }}
+    >
       <Stack
         direction="row"
         spacing={1}
@@ -53,7 +67,9 @@ const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
         />
       </Stack>
       <Divider />
-      <List>
+
+      {/* Menu Items */}
+      <List sx={{ flexGrow: 1 }}>
         {menuItems.map((item) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton onClick={() => navigate(item.path)}>
@@ -63,6 +79,30 @@ const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
           </ListItem>
         ))}
       </List>
+
+      {/* Logout Button */}
+      <Box sx={{ p: 2, borderTop: 1, borderColor: "divider" }}>
+        <Button
+          fullWidth
+          variant="outlined"
+          color="error"
+          startIcon={<LogoutIcon />}
+          onClick={handleLogout}
+          sx={{
+            borderRadius: 2,
+            py: 1.5,
+            borderWidth: 2,
+            fontWeight: 600,
+            "&:hover": {
+              borderWidth: 2,
+              backgroundColor: "error.main",
+              color: "white",
+            },
+          }}
+        >
+          Logout
+        </Button>
+      </Box>
     </Box>
   );
 

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
 import loginAnimation from "../Images/loginAnimation.gif";
 import { Checkbox, FormControlLabel, Box, Skeleton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import "./AdminLogin.css";
-import { postFetchData } from "../Api/Api";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -30,9 +29,10 @@ const AdminLogin = () => {
     setData({ ...data, [name]: value });
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setHide(true);
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!data.email || !data.password) {
@@ -47,10 +47,95 @@ const AdminLogin = () => {
       return;
     }
 
-    mutation.mutate(data);
+    try {
+      console.log("=== LOGIN ATTEMPT ===");
+      console.log("Email:", data.email);
+      console.log("Password:", data.password);
+      console.log("API URL:", `${import.meta.env.VITE_API_BASE_URL}/login`);
+
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: data.email,
+            password: data.password,
+          }),
+        }
+      );
+
+      console.log("Response status:", response.status);
+      const responseData = await response.json();
+      console.log("=== BACKEND RESPONSE ===");
+      console.log("Full response:", responseData);
+      console.log("Status:", responseData.status);
+      console.log("Message:", responseData.message);
+      console.log("Data object:", responseData.data);
+      console.log("Token:", responseData.data?.token);
+      console.log("User Role:", responseData.data?.user_role);
+      console.log("========================");
+
+      if (response.ok) {
+        // Success
+        console.log("Login successful!");
+
+        // Store token and user data based on actual backend response structure
+        if (responseData.data && responseData.data.token) {
+          localStorage.setItem("token", responseData.data.token);
+          console.log("Token stored:", responseData.data.token);
+        }
+
+        if (responseData.data && responseData.data.user_role) {
+          localStorage.setItem("user_role", responseData.data.user_role);
+          console.log("User role stored:", responseData.data.user_role);
+        }
+
+        // Show success message
+        toast.success("Login successful! Redirecting...", { autoClose: 2000 });
+
+        // Remember me functionality
+        if (rememberMe) {
+          localStorage.setItem("remembered_email", data.email);
+        } else {
+          localStorage.removeItem("remembered_email");
+        }
+
+        // Redirect after a short delay
+        setTimeout(() => {
+          navigate("/AdminPage");
+        }, 1500);
+      } else {
+        // Error
+        const errorMessage =
+          responseData.message ||
+          responseData.error ||
+          "Login failed. Please try again.";
+        toast.error(errorMessage, { autoClose: 3000 });
+        setHide(false);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error(
+        "Network error. Please check your connection and try again.",
+        { autoClose: 3000 }
+      );
+      setHide(false);
+    }
   };
 
   const [loading, setLoading] = useState(true);
+
+  // Check for remembered email on component mount
+  React.useEffect(() => {
+    const rememberedEmail = localStorage.getItem("remembered_email");
+    if (rememberedEmail) {
+      setData((prev) => ({ ...prev, email: rememberedEmail }));
+      setRememberMe(true);
+    }
+  }, []);
 
   return (
     <div className="main-loginContainer" style={{ background: "#F7F4F2" }}>

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Home from "./Pages/Home";
 import AboutUs from "./Pages/AboutUs";
 import OurExperties from "./Pages/OurExperties";
@@ -27,6 +27,32 @@ import AdminCareer from "./AdminComponents/AdminCareer";
 import AdminPublication from "./AdminComponents/AdminPublication";
 import AdminLogs from "./AdminComponents/AdminLogs";
 
+// Protected Route Component
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    // No token found, redirect to login
+    return <Navigate to="/AdminLogin" replace />;
+  }
+
+  // Token exists, render the protected component
+  return children;
+};
+
+// Public Route Component (for login page)
+const PublicRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    // Token exists, redirect to admin dashboard
+    return <Navigate to="/AdminPage" replace />;
+  }
+
+  // No token, render the login component
+  return children;
+};
+
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -43,12 +69,12 @@ const App = () => {
   const isHomePage = location.pathname === "/";
   const adminRoutes = [
     "/AdminPage",
-    "/AdminLogin",
     "/AdminTender",
     "/AdminPublication",
     "/AdminLogs",
   ];
   const isAdminRoute = adminRoutes.includes(location.pathname);
+
   return (
     <>
       {!isHomePage && !isAdminRoute && <Header />}
@@ -71,12 +97,55 @@ const App = () => {
         <Route path="/HR" element={<HRCompliances />} />
         <Route path="/policies" element={<PoliciesPage />} />
 
-        <Route path="/AdminPage" element={<AdminPage />} />
-        <Route path="/AdminLogin" element={<AdminLogin />} />
-        <Route path="/AdminTender" element={<AdminTender />} />
-        <Route path="/AdminCareer" element={<AdminCareer />} />
-        <Route path="/AdminPublication" element={<AdminPublication />} />
-        <Route path="/AdminLogs" element={<AdminLogs />} />
+        {/* Admin Routes - Protected */}
+        <Route
+          path="/AdminLogin"
+          element={
+            <PublicRoute>
+              <AdminLogin />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/AdminPage"
+          element={
+            <ProtectedRoute>
+              <AdminPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/AdminTender"
+          element={
+            <ProtectedRoute>
+              <AdminTender />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/AdminCareer"
+          element={
+            <ProtectedRoute>
+              <AdminCareer />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/AdminPublication"
+          element={
+            <ProtectedRoute>
+              <AdminPublication />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/AdminLogs"
+          element={
+            <ProtectedRoute>
+              <AdminLogs />
+            </ProtectedRoute>
+          }
+        />
 
         <Route path="*" element={<Errors />} />
       </Routes>

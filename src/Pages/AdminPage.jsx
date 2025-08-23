@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import {
   ThemeProvider,
   createTheme,
@@ -21,6 +21,7 @@ import {
   Tooltip,
   LinearProgress,
   Paper,
+  CircularProgress,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
@@ -71,73 +72,6 @@ const getDesignTokens = (mode) => ({
   },
 });
 
-// --------- MOCK DATA ---------
-const kpis = [
-  { label: "Revenue", value: "$82.4k", delta: "+12.3%", up: true },
-  { label: "Active Users", value: "12,980", delta: "+5.1%", up: true },
-  { label: "Churn", value: "2.1%", delta: "-0.3%", up: false },
-  { label: "Tickets", value: "184", delta: "+9", up: true },
-];
-
-const lineData = [
-  { month: "Jan", revenue: 42, users: 6.1 },
-  { month: "Feb", revenue: 44, users: 6.6 },
-  { month: "Mar", revenue: 48, users: 7.2 },
-  { month: "Apr", revenue: 53, users: 7.8 },
-  { month: "May", revenue: 58, users: 8.3 },
-  { month: "Jun", revenue: 62, users: 8.9 },
-  { month: "Jul", revenue: 66, users: 9.5 },
-  { month: "Aug", revenue: 70, users: 10.2 },
-  { month: "Sep", revenue: 73, users: 10.8 },
-  { month: "Oct", revenue: 76, users: 11.1 },
-  { month: "Nov", revenue: 79, users: 11.6 },
-  { month: "Dec", revenue: 82, users: 12.2 },
-];
-
-const barData = [
-  { name: "A", sales: 4000, profit: 2400 },
-  { name: "B", sales: 3000, profit: 1398 },
-  { name: "C", sales: 2000, profit: 9800 },
-  { name: "D", sales: 2780, profit: 3908 },
-  { name: "E", sales: 1890, profit: 4800 },
-  { name: "F", sales: 2390, profit: 3800 },
-  { name: "G", sales: 3490, profit: 4300 },
-];
-
-const rows = Array.from({ length: 18 }).map((_, i) => ({
-  id: i + 1,
-  name: ["Acme Inc.", "Globex", "Umbrella", "Hooli", "Soylent"][i % 5],
-  owner: ["Aman", "Shradha", "Rohit", "Priya"][i % 4],
-  status: ["Active", "Pending", "Paused"][i % 3],
-  mrr: Math.round(1000 + Math.random() * 9000),
-  tickets: Math.round(5 + Math.random() * 40),
-}));
-
-const columns = [
-  { field: "name", headerName: "Company", flex: 1, minWidth: 150 },
-  { field: "owner", headerName: "Owner", width: 120 },
-  {
-    field: "status",
-    headerName: "Status",
-    width: 130,
-    renderCell: (p) => (
-      <Chip
-        size="small"
-        label={p.value}
-        color={
-          p.value === "Active"
-            ? "success"
-            : p.value === "Pending"
-            ? "warning"
-            : "default"
-        }
-      />
-    ),
-  },
-  { field: "mrr", headerName: "MRR ($)", width: 120, type: "number" },
-  { field: "tickets", headerName: "Open Tickets", width: 130, type: "number" },
-];
-
 // --------- LAYOUT ---------
 const drawerWidth = 260;
 
@@ -146,16 +80,152 @@ export default function AdminPage() {
   const [mode, setMode] = useState(prefersDark ? "dark" : "light");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [search, setSearch] = useState("");
+  const [dashboardData, setDashboardData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
+
+  // Fetch dashboard data
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        setLoading(true);
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          console.error("No authentication token found");
+          setLoading(false);
+          return;
+        }
+
+        const response = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}/dashboard`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Dashboard API Response:", data);
+          setDashboardData(data.data);
+        } else {
+          console.error("Failed to fetch dashboard data");
+        }
+      } catch (error) {
+        console.error("Error fetching dashboard data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDashboardData();
+  }, []);
+
+  // Dynamic KPIs data from API
+  const kpis = useMemo(() => {
+    if (!dashboardData) {
+      return [
+        { label: "HR Compliances", value: "0", delta: "+0%", up: true },
+        { label: "Annual Reports", value: "0", delta: "+0%", up: true },
+        { label: "Policies", value: "0", delta: "+0%", up: true },
+        { label: "Tender", value: "0", delta: "+0%", up: true },
+      ];
+    }
+
+    return [
+      {
+        label: "HR Compliances",
+        value: dashboardData.hr_compliances?.toString() || "0",
+        delta: "+0%",
+        up: true,
+      },
+      {
+        label: "Annual Reports",
+        value: dashboardData.annaul_repost?.toString() || "0",
+        delta: "+0%",
+        up: true,
+      },
+      {
+        label: "Policies",
+        value: dashboardData.policies?.toString() || "0",
+        delta: "+0%",
+        up: true,
+      },
+      {
+        label: "Tender",
+        value: dashboardData.tender?.toString() || "0",
+        delta: "+0%",
+        up: true,
+      },
+    ];
+  }, [dashboardData]);
+
+  // Dynamic chart data from API
+  const lineData = useMemo(() => {
+    if (!dashboardData?.tender_data_monthly_basis) {
+      return [];
+    }
+
+    return dashboardData.tender_data_monthly_basis.map((item) => ({
+      month: item.month.charAt(0).toUpperCase() + item.month.slice(1),
+      revenue: item.count,
+      users: item.count,
+    }));
+  }, [dashboardData]);
+
+  const barData = [
+    { name: "A", sales: 4000, profit: 2400 },
+    { name: "B", sales: 3000, profit: 1398 },
+    { name: "C", sales: 2000, profit: 9800 },
+    { name: "D", sales: 2780, profit: 3908 },
+    { name: "E", sales: 1890, profit: 4800 },
+    { name: "F", sales: 2390, profit: 3800 },
+    { name: "G", sales: 3490, profit: 4300 },
+  ];
+
+  const columns = [
+    { field: "id", headerName: "ID", width: 90 },
+    { field: "tenderTitle", headerName: "Tender Title", width: 250 },
+    { field: "referenceNo", headerName: "Reference No", width: 200 },
+    { field: "estimatedValues", headerName: "Estimated Value", width: 180 },
+    { field: "location", headerName: "Location", width: 150 },
+    { field: "tenderCard", headerName: "Tender Status", width: 150 },
+    {
+      field: "createdAt",
+      headerName: "Created At",
+      width: 200,
+      valueGetter: (value, row) => new Date(row.createdAt).toLocaleString(),
+    },
+  ];
+
+  const rows = useMemo(() => {
+    if (!dashboardData?.tender_data) {
+      return [];
+    }
+
+    return dashboardData.tender_data.map((tender, index) => ({
+      id: tender.id || index + 1,
+      tenderTitle: tender.tenderTitle || "N/A",
+      referenceNo: tender.referenceNo || "N/A",
+      estimatedValues: tender.estimatedValues || "0",
+      location: tender.location || "N/A",
+      tenderCard: tender.tenderCard || "N/A",
+      createdAt: tender.createdAt || new Date().toISOString(),
+    }));
+  }, [dashboardData]);
 
   const filteredRows = useMemo(() => {
     const s = search.toLowerCase();
     return rows.filter((r) =>
-      [r.name, r.owner, r.status].some((v) =>
+      [r.tenderTitle, r.referenceNo, r.location, r.tenderCard].some((v) =>
         String(v).toLowerCase().includes(s)
       )
     );
-  }, [search]);
+  }, [search, rows]);
 
   return (
     <Box sx={{ display: "flex", minHeight: "100vh" }}>
@@ -207,7 +277,7 @@ export default function AdminPage() {
             </IconButton>
             <TextField
               variant="standard"
-              placeholder="Search companies, owners, status…"
+              placeholder="Search tenders, reference, location, status…"
               fullWidth
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -307,7 +377,7 @@ export default function AdminPage() {
               <Card sx={{ height: 360 }}>
                 <CardContent sx={{ height: 320 }}>
                   <Typography variant="h6" gutterBottom>
-                    Revenue & Users
+                    Monthly Tenders Count
                   </Typography>
                   <ResponsiveContainer width="100%" height="85%">
                     <LineChart
@@ -323,14 +393,14 @@ export default function AdminPage() {
                       <Line
                         yAxisId="left"
                         type="monotone"
-                        dataKey="revenue"
+                        dataKey=""
                         strokeWidth={2}
                         dot={false}
                       />
                       <Line
                         yAxisId="right"
                         type="monotone"
-                        dataKey="users"
+                        dataKey=""
                         strokeWidth={2}
                         dot={false}
                       />
@@ -370,13 +440,14 @@ export default function AdminPage() {
                 alignItems="center"
                 sx={{ mb: 1 }}
               >
-                <Typography variant="h6">Accounts</Typography>
+                <Typography variant="h6">Latest Tenders</Typography>
               </Stack>
               <div style={{ width: "100%", height: 420 }}>
                 <DataGrid
                   rows={filteredRows}
                   columns={columns}
                   pageSizeOptions={[5, 10]}
+                  loading={loading}
                   initialState={{
                     pagination: {
                       paginationModel: { page: 0, pageSize: 10 },
