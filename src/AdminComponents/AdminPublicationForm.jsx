@@ -36,30 +36,33 @@ const AdminPublicationForm = ({
       case "HR Compliances":
         return (
           <React.Fragment>
-            <label style={{ color: "#1d2640" }}>Compliances Title</label>
-            <TextField
-              fullWidth
-              size="small"
-              variant="outlined"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              sx={{ mb: 2, backgroundColor: "white" }}
-            />
-            <label style={{ color: "#1d2640" }}>Description</label>
-            <TextField
-              fullWidth
-              multiline
-              variant="outlined"
-              placeholder="Write a message..."
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              sx={{
-                mb: 2,
-                "& .MuiOutlinedInput-root": { borderRadius: "10px" },
-              }}
-            />
+            <Box sx={{ mb: 2 }}>
+              <label style={{ color: "#1d2640", display: "block", marginBottom: "8px" }}>Compliances Title</label>
+              <TextField
+                fullWidth
+                size="small"
+                variant="outlined"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                sx={{ backgroundColor: "white" }}
+              />
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <label style={{ color: "#1d2640", display: "block", marginBottom: "8px" }}>Description</label>
+              <TextField
+                fullWidth
+                multiline
+                variant="outlined"
+                placeholder="Write a message..."
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                sx={{
+                  "& .MuiOutlinedInput-root": { borderRadius: "10px" },
+                }}
+              />
+            </Box>
             <Box
               sx={{
                 border: "2px dashed #86abe4",
@@ -138,28 +141,32 @@ const AdminPublicationForm = ({
       case "Annual Reports":
         return (
           <React.Fragment>
-            <label style={{ color: "#1d2640" }}>Reports Title</label>
-            <TextField
-              fullWidth
-              size="small"
-              variant="outlined"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              sx={{ mb: 2, backgroundColor: "white" }}
-            />
-            <label style={{ color: "#1d2640" }}>
-              Year of Annual Reports like (2024-2025)
-            </label>
-            <TextField
-              fullWidth
-              size="small"
-              variant="outlined"
-              name="year"
-              value={formData.year}
-              onChange={handleChange}
-              sx={{ mb: 2, backgroundColor: "white" }}
-            />
+            <Box sx={{ mb: 2 }}>
+              <label style={{ color: "#1d2640", display: "block", marginBottom: "8px" }}>Reports Title</label>
+              <TextField
+                fullWidth
+                size="small"
+                variant="outlined"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                sx={{ backgroundColor: "white" }}
+              />
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <label style={{ color: "#1d2640", display: "block", marginBottom: "8px" }}>
+                Year of Annual Reports like (2024-2025)
+              </label>
+              <TextField
+                fullWidth
+                size="small"
+                variant="outlined"
+                name="year"
+                value={formData.year}
+                onChange={handleChange}
+                sx={{ backgroundColor: "white" }}
+              />
+            </Box>
             <Box
               sx={{
                 border: "2px dashed #86abe4",
@@ -274,16 +281,18 @@ const AdminPublicationForm = ({
       case "Policies":
         return (
           <React.Fragment>
-            <label style={{ color: "#1d2640" }}>Policy Title</label>
-            <TextField
-              fullWidth
-              size="small"
-              variant="outlined"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              sx={{ mb: 2, backgroundColor: "white" }}
-            />
+            <Box sx={{ mb: 2 }}>
+              <label style={{ color: "#1d2640", display: "block", marginBottom: "8px" }}>Policy Title</label>
+              <TextField
+                fullWidth
+                size="small"
+                variant="outlined"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                sx={{ backgroundColor: "white" }}
+              />
+            </Box>
             <Box
               sx={{
                 border: "2px dashed #86abe4",
@@ -336,13 +345,15 @@ const AdminPublicationForm = ({
       sx={{
         "& .MuiDrawer-paper": {
           width: { xs: "90%", sm: "70%", md: "30%", lg: "22%" },
-          height: { xs: "auto", md: "100%" },
-          maxHeight: { xs: "80vh", md: "100%" },
+          height: { xs: "auto", md: "100vh" },
+          maxHeight: { xs: "90vh", md: "100vh" },
           boxShadow: 4,
           borderRadius: { xs: "16px 16px 0 0", md: 0 },
           backgroundColor: "#ffffff",
           margin: "auto",
           bottom: 0,
+          display: "flex",
+          flexDirection: "column",
         },
       }}
     >
@@ -374,6 +385,11 @@ const AdminPublicationForm = ({
           justifyContent: "space-between",
           p: 3,
           borderBottom: "1px solid #e0e0e0",
+          flexShrink: 0,
+          position: "sticky",
+          top: 0,
+          backgroundColor: "#ffffff",
+          zIndex: 1,
         }}
       >
         <Box
@@ -390,28 +406,63 @@ const AdminPublicationForm = ({
         </IconButton>
       </Box>
 
-      <DialogContent sx={{ overflowY: "auto" }}>
+      <DialogContent
+        sx={{
+          overflowY: "auto",
+          flex: 1,
+          paddingTop: 2,
+          paddingBottom: 2,
+          "&::-webkit-scrollbar": {
+            width: "6px",
+          },
+          "&::-webkit-scrollbar-track": {
+            background: "#f1f1f1",
+            borderRadius: "3px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "#c1c1c1",
+            borderRadius: "3px",
+            "&:hover": {
+              background: "#a8a8a8",
+            },
+          },
+        }}
+      >
         <form onSubmit={(e) => e.preventDefault()}>
-          <label style={{ color: "#1d2640" }}>Publication Type</label>
-          <TextField
-            select
-            fullWidth
-            size="small"
-            name="publicationType"
-            value={formData.publicationType}
-            onChange={handleChange}
-            sx={{ mb: 2, backgroundColor: "white" }}
-          >
-            <MenuItem value="HR Compliances">HR Compliances</MenuItem>
-            <MenuItem value="Annual Reports">Annual Reports</MenuItem>
-            <MenuItem value="Policies">Policies</MenuItem>
-          </TextField>
+          <Box sx={{ mb: 2 }}>
+            <label style={{ color: "#1d2640", display: "block", marginBottom: "8px" }}>Publication Type</label>
+            <TextField
+              select
+              fullWidth
+              size="small"
+              name="publicationType"
+              value={formData.publicationType}
+              onChange={handleChange}
+              sx={{ backgroundColor: "white" }}
+            >
+              <MenuItem value="HR Compliances">HR Compliances</MenuItem>
+              <MenuItem value="Annual Reports">Annual Reports</MenuItem>
+              <MenuItem value="Policies">Policies</MenuItem>
+            </TextField>
+          </Box>
           {/* Conditional Fields Based on Publication Type */}
           {renderFieldsByType()}
+
+          {/* Bottom spacing to prevent cut-off */}
+          <Box sx={{ height: "20px" }} />
         </form>
       </DialogContent>
 
-      <DialogActions sx={{ justifyContent: "center", pb: 2 }}>
+      <DialogActions
+        sx={{
+          justifyContent: "center",
+          pb: 2,
+          pt: 2,
+          flexShrink: 0,
+          borderTop: "1px solid #e0e0e0",
+          backgroundColor: "#ffffff",
+        }}
+      >
         <Button
           variant="contained"
           color="primary"
