@@ -42,6 +42,7 @@ import {
   Alert,
   Switch,
   FormControlLabel,
+  Checkbox,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
@@ -152,9 +153,8 @@ const generateLogsData = () => {
     ipAddress: ipAddresses[Math.floor(Math.random() * ipAddresses.length)],
     userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
     sessionId: `sess_${Math.random().toString(36).substr(2, 9)}`,
-    details: `Action performed on ${
-      modules[Math.floor(Math.random() * modules.length)]
-    } module`,
+    details: `Action performed on ${modules[Math.floor(Math.random() * modules.length)]
+      } module`,
     duration: Math.floor(Math.random() * 5000),
   }));
 };
@@ -687,75 +687,150 @@ export default function AdminLogs() {
           )}
 
           {/* Logs Table */}
-          <Card>
+          <Card
+            sx={{
+              boxShadow: (theme) => theme.palette.mode === 'dark'
+                ? '0 4px 20px 0 rgba(0,0,0,0.4)'
+                : '0 4px 20px 0 rgba(0,0,0,0.1)',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              border: (theme) => `1px solid ${theme.palette.divider}`
+            }}>
             <CardContent sx={{ p: 0 }}>
-              <TableContainer>
+              <TableContainer sx={{
+                '& .MuiTableCell-root': {
+                  borderColor: (theme) => theme.palette.divider,
+                  py: 2.5,
+                  px: 3,
+                  fontSize: '0.875rem'
+                }
+              }}>
                 <Table>
                   <TableHead>
-                    <TableRow sx={{ backgroundColor: "background.default" }}>
-                      <TableCell padding="checkbox">
-                        <input
-                          type="checkbox"
+                    <TableRow sx={{
+                      backgroundColor: (theme) => theme.palette.mode === 'dark'
+                        ? 'rgba(255,255,255,0.08)'
+                        : 'rgba(0,0,0,0.03)',
+                      '& th': {
+                        fontWeight: 600,
+                        color: (theme) => theme.palette.mode === 'dark'
+                          ? 'primary.light'
+                          : 'primary.dark',
+                        borderBottom: 2,
+                        borderColor: 'primary.main',
+                        transition: 'all 0.2s ease',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                        fontSize: '0.75rem'
+                      }
+                    }}>
+                      <TableCell padding="checkbox" sx={{ pl: 3 }}>
+                        <Checkbox
+                          color="primary"
                           onChange={(e) => {
                             if (e.target.checked) {
-                              setSelectedLogs(
-                                filteredLogs.map((log) => log.id)
-                              );
+                              setSelectedLogs(filteredLogs.map((log) => log.id));
                             } else {
                               setSelectedLogs([]);
                             }
                           }}
-                          checked={
-                            selectedLogs.length === filteredLogs.length &&
-                            filteredLogs.length > 0
-                          }
+                          checked={selectedLogs.length === filteredLogs.length && filteredLogs.length > 0}
                         />
                       </TableCell>
-                      <TableCell sx={{ fontWeight: 600 }}>Timestamp</TableCell>
-                      <TableCell sx={{ fontWeight: 600 }}>Action</TableCell>
-                      <TableCell sx={{ fontWeight: 600 }}>Status</TableCell>
-                      <TableCell sx={{ fontWeight: 600 }}>User</TableCell>
-                      <TableCell sx={{ fontWeight: 600 }}>Module</TableCell>
-                      <TableCell sx={{ fontWeight: 600 }}>IP Address</TableCell>
-                      <TableCell sx={{ fontWeight: 600 }}>Details</TableCell>
+                      <TableCell>Timestamp</TableCell>
+                      <TableCell>Action</TableCell>
+                      <TableCell>Status</TableCell>
+                      <TableCell>User</TableCell>
+                      <TableCell>Module</TableCell>
+                      <TableCell>IP Address</TableCell>
+                      <TableCell>Details</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {filteredLogs
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
+                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                       .map((log) => (
-                        <TableRow key={log.id} hover>
-                          <TableCell padding="checkbox">
-                            <input
-                              type="checkbox"
+                        <TableRow
+                          key={log.id}
+                          hover
+                          sx={{
+                            transition: 'all 0.3s ease',
+                            position: 'relative',
+                            '&:hover': {
+                              backgroundColor: (theme) =>
+                                theme.palette.mode === 'dark'
+                                  ? 'rgba(255,255,255,0.08)'
+                                  : 'rgba(0,0,0,0.02)',
+                              transform: 'translateY(-2px)',
+                              boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+                              '& .MuiSvgIcon-root': {
+                                color: 'primary.main',
+                                transform: 'scale(1.1)'
+                              }
+                            },
+                            '&:after': {
+                              content: '""',
+                              position: 'absolute',
+                              left: 0,
+                              right: 0,
+                              bottom: 0,
+                              height: '1px',
+                              backgroundColor: (theme) => theme.palette.divider
+                            }
+                          }}
+                        >
+                          <TableCell padding="checkbox" sx={{ pl: 3 }}>
+                            <Checkbox
+                              color="primary"
                               checked={selectedLogs.includes(log.id)}
                               onChange={(e) => {
                                 if (e.target.checked) {
                                   setSelectedLogs([...selectedLogs, log.id]);
                                 } else {
-                                  setSelectedLogs(
-                                    selectedLogs.filter((id) => id !== log.id)
-                                  );
+                                  setSelectedLogs(selectedLogs.filter((id) => id !== log.id));
                                 }
                               }}
                             />
                           </TableCell>
                           <TableCell>
-                            <Typography
-                              variant="body2"
-                              sx={{ fontFamily: "monospace" }}
-                            >
-                              {formatTimestamp(log.timestamp)}
-                            </Typography>
+                            <Stack direction="row" alignItems="center" spacing={1}>
+                              <CalendarToday sx={{ fontSize: 16, color: 'text.secondary' }} />
+                              <Typography
+                                variant="body2"
+                                sx={{
+                                  fontFamily: "'SF Mono', 'Monaco', 'Inconsolata', monospace",
+                                  fontWeight: 500
+                                }}
+                              >
+                                {formatTimestamp(log.timestamp)}
+                              </Typography>
+                            </Stack>
                           </TableCell>
                           <TableCell>
                             <Stack
                               direction="row"
                               alignItems="center"
-                              spacing={1}
+                              spacing={1.5}
+                              sx={{
+                                '& .MuiSvgIcon-root': {
+                                  color: 'primary.main',
+                                  transition: 'all 0.3s ease',
+                                  backgroundColor: (theme) =>
+                                    theme.palette.mode === 'dark'
+                                      ? 'rgba(144, 202, 249, 0.08)'
+                                      : 'rgba(21, 101, 192, 0.08)',
+                                  padding: '6px',
+                                  borderRadius: '8px',
+                                  fontSize: '20px',
+                                  '&:hover': {
+                                    transform: 'scale(1.1) rotate(5deg)',
+                                    backgroundColor: (theme) =>
+                                      theme.palette.mode === 'dark'
+                                        ? 'rgba(144, 202, 249, 0.12)'
+                                        : 'rgba(21, 101, 192, 0.12)'
+                                  }
+                                }
+                              }}
                             >
                               {getActionIcon(log.action)}
                               <Typography
@@ -771,26 +846,64 @@ export default function AdminLogs() {
                               label={log.status}
                               color={getStatusColor(log.status)}
                               size="small"
-                              variant="outlined"
+                              sx={{
+                                fontWeight: 600,
+                                borderRadius: '8px',
+                                height: '24px',
+                                '& .MuiChip-label': {
+                                  px: 2,
+                                  fontSize: '0.75rem',
+                                  lineHeight: 1.5
+                                },
+                                backgroundColor: (theme) =>
+                                  theme.palette.mode === 'dark'
+                                    ? `${theme.palette[getStatusColor(log.status)].main}33`
+                                    : `${theme.palette[getStatusColor(log.status)].light}33`,
+                                color: (theme) => theme.palette[getStatusColor(log.status)].main,
+                                border: (theme) =>
+                                  `1px solid ${theme.palette[getStatusColor(log.status)].main}40`,
+                                transition: 'all 0.2s ease',
+                                '&:hover': {
+                                  transform: 'translateY(-1px)',
+                                  boxShadow: (theme) =>
+                                    `0 4px 8px ${theme.palette[getStatusColor(log.status)].main}33`
+                                }
+                              }}
                             />
+                          </TableCell>
+                          <TableCell>
+                            <Stack direction="row" alignItems="center" spacing={1}>
+                              <Person sx={{ fontSize: 16, color: 'text.secondary' }} />
+                              <Typography
+                                variant="body2"
+                                sx={{
+                                  fontFamily: "'SF Mono', 'Monaco', 'Inconsolata', monospace",
+                                  fontWeight: 500
+                                }}
+                              >
+                                {log.user}
+                              </Typography>
+                            </Stack>
                           </TableCell>
                           <TableCell>
                             <Typography
                               variant="body2"
-                              sx={{ fontFamily: "monospace" }}
+                              sx={{
+                                fontWeight: 500,
+                                color: 'text.primary'
+                              }}
                             >
-                              {log.user}
-                            </Typography>
-                          </TableCell>
-                          <TableCell>
-                            <Typography variant="body2">
                               {log.module}
                             </Typography>
                           </TableCell>
                           <TableCell>
                             <Typography
                               variant="body2"
-                              sx={{ fontFamily: "monospace" }}
+                              sx={{
+                                fontFamily: "'SF Mono', 'Monaco', 'Inconsolata', monospace",
+                                fontWeight: 500,
+                                color: 'text.secondary'
+                              }}
                             >
                               {log.ipAddress}
                             </Typography>
@@ -799,7 +912,12 @@ export default function AdminLogs() {
                             <Typography
                               variant="body2"
                               color="text.secondary"
-                              sx={{ maxWidth: 200 }}
+                              sx={{
+                                maxWidth: 200,
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap'
+                              }}
                             >
                               {log.details}
                             </Typography>
@@ -822,6 +940,36 @@ export default function AdminLogs() {
                 }}
                 rowsPerPageOptions={[10, 25, 50, 100]}
                 labelRowsPerPage="Rows per page:"
+                sx={{
+                  borderTop: 1,
+                  borderColor: 'divider',
+                  '& .MuiTablePagination-select': {
+                    backgroundColor: (theme) =>
+                      theme.palette.mode === 'dark'
+                        ? 'rgba(255, 255, 255, 0.05)'
+                        : 'rgba(0, 0, 0, 0.02)',
+                    borderRadius: 1,
+                    p: '4px 8px',
+                    '&:hover': {
+                      backgroundColor: (theme) =>
+                        theme.palette.mode === 'dark'
+                          ? 'rgba(255, 255, 255, 0.08)'
+                          : 'rgba(0, 0, 0, 0.04)'
+                    }
+                  },
+                  '& .MuiTablePagination-displayedRows': {
+                    fontWeight: 500,
+                    color: 'text.secondary'
+                  },
+                  '& .MuiButtonBase-root': {
+                    '&:hover': {
+                      backgroundColor: (theme) =>
+                        theme.palette.mode === 'dark'
+                          ? 'rgba(255, 255, 255, 0.08)'
+                          : 'rgba(0, 0, 0, 0.04)'
+                    }
+                  }
+                }}
               />
             </CardContent>
           </Card>

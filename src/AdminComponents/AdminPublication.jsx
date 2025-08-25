@@ -362,6 +362,7 @@ export default function AdminPublication() {
     thumbnail: null,
     pdfHindi: null,
     pdfEnglish: null,
+    isActive: true, // Default to active
   });
 
   const [errors, setErrors] = useState({});
@@ -420,6 +421,7 @@ export default function AdminPublication() {
       thumbnail: null,
       pdfHindi: null,
       pdfEnglish: null,
+      isActive: true, // Keep default active state
     });
     setErrors({});
     setSelectedFile(null);
@@ -476,6 +478,7 @@ export default function AdminPublication() {
       // Basic fields
       formDataToSend.append("name", formData.name);
       formDataToSend.append("publicationType", formData.publicationType);
+      formDataToSend.append("isActive", formData.isActive);
 
       // Optional fields
       if (formData.year) {
@@ -523,6 +526,7 @@ export default function AdminPublication() {
           thumbnail: null,
           pdfHindi: null,
           pdfEnglish: null,
+          isActive: true, // Keep default active state
         });
       } else {
         console.log("Error response:", response);
@@ -854,9 +858,8 @@ export default function AdminPublication() {
                               : "rgba(0,0,0,0.02)",
                           transform: "scale(1.01)",
                         },
-                        animation: `fadeInUp 0.5s ease-out ${
-                          index * 0.1
-                        }s both`,
+                        animation: `fadeInUp 0.5s ease-out ${index * 0.1
+                          }s both`,
                         "@keyframes fadeInUp": {
                           "0%": {
                             opacity: 0,
