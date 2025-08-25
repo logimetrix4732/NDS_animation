@@ -41,8 +41,7 @@ const slideData = [
   {
     img: carImg1,
     title: "Cost Efficiency",
-    subtitle:
-      "Reduce your IT overhead with our cost effective cloud solutions.",
+    subtitle: "Reduce your IT overhead with our cost effective cloud.",
   },
   {
     img: carImg9,
