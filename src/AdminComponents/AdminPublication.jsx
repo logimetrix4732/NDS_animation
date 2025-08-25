@@ -1,342 +1,46 @@
 import * as React from "react";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import {
-  ThemeProvider,
-  createTheme,
-  CssBaseline,
   Box,
-  AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
-  Drawer,
-  Grid,
-  Card,
-  CardContent,
-  TextField,
-  Stack,
-  Chip,
-  Avatar,
-  useMediaQuery,
-  Tooltip,
-  LinearProgress,
-  Paper,
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TablePagination,
-  Checkbox,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  InputAdornment,
-  Divider,
-  Badge,
-  Fade,
   Grow,
-  Zoom,
+  Stack,
+  Badge,
   Alert,
+  Button,
+  AppBar,
+  Avatar,
+  Dialog,
+  Toolbar,
+  Tooltip,
   Snackbar,
+  TextField,
+  IconButton,
+  Typography,
+  DialogTitle,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  useMediaQuery,
+  Paper,
+  CircularProgress,
 } from "@mui/material";
 import {
+  DarkMode,
+  LightMode,
+  Notifications,
+  Add as AddIcon,
   Menu as MenuIcon,
   Search as SearchIcon,
-  LightMode,
-  DarkMode,
-  Notifications,
-  CheckCircle,
-  ArrowUpward,
-  ArrowDownward,
-  Add as AddIcon,
   Download as DownloadIcon,
-  ViewModule as ViewModuleIcon,
-  MoreVert as MoreVertIcon,
-  Cancel as CancelIcon,
-  Done as DoneIcon,
-  Schedule as ScheduleIcon,
-  RadioButtonUnchecked as RadioButtonUncheckedIcon,
-  Help as HelpIcon,
-  TrendingUp as TrendingUpIcon,
-  Book as BookIcon,
-  Article as ArticleIcon,
-  Description as DescriptionIcon,
 } from "@mui/icons-material";
-import { DataGrid } from "@mui/x-data-grid";
+import { postFetch, getFetch, deleteFetch } from "../Api/Api";
 import nds_logo from "../assets/img/nds_logo.png";
 import AdminSidebar from "../AdminComponents/AdminSidebar";
 import AdminPublicationForm from "./AdminPublicationForm";
-import { postFetch } from "../Api/Api";
 
-// --------- API CONFIGURATION ---------
+import PublicationsTable from './PublicationsTable';
 
-// --------- THEME ---------
-const getDesignTokens = (mode) => ({
-  palette: {
-    mode,
-    primary: {
-      main: mode === "dark" ? "#90caf9" : "#1565c0",
-      light: mode === "dark" ? "#e3f2fd" : "#bbdefb",
-      dark: mode === "dark" ? "#42a5f5" : "#0d47a1",
-    },
-    secondary: {
-      main: mode === "dark" ? "#ffb74d" : "#ef6c00",
-      light: mode === "dark" ? "#ffe0b2" : "#ffcc02",
-      dark: mode === "dark" ? "#f57c00" : "#e65100",
-    },
-    background: {
-      default: mode === "dark" ? "#0b1020" : "#f8fafc",
-      paper: mode === "dark" ? "#0f1629" : "#ffffff",
-    },
-    success: {
-      main: mode === "dark" ? "#66bb6a" : "#2e7d32",
-      light: mode === "dark" ? "#c8e6c9" : "#a5d6a7",
-    },
-    warning: {
-      main: mode === "dark" ? "#ffa726" : "#f57c00",
-      light: mode === "dark" ? "#ffe0b2" : "#ffb74d",
-    },
-    error: {
-      main: mode === "dark" ? "#ef5350" : "#d32f2f",
-      light: mode === "dark" ? "#ffcdd2" : "#f44336",
-    },
-    info: {
-      main: mode === "dark" ? "#42a5f5" : "#1976d2",
-      light: mode === "dark" ? "#bbdefb" : "#64b5f6",
-    },
-  },
-  shape: { borderRadius: 20 },
-  typography: {
-    fontFamily:
-      "Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
-    h4: {
-      fontWeight: 800,
-      background:
-        mode === "dark"
-          ? "linear-gradient(45deg, #90caf9 30%, #42a5f5 90%)"
-          : "linear-gradient(45deg, #1565c0 30%, #42a5f5 90%)",
-      backgroundClip: "text",
-      WebkitBackgroundClip: "text",
-      WebkitTextFillColor: "transparent",
-      textShadow:
-        mode === "dark" ? "0 0 20px rgba(144, 202, 249, 0.3)" : "none",
-    },
-    h6: { fontWeight: 700 },
-    body1: { fontWeight: 500 },
-    body2: { fontWeight: 400 },
-  },
-  components: {
-    MuiCard: {
-      styleOverrides: {
-        root: {
-          overflow: "hidden",
-          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-          "&:hover": {
-            transform: "translateY(-4px)",
-            boxShadow:
-              mode === "dark"
-                ? "0 20px 40px rgba(0, 0, 0, 0.4)"
-                : "0 20px 40px rgba(0, 0, 0, 0.1)",
-          },
-        },
-      },
-    },
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          borderRadius: 12,
-          textTransform: "none",
-          fontWeight: 600,
-          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-          "&:hover": {
-            transform: "translateY(-2px)",
-            boxShadow:
-              mode === "dark"
-                ? "0 8px 25px rgba(0, 0, 0, 0.3)"
-                : "0 8px 25px rgba(0, 0, 0, 0.15)",
-          },
-        },
-      },
-    },
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-        },
-      },
-    },
-  },
-});
-
-// --------- MOCK DATA ---------
-const publications = [
-  {
-    id: "PUB-9366",
-    title: "HR Policy Compliance Guidelines 2024",
-    type: "HR Compliances",
-    status: "Published",
-    priority: "High",
-    date: "2024-01-15",
-    author: "Dr. Amit Kumar",
-    category: "HR",
-    views: 1247,
-    downloads: 89,
-    rating: 4.8,
-  },
-  {
-    id: "PUB-5736",
-    title: "Annual Report 2023-24: Dairy Development",
-    type: "Annual Reports",
-    status: "Draft",
-    priority: "Medium",
-    date: "2024-01-10",
-    author: "Dr. Priya Sharma",
-    category: "Reports",
-    views: 567,
-    downloads: 23,
-    rating: 4.2,
-  },
-  {
-    id: "PUB-7918",
-    title: "Employee Safety Policy Document",
-    type: "Policies",
-    status: "Under Review",
-    priority: "High",
-    date: "2024-01-08",
-    author: "Dr. Rajesh Patel",
-    category: "Policy",
-    views: 892,
-    downloads: 156,
-    rating: 4.9,
-  },
-  {
-    id: "PUB-6498",
-    title: "Workplace Ethics Compliance Manual",
-    type: "HR Compliances",
-    status: "Published",
-    priority: "Low",
-    date: "2024-01-05",
-    author: "HR Team",
-    category: "HR",
-    views: 2341,
-    downloads: 445,
-    rating: 4.5,
-  },
-  {
-    id: "PUB-7138",
-    title: "Annual Report 2022-23: Financial Performance",
-    type: "Annual Reports",
-    status: "Published",
-    priority: "High",
-    date: "2024-01-03",
-    author: "Finance Division",
-    category: "Reports",
-    views: 1789,
-    downloads: 234,
-    rating: 4.7,
-  },
-  {
-    id: "PUB-3344",
-    title: "Data Privacy Policy Framework",
-    type: "Policies",
-    status: "In Progress",
-    priority: "Medium",
-    date: "2024-01-01",
-    author: "IT Department",
-    category: "Policy",
-    views: 456,
-    downloads: 67,
-    rating: 4.3,
-  },
-  {
-    id: "PUB-4455",
-    title: "Labor Law Compliance Handbook",
-    type: "HR Compliances",
-    status: "Draft",
-    priority: "Low",
-    date: "2023-12-28",
-    author: "Legal Team",
-    category: "HR",
-    views: 678,
-    downloads: 89,
-    rating: 4.1,
-  },
-  {
-    id: "PUB-5566",
-    title: "Annual Report 2021-22: Strategic Overview",
-    type: "Annual Reports",
-    status: "Published",
-    priority: "High",
-    date: "2023-12-25",
-    author: "Strategy Division",
-    category: "Reports",
-    views: 1567,
-    downloads: 123,
-    rating: 4.6,
-  },
-];
-
-const getStatusIcon = (status) => {
-  switch (status) {
-    case "Published":
-      return <CheckCircle sx={{ color: "success.main", fontSize: 20 }} />;
-    case "Draft":
-      return (
-        <RadioButtonUncheckedIcon
-          sx={{ color: "warning.main", fontSize: 20 }}
-        />
-      );
-    case "Under Review":
-      return <ScheduleIcon sx={{ color: "info.main", fontSize: 20 }} />;
-    case "In Progress":
-      return <ScheduleIcon sx={{ color: "primary.main", fontSize: 20 }} />;
-    default:
-      return <HelpIcon sx={{ color: "text.secondary", fontSize: 20 }} />;
-  }
-};
-
-const getPriorityIcon = (priority) => {
-  switch (priority) {
-    case "High":
-      return <ArrowUpward sx={{ color: "error.main", fontSize: 16 }} />;
-    case "Medium":
-      return <ArrowDownward sx={{ color: "warning.main", fontSize: 16 }} />;
-    case "Low":
-      return <ArrowDownward sx={{ color: "success.main", fontSize: 16 }} />;
-    default:
-      return <ArrowDownward sx={{ color: "text.secondary", fontSize: 16 }} />;
-  }
-};
-
-const getTypeColor = (type) => {
-  switch (type) {
-    case "HR Compliances":
-      return "primary";
-    case "Annual Reports":
-      return "secondary";
-    case "Policies":
-      return "success";
-    default:
-      return "default";
-  }
-};
-
-const getTypeIcon = (type) => {
-  switch (type) {
-    case "HR Compliances":
-      return <BookIcon sx={{ fontSize: 16 }} />;
-    case "Annual Reports":
-      return <DescriptionIcon sx={{ fontSize: 16 }} />;
-    case "Policies":
-      return <ArticleIcon sx={{ fontSize: 16 }} />;
-    default:
-      return <ArticleIcon sx={{ fontSize: 16 }} />;
-  }
-};
+import DeleteConfirmationModal from './DeleteConfirmationModal';
 
 // --------- LAYOUT ---------
 const drawerWidth = 260;
@@ -352,6 +56,50 @@ export default function AdminPublication() {
   const [selectedPriority, setSelectedPriority] = useState("");
   const [formOpen, setFormOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [publications, setPublications] = useState([]);
+  console.log(publications, "=publications")
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Fetch publications data
+  const fetchPublications = async () => {
+    setIsLoading(true);
+    try {
+      const response = await getFetch(
+        `${import.meta.env.VITE_API_BASE_URL}/getPublication?publicationType=${selectedStatus || 'HR Compliances'}`
+      );
+      console.log("API Response:", response);
+
+      if (response?.data?.data) {
+        const sortedData = response.data.data.sort((a, b) => b.id - a.id);
+        const mappedData = sortedData.map(pub => ({
+          id: pub.id,
+          title: pub.name,
+          type: selectedStatus || "HR Compliances",
+          status: pub.isActive ? "Published" : "Unpublished",
+          priority: pub.isActive ? "High" : "Medium",
+          thumbnail: pub.thumbnail,
+          pdfFile: pub.pdfFile,
+          createdBy: pub.createdBy,
+        }));
+        console.log("Mapped Data:", mappedData);
+        setPublications(mappedData);
+      } else {
+        console.log("No data in response");
+        setPublications([]);
+      }
+    } catch (error) {
+      console.error("Error fetching publications:", error);
+      setErrorMessage("Failed to fetch publications. Please try again.");
+      setPublications([]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Fetch data on component mount and when filters change
+  useEffect(() => {
+    fetchPublications();
+  }, [selectedStatus]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -365,28 +113,24 @@ export default function AdminPublication() {
     isActive: true, // Default to active
   });
 
-  const [errors, setErrors] = useState({});
-  const [selectedFile, setSelectedFile] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
   const filteredPublications = useMemo(() => {
-    let filtered = publications.filter((pub) => {
+    if (!publications || publications.length === 0) return [];
+
+    return publications.filter((pub) => {
+      if (!pub) return false;
+
       const matchesSearch =
         search === "" ||
-        pub.title.toLowerCase().includes(search.toLowerCase()) ||
-        pub.id.toLowerCase().includes(search.toLowerCase()) ||
-        pub.author.toLowerCase().includes(search.toLowerCase());
+        (pub.title && pub.title.toLowerCase().includes(search.toLowerCase())) ||
+        (pub.id && pub.id.toString().toLowerCase().includes(search.toLowerCase())) ||
+        (pub.status && pub.status.toLowerCase().includes(search.toLowerCase()));
 
-      const matchesType = selectedStatus === "" || pub.type === selectedStatus;
-      const matchesStatus =
-        selectedPriority === "" || pub.status === selectedPriority;
-
-      return matchesSearch && matchesType && matchesStatus;
+      return matchesSearch;
     });
-    return filtered;
-  }, [search, selectedStatus, selectedPriority]);
+  }, [search, publications]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -405,30 +149,58 @@ export default function AdminPublication() {
     setErrorMessage("");
   };
 
-  const paginatedPublications = filteredPublications.slice(
-    page * rowsPerPage,
-    page * rowsPerPage + rowsPerPage
-  );
-
-  const handleFormOpen = () => {
-    setFormOpen(true);
-    setFormData({
-      name: "",
-      publicationType: "HR Compliances",
-      year: "",
-      description: "",
-      pdfFile: null,
-      thumbnail: null,
-      pdfHindi: null,
-      pdfEnglish: null,
-      isActive: true, // Keep default active state
-    });
-    setErrors({});
-    setSelectedFile(null);
-  };
+  const paginatedPublications = useMemo(() => {
+    return filteredPublications.slice(
+      page * rowsPerPage,
+      page * rowsPerPage + rowsPerPage
+    );
+  }, [filteredPublications, page, rowsPerPage]);
 
   const handleFormClose = () => {
     setFormOpen(false);
+  };
+
+  // Handle delete publication
+  const handleDelete = async (id, publicationType) => {
+    try {
+      setLoading(true);
+      const response = await deleteFetch(
+        `${import.meta.env.VITE_API_BASE_URL}/publication/${id}?publicationType=${publicationType}`,
+        id
+      );
+
+      if (response?.status === 200) {
+        setSuccessMessage("Publication deleted successfully!");
+        // Refresh the publications list
+        fetchPublications();
+      } else {
+        setErrorMessage("Failed to delete publication. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error deleting publication:", error);
+      setErrorMessage("Failed to delete publication. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // State for delete dialog
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [publicationToDelete, setPublicationToDelete] = useState(null);
+
+  // Handle opening delete dialog
+  const handleDeleteClick = (publication) => {
+    setPublicationToDelete(publication);
+    setDeleteDialogOpen(true);
+  };
+
+  // Handle confirming delete
+  const handleConfirmDelete = () => {
+    if (publicationToDelete) {
+      handleDelete(publicationToDelete.id, publicationToDelete.type);
+      setDeleteDialogOpen(false);
+      setPublicationToDelete(null);
+    }
   };
 
   const handleChange = (e) => {
@@ -448,13 +220,10 @@ export default function AdminPublication() {
   };
 
   const handleSubmit = async () => {
-    console.log("=== HANDLE SUBMIT CALLED ===");
-    console.log("Preventing default behavior...");
 
     // Check if token exists
     const token = localStorage.getItem("token");
     if (!token) {
-      console.log("No token found, showing error message");
       setErrorMessage("Please login first. No authentication token found.");
       return;
     }
@@ -465,9 +234,19 @@ export default function AdminPublication() {
       return;
     }
 
-    if (!formData.pdfFile) {
-      setErrorMessage("PDF file is required");
-      return;
+    // Check for PDF files based on publication type
+    if (formData.publicationType === "Annual Report") {
+      // For Annual Reports, check if either pdfHindi or pdfEnglish is uploaded
+      if (!formData.pdfHindi && !formData.pdfEnglish) {
+        setErrorMessage("At least one PDF file (Hindi or English) is required for Annual Report");
+        return;
+      }
+    } else {
+      // For other publication types, check for pdfFile
+      if (!formData.pdfFile) {
+        setErrorMessage("PDF file is required");
+        return;
+      }
     }
 
     setLoading(true);
@@ -489,19 +268,22 @@ export default function AdminPublication() {
         formDataToSend.append("description", formData.description);
       }
 
-      // Files
-      formDataToSend.append("pdfFile", formData.pdfFile);
+      // Files - handle based on publication type
+      if (formData.publicationType === "Annual Report") {
+        // For Annual Reports, use pdfHindi and pdfEnglish
+        if (formData.pdfHindi) {
+          formDataToSend.append("pdfHindi", formData.pdfHindi);
+        }
+        if (formData.pdfEnglish) {
+          formDataToSend.append("pdfEnglish", formData.pdfEnglish);
+        }
+      } else {
+        // For other publication types, use pdfFile
+        formDataToSend.append("pdfFile", formData.pdfFile);
+      }
 
       if (formData.thumbnail) {
         formDataToSend.append("thumbnail", formData.thumbnail);
-      }
-
-      if (formData.pdfHindi) {
-        formDataToSend.append("pdfHindi", formData.pdfHindi);
-      }
-
-      if (formData.pdfEnglish) {
-        formDataToSend.append("pdfEnglish", formData.pdfEnglish);
       }
 
       const response = await postFetch(
@@ -509,12 +291,13 @@ export default function AdminPublication() {
         formDataToSend
       );
 
-      console.log("API Response:", response);
 
-      if (response && response.status === 200) {
-        console.log("Success! Closing modal...");
+      if (response && response.status === 201) {
         setSuccessMessage("Publication created successfully!");
         setFormOpen(false);
+
+        // Refresh publications list
+        fetchPublications();
 
         // Reset form
         setFormData({
@@ -529,7 +312,6 @@ export default function AdminPublication() {
           isActive: true, // Keep default active state
         });
       } else {
-        console.log("Error response:", response);
         if (response && response.status === 401) {
           setErrorMessage("Authentication failed. Please login again.");
         } else {
@@ -537,7 +319,6 @@ export default function AdminPublication() {
         }
       }
     } catch (error) {
-      console.error("Error:", error);
       if (error.status === 401) {
         setErrorMessage("Authentication failed. Please login again.");
       } else {
@@ -698,8 +479,10 @@ export default function AdminPublication() {
               <Box
                 sx={{
                   display: "flex",
-                  alignItems: "center",
+                  flexDirection: { xs: "column", md: "row" },
+                  alignItems: { xs: "flex-start", md: "center" },
                   justifyContent: "space-between",
+                  gap: { xs: 3, md: 0 },
                   mb: 2,
                   width: "100%",
                 }}
@@ -708,22 +491,33 @@ export default function AdminPublication() {
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <Box
                     sx={{
-                      width: 8,
-                      height: 40,
+                      width: { xs: 6, md: 8 },
+                      height: { xs: 32, md: 40 },
                       background:
                         "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                       borderRadius: 4,
                       mr: 2,
                     }}
                   />
-                  <Typography variant="h4" sx={{ fontWeight: 800 }}>
+                  <Typography
+                    variant="h4"
+                    sx={{
+                      fontWeight: 800,
+                      fontSize: { xs: "1.5rem", sm: "1.8rem", md: "2rem" }
+                    }}
+                  >
                     Publications
                   </Typography>
                 </Box>
 
                 {/* Right Side - Action Buttons */}
-                <Stack direction="row" spacing={2}>
+                <Stack
+                  direction={{ xs: "column", sm: "row" }}
+                  spacing={2}
+                  width={{ xs: "100%", sm: "auto" }}
+                >
                   <Button
+                    fullWidth={false}
                     variant="outlined"
                     startIcon={<DownloadIcon />}
                     sx={{
@@ -732,6 +526,7 @@ export default function AdminPublication() {
                       py: 1.5,
                       borderWidth: 2,
                       fontWeight: 600,
+                      width: { xs: "100%", sm: "auto" },
                       background: (t) =>
                         t.palette.mode === "dark"
                           ? "rgba(255,255,255,0.05)"
@@ -748,6 +543,7 @@ export default function AdminPublication() {
                     Import
                   </Button>
                   <Button
+                    fullWidth={false}
                     variant="contained"
                     startIcon={<AddIcon />}
                     onClick={() => setFormOpen(true)}
@@ -756,6 +552,7 @@ export default function AdminPublication() {
                       px: 3,
                       py: 1.5,
                       fontWeight: 600,
+                      width: { xs: "100%", sm: "auto" },
                       background:
                         "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                       boxShadow: "0 8px 25px rgba(102, 126, 234, 0.3)",
@@ -776,8 +573,10 @@ export default function AdminPublication() {
                 variant="body1"
                 color="text.secondary"
                 sx={{
-                  fontSize: "1.1rem",
+                  fontSize: { xs: "0.9rem", sm: "1rem", md: "1.1rem" },
                   opacity: 0.8,
+                  textAlign: { xs: "left", md: "left" },
+                  mt: { xs: 1, md: 0 }
                 }}
               >
                 Here's a comprehensive overview of your publications for this
@@ -787,216 +586,17 @@ export default function AdminPublication() {
           </Grow>
 
           {/* Publications Table */}
-          <Paper
-            sx={{
-              borderRadius: 4,
-              overflow: "hidden",
-              background: (t) =>
-                t.palette.mode === "dark"
-                  ? "linear-gradient(135deg, #0f1629 0%, #1a2332 100%)"
-                  : "linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)",
-              border: (t) =>
-                t.palette.mode === "dark"
-                  ? "1px solid rgba(255,255,255,0.1)"
-                  : "1px solid rgba(0,0,0,0.08)",
-              boxShadow: (t) =>
-                t.palette.mode === "dark"
-                  ? "0 8px 32px rgba(0, 0, 0, 0.3)"
-                  : "0 8px 32px rgba(0, 0, 0, 0.08)",
-            }}
-          >
-            <TableContainer>
-              <Table>
-                <TableHead>
-                  <TableRow
-                    sx={{
-                      background: (t) =>
-                        t.palette.mode === "dark"
-                          ? "rgba(255,255,255,0.05)"
-                          : "rgba(0,0,0,0.02)",
-                      "& th": {
-                        borderBottom: "2px solid",
-                        borderColor: (t) =>
-                          t.palette.mode === "dark"
-                            ? "rgba(255,255,255,0.1)"
-                            : "rgba(0,0,0,0.08)",
-                      },
-                    }}
-                  >
-                    <TableCell>S.No</TableCell>
-                    <TableCell sx={{ fontWeight: 700, fontSize: "0.95rem" }}>
-                      Publication ID
-                    </TableCell>
-                    <TableCell sx={{ fontWeight: 700, fontSize: "0.95rem" }}>
-                      Title & Details
-                    </TableCell>
-                    <TableCell sx={{ fontWeight: 700, fontSize: "0.95rem" }}>
-                      Type
-                    </TableCell>
-                    <TableCell sx={{ fontWeight: 700, fontSize: "0.95rem" }}>
-                      Status
-                    </TableCell>
-                    <TableCell sx={{ fontWeight: 700, fontSize: "0.95rem" }}>
-                      Priority
-                    </TableCell>
-                    <TableCell sx={{ fontWeight: 700, fontSize: "0.95rem" }}>
-                      Actions
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {paginatedPublications.map((pub, index) => (
-                    <TableRow
-                      key={pub.id}
-                      hover
-                      sx={{
-                        transition: "all 0.2s ease-in-out",
-                        "&:hover": {
-                          background: (t) =>
-                            t.palette.mode === "dark"
-                              ? "rgba(255,255,255,0.05)"
-                              : "rgba(0,0,0,0.02)",
-                          transform: "scale(1.01)",
-                        },
-                        animation: `fadeInUp 0.5s ease-out ${index * 0.1
-                          }s both`,
-                        "@keyframes fadeInUp": {
-                          "0%": {
-                            opacity: 0,
-                            transform: "translateY(20px)",
-                          },
-                          "100%": {
-                            opacity: 1,
-                            transform: "translateY(0)",
-                          },
-                        },
-                      }}
-                    >
-                      <TableCell>{index + 1}</TableCell>
-                      <TableCell>
-                        <Box>
-                          <Typography
-                            variant="body2"
-                            sx={{ fontWeight: 600, mb: 1 }}
-                          >
-                            {pub.id}
-                          </Typography>
-                        </Box>
-                      </TableCell>
-                      <TableCell>
-                        <Box>
-                          <Typography
-                            variant="body2"
-                            sx={{ maxWidth: 300, fontWeight: 500, mb: 1 }}
-                          >
-                            {pub.title}
-                          </Typography>
-                        </Box>
-                      </TableCell>
-                      <TableCell>
-                        <Chip
-                          icon={getTypeIcon(pub.type)}
-                          label={pub.type}
-                          size="small"
-                          color={getTypeColor(pub.type)}
-                          sx={{
-                            borderRadius: 2,
-                            fontWeight: 600,
-                            "& .MuiChip-icon": {
-                              color: "inherit",
-                            },
-                          }}
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 1,
-                            p: 1,
-                            borderRadius: 2,
-                            background: (t) =>
-                              t.palette.mode === "dark"
-                                ? "rgba(255,255,255,0.05)"
-                                : "rgba(0,0,0,0.02)",
-                          }}
-                        >
-                          {getStatusIcon(pub.status)}
-                          <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                            {pub.status}
-                          </Typography>
-                        </Box>
-                      </TableCell>
-                      <TableCell>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 1,
-                            p: 1,
-                            borderRadius: 2,
-                            background: (t) =>
-                              t.palette.mode === "dark"
-                                ? "rgba(255,255,255,0.05)"
-                                : "rgba(0,0,0,0.02)",
-                          }}
-                        >
-                          {getPriorityIcon(pub.priority)}
-                          <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                            {pub.priority}
-                          </Typography>
-                        </Box>
-                      </TableCell>
-                      <TableCell>
-                        <IconButton
-                          size="small"
-                          sx={{
-                            background: (t) =>
-                              t.palette.mode === "dark"
-                                ? "rgba(255,255,255,0.05)"
-                                : "rgba(0,0,0,0.02)",
-                            "&:hover": {
-                              background: (t) =>
-                                t.palette.mode === "dark"
-                                  ? "rgba(255,255,255,0.1)"
-                                  : "rgba(0,0,0,0.08)",
-                              transform: "scale(1.1)",
-                            },
-                          }}
-                        >
-                          <MoreVertIcon />
-                        </IconButton>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-
-            {/* Pagination */}
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25]}
-              component="div"
-              count={filteredPublications.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-              labelRowsPerPage="Rows per page"
-              sx={{
-                borderTop: 1,
-                borderColor: (t) =>
-                  t.palette.mode === "dark"
-                    ? "rgba(255,255,255,0.1)"
-                    : "rgba(0,0,0,0.08)",
-                background: (t) =>
-                  t.palette.mode === "dark"
-                    ? "rgba(255,255,255,0.02)"
-                    : "rgba(0,0,0,0.01)",
-              }}
-            />
-          </Paper>
+          <PublicationsTable
+            paginatedPublications={paginatedPublications}
+            filteredPublications={filteredPublications}
+            page={page}
+            rowsPerPage={rowsPerPage}
+            handleChangePage={handleChangePage}
+            handleChangeRowsPerPage={handleChangeRowsPerPage}
+            isLoading={isLoading}
+            handleDeleteClick={handleDeleteClick}
+            loading={loading}
+          />
         </Box>
       </Box>
 
@@ -1040,6 +640,14 @@ export default function AdminPublication() {
           {errorMessage}
         </Alert>
       </Snackbar>
+
+      {/* Delete Confirmation Dialog */}
+      <DeleteConfirmationModal
+        open={deleteDialogOpen}
+        onClose={() => setDeleteDialogOpen(false)}
+        onConfirm={handleConfirmDelete}
+        loading={loading}
+      />
     </Box>
   );
 }
