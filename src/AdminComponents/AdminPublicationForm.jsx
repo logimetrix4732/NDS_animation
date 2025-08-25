@@ -12,6 +12,9 @@ import {
   CircularProgress,
   DialogContent,
   DialogActions,
+  Switch,
+  FormControlLabel,
+  Card,
 } from "@mui/material";
 import {
   CloudUpload as CloudUploadIcon,
@@ -135,6 +138,49 @@ const AdminPublicationForm = ({
                 </Box>
               </label>
             </Box>
+
+            <Card sx={{
+              pt: 2,
+              pl: 2,
+              pb: 0.5,
+              mb: 2,
+              backgroundColor: formData.isActive ? '#f0f7ff' : '#fff5f5',
+              transition: 'background-color 0.3s ease'
+            }}>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={formData.isActive}
+                    onChange={(e) => handleChange({
+                      target: {
+                        name: 'isActive',
+                        value: e.target.checked
+                      }
+                    })}
+                    color="primary"
+                    sx={{
+                      '& .MuiSwitch-switchBase.Mui-checked': {
+                        color: '#4786e6',
+                      },
+                      '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                        backgroundColor: '#4786e6',
+                      },
+                    }}
+                  />
+                }
+                label={
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: formData.isActive ? '#1565c0' : '#d32f2f',
+                      fontWeight: 600
+                    }}
+                  >
+                    {formData.isActive ? 'Active' : 'Inactive'}
+                  </Typography>
+                }
+              />
+            </Card>
           </React.Fragment>
         );
 
@@ -275,6 +321,49 @@ const AdminPublicationForm = ({
                 </Box>
               </label>
             </Box>
+
+            <Card sx={{
+              pt: 2,
+              pl: 2,
+              pb: 0.5,
+              mb: 2,
+              backgroundColor: formData.isActive ? '#f0f7ff' : '#fff5f5',
+              transition: 'background-color 0.3s ease'
+            }}>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={formData.isActive}
+                    onChange={(e) => handleChange({
+                      target: {
+                        name: 'isActive',
+                        value: e.target.checked
+                      }
+                    })}
+                    color="primary"
+                    sx={{
+                      '& .MuiSwitch-switchBase.Mui-checked': {
+                        color: '#4786e6',
+                      },
+                      '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                        backgroundColor: '#4786e6',
+                      },
+                    }}
+                  />
+                }
+                label={
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: formData.isActive ? '#1565c0' : '#d32f2f',
+                      fontWeight: 600
+                    }}
+                  >
+                    {formData.isActive ? 'Active' : 'Inactive'}
+                  </Typography>
+                }
+              />
+            </Card>
           </React.Fragment>
         );
 
@@ -329,6 +418,49 @@ const AdminPublicationForm = ({
                 </Box>
               </label>
             </Box>
+
+            <Card sx={{
+              pt: 2,
+              pl: 2,
+              pb: 0.5,
+              mb: 2,
+              backgroundColor: formData.isActive ? '#f0f7ff' : '#fff5f5',
+              transition: 'background-color 0.3s ease'
+            }}>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={formData.isActive}
+                    onChange={(e) => handleChange({
+                      target: {
+                        name: 'isActive',
+                        value: e.target.checked
+                      }
+                    })}
+                    color="primary"
+                    sx={{
+                      '& .MuiSwitch-switchBase.Mui-checked': {
+                        color: '#4786e6',
+                      },
+                      '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                        backgroundColor: '#4786e6',
+                      },
+                    }}
+                  />
+                }
+                label={
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: formData.isActive ? '#1565c0' : '#d32f2f',
+                      fontWeight: 600
+                    }}
+                  >
+                    {formData.isActive ? 'Active' : 'Inactive'}
+                  </Typography>
+                }
+              />
+            </Card>
           </React.Fragment>
         );
 
