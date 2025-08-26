@@ -100,7 +100,7 @@ const SemenStations = () => {
                   selectedState={selectedState}
                   hoveredState={hoveredState}
                   coveredStates={coveredStates}
-                  title="Animal Productivity Services"
+                  title=""
                 />
               </Box>
             </Fade>

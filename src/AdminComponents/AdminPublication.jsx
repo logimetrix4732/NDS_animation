@@ -43,9 +43,9 @@ import nds_logo from "../assets/img/nds_logo.png";
 import AdminSidebar from "../AdminComponents/AdminSidebar";
 import AdminPublicationForm from "./AdminPublicationForm";
 
-import PublicationsTable from './PublicationsTable';
+import PublicationsTable from "./PublicationsTable";
 
-import DeleteConfirmationModal from './DeleteConfirmationModal';
+import DeleteConfirmationModal from "./DeleteConfirmationModal";
 
 // --------- LAYOUT ---------
 const drawerWidth = 260;
@@ -62,7 +62,7 @@ export default function AdminPublication() {
   const [formOpen, setFormOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [publications, setPublications] = useState([]);
-  console.log(publications, "=publications")
+  console.log(publications, "=publications");
   const [isLoading, setIsLoading] = useState(false);
 
   // Fetch publications data
@@ -70,13 +70,15 @@ export default function AdminPublication() {
     setIsLoading(true);
     try {
       const response = await getFetch(
-        `${import.meta.env.VITE_API_BASE_URL}/getPublication?publicationType=${selectedStatus}`
+        `${
+          import.meta.env.VITE_API_BASE_URL
+        }/getPublication?publicationType=${selectedStatus}`
       );
       console.log("API Response:", response);
 
       if (response?.data?.data) {
         const sortedData = response.data.data.sort((a, b) => b.id - a.id);
-        const mappedData = sortedData.map(pub => ({
+        const mappedData = sortedData.map((pub) => ({
           id: pub.id,
           title: pub.name,
           type: selectedStatus,
@@ -133,7 +135,8 @@ export default function AdminPublication() {
       const matchesSearch =
         search === "" ||
         (pub.title && pub.title.toLowerCase().includes(search.toLowerCase())) ||
-        (pub.id && pub.id.toString().toLowerCase().includes(search.toLowerCase())) ||
+        (pub.id &&
+          pub.id.toString().toLowerCase().includes(search.toLowerCase())) ||
         (pub.status && pub.status.toLowerCase().includes(search.toLowerCase()));
 
       return matchesSearch;
@@ -179,7 +182,9 @@ export default function AdminPublication() {
     try {
       setLoading(true);
       const response = await deleteFetch(
-        `${import.meta.env.VITE_API_BASE_URL}/publication/${id}?publicationType=${publicationType}`,
+        `${
+          import.meta.env.VITE_API_BASE_URL
+        }/publication/${id}?publicationType=${publicationType}`,
         id
       );
 
@@ -234,38 +239,39 @@ export default function AdminPublication() {
   };
 
   const handleSubmit = async () => {
-
-    // Check if token exists
-    const token = localStorage.getItem("token");
-    if (!token) {
-      setErrorMessage("Please login first. No authentication token found.");
-      return;
-    }
-
-    // Simple validation
-    if (!formData.name.trim()) {
-      setErrorMessage("Name is required");
-      return;
-    }
-
-    // Check for PDF files based on publication type
-    if (formData.publicationType === "Annual Reports") {
-      // For Annual Reports, check if either pdfHindi or pdfEnglish is uploaded
-      if (!formData.pdfHindi && !formData.pdfEnglish) {
-        setErrorMessage("At least one PDF file (Hindi or English) is required for Annual Reports");
-        return;
-      }
-    } else {
-      // For other publication types, check for pdfFile
-      if (!formData.pdfFile) {
-        setErrorMessage("PDF file is required");
-        return;
-      }
-    }
-
-    setLoading(true);
-
     try {
+      // Check if token exists
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setErrorMessage("Please login first. No authentication token found.");
+        return;
+      }
+
+      // Simple validation
+      if (!formData.name.trim()) {
+        setErrorMessage("Name is required");
+        return;
+      }
+
+      // Check for PDF files based on publication type
+      if (formData.publicationType === "Annual Reports") {
+        // For Annual Reports, check if either pdfHindi or pdfEnglish is uploaded
+        if (!formData.pdfHindi && !formData.pdfEnglish) {
+          setErrorMessage(
+            "At least one PDF file (Hindi or English) is required for Annual Reports"
+          );
+          return;
+        }
+      } else {
+        // For other publication types, check for pdfFile
+        if (!formData.pdfFile) {
+          setErrorMessage("PDF file is required");
+          return;
+        }
+      }
+
+      setLoading(true);
+
       const formDataToSend = new FormData();
 
       // Basic fields
@@ -293,48 +299,69 @@ export default function AdminPublication() {
         }
       } else {
         // For other publication types, use pdfFile
-        formDataToSend.append("pdfFile", formData.pdfFile);
+        if (formData.pdfFile) {
+          formDataToSend.append("pdfFile", formData.pdfFile);
+        }
       }
 
       if (formData.thumbnail) {
         formDataToSend.append("thumbnail", formData.thumbnail);
       }
 
+      console.log("Sending form data:", {
+        name: formData.name,
+        publicationType: formData.publicationType,
+        isActive: formData.isActive,
+        year: formData.year,
+        description: formData.description,
+        hasPdfFile: !!formData.pdfFile,
+        hasPdfHindi: !!formData.pdfHindi,
+        hasPdfEnglish: !!formData.pdfEnglish,
+        hasThumbnail: !!formData.thumbnail,
+      });
+
       const response = await postFetch(
         `${import.meta.env.VITE_API_BASE_URL}/createPublications`,
         formDataToSend
       );
 
+      console.log("API Response:", response);
 
       if (response && response.status === 201) {
         setSuccessMessage("Publication created successfully!");
         setFormOpen(false);
 
         // Refresh publications list
-        fetchPublications();
+        await fetchPublications();
 
         // Reset form
         setFormData({
           name: "",
-          publicationType: "HR Compliances",
+          publicationType: selectedStatus, // Use current selected status
           year: "",
           description: "",
           pdfFile: null,
           thumbnail: null,
           pdfHindi: null,
           pdfEnglish: null,
-          isActive: true, // Keep default active state
+          isActive: true,
         });
       } else {
+        console.error("API Error Response:", response);
         if (response && response.status === 401) {
           setErrorMessage("Authentication failed. Please login again.");
+        } else if (response && response.data && response.data.message) {
+          setErrorMessage(response.data.message);
         } else {
           setErrorMessage("Error creating publication. Please try again.");
         }
       }
     } catch (error) {
+      console.error("Submit Error:", error);
       if (error.status === 401) {
         setErrorMessage("Authentication failed. Please login again.");
+      } else if (error.message) {
+        setErrorMessage(error.message);
       } else {
         setErrorMessage("Error creating publication. Please try again.");
       }
@@ -517,7 +544,7 @@ export default function AdminPublication() {
                     variant="h4"
                     sx={{
                       fontWeight: 800,
-                      fontSize: { xs: "1.5rem", sm: "1.8rem", md: "2rem" }
+                      fontSize: { xs: "1.5rem", sm: "1.8rem", md: "2rem" },
                     }}
                   >
                     Publications
@@ -604,7 +631,7 @@ export default function AdminPublication() {
                   fontSize: { xs: "0.9rem", sm: "1rem", md: "1.1rem" },
                   opacity: 0.8,
                   textAlign: { xs: "left", md: "left" },
-                  mt: { xs: 1, md: 0 }
+                  mt: { xs: 1, md: 0 },
                 }}
               >
                 Here's a comprehensive overview of your publications for this
@@ -645,16 +672,15 @@ export default function AdminPublication() {
                           : "rgba(0,0,0,0.6)",
                       "&.Mui-selected": {
                         color: (t) =>
-                          t.palette.mode === "dark"
-                            ? "#667eea"
-                            : "#667eea",
+                          t.palette.mode === "dark" ? "#667eea" : "#667eea",
                         fontWeight: 700,
                       },
                     },
                     "& .MuiTabs-indicator": {
                       height: 3,
                       borderRadius: "3px 3px 0 0",
-                      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                      background:
+                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                     },
                   }}
                 >

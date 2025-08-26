@@ -76,16 +76,6 @@ const slideData = [
     title: "End-to-End Support",
     subtitle: "We provide 24/7 monitoring and support to ensure your systems.",
   },
-  {
-    img: carImg6,
-    title: "End-to-End Support",
-    subtitle: "We provide 24/7 monitoring and support to ensure your systems.",
-  },
-  {
-    img: carImg7,
-    title: "End-to-End Support",
-    subtitle: "We provide 24/7 monitoring and support to ensure your systems.",
-  },
 ];
 const slideData1 = [
   {
@@ -117,18 +107,9 @@ const slideData1 = [
     subtitle:
       "We understand that every business is unique. Our cloud solutions.",
   },
-  {
-    img: WhatsApp_imgCar,
-    title: "End-to-End Support",
-    subtitle: "We provide 24/7 monitoring and support to ensure your systems.",
-  },
+
   {
     img: SDS_8204,
-    title: "End-to-End Support",
-    subtitle: "We provide 24/7 monitoring and support to ensure your systems.",
-  },
-  {
-    img: WhatsApp_imgCar1,
     title: "End-to-End Support",
     subtitle: "We provide 24/7 monitoring and support to ensure your systems.",
   },

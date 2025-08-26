@@ -1,5 +1,5 @@
 import React from "react";
-import Footage from "../../Images/Videos/dashboardFootage1.mp4";
+import Footage from "../../Images/Videos/carrerVideo.mp4";
 import { Box, Typography } from "@mui/material";
 import backgroundImage from "../../Images/careerintrobanner.png";
 const CarrerVideoSection = () => {

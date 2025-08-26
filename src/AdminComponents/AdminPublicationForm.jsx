@@ -40,7 +40,15 @@ const AdminPublicationForm = ({
         return (
           <React.Fragment>
             <Box sx={{ mb: 2 }}>
-              <label style={{ color: "#1d2640", display: "block", marginBottom: "8px" }}>Compliances Title</label>
+              <label
+                style={{
+                  color: "#1d2640",
+                  display: "block",
+                  marginBottom: "8px",
+                }}
+              >
+                Compliances Title
+              </label>
               <TextField
                 fullWidth
                 size="small"
@@ -52,7 +60,15 @@ const AdminPublicationForm = ({
               />
             </Box>
             <Box sx={{ mb: 2 }}>
-              <label style={{ color: "#1d2640", display: "block", marginBottom: "8px" }}>Description</label>
+              <label
+                style={{
+                  color: "#1d2640",
+                  display: "block",
+                  marginBottom: "8px",
+                }}
+              >
+                Description
+              </label>
               <TextField
                 fullWidth
                 multiline
@@ -139,32 +155,37 @@ const AdminPublicationForm = ({
               </label>
             </Box>
 
-            <Card sx={{
-              pt: 2,
-              pl: 2,
-              pb: 0.5,
-              mb: 2,
-              backgroundColor: formData.isActive ? '#f0f7ff' : '#fff5f5',
-              transition: 'background-color 0.3s ease'
-            }}>
+            <Card
+              sx={{
+                pt: 2,
+                pl: 2,
+                pb: 0.5,
+                mb: 2,
+                backgroundColor: formData.isActive ? "#f0f7ff" : "#fff5f5",
+                transition: "background-color 0.3s ease",
+              }}
+            >
               <FormControlLabel
                 control={
                   <Switch
                     checked={formData.isActive}
-                    onChange={(e) => handleChange({
-                      target: {
-                        name: 'isActive',
-                        value: e.target.checked
-                      }
-                    })}
+                    onChange={(e) =>
+                      handleChange({
+                        target: {
+                          name: "isActive",
+                          value: e.target.checked,
+                        },
+                      })
+                    }
                     color="primary"
                     sx={{
-                      '& .MuiSwitch-switchBase.Mui-checked': {
-                        color: '#4786e6',
+                      "& .MuiSwitch-switchBase.Mui-checked": {
+                        color: "#4786e6",
                       },
-                      '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                        backgroundColor: '#4786e6',
-                      },
+                      "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track":
+                        {
+                          backgroundColor: "#4786e6",
+                        },
                     }}
                   />
                 }
@@ -172,11 +193,11 @@ const AdminPublicationForm = ({
                   <Typography
                     variant="body2"
                     sx={{
-                      color: formData.isActive ? '#1565c0' : '#d32f2f',
-                      fontWeight: 600
+                      color: formData.isActive ? "#1565c0" : "#d32f2f",
+                      fontWeight: 600,
                     }}
                   >
-                    {formData.isActive ? 'Active' : 'Inactive'}
+                    {formData.isActive ? "Active" : "Inactive"}
                   </Typography>
                 }
               />
@@ -188,7 +209,15 @@ const AdminPublicationForm = ({
         return (
           <React.Fragment>
             <Box sx={{ mb: 2 }}>
-              <label style={{ color: "#1d2640", display: "block", marginBottom: "8px" }}>Reports Title</label>
+              <label
+                style={{
+                  color: "#1d2640",
+                  display: "block",
+                  marginBottom: "8px",
+                }}
+              >
+                Reports Title
+              </label>
               <TextField
                 fullWidth
                 size="small"
@@ -200,7 +229,13 @@ const AdminPublicationForm = ({
               />
             </Box>
             <Box sx={{ mb: 2 }}>
-              <label style={{ color: "#1d2640", display: "block", marginBottom: "8px" }}>
+              <label
+                style={{
+                  color: "#1d2640",
+                  display: "block",
+                  marginBottom: "8px",
+                }}
+              >
                 Year of Annual Reports like (2024-2025)
               </label>
               <TextField
@@ -322,32 +357,37 @@ const AdminPublicationForm = ({
               </label>
             </Box>
 
-            <Card sx={{
-              pt: 2,
-              pl: 2,
-              pb: 0.5,
-              mb: 2,
-              backgroundColor: formData.isActive ? '#f0f7ff' : '#fff5f5',
-              transition: 'background-color 0.3s ease'
-            }}>
+            <Card
+              sx={{
+                pt: 2,
+                pl: 2,
+                pb: 0.5,
+                mb: 2,
+                backgroundColor: formData.isActive ? "#f0f7ff" : "#fff5f5",
+                transition: "background-color 0.3s ease",
+              }}
+            >
               <FormControlLabel
                 control={
                   <Switch
                     checked={formData.isActive}
-                    onChange={(e) => handleChange({
-                      target: {
-                        name: 'isActive',
-                        value: e.target.checked
-                      }
-                    })}
+                    onChange={(e) =>
+                      handleChange({
+                        target: {
+                          name: "isActive",
+                          value: e.target.checked,
+                        },
+                      })
+                    }
                     color="primary"
                     sx={{
-                      '& .MuiSwitch-switchBase.Mui-checked': {
-                        color: '#4786e6',
+                      "& .MuiSwitch-switchBase.Mui-checked": {
+                        color: "#4786e6",
                       },
-                      '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                        backgroundColor: '#4786e6',
-                      },
+                      "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track":
+                        {
+                          backgroundColor: "#4786e6",
+                        },
                     }}
                   />
                 }
@@ -355,11 +395,11 @@ const AdminPublicationForm = ({
                   <Typography
                     variant="body2"
                     sx={{
-                      color: formData.isActive ? '#1565c0' : '#d32f2f',
-                      fontWeight: 600
+                      color: formData.isActive ? "#1565c0" : "#d32f2f",
+                      fontWeight: 600,
                     }}
                   >
-                    {formData.isActive ? 'Active' : 'Inactive'}
+                    {formData.isActive ? "Active" : "Inactive"}
                   </Typography>
                 }
               />
@@ -371,7 +411,15 @@ const AdminPublicationForm = ({
         return (
           <React.Fragment>
             <Box sx={{ mb: 2 }}>
-              <label style={{ color: "#1d2640", display: "block", marginBottom: "8px" }}>Policy Title</label>
+              <label
+                style={{
+                  color: "#1d2640",
+                  display: "block",
+                  marginBottom: "8px",
+                }}
+              >
+                Policy Title
+              </label>
               <TextField
                 fullWidth
                 size="small"
@@ -419,32 +467,37 @@ const AdminPublicationForm = ({
               </label>
             </Box>
 
-            <Card sx={{
-              pt: 2,
-              pl: 2,
-              pb: 0.5,
-              mb: 2,
-              backgroundColor: formData.isActive ? '#f0f7ff' : '#fff5f5',
-              transition: 'background-color 0.3s ease'
-            }}>
+            <Card
+              sx={{
+                pt: 2,
+                pl: 2,
+                pb: 0.5,
+                mb: 2,
+                backgroundColor: formData.isActive ? "#f0f7ff" : "#fff5f5",
+                transition: "background-color 0.3s ease",
+              }}
+            >
               <FormControlLabel
                 control={
                   <Switch
                     checked={formData.isActive}
-                    onChange={(e) => handleChange({
-                      target: {
-                        name: 'isActive',
-                        value: e.target.checked
-                      }
-                    })}
+                    onChange={(e) =>
+                      handleChange({
+                        target: {
+                          name: "isActive",
+                          value: e.target.checked,
+                        },
+                      })
+                    }
                     color="primary"
                     sx={{
-                      '& .MuiSwitch-switchBase.Mui-checked': {
-                        color: '#4786e6',
+                      "& .MuiSwitch-switchBase.Mui-checked": {
+                        color: "#4786e6",
                       },
-                      '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                        backgroundColor: '#4786e6',
-                      },
+                      "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track":
+                        {
+                          backgroundColor: "#4786e6",
+                        },
                     }}
                   />
                 }
@@ -452,11 +505,11 @@ const AdminPublicationForm = ({
                   <Typography
                     variant="body2"
                     sx={{
-                      color: formData.isActive ? '#1565c0' : '#d32f2f',
-                      fontWeight: 600
+                      color: formData.isActive ? "#1565c0" : "#d32f2f",
+                      fontWeight: 600,
                     }}
                   >
-                    {formData.isActive ? 'Active' : 'Inactive'}
+                    {formData.isActive ? "Active" : "Inactive"}
                   </Typography>
                 }
               />
@@ -560,9 +613,17 @@ const AdminPublicationForm = ({
           },
         }}
       >
-        <form onSubmit={(e) => e.preventDefault()}>
+        <Box component="div">
           <Box sx={{ mb: 2 }}>
-            <label style={{ color: "#1d2640", display: "block", marginBottom: "8px" }}>Publication Type</label>
+            <label
+              style={{
+                color: "#1d2640",
+                display: "block",
+                marginBottom: "8px",
+              }}
+            >
+              Publication Type
+            </label>
             <TextField
               select
               fullWidth
@@ -582,7 +643,7 @@ const AdminPublicationForm = ({
 
           {/* Bottom spacing to prevent cut-off */}
           <Box sx={{ height: "20px" }} />
-        </form>
+        </Box>
       </DialogContent>
 
       <DialogActions
@@ -599,6 +660,7 @@ const AdminPublicationForm = ({
           variant="contained"
           color="primary"
           fullWidth
+          type="button"
           sx={{
             maxWidth: "310px",
             fontWeight: "bold",
@@ -612,11 +674,7 @@ const AdminPublicationForm = ({
               boxShadow: "0 12px 35px rgba(102, 126, 234, 0.4)",
             },
           }}
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            handleSubmit();
-          }}
+          onClick={handleSubmit}
           disabled={loading}
         >
           {loading ? "Creating..." : "Create Publication"}

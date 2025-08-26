@@ -122,199 +122,220 @@ const PublicationsTable = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {isLoading
-              ? // Skeleton loading rows
-                [...Array(5)].map((_, index) => (
-                  <TableRow key={`skeleton-${index}`}>
-                    <TableCell>
-                      <Skeleton variant="text" width={30} />
-                    </TableCell>
-                    <TableCell>
-                      <Skeleton variant="text" width={200} />
-                    </TableCell>
-                    <TableCell>
-                      <Skeleton variant="rounded" width={100} height={32} />
-                    </TableCell>
+            {isLoading ? (
+              // Skeleton loading rows
+              [...Array(5)].map((_, index) => (
+                <TableRow key={`skeleton-${index}`}>
+                  <TableCell>
+                    <Skeleton variant="text" width={30} />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton variant="text" width={200} />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton variant="rounded" width={100} height={32} />
+                  </TableCell>
 
-                    <TableCell>
-                      <Stack direction="row" spacing={1}>
-                        <Skeleton variant="circular" width={32} height={32} />
-                        <Skeleton variant="circular" width={32} height={32} />
-                        <Skeleton variant="circular" width={32} height={32} />
-                        <Skeleton variant="circular" width={32} height={32} />
-                      </Stack>
-                    </TableCell>
-                  </TableRow>
-                ))
-              : paginatedPublications.map((pub, index) => (
-                  <TableRow
-                    key={pub.id}
-                    hover
+                  <TableCell>
+                    <Stack direction="row" spacing={1}>
+                      <Skeleton variant="circular" width={32} height={32} />
+                      <Skeleton variant="circular" width={32} height={32} />
+                      <Skeleton variant="circular" width={32} height={32} />
+                      <Skeleton variant="circular" width={32} height={32} />
+                    </Stack>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : paginatedPublications.length === 0 ? (
+              <TableRow>
+                <TableCell
+                  colSpan={selectedStatus === "Annual Reports" ? 5 : 4}
+                >
+                  <Box
                     sx={{
-                      transition: "all 0.2s ease-in-out",
-                      "&:hover": {
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      py: 4,
+                    }}
+                  >
+                    <Typography variant="body1" color="text.secondary">
+                      No Data Available
+                    </Typography>
+                  </Box>
+                </TableCell>
+              </TableRow>
+            ) : (
+              paginatedPublications.map((pub, index) => (
+                <TableRow
+                  key={pub.id}
+                  hover
+                  sx={{
+                    transition: "all 0.2s ease-in-out",
+                    "&:hover": {
+                      background: (t) =>
+                        t.palette.mode === "dark"
+                          ? "rgba(255,255,255,0.05)"
+                          : "rgba(0,0,0,0.02)",
+                      transform: "scale(1.01)",
+                    },
+                    animation: `fadeInUp 0.5s ease-out ${index * 0.1}s both`,
+                    "@keyframes fadeInUp": {
+                      "0%": {
+                        opacity: 0,
+                        transform: "translateY(20px)",
+                      },
+                      "100%": {
+                        opacity: 1,
+                        transform: "translateY(0)",
+                      },
+                    },
+                  }}
+                >
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>
+                    <Typography
+                      variant="body2"
+                      sx={{ maxWidth: 300, fontWeight: 500 }}
+                    >
+                      {pub.title}
+                    </Typography>
+                  </TableCell>
+                  {selectedStatus === "Annual Reports" && (
+                    <TableCell>
+                      <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                        {pub.year || "N/A"}
+                      </Typography>
+                    </TableCell>
+                  )}
+                  <TableCell>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
+                        p: 1,
+                        borderRadius: 2,
                         background: (t) =>
                           t.palette.mode === "dark"
                             ? "rgba(255,255,255,0.05)"
                             : "rgba(0,0,0,0.02)",
-                        transform: "scale(1.01)",
-                      },
-                      animation: `fadeInUp 0.5s ease-out ${index * 0.1}s both`,
-                      "@keyframes fadeInUp": {
-                        "0%": {
-                          opacity: 0,
-                          transform: "translateY(20px)",
-                        },
-                        "100%": {
-                          opacity: 1,
-                          transform: "translateY(0)",
-                        },
-                      },
-                    }}
-                  >
-                    <TableCell>{index + 1}</TableCell>
-                    <TableCell>
-                      <Typography
-                        variant="body2"
-                        sx={{ maxWidth: 300, fontWeight: 500 }}
-                      >
-                        {pub.title}
+                      }}
+                    >
+                      {getStatusIcon(pub.status)}
+                      <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                        {pub.status}
                       </Typography>
-                    </TableCell>
-                    {selectedStatus === "Annual Reports" && (
-                      <TableCell>
-                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                          {pub.year || "N/A"}
-                        </Typography>
-                      </TableCell>
-                    )}
-                    <TableCell>
-                      <Box
+                    </Box>
+                  </TableCell>
+                  <TableCell>
+                    <Stack direction="row" spacing={1}>
+                      {/* View PDF Button */}
+                      {selectedStatus === "Annual Reports" ? (
+                        // For Annual Reports, show both Hindi and English PDFs
+                        <>
+                          {pub.pdfHindi && (
+                            <IconButton
+                              size="small"
+                              color="primary"
+                              onClick={() =>
+                                window.open(
+                                  `${import.meta.env.VITE_API_BASE_URL}/${
+                                    pub.pdfHindi
+                                  }`,
+                                  "_blank"
+                                )
+                              }
+                              sx={{
+                                background: (t) =>
+                                  t.palette.mode === "dark"
+                                    ? "rgba(255,255,255,0.05)"
+                                    : "rgba(0,0,0,0.02)",
+                              }}
+                              title="View Hindi PDF"
+                            >
+                              <RemoveRedEyeIcon fontSize="small" />
+                            </IconButton>
+                          )}
+                          {pub.pdfEnglish && (
+                            <IconButton
+                              size="small"
+                              color="secondary"
+                              onClick={() =>
+                                window.open(
+                                  `${import.meta.env.VITE_API_BASE_URL}/${
+                                    pub.pdfEnglish
+                                  }`,
+                                  "_blank"
+                                )
+                              }
+                              sx={{
+                                background: (t) =>
+                                  t.palette.mode === "dark"
+                                    ? "rgba(255,255,255,0.05)"
+                                    : "rgba(0,0,0,0.02)",
+                              }}
+                              title="View English PDF"
+                            >
+                              <RemoveRedEyeIcon fontSize="small" />
+                            </IconButton>
+                          )}
+                        </>
+                      ) : (
+                        // For other types, show single PDF
+                        <IconButton
+                          size="small"
+                          color="primary"
+                          onClick={() =>
+                            window.open(
+                              `${import.meta.env.VITE_API_BASE_URL}/${
+                                pub.pdfFile
+                              }`,
+                              "_blank"
+                            )
+                          }
+                          sx={{
+                            background: (t) =>
+                              t.palette.mode === "dark"
+                                ? "rgba(255,255,255,0.05)"
+                                : "rgba(0,0,0,0.02)",
+                          }}
+                        >
+                          <RemoveRedEyeIcon fontSize="small" />
+                        </IconButton>
+                      )}
+
+                      <IconButton
+                        size="small"
+                        color="warning"
                         sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 1,
-                          p: 1,
-                          borderRadius: 2,
                           background: (t) =>
                             t.palette.mode === "dark"
                               ? "rgba(255,255,255,0.05)"
                               : "rgba(0,0,0,0.02)",
                         }}
                       >
-                        {getStatusIcon(pub.status)}
-                        <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                          {pub.status}
-                        </Typography>
-                      </Box>
-                    </TableCell>
-                    <TableCell>
-                      <Stack direction="row" spacing={1}>
-                        {/* View PDF Button */}
-                        {selectedStatus === "Annual Reports" ? (
-                          // For Annual Reports, show both Hindi and English PDFs
-                          <>
-                            {pub.pdfHindi && (
-                              <IconButton
-                                size="small"
-                                color="primary"
-                                onClick={() =>
-                                  window.open(
-                                    `${import.meta.env.VITE_API_BASE_URL}/${
-                                      pub.pdfHindi
-                                    }`,
-                                    "_blank"
-                                  )
-                                }
-                                sx={{
-                                  background: (t) =>
-                                    t.palette.mode === "dark"
-                                      ? "rgba(255,255,255,0.05)"
-                                      : "rgba(0,0,0,0.02)",
-                                }}
-                                title="View Hindi PDF"
-                              >
-                                <RemoveRedEyeIcon fontSize="small" />
-                              </IconButton>
-                            )}
-                            {pub.pdfEnglish && (
-                              <IconButton
-                                size="small"
-                                color="secondary"
-                                onClick={() =>
-                                  window.open(
-                                    `${import.meta.env.VITE_API_BASE_URL}/${
-                                      pub.pdfEnglish
-                                    }`,
-                                    "_blank"
-                                  )
-                                }
-                                sx={{
-                                  background: (t) =>
-                                    t.palette.mode === "dark"
-                                      ? "rgba(255,255,255,0.05)"
-                                      : "rgba(0,0,0,0.02)",
-                                }}
-                                title="View English PDF"
-                              >
-                                <RemoveRedEyeIcon fontSize="small" />
-                              </IconButton>
-                            )}
-                          </>
-                        ) : (
-                          // For other types, show single PDF
-                          <IconButton
-                            size="small"
-                            color="primary"
-                            onClick={() =>
-                              window.open(
-                                `${import.meta.env.VITE_API_BASE_URL}/${
-                                  pub.pdfFile
-                                }`,
-                                "_blank"
-                              )
-                            }
-                            sx={{
-                              background: (t) =>
-                                t.palette.mode === "dark"
-                                  ? "rgba(255,255,255,0.05)"
-                                  : "rgba(0,0,0,0.02)",
-                            }}
-                          >
-                            <RemoveRedEyeIcon fontSize="small" />
-                          </IconButton>
-                        )}
-
-                        <IconButton
-                          size="small"
-                          color="warning"
-                          sx={{
-                            background: (t) =>
-                              t.palette.mode === "dark"
-                                ? "rgba(255,255,255,0.05)"
-                                : "rgba(0,0,0,0.02)",
-                          }}
-                        >
-                          <EditIcon fontSize="small" />
-                        </IconButton>
-                        <IconButton
-                          size="small"
-                          color="error"
-                          onClick={() => handleDeleteClick(pub)}
-                          disabled={loading}
-                          sx={{
-                            background: (t) =>
-                              t.palette.mode === "dark"
-                                ? "rgba(255,255,255,0.05)"
-                                : "rgba(0,0,0,0.02)",
-                          }}
-                        >
-                          <DeleteIcon fontSize="small" />
-                        </IconButton>
-                      </Stack>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                        <EditIcon fontSize="small" />
+                      </IconButton>
+                      <IconButton
+                        size="small"
+                        color="error"
+                        onClick={() => handleDeleteClick(pub)}
+                        disabled={loading}
+                        sx={{
+                          background: (t) =>
+                            t.palette.mode === "dark"
+                              ? "rgba(255,255,255,0.05)"
+                              : "rgba(0,0,0,0.02)",
+                        }}
+                      >
+                        <DeleteIcon fontSize="small" />
+                      </IconButton>
+                    </Stack>
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
           </TableBody>
         </Table>
       </TableContainer>

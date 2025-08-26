@@ -10,39 +10,52 @@ import {
   Button,
   CircularProgress,
   Box,
+  Typography,
 } from "@mui/material";
 import { Download } from "@mui/icons-material";
 import "./globals.css";
 import CommonBanner from "../components/BannersComponents/CommonBanner";
+import { getFetch } from "../Api/Api";
 
 export default function PoliciesPage() {
   const [loading, setLoading] = useState(true);
   const [docs, setDocs] = useState([]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setDocs([
-        {
-          id: 1,
-          name: "Annual Report 2023-24",
-          date: "12 Aug 2025",
-          file: "#",
-        },
-        {
-          id: 2,
-          name: "Innovation Whitepaper",
-          date: "05 Jul 2025",
-          file: "#",
-        },
-        {
-          id: 3,
-          name: "Community Projects Summary",
-          date: "18 Jun 2025",
-          file: "#",
-        },
-      ]);
-      setLoading(false);
-    }, 2000);
+    const fetchPolicies = async () => {
+      try {
+        setLoading(true);
+        const response = await getFetch(
+          `${
+            import.meta.env.VITE_API_BASE_URL
+          }/getPublication?publicationType=Policies`
+        );
+
+        if (response?.data?.data) {
+          const mappedData = response.data.data.map((item) => ({
+            id: item.id,
+            name: item.name,
+            date: new Date().toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            }),
+            file: item.pdfFile,
+            isActive: item.isActive,
+          }));
+          setDocs(mappedData);
+        } else {
+          setDocs([]);
+        }
+      } catch (error) {
+        console.error("Error fetching Policies:", error);
+        setDocs([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPolicies();
   }, []);
 
   return (
@@ -87,6 +100,21 @@ export default function PoliciesPage() {
                         </Box>
                       </TableCell>
                     </TableRow>
+                  ) : docs.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={4} align="center">
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          alignItems="center"
+                          py={3}
+                        >
+                          <Typography variant="h6" color="text.secondary">
+                            No Policies available
+                          </Typography>
+                        </Box>
+                      </TableCell>
+                    </TableRow>
                   ) : (
                     docs.map((doc, index) => (
                       <TableRow key={doc.id} className="table-row-hover">
@@ -97,7 +125,17 @@ export default function PoliciesPage() {
                           <Button
                             variant="contained"
                             startIcon={<Download />}
-                            href={doc.file}
+                            onClick={() => {
+                              if (doc.file) {
+                                window.open(
+                                  `${import.meta.env.VITE_API_BASE_URL}/${
+                                    doc.file
+                                  }`,
+                                  "_blank"
+                                );
+                              }
+                            }}
+                            disabled={!doc.file}
                             sx={{
                               backgroundColor: "#bd8f59",
                               textTransform: "none",
