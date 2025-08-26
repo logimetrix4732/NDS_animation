@@ -48,7 +48,7 @@ const getCategoryIcon = (category) => {
     }
 };
 
-const TenderCardsList = ({ filteredTenders }) => {
+const TenderCardsList = ({ filteredTenders, onViewDocument }) => {
     return (
         <Stack spacing={3}>
             {filteredTenders.map((tender, index) => (
@@ -385,6 +385,7 @@ const TenderCardsList = ({ filteredTenders }) => {
                                 <Button
                                     variant="outlined"
                                     startIcon={<DescriptionIcon />}
+                                    onClick={() => onViewDocument && onViewDocument(tender)}
                                     sx={{
                                         borderRadius: 2,
                                         fontWeight: 600,

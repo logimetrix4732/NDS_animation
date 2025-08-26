@@ -101,7 +101,7 @@ const TenderCard = ({
               </Typography>
               <Typography variant="body2" sx={{ color: "#666" }}>
                 <Business sx={{ fontSize: 16 }} /> {tender.location} • TND-
-                {tender.id.padStart(4, "0")}-001
+                {String(tender.id).padStart(4, "0")}-001
               </Typography>
             </Box>
             <Box display="flex" alignItems="center" gap={1}>
@@ -146,10 +146,10 @@ const TenderCard = ({
                     Tender Details
                   </Typography>
                   <Box
-                    sx={{ display: "flex", flexDirection: "column", gap: 1 }}
+                    sx={{ display: "flex", flexDirection: "column", gap: 1, border: "1px solid red", minWidth: "300px" }}
                   >
                     <Box
-                      sx={{ display: "flex", justifyContent: "space-between" }}
+                      sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}
                     >
                       <Typography variant="body2" color="text.secondary">
                         Start Date:
@@ -159,7 +159,7 @@ const TenderCard = ({
                       </Typography>
                     </Box>
                     <Box
-                      sx={{ display: "flex", justifyContent: "space-between" }}
+                      sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}
                     >
                       <Typography variant="body2" color="text.secondary">
                         Estimated Value:
@@ -169,7 +169,7 @@ const TenderCard = ({
                       </Typography>
                     </Box>
                     <Box
-                      sx={{ display: "flex", justifyContent: "space-between" }}
+                      sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}
                     >
                       <Typography variant="body2" color="text.secondary">
                         Location:

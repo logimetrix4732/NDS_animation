@@ -27,7 +27,6 @@ import {
     Description as DescriptionIcon,
     RadioButtonUnchecked as RadioButtonUncheckedIcon,
     RemoveRedEye as RemoveRedEyeIcon,
-    Download as DownloadIcon,
     Edit as EditIcon,
     Delete as DeleteIcon,
 } from "@mui/icons-material";
@@ -86,7 +85,8 @@ const PublicationsTable = ({
     handleChangeRowsPerPage,
     isLoading,
     handleDeleteClick,
-    loading
+    loading,
+    selectedStatus
 }) => {
     return (
         <Paper
@@ -127,11 +127,14 @@ const PublicationsTable = ({
                         >
                             <TableCell>S.No</TableCell>
                             <TableCell sx={{ fontWeight: 700, fontSize: "0.95rem" }}>
-                                Title
+                                {selectedStatus === "Annual Reports" ? "Report Title" :
+                                    selectedStatus === "Policies" ? "Policy Title" : "Compliance Title"}
                             </TableCell>
-                            <TableCell sx={{ fontWeight: 700, fontSize: "0.95rem" }}>
-                                Type
-                            </TableCell>
+                            {selectedStatus === "Annual Reports" && (
+                                <TableCell sx={{ fontWeight: 700, fontSize: "0.95rem" }}>
+                                    Year
+                                </TableCell>
+                            )}
                             <TableCell sx={{ fontWeight: 700, fontSize: "0.95rem" }}>
                                 Status
                             </TableCell>
@@ -206,21 +209,13 @@ const PublicationsTable = ({
                                             {pub.title}
                                         </Typography>
                                     </TableCell>
-                                    <TableCell>
-                                        <Chip
-                                            icon={getTypeIcon(pub.type)}
-                                            label={pub.type}
-                                            size="small"
-                                            color={getTypeColor(pub.type)}
-                                            sx={{
-                                                borderRadius: 2,
-                                                fontWeight: 600,
-                                                "& .MuiChip-icon": {
-                                                    color: "inherit",
-                                                },
-                                            }}
-                                        />
-                                    </TableCell>
+                                    {selectedStatus === "Annual Reports" && (
+                                        <TableCell>
+                                            <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                                                {pub.year || "N/A"}
+                                            </Typography>
+                                        </TableCell>
+                                    )}
                                     <TableCell>
                                         <Box
                                             sx={{
@@ -262,39 +257,61 @@ const PublicationsTable = ({
                                     </TableCell>
                                     <TableCell>
                                         <Stack direction="row" spacing={1}>
-                                            <IconButton
-                                                size="small"
-                                                color="primary"
-                                                onClick={() => window.open(`${import.meta.env.VITE_API_BASE_URL}/${pub.pdfFile}`, '_blank')}
-                                                sx={{
-                                                    background: (t) =>
-                                                        t.palette.mode === "dark"
-                                                            ? "rgba(255,255,255,0.05)"
-                                                            : "rgba(0,0,0,0.02)",
-                                                }}
-                                            >
-                                                <RemoveRedEyeIcon fontSize="small" />
-                                            </IconButton>
-                                            <IconButton
-                                                size="small"
-                                                color="primary"
-                                                onClick={() => {
-                                                    const link = document.createElement('a');
-                                                    link.href = `${import.meta.env.VITE_API_BASE_URL}/${pub.pdfFile}`;
-                                                    link.download = pub.title;
-                                                    document.body.appendChild(link);
-                                                    link.click();
-                                                    document.body.removeChild(link);
-                                                }}
-                                                sx={{
-                                                    background: (t) =>
-                                                        t.palette.mode === "dark"
-                                                            ? "rgba(255,255,255,0.05)"
-                                                            : "rgba(0,0,0,0.02)",
-                                                }}
-                                            >
-                                                <DownloadIcon fontSize="small" />
-                                            </IconButton>
+                                            {/* View PDF Button */}
+                                            {selectedStatus === "Annual Reports" ? (
+                                                // For Annual Reports, show both Hindi and English PDFs
+                                                <>
+                                                    {pub.pdfHindi && (
+                                                        <IconButton
+                                                            size="small"
+                                                            color="primary"
+                                                            onClick={() => window.open(`${import.meta.env.VITE_API_BASE_URL}/${pub.pdfHindi}`, '_blank')}
+                                                            sx={{
+                                                                background: (t) =>
+                                                                    t.palette.mode === "dark"
+                                                                        ? "rgba(255,255,255,0.05)"
+                                                                        : "rgba(0,0,0,0.02)",
+                                                            }}
+                                                            title="View Hindi PDF"
+                                                        >
+                                                            <RemoveRedEyeIcon fontSize="small" />
+                                                        </IconButton>
+                                                    )}
+                                                    {pub.pdfEnglish && (
+                                                        <IconButton
+                                                            size="small"
+                                                            color="secondary"
+                                                            onClick={() => window.open(`${import.meta.env.VITE_API_BASE_URL}/${pub.pdfEnglish}`, '_blank')}
+                                                            sx={{
+                                                                background: (t) =>
+                                                                    t.palette.mode === "dark"
+                                                                        ? "rgba(255,255,255,0.05)"
+                                                                        : "rgba(0,0,0,0.02)",
+                                                            }}
+                                                            title="View English PDF"
+                                                        >
+                                                            <RemoveRedEyeIcon fontSize="small" />
+                                                        </IconButton>
+                                                    )}
+                                                </>
+                                            ) : (
+                                                // For other types, show single PDF
+                                                <IconButton
+                                                    size="small"
+                                                    color="primary"
+                                                    onClick={() => window.open(`${import.meta.env.VITE_API_BASE_URL}/${pub.pdfFile}`, '_blank')}
+                                                    sx={{
+                                                        background: (t) =>
+                                                            t.palette.mode === "dark"
+                                                                ? "rgba(255,255,255,0.05)"
+                                                                : "rgba(0,0,0,0.02)",
+                                                    }}
+                                                >
+                                                    <RemoveRedEyeIcon fontSize="small" />
+                                                </IconButton>
+                                            )}
+
+
                                             <IconButton
                                                 size="small"
                                                 color="warning"

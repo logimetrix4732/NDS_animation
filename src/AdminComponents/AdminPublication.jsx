@@ -23,6 +23,8 @@ import {
   useMediaQuery,
   Paper,
   CircularProgress,
+  Tabs,
+  Tab,
 } from "@mui/material";
 import {
   DarkMode,
@@ -32,6 +34,9 @@ import {
   Menu as MenuIcon,
   Search as SearchIcon,
   Download as DownloadIcon,
+  Book as BookIcon,
+  Description as DescriptionIcon,
+  Article as ArticleIcon,
 } from "@mui/icons-material";
 import { postFetch, getFetch, deleteFetch } from "../Api/Api";
 import nds_logo from "../assets/img/nds_logo.png";
@@ -52,7 +57,7 @@ export default function AdminPublication() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [selectedStatus, setSelectedStatus] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("HR Compliances");
   const [selectedPriority, setSelectedPriority] = useState("");
   const [formOpen, setFormOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -65,7 +70,7 @@ export default function AdminPublication() {
     setIsLoading(true);
     try {
       const response = await getFetch(
-        `${import.meta.env.VITE_API_BASE_URL}/getPublication?publicationType=${selectedStatus || 'HR Compliances'}`
+        `${import.meta.env.VITE_API_BASE_URL}/getPublication?publicationType=${selectedStatus}`
       );
       console.log("API Response:", response);
 
@@ -74,11 +79,14 @@ export default function AdminPublication() {
         const mappedData = sortedData.map(pub => ({
           id: pub.id,
           title: pub.name,
-          type: selectedStatus || "HR Compliances",
+          type: selectedStatus,
           status: pub.isActive ? "Published" : "Unpublished",
           priority: pub.isActive ? "High" : "Medium",
           thumbnail: pub.thumbnail,
           pdfFile: pub.pdfFile,
+          pdfHindi: pub.pdfHindi,
+          pdfEnglish: pub.pdfEnglish,
+          year: pub.year,
           createdBy: pub.createdBy,
         }));
         console.log("Mapped Data:", mappedData);
@@ -160,6 +168,12 @@ export default function AdminPublication() {
     setFormOpen(false);
   };
 
+  // Handle tab change
+  const handleTabChange = (event, newValue) => {
+    setSelectedStatus(newValue);
+    setPage(0); // Reset to first page when changing tabs
+  };
+
   // Handle delete publication
   const handleDelete = async (id, publicationType) => {
     try {
@@ -235,10 +249,10 @@ export default function AdminPublication() {
     }
 
     // Check for PDF files based on publication type
-    if (formData.publicationType === "Annual Report") {
+    if (formData.publicationType === "Annual Reports") {
       // For Annual Reports, check if either pdfHindi or pdfEnglish is uploaded
       if (!formData.pdfHindi && !formData.pdfEnglish) {
-        setErrorMessage("At least one PDF file (Hindi or English) is required for Annual Report");
+        setErrorMessage("At least one PDF file (Hindi or English) is required for Annual Reports");
         return;
       }
     } else {
@@ -269,7 +283,7 @@ export default function AdminPublication() {
       }
 
       // Files - handle based on publication type
-      if (formData.publicationType === "Annual Report") {
+      if (formData.publicationType === "Annual Reports") {
         // For Annual Reports, use pdfHindi and pdfEnglish
         if (formData.pdfHindi) {
           formDataToSend.append("pdfHindi", formData.pdfHindi);
@@ -546,7 +560,21 @@ export default function AdminPublication() {
                     fullWidth={false}
                     variant="contained"
                     startIcon={<AddIcon />}
-                    onClick={() => setFormOpen(true)}
+                    onClick={() => {
+                      // Set the form data to match the selected tab
+                      setFormData({
+                        name: "",
+                        publicationType: selectedStatus,
+                        year: "",
+                        description: "",
+                        pdfFile: null,
+                        thumbnail: null,
+                        pdfHindi: null,
+                        pdfEnglish: null,
+                        isActive: true,
+                      });
+                      setFormOpen(true);
+                    }}
                     sx={{
                       borderRadius: 3,
                       px: 3,
@@ -585,6 +613,74 @@ export default function AdminPublication() {
             </Box>
           </Grow>
 
+          {/* Tabs Section */}
+          <Grow in timeout={600}>
+            <Box sx={{ mb: 3 }}>
+              <Paper
+                sx={{
+                  borderRadius: 3,
+                  background: (t) =>
+                    t.palette.mode === "dark"
+                      ? "rgba(255,255,255,0.05)"
+                      : "rgba(255,255,255,0.8)",
+                  border: (t) =>
+                    t.palette.mode === "dark"
+                      ? "1px solid rgba(255,255,255,0.1)"
+                      : "1px solid rgba(0,0,0,0.08)",
+                }}
+              >
+                <Tabs
+                  value={selectedStatus}
+                  onChange={handleTabChange}
+                  variant="fullWidth"
+                  sx={{
+                    "& .MuiTab-root": {
+                      fontWeight: 600,
+                      fontSize: "0.95rem",
+                      textTransform: "none",
+                      minHeight: 64,
+                      color: (t) =>
+                        t.palette.mode === "dark"
+                          ? "rgba(255,255,255,0.7)"
+                          : "rgba(0,0,0,0.6)",
+                      "&.Mui-selected": {
+                        color: (t) =>
+                          t.palette.mode === "dark"
+                            ? "#667eea"
+                            : "#667eea",
+                        fontWeight: 700,
+                      },
+                    },
+                    "& .MuiTabs-indicator": {
+                      height: 3,
+                      borderRadius: "3px 3px 0 0",
+                      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                    },
+                  }}
+                >
+                  <Tab
+                    label="HR Compliances"
+                    value="HR Compliances"
+                    icon={<BookIcon sx={{ fontSize: 20, mb: 0.5 }} />}
+                    iconPosition="top"
+                  />
+                  <Tab
+                    label="Annual Reports"
+                    value="Annual Reports"
+                    icon={<DescriptionIcon sx={{ fontSize: 20, mb: 0.5 }} />}
+                    iconPosition="top"
+                  />
+                  <Tab
+                    label="Policies"
+                    value="Policies"
+                    icon={<ArticleIcon sx={{ fontSize: 20, mb: 0.5 }} />}
+                    iconPosition="top"
+                  />
+                </Tabs>
+              </Paper>
+            </Box>
+          </Grow>
+
           {/* Publications Table */}
           <PublicationsTable
             paginatedPublications={paginatedPublications}
@@ -596,6 +692,7 @@ export default function AdminPublication() {
             isLoading={isLoading}
             handleDeleteClick={handleDeleteClick}
             loading={loading}
+            selectedStatus={selectedStatus}
           />
         </Box>
       </Box>
