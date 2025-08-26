@@ -256,11 +256,11 @@ export const putFetchData = async (url, data) => {
   }
 };
 
-export const deleteFetch = async (url, id) => {
+export const deleteFetch = async (url) => {
   try {
     const response = await axios({
       method: "delete",
-      url: `${url}/${id}`,
+      url: url,
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",

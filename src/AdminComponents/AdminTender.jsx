@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import {
   ThemeProvider,
   createTheme,
@@ -53,7 +53,8 @@ import nds_logo from "../assets/img/nds_logo.png";
 import AdminSidebar from "../AdminComponents/AdminSidebar";
 import AdminTenderForm from "./AdminTenderForm";
 import TenderCardsList from "./TenderCardsList";
-import { postFetch } from "../Api/Api";
+import DocumentViewerDialog from "./DocumentViewerDialog";
+import { postFetch, getFetch } from "../Api/Api";
 
 // --------- THEME ---------
 const getDesignTokens = (mode) => ({
@@ -153,66 +154,6 @@ const getDesignTokens = (mode) => ({
   },
 });
 
-// --------- MOCK DATA ---------
-const tenders = [
-  {
-    id: "TND-2024-001",
-    title: "Digital Infrastructure Modernization Project",
-    description: "Comprehensive upgrade of city digital infrastructure including network modernization, cloud migration, and cybersecurity implementation.",
-    status: "Published",
-    priority: "High",
-    startDate: "2024-01-02",
-    estimatedValue: "$2,500,000",
-    location: "Delhi",
-    preBidMeeting: "2024-01-02T10:00",
-    lastDateSubmission: "2024-03-15T17:00",
-    bidOpening: "2024-03-15T18:00",
-    participants: 24,
-    category: "Infrastructure",
-    tenderCard: "Inactive",
-    tenderFile: null,
-    image: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400",
-  },
-  {
-    id: "TND-2024-003",
-    title: "Highway Repair Project NH-48 Stretch",
-    description: "Repair and maintenance of NH-48 stretch with advanced road technology and safety improvements.",
-    status: "Published",
-    priority: "High",
-    startDate: "2024-02-05",
-    estimatedValue: "$12,000,000",
-    location: "Gujarat",
-    preBidMeeting: "2024-02-01T11:00",
-    lastDateSubmission: "2024-02-12T16:30",
-    bidOpening: "2024-02-18T10:30",
-    participants: 35,
-    category: "Infrastructure",
-    tenderCard: "Active",
-    tenderFile: null,
-    image: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400",
-  },
-  {
-    id: "TND-2024-004",
-    title: "Smart City WiFi Network Installation",
-    description: "City-wide WiFi network installation with high-speed connectivity and smart city integration.",
-    status: "Published",
-    priority: "Low",
-    startDate: "2024-01-20",
-    estimatedValue: "$850,000",
-    location: "Pune",
-    preBidMeeting: "2024-01-25T14:00",
-    lastDateSubmission: "2024-03-10T17:00",
-    bidOpening: "2024-03-11T10:00",
-    participants: 18,
-    category: "Technology",
-    tenderCard: "Active",
-    tenderFile: null,
-    image: "https://images.unsplash.com/photo-1558618666-fc709c12af57?w=400",
-  },
-];
-
-// Helper functions moved to TenderCardsList component
-
 // --------- LAYOUT ---------
 const drawerWidth = 260;
 
@@ -227,6 +168,11 @@ export default function AdminTender() {
   const [selectedLocation, setSelectedLocation] = useState("");
   const [formOpen, setFormOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [tenders, setTenders] = useState([]);
+  const [fetchLoading, setFetchLoading] = useState(true);
+  const [fetchError, setFetchError] = useState("");
+  const [documentDialogOpen, setDocumentDialogOpen] = useState(false);
+  const [selectedTender, setSelectedTender] = useState(null);
 
   const [formData, setFormData] = useState({
     tenderTitle: "",
@@ -250,12 +196,81 @@ export default function AdminTender() {
   const [errorMessage, setErrorMessage] = useState("");
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
+  // Fetch tenders from API
+  useEffect(() => {
+    const fetchTenders = async () => {
+      try {
+        setFetchLoading(true);
+        setFetchError("");
+
+        const token = localStorage.getItem("token");
+        if (!token) {
+          setFetchError("Please login first. No authentication token found.");
+          setFetchLoading(false);
+          return;
+        }
+
+        const response = await getFetch(
+          `${import.meta.env.VITE_API_BASE_URL}/tenders`
+        );
+
+        console.log("Tenders API Response:", response);
+
+        if (response && response.status === 200) {
+          console.log("Raw API Response Data:", response.data.data);
+
+          // Map the API response to match the expected format
+          const mappedTenders = response.data.data.map((tender) => {
+            console.log("Processing tender:", tender);
+
+            // Try different possible field names for tender file
+            const tenderFile = tender.tenderFile || tender.tender_file || tender.file || tender.document || tender.pdfFile || null;
+            console.log("Found tenderFile:", tenderFile);
+
+            return {
+              id: tender.id || tender.referenceNo || `TND-${Date.now()}`,
+              title: tender.tenderTitle || "Untitled Tender",
+              description: tender.description || "No description available",
+              status: "Published", // Default status
+              priority: "Medium", // Default priority
+              startDate: tender.startDate || new Date().toISOString().split('T')[0],
+              estimatedValue: tender.estimatedValues || "$0",
+              location: tender.location || "Not specified",
+              preBidMeeting: tender.preBidMeeting || new Date().toISOString(),
+              lastDateSubmission: tender.lastDateSubmission || new Date().toISOString(),
+              bidOpening: tender.bidOpenning || tender.bidOpening || new Date().toISOString(),
+              participants: Math.floor(Math.random() * 50) + 1, // Random participants for now
+              category: "Infrastructure", // Default category
+              tenderCard: tender.tenderCard || "Inactive",
+              tenderFile: tenderFile,
+              image: tender.image || "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400",
+            };
+          });
+
+          console.log("Mapped Tenders:", mappedTenders);
+          setTenders(mappedTenders);
+        } else {
+          console.error("Failed to fetch tenders:", response);
+          setFetchError("Failed to fetch tenders. Please try again.");
+          setTenders([]);
+        }
+      } catch (error) {
+        console.error("Error fetching tenders:", error);
+        setFetchError("Error fetching tenders. Please try again.");
+        setTenders([]);
+      } finally {
+        setFetchLoading(false);
+      }
+    };
+
+    fetchTenders();
+  }, []);
+
   const filteredTenders = useMemo(() => {
     let filtered = tenders.filter((tender) => {
       const matchesSearch =
         search === "" ||
         tender.title.toLowerCase().includes(search.toLowerCase()) ||
-        tender.id.toLowerCase().includes(search.toLowerCase()) ||
         tender.location.toLowerCase().includes(search.toLowerCase());
 
       const matchesStatus = selectedStatus === "" || tender.tenderCard === selectedStatus;
@@ -266,7 +281,7 @@ export default function AdminTender() {
       return matchesSearch && matchesStatus && matchesPriority && matchesCategory && matchesLocation;
     });
     return filtered;
-  }, [search, selectedStatus, selectedPriority, selectedCategory, selectedLocation]);
+  }, [tenders, search, selectedStatus, selectedPriority, selectedCategory, selectedLocation]);
 
   const handleCloseSnackbar = (event, reason) => {
     if (reason === "clickaway") {
@@ -353,7 +368,7 @@ export default function AdminTender() {
       formDataToSend.append("location", formData.location);
       formDataToSend.append("preBidMeeting", formData.preBidMeeting);
       formDataToSend.append("lastDateSubmission", formData.lastDateSubmission);
-      formDataToSend.append("bidOpening", formData.bidOpening);
+      formDataToSend.append("bidOpenning", formData.bidOpening);
       formDataToSend.append("corrigendum", formData.corrigendum);
       formDataToSend.append("tenderCard", formData.tenderCard);
 
@@ -377,7 +392,7 @@ export default function AdminTender() {
 
       console.log("API Response:", response);
 
-      if (response && response.status === 200) {
+      if (response && response.status === 201) {
         console.log("Success! Closing modal...");
         setSuccessMessage("Tender created successfully!");
         setFormOpen(false);
@@ -399,6 +414,9 @@ export default function AdminTender() {
           corrigendumFile: null,
           image: null,
         });
+
+        // Refresh the tenders list
+        window.location.reload();
       } else {
         console.log("Error response:", response);
         if (response && response.status === 401) {
@@ -417,6 +435,41 @@ export default function AdminTender() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleViewDocument = (tender) => {
+    setSelectedTender(tender);
+    setDocumentDialogOpen(true);
+  };
+
+  const handleCloseDocumentDialog = () => {
+    setDocumentDialogOpen(false);
+    setSelectedTender(null);
+  };
+
+  // Test function to add a sample tender with document for testing
+  const addTestTender = () => {
+    const testTender = {
+      id: "TEST-001",
+      title: "Test Tender with Document",
+      description: "This is a test tender to verify document viewing functionality",
+      status: "Published",
+      priority: "High",
+      startDate: "2024-01-15",
+      estimatedValue: "$1,000,000",
+      location: "Delhi",
+      preBidMeeting: "2024-01-20T10:00",
+      lastDateSubmission: "2024-02-15T17:00",
+      bidOpening: "2024-02-16T10:00",
+      participants: 15,
+      category: "Technology",
+      tenderCard: "Active",
+      tenderFile: "NDDB_1755844357952_0lw7wt.pdf", // Sample filename from your image
+      image: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400",
+    };
+
+    setTenders(prev => [testTender, ...prev]);
+    console.log("Added test tender:", testTender);
   };
 
   return (
@@ -617,6 +670,30 @@ export default function AdminTender() {
                     }}
                   >
                     Import
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    onClick={addTestTender}
+                    sx={{
+                      borderRadius: 3,
+                      px: 3,
+                      py: 1.5,
+                      borderWidth: 2,
+                      fontWeight: 600,
+                      background: (t) =>
+                        t.palette.mode === "dark"
+                          ? "rgba(255,255,255,0.05)"
+                          : "rgba(0,0,0,0.02)",
+                      "&:hover": {
+                        borderWidth: 2,
+                        background: (t) =>
+                          t.palette.mode === "dark"
+                            ? "rgba(255,255,255,0.1)"
+                            : "rgba(0,0,0,0.05)",
+                      },
+                    }}
+                  >
+                    Add Test Tender
                   </Button>
                   <Button
                     variant="contained"
@@ -878,8 +955,44 @@ export default function AdminTender() {
             </Box>
           </Grow>
 
+          {/* Loading State */}
+          {fetchLoading && (
+            <Box sx={{ width: "100%", mb: 3 }}>
+              <LinearProgress sx={{ borderRadius: 2, height: 6 }} />
+              <Typography variant="body2" sx={{ mt: 1, textAlign: "center", color: "text.secondary" }}>
+                Loading tenders...
+              </Typography>
+            </Box>
+          )}
+
+          {/* Error State */}
+          {fetchError && (
+            <Alert severity="error" sx={{ mb: 3 }}>
+              {fetchError}
+            </Alert>
+          )}
+
           {/* Tenders Cards List */}
-          <TenderCardsList filteredTenders={filteredTenders} />
+          {!fetchLoading && !fetchError && (
+            <TenderCardsList
+              filteredTenders={filteredTenders}
+              onViewDocument={handleViewDocument}
+            />
+          )}
+
+          {/* No Data State */}
+          {!fetchLoading && !fetchError && filteredTenders.length === 0 && (
+            <Box sx={{ textAlign: "center", py: 8 }}>
+              <Typography variant="h6" color="text.secondary" sx={{ mb: 2 }}>
+                No tenders found
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {search || selectedStatus || selectedPriority || selectedCategory || selectedLocation
+                  ? "Try adjusting your filters"
+                  : "Create your first tender to get started"}
+              </Typography>
+            </Box>
+          )}
         </Box>
       </Box>
 
@@ -892,6 +1005,13 @@ export default function AdminTender() {
         handleChange={handleChange}
         handleFileChange={handleFileChange}
         handleSubmit={handleSubmit}
+      />
+
+      {/* Document Viewer Dialog */}
+      <DocumentViewerDialog
+        open={documentDialogOpen}
+        onClose={handleCloseDocumentDialog}
+        tender={selectedTender}
       />
 
       {/* Snackbar for success/error messages */}
