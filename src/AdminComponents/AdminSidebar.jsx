@@ -46,7 +46,12 @@ const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
       path: "/AdminPublication",
     },
     { text: "Tender", icon: <SettingsIcon />, path: "/AdminTender" },
-    { text: "Logs", icon: <Diversity2Icon />, path: "/AdminLogs" },
+    { text: "Tender Logs", icon: <Diversity2Icon />, path: "/AdminLogs" },
+    {
+      text: "MPO & Animal Productivity Servies",
+      icon: <Diversity2Icon />,
+      path: "/AdminLogs",
+    },
   ];
 
   const sidebarContent = (

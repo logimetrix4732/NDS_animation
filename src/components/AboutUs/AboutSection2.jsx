@@ -4,7 +4,6 @@ import video from "../../Images/Videos/video.mp4";
 import DSC_4156 from "../../Images/HomeImgs/DSC_4156.jpg";
 import DSC_9821 from "../../Images/HomeImgs/DSC_9821.jpg";
 import checkMarkIcon from "../../Images/HomeImgs/checkMarkIcon.png";
-import { Link } from "react-router-dom";
 const AboutSection2 = () => {
   return (
     <div
