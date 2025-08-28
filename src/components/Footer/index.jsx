@@ -25,18 +25,11 @@ const Footer = () => {
                 </p>
                 <div className="th-social">
                   <a
-                    href="https://www.facebook.com/SuperiorAnimalGenetics"
+                    href="https://www.youtube.com/@nddbdairyservices6754"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className="fab fa-facebook-f" />
-                  </a>
-                  <a
-                    href="https://mobile.twitter.com/NDDBDairyServ"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="ri-twitter-x-fill" />
+                    <i className="fab fa-youtube" />
                   </a>
                   <a
                     href="https://www.linkedin.com/company/nddb-dairy-services/"
@@ -46,14 +39,22 @@ const Footer = () => {
                     <i className="fab fa-linkedin-in" />
                   </a>
                   <a
-                    href="https://www.youtube.com/@nddbdairyservices6754"
+                    href="https://mobile.twitter.com/NDDBDairyServ"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className="fab fa-youtube" />
+                    <i className="ri-twitter-x-fill" />
                   </a>
                   <a
-                    href="https://www.youtube.com/@nddbdairyservices6754"
+                    href="https://www.facebook.com/SuperiorAnimalGenetics"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-facebook-f" />
+                  </a>
+
+                  <a
+                    href="https://www.instagram.com/sag_superioranimalgenetics/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -73,8 +74,8 @@ const Footer = () => {
                   </div>
                   <div className="details">
                     <p>
-                      <a href="tel:+9170929224210" className="info-box_link">
-                        +91 7092922421
+                      <a href="tel:01149883000" className="info-box_link">
+                        011-49883000 / 49883088
                       </a>
                     </p>
                   </div>
@@ -126,7 +127,7 @@ const Footer = () => {
                 >
                   <li>
                     <Link
-                      to="/"
+                      to="/privacyPage"
                       style={{ color: "white", textDecoration: "none" }}
                     >
                       Privacy Policy
@@ -134,7 +135,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <Link
-                      to="/"
+                      to="/privacyPage"
                       style={{ color: "white", textDecoration: "none" }}
                     >
                       Return Policy
@@ -142,7 +143,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <Link
-                      to="/"
+                      to="/privacyPage"
                       style={{ color: "white", textDecoration: "none" }}
                     >
                       Terms &amp; Conditions

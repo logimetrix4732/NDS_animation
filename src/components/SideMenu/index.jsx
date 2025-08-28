@@ -73,20 +73,20 @@ const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
       <Box display="flex" gap={1.5} mb={3}>
         {[
           {
-            icon: FacebookIcon,
-            link: "https://www.facebook.com/SuperiorAnimalGenetics",
-          },
-          {
-            icon: XIcon,
-            link: "https://x.com/NDDBDairyServ",
+            icon: YouTubeIcon,
+            link: "https://www.youtube.com/@nddbdairyservices6754",
           },
           {
             icon: LinkedInIcon,
             link: "https://www.linkedin.com/company/yourcompany",
           },
           {
-            icon: YouTubeIcon,
-            link: "https://www.youtube.com/@nddbdairyservices6754",
+            icon: XIcon,
+            link: "https://x.com/NDDBDairyServ",
+          },
+          {
+            icon: FacebookIcon,
+            link: "https://www.facebook.com/SuperiorAnimalGenetics",
           },
           {
             icon: InstagramIcon,
@@ -133,7 +133,9 @@ const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
         <Box display="flex" alignItems="flex-start" mb={2}>
           <PhoneIcon sx={{ color: "#bd8f59", mr: 1 }} />
           <Box>
-            <Typography className="about-text">+91 7092922421</Typography>
+            <Typography className="about-text">
+              011 4988 3000 / 49883088
+            </Typography>
           </Box>
         </Box>
 

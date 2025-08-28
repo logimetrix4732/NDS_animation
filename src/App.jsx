@@ -26,6 +26,8 @@ import AdminTender from "./AdminComponents/AdminTender";
 import AdminCareer from "./AdminComponents/AdminCareer";
 import AdminPublication from "./AdminComponents/AdminPublication";
 import AdminLogs from "./AdminComponents/AdminLogs";
+import PrivacyPage from "./Pages/PrivacyPolicyPage";
+import DynamicData from "./AdminComponents/DynamicData";
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -72,6 +74,7 @@ const App = () => {
     "/AdminTender",
     "/AdminPublication",
     "/AdminLogs",
+    "/dynamicData",
   ];
   const isAdminRoute = adminRoutes.includes(location.pathname);
 
@@ -96,6 +99,8 @@ const App = () => {
         <Route path="/annualReport" element={<AnnualReport />} />
         <Route path="/HR" element={<HRCompliances />} />
         <Route path="/policies" element={<PoliciesPage />} />
+        <Route path="/privacyPage" element={<PrivacyPage />} />
+        <Route path="/dynamicData" element={<DynamicData />} />
 
         {/* Admin Routes - Protected */}
         <Route

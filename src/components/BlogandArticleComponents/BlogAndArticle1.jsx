@@ -2,7 +2,7 @@ import React from "react";
 import AnimatedText from "../AnimatedText";
 import { useMediaQuery, useTheme } from "@mui/material";
 import DrawerModal from "../DrawerModal";
-import AnimalNutrition from "../../Images/OurExpertiesImg/AnimalNutrition.JPG";
+import AnimalNutrition from "../../Images/OurExpertiesImg/animalNutrition.png";
 import checkMarkIcon from "../../Images/HomeImgs/checkMarkIcon.png";
 
 const BlogAndArticle1 = () => {

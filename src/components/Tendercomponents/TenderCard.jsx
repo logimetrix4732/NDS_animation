@@ -146,10 +146,21 @@ const TenderCard = ({
                     Tender Details
                   </Typography>
                   <Box
-                    sx={{ display: "flex", flexDirection: "column", gap: 1, border: "1px solid red", minWidth: "300px" }}
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 1,
+                      border: "1px solid red",
+                      minWidth: "300px",
+                    }}
                   >
                     <Box
-                      sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        width: "100%",
+                      }}
                     >
                       <Typography variant="body2" color="text.secondary">
                         Start Date:
@@ -159,7 +170,12 @@ const TenderCard = ({
                       </Typography>
                     </Box>
                     <Box
-                      sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        width: "100%",
+                      }}
                     >
                       <Typography variant="body2" color="text.secondary">
                         Estimated Value:
@@ -169,7 +185,12 @@ const TenderCard = ({
                       </Typography>
                     </Box>
                     <Box
-                      sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        width: "100%",
+                      }}
                     >
                       <Typography variant="body2" color="text.secondary">
                         Location:

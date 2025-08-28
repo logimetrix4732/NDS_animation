@@ -288,7 +288,7 @@ const PublicationsTable = ({
                           color="primary"
                           onClick={() =>
                             window.open(
-                              `${import.meta.env.VITE_API_BASE_URL}/${
+                              `${import.meta.env.VITE_API_BASE_URL}/files${
                                 pub.pdfFile
                               }`,
                               "_blank"

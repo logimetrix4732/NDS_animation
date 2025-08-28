@@ -93,9 +93,6 @@ const AboutSection7 = () => {
           <div className="col-xl-5">
             <div className="ps-xxl-2">
               <div className="title-area about-3-titlebox mb-20 pe-xxl-1 me-xxl-1">
-                <span className="sub-title style1 text-anime-style-2 wow fadeInLeft">
-                  Importance and Impact of Semen Stations
-                </span>
                 <AnimatedText
                   text="Semen Stations"
                   tag="h2"

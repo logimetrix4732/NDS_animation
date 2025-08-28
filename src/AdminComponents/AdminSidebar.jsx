@@ -48,9 +48,9 @@ const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
     { text: "Tender", icon: <SettingsIcon />, path: "/AdminTender" },
     { text: "Tender Logs", icon: <Diversity2Icon />, path: "/AdminLogs" },
     {
-      text: "MPO & Animal Productivity Servies",
+      text: "Dynamic Data",
       icon: <Diversity2Icon />,
-      path: "/AdminLogs",
+      path: "/dynamicData",
     },
   ];
 

@@ -37,7 +37,7 @@ export default function HRCompliances() {
               item.thumbnail !== "null" &&
               item.thumbnail !== "" &&
               item.thumbnail !== null
-                ? `${import.meta.env.VITE_API_BASE_URL}/${item.thumbnail}`
+                ? `${import.meta.env.VITE_API_BASE_URL}/files/${item.thumbnail}`
                 : "https://images.pexels.com/photos/3184302/pexels-photo-3184302.jpeg";
 
             console.log("Final image URL:", imageUrl);

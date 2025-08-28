@@ -224,7 +224,13 @@ export default function AdminTender() {
             console.log("Processing tender:", tender);
 
             // Try different possible field names for tender file
-            const tenderFile = tender.tenderFile || tender.tender_file || tender.file || tender.document || tender.pdfFile || null;
+            const tenderFile =
+              tender.tenderFile ||
+              tender.tender_file ||
+              tender.file ||
+              tender.document ||
+              tender.pdfFile ||
+              null;
             console.log("Found tenderFile:", tenderFile);
 
             return {
@@ -233,17 +239,24 @@ export default function AdminTender() {
               description: tender.description || "No description available",
               status: "Published", // Default status
               priority: "Medium", // Default priority
-              startDate: tender.startDate || new Date().toISOString().split('T')[0],
+              startDate:
+                tender.startDate || new Date().toISOString().split("T")[0],
               estimatedValue: tender.estimatedValues || "$0",
               location: tender.location || "Not specified",
               preBidMeeting: tender.preBidMeeting || new Date().toISOString(),
-              lastDateSubmission: tender.lastDateSubmission || new Date().toISOString(),
-              bidOpening: tender.bidOpenning || tender.bidOpening || new Date().toISOString(),
+              lastDateSubmission:
+                tender.lastDateSubmission || new Date().toISOString(),
+              bidOpening:
+                tender.bidOpenning ||
+                tender.bidOpening ||
+                new Date().toISOString(),
               participants: Math.floor(Math.random() * 50) + 1, // Random participants for now
               category: "Infrastructure", // Default category
               tenderCard: tender.tenderCard || "Inactive",
               tenderFile: tenderFile,
-              image: tender.image || "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400",
+              image:
+                tender.image ||
+                "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400",
             };
           });
 
@@ -273,15 +286,32 @@ export default function AdminTender() {
         tender.title.toLowerCase().includes(search.toLowerCase()) ||
         tender.location.toLowerCase().includes(search.toLowerCase());
 
-      const matchesStatus = selectedStatus === "" || tender.tenderCard === selectedStatus;
-      const matchesPriority = selectedPriority === "" || tender.priority === selectedPriority;
-      const matchesCategory = selectedCategory === "" || tender.category === selectedCategory;
-      const matchesLocation = selectedLocation === "" || tender.location === selectedLocation;
+      const matchesStatus =
+        selectedStatus === "" || tender.tenderCard === selectedStatus;
+      const matchesPriority =
+        selectedPriority === "" || tender.priority === selectedPriority;
+      const matchesCategory =
+        selectedCategory === "" || tender.category === selectedCategory;
+      const matchesLocation =
+        selectedLocation === "" || tender.location === selectedLocation;
 
-      return matchesSearch && matchesStatus && matchesPriority && matchesCategory && matchesLocation;
+      return (
+        matchesSearch &&
+        matchesStatus &&
+        matchesPriority &&
+        matchesCategory &&
+        matchesLocation
+      );
     });
     return filtered;
-  }, [tenders, search, selectedStatus, selectedPriority, selectedCategory, selectedLocation]);
+  }, [
+    tenders,
+    search,
+    selectedStatus,
+    selectedPriority,
+    selectedCategory,
+    selectedLocation,
+  ]);
 
   const handleCloseSnackbar = (event, reason) => {
     if (reason === "clickaway") {
@@ -445,31 +475,6 @@ export default function AdminTender() {
   const handleCloseDocumentDialog = () => {
     setDocumentDialogOpen(false);
     setSelectedTender(null);
-  };
-
-  // Test function to add a sample tender with document for testing
-  const addTestTender = () => {
-    const testTender = {
-      id: "TEST-001",
-      title: "Test Tender with Document",
-      description: "This is a test tender to verify document viewing functionality",
-      status: "Published",
-      priority: "High",
-      startDate: "2024-01-15",
-      estimatedValue: "$1,000,000",
-      location: "Delhi",
-      preBidMeeting: "2024-01-20T10:00",
-      lastDateSubmission: "2024-02-15T17:00",
-      bidOpening: "2024-02-16T10:00",
-      participants: 15,
-      category: "Technology",
-      tenderCard: "Active",
-      tenderFile: "NDDB_1755844357952_0lw7wt.pdf", // Sample filename from your image
-      image: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400",
-    };
-
-    setTenders(prev => [testTender, ...prev]);
-    console.log("Added test tender:", testTender);
   };
 
   return (
@@ -671,30 +676,7 @@ export default function AdminTender() {
                   >
                     Import
                   </Button>
-                  <Button
-                    variant="outlined"
-                    onClick={addTestTender}
-                    sx={{
-                      borderRadius: 3,
-                      px: 3,
-                      py: 1.5,
-                      borderWidth: 2,
-                      fontWeight: 600,
-                      background: (t) =>
-                        t.palette.mode === "dark"
-                          ? "rgba(255,255,255,0.05)"
-                          : "rgba(0,0,0,0.02)",
-                      "&:hover": {
-                        borderWidth: 2,
-                        background: (t) =>
-                          t.palette.mode === "dark"
-                            ? "rgba(255,255,255,0.1)"
-                            : "rgba(0,0,0,0.05)",
-                      },
-                    }}
-                  >
-                    Add Test Tender
-                  </Button>
+
                   <Button
                     variant="contained"
                     startIcon={<AddIcon />}
@@ -740,21 +722,31 @@ export default function AdminTender() {
                 sx={{
                   p: 3,
                   borderRadius: 2,
-                  background: (t) => t.palette.mode === "dark"
-                    ? "linear-gradient(135deg, #1e293b 0%, #334155 100%)"
-                    : "#ffffff",
-                  border: (t) => t.palette.mode === "dark"
-                    ? "1px solid rgba(255,255,255,0.1)"
-                    : "1px solid #e5e7eb",
-                  boxShadow: (t) => t.palette.mode === "dark"
-                    ? "0 4px 20px rgba(0, 0, 0, 0.3)"
-                    : "0 1px 3px rgba(0, 0, 0, 0.1)",
+                  background: (t) =>
+                    t.palette.mode === "dark"
+                      ? "linear-gradient(135deg, #1e293b 0%, #334155 100%)"
+                      : "#ffffff",
+                  border: (t) =>
+                    t.palette.mode === "dark"
+                      ? "1px solid rgba(255,255,255,0.1)"
+                      : "1px solid #e5e7eb",
+                  boxShadow: (t) =>
+                    t.palette.mode === "dark"
+                      ? "0 4px 20px rgba(0, 0, 0, 0.3)"
+                      : "0 1px 3px rgba(0, 0, 0, 0.1)",
                 }}
               >
                 {/* Header */}
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 3 }}>
-                  <FilterListIcon sx={{ color: "primary.main", fontSize: 20 }} />
-                  <Typography variant="h6" sx={{ fontWeight: 600, color: "primary.main" }}>
+                <Box
+                  sx={{ display: "flex", alignItems: "center", gap: 1, mb: 3 }}
+                >
+                  <FilterListIcon
+                    sx={{ color: "primary.main", fontSize: 20 }}
+                  />
+                  <Typography
+                    variant="h6"
+                    sx={{ fontWeight: 600, color: "primary.main" }}
+                  >
                     Filter & Search
                   </Typography>
                 </Box>
@@ -770,19 +762,30 @@ export default function AdminTender() {
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
                       InputProps={{
-                        startAdornment: <SearchIcon sx={{ color: "#9ca3af", mr: 1, fontSize: 20 }} />,
+                        startAdornment: (
+                          <SearchIcon
+                            sx={{ color: "#9ca3af", mr: 1, fontSize: 20 }}
+                          />
+                        ),
                       }}
                       sx={{
                         "& .MuiOutlinedInput-root": {
                           borderRadius: 1.5,
-                          backgroundColor: (t) => t.palette.mode === "dark" ? "rgba(255,255,255,0.05)" : "#f9fafb",
-                          border: (t) => t.palette.mode === "dark" ? "1px solid rgba(255,255,255,0.1)" : "1px solid #e5e7eb",
+                          backgroundColor: (t) =>
+                            t.palette.mode === "dark"
+                              ? "rgba(255,255,255,0.05)"
+                              : "#f9fafb",
+                          border: (t) =>
+                            t.palette.mode === "dark"
+                              ? "1px solid rgba(255,255,255,0.1)"
+                              : "1px solid #e5e7eb",
                           "&:hover": {
                             borderColor: "primary.main",
                           },
                           "&.Mui-focused": {
                             borderColor: "primary.main",
-                            boxShadow: (t) => `0 0 0 2px ${t.palette.primary.main}20`,
+                            boxShadow: (t) =>
+                              `0 0 0 2px ${t.palette.primary.main}20`,
                           },
                         },
                       }}
@@ -798,9 +801,15 @@ export default function AdminTender() {
                         displayEmpty
                         sx={{
                           borderRadius: 1.5,
-                          backgroundColor: (t) => t.palette.mode === "dark" ? "rgba(255,255,255,0.05)" : "#f9fafb",
+                          backgroundColor: (t) =>
+                            t.palette.mode === "dark"
+                              ? "rgba(255,255,255,0.05)"
+                              : "#f9fafb",
                           "& .MuiOutlinedInput-notchedOutline": {
-                            borderColor: (t) => t.palette.mode === "dark" ? "rgba(255,255,255,0.1)" : "#e5e7eb",
+                            borderColor: (t) =>
+                              t.palette.mode === "dark"
+                                ? "rgba(255,255,255,0.1)"
+                                : "#e5e7eb",
                           },
                           "&:hover .MuiOutlinedInput-notchedOutline": {
                             borderColor: "primary.main",
@@ -811,7 +820,9 @@ export default function AdminTender() {
                         }}
                       >
                         <MenuItem value="">All Categories</MenuItem>
-                        <MenuItem value="Infrastructure">Infrastructure</MenuItem>
+                        <MenuItem value="Infrastructure">
+                          Infrastructure
+                        </MenuItem>
                         <MenuItem value="Construction">Construction</MenuItem>
                         <MenuItem value="Technology">Technology</MenuItem>
                       </Select>
@@ -827,9 +838,15 @@ export default function AdminTender() {
                         displayEmpty
                         sx={{
                           borderRadius: 1.5,
-                          backgroundColor: (t) => t.palette.mode === "dark" ? "rgba(255,255,255,0.05)" : "#f9fafb",
+                          backgroundColor: (t) =>
+                            t.palette.mode === "dark"
+                              ? "rgba(255,255,255,0.05)"
+                              : "#f9fafb",
                           "& .MuiOutlinedInput-notchedOutline": {
-                            borderColor: (t) => t.palette.mode === "dark" ? "rgba(255,255,255,0.1)" : "#e5e7eb",
+                            borderColor: (t) =>
+                              t.palette.mode === "dark"
+                                ? "rgba(255,255,255,0.1)"
+                                : "#e5e7eb",
                           },
                           "&:hover .MuiOutlinedInput-notchedOutline": {
                             borderColor: "primary.main",
@@ -855,9 +872,15 @@ export default function AdminTender() {
                         displayEmpty
                         sx={{
                           borderRadius: 1.5,
-                          backgroundColor: (t) => t.palette.mode === "dark" ? "rgba(255,255,255,0.05)" : "#f9fafb",
+                          backgroundColor: (t) =>
+                            t.palette.mode === "dark"
+                              ? "rgba(255,255,255,0.05)"
+                              : "#f9fafb",
                           "& .MuiOutlinedInput-notchedOutline": {
-                            borderColor: (t) => t.palette.mode === "dark" ? "rgba(255,255,255,0.1)" : "#e5e7eb",
+                            borderColor: (t) =>
+                              t.palette.mode === "dark"
+                                ? "rgba(255,255,255,0.1)"
+                                : "#e5e7eb",
                           },
                           "&:hover .MuiOutlinedInput-notchedOutline": {
                             borderColor: "primary.main",
@@ -884,9 +907,15 @@ export default function AdminTender() {
                         displayEmpty
                         sx={{
                           borderRadius: 1.5,
-                          backgroundColor: (t) => t.palette.mode === "dark" ? "rgba(255,255,255,0.05)" : "#f9fafb",
+                          backgroundColor: (t) =>
+                            t.palette.mode === "dark"
+                              ? "rgba(255,255,255,0.05)"
+                              : "#f9fafb",
                           "& .MuiOutlinedInput-notchedOutline": {
-                            borderColor: (t) => t.palette.mode === "dark" ? "rgba(255,255,255,0.1)" : "#e5e7eb",
+                            borderColor: (t) =>
+                              t.palette.mode === "dark"
+                                ? "rgba(255,255,255,0.1)"
+                                : "#e5e7eb",
                           },
                           "&:hover .MuiOutlinedInput-notchedOutline": {
                             borderColor: "primary.main",
@@ -907,8 +936,18 @@ export default function AdminTender() {
 
                   {/* View Mode Buttons */}
                   <Grid item xs={12} md={1.5}>
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 1, justifyContent: "flex-end" }}>
-                      <Typography variant="body2" sx={{ color: "#6b7280", fontWeight: 500, mr: 1 }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
+                        justifyContent: "flex-end",
+                      }}
+                    >
+                      <Typography
+                        variant="body2"
+                        sx={{ color: "#6b7280", fontWeight: 500, mr: 1 }}
+                      >
                         View Mode:
                       </Typography>
                       <Button
@@ -958,10 +997,123 @@ export default function AdminTender() {
           {/* Loading State */}
           {fetchLoading && (
             <Box sx={{ width: "100%", mb: 3 }}>
-              <LinearProgress sx={{ borderRadius: 2, height: 6 }} />
-              <Typography variant="body2" sx={{ mt: 1, textAlign: "center", color: "text.secondary" }}>
-                Loading tenders...
-              </Typography>
+              <Paper
+                sx={{
+                  p: 4,
+                  borderRadius: 3,
+                  background: (t) =>
+                    t.palette.mode === "dark"
+                      ? "linear-gradient(135deg, #1e293b 0%, #334155 100%)"
+                      : "#ffffff",
+                  border: (t) =>
+                    t.palette.mode === "dark"
+                      ? "1px solid rgba(255,255,255,0.1)"
+                      : "1px solid #e5e7eb",
+                  boxShadow: (t) =>
+                    t.palette.mode === "dark"
+                      ? "0 4px 20px rgba(0, 0, 0, 0.3)"
+                      : "0 1px 3px rgba(0, 0, 0, 0.1)",
+                }}
+              >
+                <Box sx={{ textAlign: "center" }}>
+                  {/* Animated Loading Icon */}
+                  <Box
+                    sx={{
+                      width: 80,
+                      height: 80,
+                      margin: "0 auto 2rem",
+                      borderRadius: "50%",
+                      background:
+                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      position: "relative",
+                      "&::before": {
+                        content: '""',
+                        position: "absolute",
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: "50%",
+                        background:
+                          "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                        animation: "pulse 2s infinite",
+                        opacity: 0.3,
+                      },
+                      "@keyframes pulse": {
+                        "0%": {
+                          transform: "scale(1)",
+                          opacity: 0.3,
+                        },
+                        "50%": {
+                          transform: "scale(1.2)",
+                          opacity: 0.1,
+                        },
+                        "100%": {
+                          transform: "scale(1)",
+                          opacity: 0.3,
+                        },
+                      },
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: "50%",
+                        border: "3px solid transparent",
+                        borderTop: "3px solid white",
+                        animation: "spin 1s linear infinite",
+                        "@keyframes spin": {
+                          "0%": { transform: "rotate(0deg)" },
+                          "100%": { transform: "rotate(360deg)" },
+                        },
+                      }}
+                    />
+                  </Box>
+
+                  {/* Loading Text */}
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontWeight: 600,
+                      mb: 1,
+                      background:
+                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                      backgroundClip: "text",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                  >
+                    Loading Tenders
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{ color: "text.secondary", mb: 3 }}
+                  >
+                    Please wait while we fetch your tender data...
+                  </Typography>
+
+                  {/* Progress Bar */}
+                  <Box sx={{ width: "100%", maxWidth: 400, mx: "auto" }}>
+                    <LinearProgress
+                      sx={{
+                        height: 8,
+                        borderRadius: 4,
+                        backgroundColor: (t) =>
+                          t.palette.mode === "dark"
+                            ? "rgba(255,255,255,0.1)"
+                            : "rgba(0,0,0,0.1)",
+                        "& .MuiLinearProgress-bar": {
+                          borderRadius: 4,
+                          background:
+                            "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                        },
+                      }}
+                    />
+                  </Box>
+                </Box>
+              </Paper>
             </Box>
           )}
 
@@ -983,14 +1135,161 @@ export default function AdminTender() {
           {/* No Data State */}
           {!fetchLoading && !fetchError && filteredTenders.length === 0 && (
             <Box sx={{ textAlign: "center", py: 8 }}>
-              <Typography variant="h6" color="text.secondary" sx={{ mb: 2 }}>
-                No tenders found
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {search || selectedStatus || selectedPriority || selectedCategory || selectedLocation
-                  ? "Try adjusting your filters"
-                  : "Create your first tender to get started"}
-              </Typography>
+              <Paper
+                sx={{
+                  p: 6,
+                  borderRadius: 3,
+                  maxWidth: 600,
+                  mx: "auto",
+                  background: (t) =>
+                    t.palette.mode === "dark"
+                      ? "linear-gradient(135deg, #1e293b 0%, #334155 100%)"
+                      : "#ffffff",
+                  border: (t) =>
+                    t.palette.mode === "dark"
+                      ? "1px solid rgba(255,255,255,0.1)"
+                      : "1px solid #e5e7eb",
+                  boxShadow: (t) =>
+                    t.palette.mode === "dark"
+                      ? "0 4px 20px rgba(0, 0, 0, 0.3)"
+                      : "0 1px 3px rgba(0, 0, 0, 0.1)",
+                }}
+              >
+                {/* Empty State Icon */}
+                <Box
+                  sx={{
+                    width: 120,
+                    height: 120,
+                    margin: "0 auto 2rem",
+                    borderRadius: "50%",
+                    background: (t) =>
+                      t.palette.mode === "dark"
+                        ? "linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)"
+                        : "linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: (t) =>
+                      t.palette.mode === "dark"
+                        ? "2px dashed rgba(102, 126, 234, 0.3)"
+                        : "2px dashed rgba(102, 126, 234, 0.2)",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      fontSize: 48,
+                      color: (t) =>
+                        t.palette.mode === "dark"
+                          ? "rgba(102, 126, 234, 0.6)"
+                          : "rgba(102, 126, 234, 0.4)",
+                      fontWeight: 300,
+                    }}
+                  >
+                    📋
+                  </Box>
+                </Box>
+
+                {/* Main Message */}
+                <Typography
+                  variant="h5"
+                  sx={{
+                    fontWeight: 700,
+                    mb: 2,
+                    background:
+                      "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                    backgroundClip: "text",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  {search ||
+                  selectedStatus ||
+                  selectedPriority ||
+                  selectedCategory ||
+                  selectedLocation
+                    ? "No matching tenders found"
+                    : "No tenders available yet"}
+                </Typography>
+
+                {/* Subtitle */}
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: "text.secondary",
+                    mb: 4,
+                    maxWidth: 400,
+                    mx: "auto",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {search ||
+                  selectedStatus ||
+                  selectedPriority ||
+                  selectedCategory ||
+                  selectedLocation
+                    ? "Try adjusting your search criteria or filters to find what you're looking for."
+                    : "Get started by creating your first tender. It only takes a few minutes to set up."}
+                </Typography>
+
+                {/* Action Buttons */}
+                <Stack
+                  direction={{ xs: "column", sm: "row" }}
+                  spacing={2}
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  {(search ||
+                    selectedStatus ||
+                    selectedPriority ||
+                    selectedCategory ||
+                    selectedLocation) && (
+                    <Button
+                      variant="outlined"
+                      onClick={() => {
+                        setSearch("");
+                        setSelectedStatus("");
+                        setSelectedPriority("");
+                        setSelectedCategory("");
+                        setSelectedLocation("");
+                      }}
+                      startIcon={<ClearIcon />}
+                      sx={{
+                        borderRadius: 2,
+                        px: 3,
+                        py: 1.5,
+                        borderWidth: 2,
+                        fontWeight: 600,
+                        "&:hover": {
+                          borderWidth: 2,
+                        },
+                      }}
+                    >
+                      Clear All Filters
+                    </Button>
+                  )}
+                  <Button
+                    variant="contained"
+                    onClick={() => setFormOpen(true)}
+                    startIcon={<AddIcon />}
+                    sx={{
+                      borderRadius: 2,
+                      px: 3,
+                      py: 1.5,
+                      fontWeight: 600,
+                      background:
+                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                      boxShadow: "0 8px 25px rgba(102, 126, 234, 0.3)",
+                      "&:hover": {
+                        background:
+                          "linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%)",
+                        boxShadow: "0 12px 35px rgba(102, 126, 234, 0.4)",
+                      },
+                    }}
+                  >
+                    Create New Tender
+                  </Button>
+                </Stack>
+              </Paper>
             </Box>
           )}
         </Box>

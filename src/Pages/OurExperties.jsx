@@ -46,11 +46,8 @@ const OurExperties = () => {
         width="60%"
       />
       <CommonBanner
-        title="Our Areas of Expertise"
-        breadcrumbs={[
-          { label: "Home", path: "/" },
-          { label: "Our Areas of Expertise" },
-        ]}
+        title="Our Expertise"
+        breadcrumbs={[{ label: "Home", path: "/" }, { label: "Our Expertise" }]}
       />
       <AboutSection12 />
       <AboutSection3 />

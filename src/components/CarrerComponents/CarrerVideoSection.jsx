@@ -1,64 +1,58 @@
 import React from "react";
-import Footage from "../../Images/Videos/carrerVideo.mp4";
 import { Box, Typography } from "@mui/material";
 import backgroundImage from "../../Images/careerintrobanner.png";
+import DSC_2347 from "../../Images/CarrerImg/DSC_2347.jpg";
+
 const CarrerVideoSection = () => {
   return (
     <>
-      <div
-        className="hero-1"
-        id="hero"
-        style={{ position: "relative", height: "100vh", overflow: "hidden" }}
+      {/* Hero Section with Image */}
+      <Box
+        sx={{
+          position: "relative",
+          height: { xs: "60vh", md: "92vh" },
+          width: "100%",
+          overflow: "hidden",
+          backgroundImage: `url(${DSC_2347})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          display: "flex",
+          alignItems: "flex-end",
+          justifyContent: "flex-end",
+        }}
       >
-        <video
-          src={Footage}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="none"
-          style={{
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            top: 0,
-            left: 0,
-            zIndex: -1,
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "190px",
-            right: "0",
-            display: "flex",
-            justifyContent: "flex-end",
-            width: "100%",
-            animation: "fadeInRight 1s ease-out",
+        {/* Overlay Text */}
+        <Box
+          sx={{
+            mb: { xs: 4, md: 12 },
+            mr: { xs: 0, md: 0 },
+            background:
+              "linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.3))",
+            p: { xs: 2, md: "16px 28px" },
+            borderRadius: "10px 0px 0px 10px",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+            backdropFilter: "blur(4px)",
+            textAlign: "right",
           }}
         >
-          <h4
-            style={{
+          <Typography
+            variant="h5"
+            sx={{
               color: "#fff",
-              fontSize: "1.8rem",
-              background:
-                "linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.3))",
-              padding: "16px 28px",
-              borderRadius: "10px 0px 0px 10px",
-              width: "fit-content",
-              textAlign: "right",
-              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)",
-              backdropFilter: "blur(4px)",
+              fontSize: { xs: "1.2rem", md: "1.8rem" },
+              fontWeight: 600,
+              lineHeight: 1.4,
             }}
           >
             Build a Career That <br /> Creates Real Impact
-          </h4>
-        </div>
-      </div>
+          </Typography>
+        </Box>
+      </Box>
+
+      {/* Second Section */}
       <Box
         sx={{
-          height: "472.5px",
+          height: { xs: "auto", md: "472.5px" },
           position: "relative",
           display: "flex",
           alignItems: "center",
@@ -66,11 +60,13 @@ const CarrerVideoSection = () => {
           textAlign: "center",
           overflow: "hidden",
           width: "100%",
-          height: "472.5px",
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",
+          backgroundPosition: "center",
+          py: { xs: 6, md: 0 },
         }}
       >
+        {/* Dark Overlay */}
         <Box
           sx={{
             position: "absolute",
@@ -82,6 +78,7 @@ const CarrerVideoSection = () => {
             zIndex: 1,
           }}
         />
+        {/* Content */}
         <Box sx={{ zIndex: 2, maxWidth: "800px", px: 2 }}>
           <Typography variant="h5" color="white" fontWeight={600}>
             <strong> People at the Core of Our Purpose</strong> <br /> At NDDB

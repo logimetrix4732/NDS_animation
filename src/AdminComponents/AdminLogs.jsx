@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import {
   ThemeProvider,
   createTheme,
@@ -9,7 +9,6 @@ import {
   Toolbar,
   Typography,
   IconButton,
-  Drawer,
   Grid,
   Card,
   CardContent,
@@ -19,17 +18,12 @@ import {
   Avatar,
   useMediaQuery,
   Tooltip,
-  LinearProgress,
   Paper,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
   Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
   Table,
   TableBody,
   TableCell,
@@ -37,12 +31,14 @@ import {
   TableHead,
   TableRow,
   TablePagination,
-  Badge,
-  Divider,
   Alert,
   Switch,
   FormControlLabel,
   Checkbox,
+  CircularProgress,
+  Badge,
+  Divider,
+  InputAdornment,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
@@ -50,9 +46,6 @@ import {
   LightMode,
   DarkMode,
   Notifications,
-  CheckCircle,
-  ArrowUpward,
-  ArrowDownward,
   FilterList,
   Download,
   Refresh,
@@ -67,22 +60,16 @@ import {
   Computer,
   Security,
   Upload,
+  Add,
+  Remove,
+  Email,
+  AccessTime,
+  TrendingUp,
+  TrendingDown,
 } from "@mui/icons-material";
-import { DataGrid } from "@mui/x-data-grid";
 import nds_logo from "../assets/img/nds_logo.png";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip as ReTooltip,
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  Legend,
-} from "recharts";
 import AdminSidebar from "../AdminComponents/AdminSidebar";
+import { getFetch } from "../Api/Api";
 
 // --------- THEME ---------
 const getDesignTokens = (mode) => ({
@@ -107,61 +94,6 @@ const getDesignTokens = (mode) => ({
   },
 });
 
-// --------- MOCK LOGS DATA ---------
-const generateLogsData = () => {
-  const actions = [
-    "LOGIN",
-    "LOGOUT",
-    "CREATE",
-    "UPDATE",
-    "DELETE",
-    "VIEW",
-    "DOWNLOAD",
-    "UPLOAD",
-  ];
-  const statuses = ["SUCCESS", "ERROR", "WARNING", "INFO"];
-  const users = [
-    "admin@nddb.com",
-    "user1@nddb.com",
-    "manager@nddb.com",
-    "analyst@nddb.com",
-  ];
-  const modules = [
-    "User Management",
-    "Reports",
-    "Dashboard",
-    "Settings",
-    "Data Export",
-    "Analytics",
-  ];
-  const ipAddresses = [
-    "192.168.1.100",
-    "10.0.0.50",
-    "172.16.0.25",
-    "203.0.113.10",
-  ];
-
-  return Array.from({ length: 150 }, (_, i) => ({
-    id: i + 1,
-    timestamp: new Date(
-      Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000
-    ).toISOString(),
-    action: actions[Math.floor(Math.random() * actions.length)],
-    status: statuses[Math.floor(Math.random() * statuses.length)],
-    user: users[Math.floor(Math.random() * users.length)],
-    module: modules[Math.floor(Math.random() * modules.length)],
-    ipAddress: ipAddresses[Math.floor(Math.random() * ipAddresses.length)],
-    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-    sessionId: `sess_${Math.random().toString(36).substr(2, 9)}`,
-    details: `Action performed on ${
-      modules[Math.floor(Math.random() * modules.length)]
-    } module`,
-    duration: Math.floor(Math.random() * 5000),
-  }));
-};
-
-const logsData = generateLogsData();
-
 // --------- LAYOUT ---------
 const drawerWidth = 260;
 
@@ -169,101 +101,119 @@ export default function AdminLogs() {
   const prefersDark = useMediaQuery("(prefers-color-scheme: dark)");
   const [mode, setMode] = useState(prefersDark ? "dark" : "light");
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Data states
+  const [logs, setLogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  // Pagination states
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [total, setTotal] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+
+  // Filter states
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
-  const [actionFilter, setActionFilter] = useState("ALL");
-  const [moduleFilter, setModuleFilter] = useState("ALL");
+  const [emailFilter, setEmailFilter] = useState("");
+  const [tenderIdFilter, setTenderIdFilter] = useState("");
   const [dateRange, setDateRange] = useState({
     startDate: "",
     endDate: "",
   });
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(25);
   const [showFilters, setShowFilters] = useState(false);
-  const [realTimeMode, setRealTimeMode] = useState(false);
   const [selectedLogs, setSelectedLogs] = useState([]);
 
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
-  // Filter logs based on all criteria
-  const filteredLogs = useMemo(() => {
-    let filtered = logsData.filter((log) => {
-      const matchesSearch =
-        search === "" ||
-        log.user.toLowerCase().includes(search.toLowerCase()) ||
-        log.action.toLowerCase().includes(search.toLowerCase()) ||
-        log.module.toLowerCase().includes(search.toLowerCase()) ||
-        log.ipAddress.includes(search) ||
-        log.details.toLowerCase().includes(search.toLowerCase());
+  // Fetch tender logs from API
+  const fetchTenderLogs = async () => {
+    try {
+      setLoading(true);
+      setError("");
 
-      const matchesStatus =
-        statusFilter === "ALL" || log.status === statusFilter;
-      const matchesAction =
-        actionFilter === "ALL" || log.action === actionFilter;
-      const matchesModule =
-        moduleFilter === "ALL" || log.module === moduleFilter;
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setError("Please login first. No authentication token found.");
+        setLoading(false);
+        return;
+      }
 
-      const matchesDate =
-        !dateRange.startDate ||
-        !dateRange.endDate ||
-        (new Date(log.timestamp) >= new Date(dateRange.startDate) &&
-          new Date(log.timestamp) <= new Date(dateRange.endDate));
+      // Build query parameters
+      const params = new URLSearchParams({
+        page: page + 1, // API uses 1-based pagination
+        limit: rowsPerPage,
+      });
 
-      return (
-        matchesSearch &&
-        matchesStatus &&
-        matchesAction &&
-        matchesModule &&
-        matchesDate
+      if (emailFilter) params.append("email", emailFilter);
+      if (statusFilter !== "ALL") params.append("status", statusFilter);
+      if (tenderIdFilter) params.append("tenderId", tenderIdFilter);
+      if (dateRange.startDate) params.append("startDate", dateRange.startDate);
+      if (dateRange.endDate) params.append("endDate", dateRange.endDate);
+
+      const response = await getFetch(
+        `${import.meta.env.VITE_API_BASE_URL}/tender-logs?${params.toString()}`
       );
-    });
 
-    // Sort by timestamp (newest first)
-    return filtered.sort(
-      (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
-    );
-  }, [search, statusFilter, actionFilter, moduleFilter, dateRange]);
+      console.log("Tender Logs API Response:", response);
 
-  // Get unique values for filters
-  const uniqueStatuses = [...new Set(logsData.map((log) => log.status))];
-  const uniqueActions = [...new Set(logsData.map((log) => log.action))];
-  const uniqueModules = [...new Set(logsData.map((log) => log.module))];
+      if (response && response.status === 200) {
+        const data = response.data.data;
+        setLogs(data.logs || []);
+        setTotal(data.total || 0);
+        setTotalPages(data.totalPages || 0);
+      } else {
+        setError("Failed to fetch tender logs");
+      }
+    } catch (err) {
+      console.error("Error fetching tender logs:", err);
+      setError("Error fetching tender logs. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fetch logs on component mount and when filters change
+  useEffect(() => {
+    fetchTenderLogs();
+  }, [
+    page,
+    rowsPerPage,
+    emailFilter,
+    statusFilter,
+    tenderIdFilter,
+    dateRange.startDate,
+    dateRange.endDate,
+  ]);
 
   // Get status color
   const getStatusColor = (status) => {
     switch (status) {
-      case "SUCCESS":
+      case "CREATE":
         return "success";
-      case "ERROR":
-        return "error";
-      case "WARNING":
-        return "warning";
-      case "INFO":
+      case "UPDATE":
         return "info";
+      case "DELETE":
+        return "error";
+      case "VIEW":
+        return "warning";
       default:
         return "default";
     }
   };
 
-  // Get action icon
-  const getActionIcon = (action) => {
-    switch (action) {
-      case "LOGIN":
-        return <Security />;
-      case "LOGOUT":
-        return <Security />;
+  // Get status icon
+  const getStatusIcon = (status) => {
+    switch (status) {
       case "CREATE":
-        return <Edit />;
+        return <Add />;
       case "UPDATE":
         return <Edit />;
       case "DELETE":
         return <Delete />;
       case "VIEW":
         return <Visibility />;
-      case "DOWNLOAD":
-        return <Download />;
-      case "UPLOAD":
-        return <Upload />;
       default:
         return <Info />;
     }
@@ -285,13 +235,26 @@ export default function AdminLogs() {
   // Handle bulk actions
   const handleBulkAction = (action) => {
     if (action === "export") {
-      // Export selected logs
       console.log("Exporting logs:", selectedLogs);
+      // Implement export functionality
     } else if (action === "delete") {
-      // Delete selected logs
       console.log("Deleting logs:", selectedLogs);
+      // Implement delete functionality
     }
   };
+
+  // Clear all filters
+  const clearFilters = () => {
+    setEmailFilter("");
+    setStatusFilter("ALL");
+    setTenderIdFilter("");
+    setDateRange({ startDate: "", endDate: "" });
+    setSearch("");
+    setPage(0);
+  };
+
+  // Get unique statuses from logs
+  const uniqueStatuses = [...new Set(logs.map((log) => log.status))];
 
   return (
     <Box sx={{ display: "flex", minHeight: "100vh" }}>
@@ -343,7 +306,7 @@ export default function AdminLogs() {
             </IconButton>
             <TextField
               variant="standard"
-              placeholder="Search logs, users, actions..."
+              placeholder="Search by email, status, tender ID..."
               fullWidth
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -394,31 +357,28 @@ export default function AdminLogs() {
           >
             <Box>
               <Typography variant="h4" sx={{ fontWeight: 700, mb: 1 }}>
-                System Logs
+                Tender Activity Logs
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                Monitor and analyze system activities, user actions, and
-                security events
+                Monitor and track all tender-related activities and user actions
               </Typography>
             </Box>
 
             <Stack direction="row" spacing={2} alignItems="center">
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={realTimeMode}
-                    onChange={(e) => setRealTimeMode(e.target.checked)}
-                    color="primary"
-                  />
-                }
-                label="Real-time"
-              />
               <Button
                 variant="outlined"
                 startIcon={<FilterList />}
                 onClick={() => setShowFilters(!showFilters)}
               >
                 Filters
+              </Button>
+              <Button
+                variant="outlined"
+                startIcon={<Refresh />}
+                onClick={fetchTenderLogs}
+                disabled={loading}
+              >
+                Refresh
               </Button>
               <Button
                 variant="contained"
@@ -446,7 +406,7 @@ export default function AdminLogs() {
                         Total Logs
                       </Typography>
                       <Typography variant="h4" sx={{ fontWeight: 700 }}>
-                        {filteredLogs.length}
+                        {total}
                       </Typography>
                     </Box>
                     <Box
@@ -474,16 +434,13 @@ export default function AdminLogs() {
                   >
                     <Box>
                       <Typography color="text.secondary" variant="body2">
-                        Active Users
+                        Create Actions
                       </Typography>
-                      <Typography variant="h4" sx={{ fontWeight: 700 }}>
-                        {
-                          new Set(
-                            filteredLogs
-                              .filter((log) => log.action === "LOGIN")
-                              .map((log) => log.user)
-                          ).size
-                        }
+                      <Typography
+                        variant="h4"
+                        sx={{ fontWeight: 700, color: "success.main" }}
+                      >
+                        {logs.filter((log) => log.status === "CREATE").length}
                       </Typography>
                     </Box>
                     <Box
@@ -494,7 +451,7 @@ export default function AdminLogs() {
                         color: "white",
                       }}
                     >
-                      <Person />
+                      <Add />
                     </Box>
                   </Stack>
                 </CardContent>
@@ -511,16 +468,47 @@ export default function AdminLogs() {
                   >
                     <Box>
                       <Typography color="text.secondary" variant="body2">
-                        Errors
+                        Update Actions
+                      </Typography>
+                      <Typography
+                        variant="h4"
+                        sx={{ fontWeight: 700, color: "info.main" }}
+                      >
+                        {logs.filter((log) => log.status === "UPDATE").length}
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        backgroundColor: "info.main",
+                        borderRadius: "50%",
+                        p: 1.5,
+                        color: "white",
+                      }}
+                    >
+                      <Edit />
+                    </Box>
+                  </Stack>
+                </CardContent>
+              </Card>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={3}>
+              <Card sx={{ height: "100%" }}>
+                <CardContent>
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Box>
+                      <Typography color="text.secondary" variant="body2">
+                        Delete Actions
                       </Typography>
                       <Typography
                         variant="h4"
                         sx={{ fontWeight: 700, color: "error.main" }}
                       >
-                        {
-                          filteredLogs.filter((log) => log.status === "ERROR")
-                            .length
-                        }
+                        {logs.filter((log) => log.status === "DELETE").length}
                       </Typography>
                     </Box>
                     <Box
@@ -531,44 +519,7 @@ export default function AdminLogs() {
                         color: "white",
                       }}
                     >
-                      <Error />
-                    </Box>
-                  </Stack>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={3}>
-              <Card sx={{ height: "100%" }}>
-                <CardContent>
-                  <Stack
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="space-between"
-                  >
-                    <Box>
-                      <Typography color="text.secondary" variant="body2">
-                        Warnings
-                      </Typography>
-                      <Typography
-                        variant="h4"
-                        sx={{ fontWeight: 700, color: "warning.main" }}
-                      >
-                        {
-                          filteredLogs.filter((log) => log.status === "WARNING")
-                            .length
-                        }
-                      </Typography>
-                    </Box>
-                    <Box
-                      sx={{
-                        backgroundColor: "warning.main",
-                        borderRadius: "50%",
-                        p: 1.5,
-                        color: "white",
-                      }}
-                    >
-                      <Warning />
+                      <Delete />
                     </Box>
                   </Stack>
                 </CardContent>
@@ -584,6 +535,22 @@ export default function AdminLogs() {
                   Advanced Filters
                 </Typography>
                 <Grid container spacing={3}>
+                  <Grid item xs={12} sm={6} md={3}>
+                    <TextField
+                      fullWidth
+                      label="Email"
+                      value={emailFilter}
+                      onChange={(e) => setEmailFilter(e.target.value)}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <Email />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </Grid>
+
                   <Grid item xs={12} sm={6} md={3}>
                     <FormControl fullWidth>
                       <InputLabel>Status</InputLabel>
@@ -603,39 +570,13 @@ export default function AdminLogs() {
                   </Grid>
 
                   <Grid item xs={12} sm={6} md={3}>
-                    <FormControl fullWidth>
-                      <InputLabel>Action</InputLabel>
-                      <Select
-                        value={actionFilter}
-                        label="Action"
-                        onChange={(e) => setActionFilter(e.target.value)}
-                      >
-                        <MenuItem value="ALL">All Actions</MenuItem>
-                        {uniqueActions.map((action) => (
-                          <MenuItem key={action} value={action}>
-                            {action}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </Grid>
-
-                  <Grid item xs={12} sm={6} md={3}>
-                    <FormControl fullWidth>
-                      <InputLabel>Module</InputLabel>
-                      <Select
-                        value={moduleFilter}
-                        label="Module"
-                        onChange={(e) => setModuleFilter(e.target.value)}
-                      >
-                        <MenuItem value="ALL">All Modules</MenuItem>
-                        {uniqueModules.map((module) => (
-                          <MenuItem key={module} value={module}>
-                            {module}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
+                    <TextField
+                      fullWidth
+                      label="Tender ID"
+                      value={tenderIdFilter}
+                      onChange={(e) => setTenderIdFilter(e.target.value)}
+                      placeholder="Enter tender ID"
+                    />
                   </Grid>
 
                   <Grid item xs={12} sm={6} md={3}>
@@ -651,6 +592,13 @@ export default function AdminLogs() {
                         })
                       }
                       InputLabelProps={{ shrink: true }}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <CalendarToday />
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   </Grid>
 
@@ -664,6 +612,13 @@ export default function AdminLogs() {
                         setDateRange({ ...dateRange, endDate: e.target.value })
                       }
                       InputLabelProps={{ shrink: true }}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <CalendarToday />
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   </Grid>
 
@@ -671,12 +626,7 @@ export default function AdminLogs() {
                     <Button
                       variant="outlined"
                       startIcon={<Refresh />}
-                      onClick={() => {
-                        setStatusFilter("ALL");
-                        setActionFilter("ALL");
-                        setModuleFilter("ALL");
-                        setDateRange({ startDate: "", endDate: "" });
-                      }}
+                      onClick={clearFilters}
                       fullWidth
                     >
                       Clear Filters
@@ -685,6 +635,13 @@ export default function AdminLogs() {
                 </Grid>
               </CardContent>
             </Card>
+          )}
+
+          {/* Error Alert */}
+          {error && (
+            <Alert severity="error" onClose={() => setError("")}>
+              {error}
+            </Alert>
           )}
 
           {/* Logs Table */}
@@ -700,337 +657,387 @@ export default function AdminLogs() {
             }}
           >
             <CardContent sx={{ p: 0 }}>
-              <TableContainer
-                sx={{
-                  "& .MuiTableCell-root": {
-                    borderColor: (theme) => theme.palette.divider,
-                    py: 2.5,
-                    px: 3,
-                    fontSize: "0.875rem",
-                  },
-                }}
-              >
-                <Table>
-                  <TableHead>
-                    <TableRow
-                      sx={{
-                        backgroundColor: (theme) =>
-                          theme.palette.mode === "dark"
-                            ? "rgba(255,255,255,0.08)"
-                            : "rgba(0,0,0,0.03)",
-                        "& th": {
-                          fontWeight: 600,
-                          color: (theme) =>
-                            theme.palette.mode === "dark"
-                              ? "primary.light"
-                              : "primary.dark",
-                          borderBottom: 2,
-                          borderColor: "primary.main",
-                          transition: "all 0.2s ease",
-                          textTransform: "uppercase",
-                          letterSpacing: "0.05em",
-                          fontSize: "0.75rem",
-                        },
-                      }}
-                    >
-                      <TableCell padding="checkbox" sx={{ pl: 3 }}>
-                        <Checkbox
-                          color="primary"
-                          onChange={(e) => {
-                            if (e.target.checked) {
-                              setSelectedLogs(
-                                filteredLogs.map((log) => log.id)
-                              );
-                            } else {
-                              setSelectedLogs([]);
-                            }
-                          }}
-                          checked={
-                            selectedLogs.length === filteredLogs.length &&
-                            filteredLogs.length > 0
-                          }
-                        />
-                      </TableCell>
-                      <TableCell>Timestamp</TableCell>
-                      <TableCell>Action</TableCell>
-                      <TableCell>Status</TableCell>
-                      <TableCell>User</TableCell>
-                      <TableCell>Module</TableCell>
-                      <TableCell>IP Address</TableCell>
-                      <TableCell>Details</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {filteredLogs
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((log) => (
+              {loading ? (
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    py: 8,
+                  }}
+                >
+                  <CircularProgress />
+                </Box>
+              ) : (
+                <>
+                  <TableContainer
+                    sx={{
+                      "& .MuiTableCell-root": {
+                        borderColor: (theme) => theme.palette.divider,
+                        py: 2.5,
+                        px: 3,
+                        fontSize: "0.875rem",
+                      },
+                    }}
+                  >
+                    <Table>
+                      <TableHead>
                         <TableRow
-                          key={log.id}
-                          hover
                           sx={{
-                            transition: "all 0.3s ease",
-                            position: "relative",
-                            "&:hover": {
-                              backgroundColor: (theme) =>
+                            backgroundColor: (theme) =>
+                              theme.palette.mode === "dark"
+                                ? "rgba(255,255,255,0.08)"
+                                : "rgba(0,0,0,0.03)",
+                            "& th": {
+                              fontWeight: 600,
+                              color: (theme) =>
                                 theme.palette.mode === "dark"
-                                  ? "rgba(255,255,255,0.08)"
-                                  : "rgba(0,0,0,0.02)",
-                              transform: "translateY(-2px)",
-                              boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
-                              "& .MuiSvgIcon-root": {
-                                color: "primary.main",
-                                transform: "scale(1.1)",
-                              },
-                            },
-                            "&:after": {
-                              content: '""',
-                              position: "absolute",
-                              left: 0,
-                              right: 0,
-                              bottom: 0,
-                              height: "1px",
-                              backgroundColor: (theme) => theme.palette.divider,
+                                  ? "primary.light"
+                                  : "primary.dark",
+                              borderBottom: 2,
+                              borderColor: "primary.main",
+                              transition: "all 0.2s ease",
+                              textTransform: "uppercase",
+                              letterSpacing: "0.05em",
+                              fontSize: "0.75rem",
                             },
                           }}
                         >
                           <TableCell padding="checkbox" sx={{ pl: 3 }}>
                             <Checkbox
                               color="primary"
-                              checked={selectedLogs.includes(log.id)}
                               onChange={(e) => {
                                 if (e.target.checked) {
-                                  setSelectedLogs([...selectedLogs, log.id]);
+                                  setSelectedLogs(logs.map((log) => log.id));
                                 } else {
-                                  setSelectedLogs(
-                                    selectedLogs.filter((id) => id !== log.id)
-                                  );
+                                  setSelectedLogs([]);
                                 }
                               }}
+                              checked={
+                                selectedLogs.length === logs.length &&
+                                logs.length > 0
+                              }
                             />
                           </TableCell>
-                          <TableCell>
-                            <Stack
-                              direction="row"
-                              alignItems="center"
-                              spacing={1}
+                          <TableCell>ID</TableCell>
+                          <TableCell>Email</TableCell>
+                          <TableCell>Status</TableCell>
+                          <TableCell>Timestamp</TableCell>
+                          <TableCell>Tender ID</TableCell>
+                          <TableCell>Created</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {logs.length === 0 ? (
+                          <TableRow>
+                            <TableCell
+                              colSpan={7}
+                              align="center"
+                              sx={{ py: 4 }}
                             >
-                              <CalendarToday
-                                sx={{ fontSize: 16, color: "text.secondary" }}
-                              />
                               <Typography
-                                variant="body2"
-                                sx={{
-                                  fontFamily:
-                                    "'SF Mono', 'Monaco', 'Inconsolata', monospace",
-                                  fontWeight: 500,
-                                }}
+                                variant="body1"
+                                color="text.secondary"
                               >
-                                {formatTimestamp(log.timestamp)}
+                                No logs found
                               </Typography>
-                            </Stack>
-                          </TableCell>
-                          <TableCell>
-                            <Stack
-                              direction="row"
-                              alignItems="center"
-                              spacing={1.5}
+                            </TableCell>
+                          </TableRow>
+                        ) : (
+                          logs.map((log) => (
+                            <TableRow
+                              key={log.id}
+                              hover
                               sx={{
-                                "& .MuiSvgIcon-root": {
-                                  color: "primary.main",
-                                  transition: "all 0.3s ease",
+                                transition: "all 0.3s ease",
+                                position: "relative",
+                                "&:hover": {
                                   backgroundColor: (theme) =>
                                     theme.palette.mode === "dark"
-                                      ? "rgba(144, 202, 249, 0.08)"
-                                      : "rgba(21, 101, 192, 0.08)",
-                                  padding: "6px",
-                                  borderRadius: "8px",
-                                  fontSize: "20px",
-                                  "&:hover": {
-                                    transform: "scale(1.1) rotate(5deg)",
-                                    backgroundColor: (theme) =>
-                                      theme.palette.mode === "dark"
-                                        ? "rgba(144, 202, 249, 0.12)"
-                                        : "rgba(21, 101, 192, 0.12)",
+                                      ? "rgba(255,255,255,0.08)"
+                                      : "rgba(0,0,0,0.02)",
+                                  transform: "translateY(-2px)",
+                                  boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+                                  "& .MuiSvgIcon-root": {
+                                    color: "primary.main",
+                                    transform: "scale(1.1)",
                                   },
                                 },
-                              }}
-                            >
-                              {getActionIcon(log.action)}
-                              <Typography
-                                variant="body2"
-                                sx={{ fontWeight: 500 }}
-                              >
-                                {log.action}
-                              </Typography>
-                            </Stack>
-                          </TableCell>
-                          <TableCell>
-                            <Chip
-                              label={log.status}
-                              color={getStatusColor(log.status)}
-                              size="small"
-                              sx={{
-                                fontWeight: 600,
-                                borderRadius: "8px",
-                                height: "24px",
-                                "& .MuiChip-label": {
-                                  px: 2,
-                                  fontSize: "0.75rem",
-                                  lineHeight: 1.5,
-                                },
-                                backgroundColor: (theme) =>
-                                  theme.palette.mode === "dark"
-                                    ? `${
-                                        theme.palette[
-                                          getStatusColor(log.status)
-                                        ].main
-                                      }33`
-                                    : `${
-                                        theme.palette[
-                                          getStatusColor(log.status)
-                                        ].light
-                                      }33`,
-                                color: (theme) =>
-                                  theme.palette[getStatusColor(log.status)]
-                                    .main,
-                                border: (theme) =>
-                                  `1px solid ${
-                                    theme.palette[getStatusColor(log.status)]
-                                      .main
-                                  }40`,
-                                transition: "all 0.2s ease",
-                                "&:hover": {
-                                  transform: "translateY(-1px)",
-                                  boxShadow: (theme) =>
-                                    `0 4px 8px ${
-                                      theme.palette[getStatusColor(log.status)]
-                                        .main
-                                    }33`,
+                                "&:after": {
+                                  content: '""',
+                                  position: "absolute",
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 0,
+                                  height: "1px",
+                                  backgroundColor: (theme) =>
+                                    theme.palette.divider,
                                 },
                               }}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <Stack
-                              direction="row"
-                              alignItems="center"
-                              spacing={1}
                             >
-                              <Person
-                                sx={{ fontSize: 16, color: "text.secondary" }}
-                              />
-                              <Typography
-                                variant="body2"
-                                sx={{
-                                  fontFamily:
-                                    "'SF Mono', 'Monaco', 'Inconsolata', monospace",
-                                  fontWeight: 500,
-                                }}
-                              >
-                                {log.user}
-                              </Typography>
-                            </Stack>
-                          </TableCell>
-                          <TableCell>
-                            <Typography
-                              variant="body2"
-                              sx={{
-                                fontWeight: 500,
-                                color: "text.primary",
-                              }}
-                            >
-                              {log.module}
-                            </Typography>
-                          </TableCell>
-                          <TableCell>
-                            <Typography
-                              variant="body2"
-                              sx={{
-                                fontFamily:
-                                  "'SF Mono', 'Monaco', 'Inconsolata', monospace",
-                                fontWeight: 500,
-                                color: "text.secondary",
-                              }}
-                            >
-                              {log.ipAddress}
-                            </Typography>
-                          </TableCell>
-                          <TableCell>
-                            <Typography
-                              variant="body2"
-                              color="text.secondary"
-                              sx={{
-                                maxWidth: 200,
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                whiteSpace: "nowrap",
-                              }}
-                            >
-                              {log.details}
-                            </Typography>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+                              <TableCell padding="checkbox" sx={{ pl: 3 }}>
+                                <Checkbox
+                                  color="primary"
+                                  checked={selectedLogs.includes(log.id)}
+                                  onChange={(e) => {
+                                    if (e.target.checked) {
+                                      setSelectedLogs([
+                                        ...selectedLogs,
+                                        log.id,
+                                      ]);
+                                    } else {
+                                      setSelectedLogs(
+                                        selectedLogs.filter(
+                                          (id) => id !== log.id
+                                        )
+                                      );
+                                    }
+                                  }}
+                                />
+                              </TableCell>
+                              <TableCell>
+                                <Typography
+                                  variant="body2"
+                                  sx={{
+                                    fontFamily:
+                                      "'SF Mono', 'Monaco', 'Inconsolata', monospace",
+                                    fontWeight: 600,
+                                    color: "primary.main",
+                                  }}
+                                >
+                                  #{log.id}
+                                </Typography>
+                              </TableCell>
+                              <TableCell>
+                                <Stack
+                                  direction="row"
+                                  alignItems="center"
+                                  spacing={1}
+                                >
+                                  <Person
+                                    sx={{
+                                      fontSize: 16,
+                                      color: "text.secondary",
+                                    }}
+                                  />
+                                  <Typography
+                                    variant="body2"
+                                    sx={{
+                                      fontFamily:
+                                        "'SF Mono', 'Monaco', 'Inconsolata', monospace",
+                                      fontWeight: 500,
+                                    }}
+                                  >
+                                    {log.email}
+                                  </Typography>
+                                </Stack>
+                              </TableCell>
+                              <TableCell>
+                                <Stack
+                                  direction="row"
+                                  alignItems="center"
+                                  spacing={1.5}
+                                  sx={{
+                                    "& .MuiSvgIcon-root": {
+                                      color: (theme) =>
+                                        theme.palette[
+                                          getStatusColor(log.status)
+                                        ].main,
+                                      transition: "all 0.3s ease",
+                                      backgroundColor: (theme) =>
+                                        theme.palette.mode === "dark"
+                                          ? `${
+                                              theme.palette[
+                                                getStatusColor(log.status)
+                                              ].main
+                                            }22`
+                                          : `${
+                                              theme.palette[
+                                                getStatusColor(log.status)
+                                              ].light
+                                            }33`,
+                                      padding: "6px",
+                                      borderRadius: "8px",
+                                      fontSize: "20px",
+                                      "&:hover": {
+                                        transform: "scale(1.1) rotate(5deg)",
+                                        backgroundColor: (theme) =>
+                                          theme.palette.mode === "dark"
+                                            ? `${
+                                                theme.palette[
+                                                  getStatusColor(log.status)
+                                                ].main
+                                              }44`
+                                            : `${
+                                                theme.palette[
+                                                  getStatusColor(log.status)
+                                                ].light
+                                              }55`,
+                                      },
+                                    },
+                                  }}
+                                >
+                                  {getStatusIcon(log.status)}
+                                  <Chip
+                                    label={log.status}
+                                    color={getStatusColor(log.status)}
+                                    size="small"
+                                    sx={{
+                                      fontWeight: 600,
+                                      borderRadius: "8px",
+                                      height: "24px",
+                                      "& .MuiChip-label": {
+                                        px: 2,
+                                        fontSize: "0.75rem",
+                                        lineHeight: 1.5,
+                                      },
+                                      backgroundColor: (theme) =>
+                                        theme.palette.mode === "dark"
+                                          ? `${
+                                              theme.palette[
+                                                getStatusColor(log.status)
+                                              ].main
+                                            }33`
+                                          : `${
+                                              theme.palette[
+                                                getStatusColor(log.status)
+                                              ].light
+                                            }33`,
+                                      color: (theme) =>
+                                        theme.palette[
+                                          getStatusColor(log.status)
+                                        ].main,
+                                      border: (theme) =>
+                                        `1px solid ${
+                                          theme.palette[
+                                            getStatusColor(log.status)
+                                          ].main
+                                        }40`,
+                                      transition: "all 0.2s ease",
+                                      "&:hover": {
+                                        transform: "translateY(-1px)",
+                                        boxShadow: (theme) =>
+                                          `0 4px 8px ${
+                                            theme.palette[
+                                              getStatusColor(log.status)
+                                            ].main
+                                          }33`,
+                                      },
+                                    }}
+                                  />
+                                </Stack>
+                              </TableCell>
+                              <TableCell>
+                                <Stack
+                                  direction="row"
+                                  alignItems="center"
+                                  spacing={1}
+                                >
+                                  <AccessTime
+                                    sx={{
+                                      fontSize: 16,
+                                      color: "text.secondary",
+                                    }}
+                                  />
+                                  <Typography
+                                    variant="body2"
+                                    sx={{
+                                      fontFamily:
+                                        "'SF Mono', 'Monaco', 'Inconsolata', monospace",
+                                      fontWeight: 500,
+                                    }}
+                                  >
+                                    {formatTimestamp(log.timestamp)}
+                                  </Typography>
+                                </Stack>
+                              </TableCell>
+                              <TableCell>
+                                <Typography
+                                  variant="body2"
+                                  sx={{
+                                    fontFamily:
+                                      "'SF Mono', 'Monaco', 'Inconsolata', monospace",
+                                    fontWeight: 500,
+                                    color: log.tenderId
+                                      ? "primary.main"
+                                      : "text.secondary",
+                                  }}
+                                >
+                                  {log.tenderId || "N/A"}
+                                </Typography>
+                              </TableCell>
+                              <TableCell>
+                                <Typography
+                                  variant="body2"
+                                  sx={{
+                                    fontFamily:
+                                      "'SF Mono', 'Monaco', 'Inconsolata', monospace",
+                                    fontWeight: 500,
+                                    color: "text.secondary",
+                                  }}
+                                >
+                                  {formatTimestamp(log.createdAt)}
+                                </Typography>
+                              </TableCell>
+                            </TableRow>
+                          ))
+                        )}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
 
-              <TablePagination
-                component="div"
-                count={filteredLogs.length}
-                page={page}
-                onPageChange={(event, newPage) => setPage(newPage)}
-                rowsPerPage={rowsPerPage}
-                onRowsPerPageChange={(event) => {
-                  setRowsPerPage(parseInt(event.target.value, 10));
-                  setPage(0);
-                }}
-                rowsPerPageOptions={[10, 25, 50, 100]}
-                labelRowsPerPage="Rows per page:"
-                sx={{
-                  borderTop: 1,
-                  borderColor: "divider",
-                  "& .MuiTablePagination-select": {
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === "dark"
-                        ? "rgba(255, 255, 255, 0.05)"
-                        : "rgba(0, 0, 0, 0.02)",
-                    borderRadius: 1,
-                    p: "4px 8px",
-                    "&:hover": {
-                      backgroundColor: (theme) =>
-                        theme.palette.mode === "dark"
-                          ? "rgba(255, 255, 255, 0.08)"
-                          : "rgba(0, 0, 0, 0.04)",
-                    },
-                  },
-                  "& .MuiTablePagination-displayedRows": {
-                    fontWeight: 500,
-                    color: "text.secondary",
-                  },
-                  "& .MuiButtonBase-root": {
-                    "&:hover": {
-                      backgroundColor: (theme) =>
-                        theme.palette.mode === "dark"
-                          ? "rgba(255, 255, 255, 0.08)"
-                          : "rgba(0, 0, 0, 0.04)",
-                    },
-                  },
-                }}
-              />
+                  <TablePagination
+                    component="div"
+                    count={total}
+                    page={page}
+                    onPageChange={(event, newPage) => setPage(newPage)}
+                    rowsPerPage={rowsPerPage}
+                    onRowsPerPageChange={(event) => {
+                      setRowsPerPage(parseInt(event.target.value, 10));
+                      setPage(0);
+                    }}
+                    rowsPerPageOptions={[5, 10, 25, 50]}
+                    labelRowsPerPage="Rows per page:"
+                    labelDisplayedRows={({ from, to, count }) =>
+                      `${from}-${to} of ${
+                        count !== -1 ? count : `more than ${to}`
+                      }`
+                    }
+                    sx={{
+                      borderTop: 1,
+                      borderColor: "divider",
+                      "& .MuiTablePagination-select": {
+                        backgroundColor: (theme) =>
+                          theme.palette.mode === "dark"
+                            ? "rgba(255, 255, 255, 0.05)"
+                            : "rgba(0, 0, 0, 0.02)",
+                        borderRadius: 1,
+                        p: "4px 8px",
+                        "&:hover": {
+                          backgroundColor: (theme) =>
+                            theme.palette.mode === "dark"
+                              ? "rgba(255, 255, 255, 0.08)"
+                              : "rgba(0, 0, 0, 0.04)",
+                        },
+                      },
+                      "& .MuiTablePagination-displayedRows": {
+                        fontWeight: 500,
+                        color: "text.secondary",
+                      },
+                      "& .MuiButtonBase-root": {
+                        "&:hover": {
+                          backgroundColor: (theme) =>
+                            theme.palette.mode === "dark"
+                              ? "rgba(255, 255, 255, 0.08)"
+                              : "rgba(0, 0, 0, 0.04)",
+                        },
+                      },
+                    }}
+                  />
+                </>
+              )}
             </CardContent>
           </Card>
-
-          {/* Real-time Indicator */}
-          {realTimeMode && (
-            <Alert severity="info" icon={<Info />}>
-              Real-time monitoring is active. New logs will appear
-              automatically.
-            </Alert>
-          )}
         </Stack>
       </Box>
     </Box>
