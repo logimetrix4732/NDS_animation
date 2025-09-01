@@ -8,114 +8,97 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  IconButton,
   Grid,
-  Card,
-  CardContent,
-  TextField,
   Stack,
-  Chip,
   Avatar,
-  useMediaQuery,
-  Tooltip,
   Paper,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
   Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TablePagination,
   Alert,
-  Switch,
-  FormControlLabel,
-  Checkbox,
-  CircularProgress,
-  Badge,
-  Divider,
-  InputAdornment,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
-  IconButton as MuiIconButton,
-  Fab,
+  IconButton,
   Snackbar,
+  alpha,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
-  Search as SearchIcon,
   Notifications,
-  FilterList,
-  Download,
   Refresh,
-  Visibility,
-  Edit,
-  Delete,
-  Warning,
-  Info,
-  Error,
-  CalendarToday,
-  Person,
-  Computer,
-  Security,
-  Upload,
   Add,
-  Remove,
-  Email,
-  AccessTime,
   TrendingUp,
-  TrendingDown,
-  ExpandMore,
-  Save,
-  Close,
-  AddCircle,
-  RemoveCircle,
   LocationOn,
-  Business,
-  Link as LinkIcon,
 } from "@mui/icons-material";
 import nds_logo from "../assets/img/nds_logo.png";
 import AdminSidebar from "../AdminComponents/AdminSidebar";
+import HomeStatisticsConfig from "./HomeStatisticsConfig";
+import MilkProducerOrganisations from "./MilkProducerOrganisations";
+import OrganisationDialog from "./OrganisationDialog";
 import { getFetch, postFetchData, putFetchData, deleteFetch } from "../Api/Api";
-
-// --------- THEME ---------
-const getDesignTokens = () => ({
-  palette: {
-    mode: "light",
-    primary: { main: "#1565c0" },
-    secondary: { main: "#ef6c00" },
-    background: {
-      default: "#f6f8fc",
-      paper: "#ffffff",
-    },
-  },
-  shape: { borderRadius: 16 },
-  typography: {
-    fontFamily:
-      "Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
-    h4: { fontWeight: 700 },
-    h6: { fontWeight: 600 },
-  },
-  components: {
-    MuiCard: { styleOverrides: { root: { overflow: "hidden" } } },
-  },
-});
 
 // --------- LAYOUT ---------
 const drawerWidth = 260;
+
+// Custom theme for better UI
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#1976d2",
+      light: "#42a5f5",
+      dark: "#1565c0",
+    },
+    secondary: {
+      main: "#dc004e",
+    },
+    background: {
+      default: "#f8fafc",
+      paper: "#ffffff",
+    },
+  },
+  components: {
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: 12,
+          boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
+          border: "1px solid rgba(0,0,0,0.06)",
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+          textTransform: "none",
+          fontWeight: 600,
+        },
+        contained: {
+          boxShadow: "0 4px 12px rgba(25, 118, 210, 0.3)",
+          "&:hover": {
+            boxShadow: "0 6px 16px rgba(25, 118, 210, 0.4)",
+          },
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "& .MuiOutlinedInput-root": {
+            borderRadius: 8,
+          },
+        },
+      },
+    },
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+          boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+          "&:before": {
+            display: "none",
+          },
+        },
+      },
+    },
+  },
+});
 
 export default function DynamicData() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -140,7 +123,6 @@ export default function DynamicData() {
 
   // Milk Producer Organisations State
   const [orgServices, setOrgServices] = useState([]);
-  const [selectedOrg, setSelectedOrg] = useState(null);
   const [orgDialogOpen, setOrgDialogOpen] = useState(false);
   const [editingOrg, setEditingOrg] = useState(null);
 
@@ -164,15 +146,13 @@ export default function DynamicData() {
     url: "",
   });
 
-  // API Base URL - you can set this in your environment variables
-  const API_BASE_URL =
-    import.meta.env.VITE_API_URL || "http://localhost:3000/api";
-
   // Fetch home statistics
   const fetchHomeStats = async () => {
     setLoading(true);
     try {
-      const response = await getFetch(`${API_BASE_URL}/home/fetch`);
+      const response = await getFetch(
+        `${import.meta.env.VITE_API_BASE_URL}/home/fetch`
+      );
       if (response?.data?.status && response?.data?.data?.length > 0) {
         const stats = response.data.data[0];
         setHomeStats({
@@ -200,7 +180,9 @@ export default function DynamicData() {
     setLoading(true);
     try {
       const response = await getFetch(
-        `${API_BASE_URL}/org-services/fetch?Type=MILK PRODUCER ORGANISATION`
+        `${
+          import.meta.env.VITE_API_BASE_URL
+        }/org-services/fetch?Type=MILK PRODUCER ORGANISATION`
       );
       if (response?.data?.status && response?.data?.data) {
         setOrgServices(response.data.data);
@@ -330,36 +312,6 @@ export default function DynamicData() {
     }
   };
 
-  // Add new link to state data
-  const addLinkToState = () => {
-    if (newLink.title && newLink.url) {
-      setNewStateData((prev) => ({
-        ...prev,
-        links: [...prev.links, { ...newLink }],
-      }));
-      setNewLink({ title: "", url: "" });
-    }
-  };
-
-  // Remove link from state data
-  const removeLinkFromState = (index) => {
-    setNewStateData((prev) => ({
-      ...prev,
-      links: prev.links.filter((_, i) => i !== index),
-    }));
-  };
-
-  // Add new state to organisation
-  const addStateToOrg = () => {
-    if (newStateData.name && newStateData.description) {
-      setNewOrg((prev) => ({
-        ...prev,
-        states_data: [...prev.states_data, { ...newStateData }],
-      }));
-      setNewStateData({ name: "", description: "", links: [] });
-    }
-  };
-
   // Remove state from organisation
   const removeStateFromOrg = (index) => {
     setNewOrg((prev) => ({
@@ -392,18 +344,22 @@ export default function DynamicData() {
     fetchOrgServices();
   }, []);
 
-  const theme = useMemo(() => createTheme(getDesignTokens()), []);
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ display: "flex", minHeight: "100vh" }}>
+      <Box
+        sx={{
+          display: "flex",
+          minHeight: "100vh",
+          bgcolor: "background.default",
+        }}
+      >
         <AppBar
           position="fixed"
           elevation={0}
           sx={{
-            backdropFilter: "blur(8px)",
-            backgroundColor: "rgba(255,255,255,0.9)",
+            backdropFilter: "blur(12px)",
+            backgroundColor: "rgba(255,255,255,0.95)",
             borderBottom: 1,
             borderColor: "divider",
             zIndex: (theme) => theme.zIndex.drawer + 1,
@@ -413,7 +369,7 @@ export default function DynamicData() {
             <IconButton
               edge="start"
               onClick={() => setMobileOpen(!mobileOpen)}
-              sx={{ mr: 1, display: { sm: "none" } }}
+              sx={{ mr: 2, display: { sm: "none" } }}
             >
               <MenuIcon />
             </IconButton>
@@ -426,631 +382,268 @@ export default function DynamicData() {
               />
             </Typography>
 
-            <Stack direction="row" spacing={1} alignItems="center">
-              <IconButton>
+            <Stack direction="row" spacing={2} alignItems="center">
+              <IconButton
+                sx={{
+                  bgcolor: alpha("#1976d2", 0.1),
+                  "&:hover": { bgcolor: alpha("#1976d2", 0.2) },
+                }}
+              >
                 <Notifications />
               </IconButton>
-              <Avatar sx={{ width: 34, height: 34 }}>AS</Avatar>
+              <Avatar
+                sx={{
+                  width: 40,
+                  height: 40,
+                  bgcolor: "primary.main",
+                  fontWeight: 600,
+                }}
+              >
+                AS
+              </Avatar>
             </Stack>
           </Toolbar>
         </AppBar>
 
         <AdminSidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
-
         <Box
           component="main"
           sx={{
             flexGrow: 1,
-            p: 3,
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
-            mt: { xs: 8, md: 10 },
-            ml: { sm: `${drawerWidth}px` },
+            p: { xs: 1, md: 2 },
+            ml: { md: `${drawerWidth}px` },
+            background: (t) =>
+              t.palette.mode === "dark"
+                ? "linear-gradient(135deg, #0b1020 0%, #0f1629 100%)"
+                : "linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)",
+            minHeight: "100vh",
+            width: "100%",
           }}
         >
-          <Grid container spacing={3}>
-            {/* Header */}
-            <Grid item xs={12}>
-              <Box sx={{ mb: 3 }}>
-                <Typography variant="h4" sx={{ fontWeight: 700, mb: 1 }}>
-                  Dynamic Data Management
-                </Typography>
-                <Typography variant="body1" color="text.secondary">
-                  Manage home statistics and milk producer organisation data
-                </Typography>
-              </Box>
-            </Grid>
+          <Toolbar />
 
-            {/* Tabs */}
-            <Grid item xs={12}>
-              <Paper sx={{ mb: 3 }}>
-                <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          {/* Main Content */}
+          <Box sx={{ mt: 2, width: "100%" }}>
+            {/* Header Section */}
+            <Box sx={{ mb: 4, width: "100%" }}>
+              {/* Top Row - Title and Action Buttons */}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  mb: 2,
+                  width: "100%",
+                }}
+              >
+                {/* Left Side - Title with Accent Bar */}
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Box
+                    sx={{
+                      width: 8,
+                      height: 40,
+                      background:
+                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                      borderRadius: 4,
+                      mr: 2,
+                    }}
+                  />
+                  <Typography variant="h4" sx={{ fontWeight: 800 }}>
+                    Dynamic Data Management
+                  </Typography>
+                </Box>
+
+                {/* Right Side - Action Buttons */}
+                <Stack direction="row" spacing={2}>
+                  <Button
+                    variant="outlined"
+                    startIcon={<Refresh />}
+                    onClick={fetchHomeStats}
+                    disabled={loading}
+                    sx={{
+                      borderRadius: 3,
+                      px: 3,
+                      py: 1.5,
+                      borderWidth: 2,
+                      fontWeight: 600,
+                      background: (t) =>
+                        t.palette.mode === "dark"
+                          ? "rgba(255,255,255,0.05)"
+                          : "rgba(0,0,0,0.02)",
+                      "&:hover": {
+                        borderWidth: 2,
+                        background: (t) =>
+                          t.palette.mode === "dark"
+                            ? "rgba(255,255,255,0.1)"
+                            : "rgba(0,0,0,0.05)",
+                      },
+                    }}
+                  >
+                    Refresh Data
+                  </Button>
+
+                  <Button
+                    variant="contained"
+                    startIcon={<Add />}
+                    onClick={openCreateDialog}
+                    sx={{
+                      borderRadius: 3,
+                      px: 3,
+                      py: 1.5,
+                      fontWeight: 600,
+                      background:
+                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                      boxShadow: "0 8px 25px rgba(102, 126, 234, 0.3)",
+                      "&:hover": {
+                        background:
+                          "linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%)",
+                        boxShadow: "0 12px 35px rgba(102, 126, 234, 0.4)",
+                      },
+                    }}
+                  >
+                    Add Organisation
+                  </Button>
+                </Stack>
+              </Box>
+
+              {/* Bottom Row - Subtitle */}
+              <Typography
+                variant="body1"
+                color="text.secondary"
+                sx={{
+                  fontSize: "1.1rem",
+                  opacity: 0.8,
+                }}
+              >
+                Manage home statistics and milk producer organisation data with
+                comprehensive controls
+              </Typography>
+            </Box>
+
+            {/* Tabs Section */}
+            <Box sx={{ mb: 4 }}>
+              <Paper
+                sx={{
+                  borderRadius: 3,
+                  overflow: "hidden",
+                  boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
+                  background: (t) =>
+                    t.palette.mode === "dark"
+                      ? "linear-gradient(135deg, #1e293b 0%, #334155 100%)"
+                      : "#ffffff",
+                  border: (t) =>
+                    t.palette.mode === "dark"
+                      ? "1px solid rgba(255,255,255,0.1)"
+                      : "1px solid #e5e7eb",
+                }}
+              >
+                <Box
+                  sx={{
+                    borderBottom: 1,
+                    borderColor: "divider",
+                    bgcolor: "background.paper",
+                  }}
+                >
                   <Stack direction="row" spacing={0}>
                     <Button
                       variant={activeTab === 0 ? "contained" : "text"}
                       onClick={() => setActiveTab(0)}
-                      sx={{ borderRadius: 0, px: 3, py: 2 }}
+                      sx={{
+                        borderRadius: 0,
+                        px: 4,
+                        py: 3,
+                        minWidth: 200,
+                        fontSize: "1rem",
+                        fontWeight: 600,
+                        "&.MuiButton-contained": {
+                          bgcolor: "primary.main",
+                          boxShadow: "0 4px 12px rgba(25, 118, 210, 0.3)",
+                        },
+                      }}
                     >
-                      <TrendingUp sx={{ mr: 1 }} />
+                      <TrendingUp sx={{ mr: 1.5, fontSize: 20 }} />
                       Home Statistics
                     </Button>
                     <Button
                       variant={activeTab === 1 ? "contained" : "text"}
                       onClick={() => setActiveTab(1)}
-                      sx={{ borderRadius: 0, px: 3, py: 2 }}
+                      sx={{
+                        borderRadius: 0,
+                        px: 4,
+                        py: 3,
+                        minWidth: 200,
+                        fontSize: "1rem",
+                        fontWeight: 600,
+                        "&.MuiButton-contained": {
+                          bgcolor: "primary.main",
+                          boxShadow: "0 4px 12px rgba(25, 118, 210, 0.3)",
+                        },
+                      }}
                     >
-                      <LocationOn sx={{ mr: 1 }} />
+                      <LocationOn sx={{ mr: 1.5, fontSize: 20 }} />
                       Milk Producer Organisations
                     </Button>
                   </Stack>
                 </Box>
               </Paper>
-            </Grid>
+            </Box>
 
             {/* Home Statistics Tab */}
             {activeTab === 0 && (
-              <Grid item xs={12}>
-                <Card>
-                  <CardContent>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        mb: 3,
-                      }}
-                    >
-                      <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                        Home Statistics Configuration
-                      </Typography>
-                      <Button
-                        variant="outlined"
-                        startIcon={<Refresh />}
-                        onClick={fetchHomeStats}
-                        disabled={loading}
-                      >
-                        Refresh
-                      </Button>
-                    </Box>
-
-                    <Grid container spacing={3}>
-                      <Grid item xs={12} sm={6} md={3}>
-                        <TextField
-                          fullWidth
-                          label="States Covered"
-                          value={homeStats.states_covered}
-                          onChange={(e) =>
-                            setHomeStats((prev) => ({
-                              ...prev,
-                              states_covered: e.target.value,
-                            }))
-                          }
-                          placeholder="e.g., 11"
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <LocationOn color="primary" />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={3}>
-                        <TextField
-                          fullWidth
-                          label="Districts Served"
-                          value={homeStats.district_served}
-                          onChange={(e) =>
-                            setHomeStats((prev) => ({
-                              ...prev,
-                              district_served: e.target.value,
-                            }))
-                          }
-                          placeholder="e.g., 200"
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <Business color="primary" />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={3}>
-                        <TextField
-                          fullWidth
-                          label="Villages Reached"
-                          value={homeStats.villages_reached}
-                          onChange={(e) =>
-                            setHomeStats((prev) => ({
-                              ...prev,
-                              villages_reached: e.target.value,
-                            }))
-                          }
-                          placeholder="e.g., 36,630"
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <LocationOn color="primary" />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={3}>
-                        <TextField
-                          fullWidth
-                          label="Associated Farmers (Lac)"
-                          value={homeStats.associated_farmers}
-                          onChange={(e) =>
-                            setHomeStats((prev) => ({
-                              ...prev,
-                              associated_farmers: e.target.value,
-                            }))
-                          }
-                          placeholder="e.g., 12.3"
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <Person color="primary" />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                      </Grid>
-                    </Grid>
-
-                    <Box
-                      sx={{
-                        mt: 3,
-                        display: "flex",
-                        justifyContent: "flex-end",
-                      }}
-                    >
-                      <Button
-                        variant="contained"
-                        startIcon={<Save />}
-                        onClick={saveHomeStats}
-                        disabled={loading}
-                        size="large"
-                      >
-                        {loading ? (
-                          <CircularProgress size={20} />
-                        ) : (
-                          "Save Statistics"
-                        )}
-                      </Button>
-                    </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
+              <HomeStatisticsConfig
+                homeStats={homeStats}
+                setHomeStats={setHomeStats}
+                loading={loading}
+                fetchHomeStats={fetchHomeStats}
+                saveHomeStats={saveHomeStats}
+              />
             )}
 
             {/* Milk Producer Organisations Tab */}
             {activeTab === 1 && (
-              <Grid item xs={12}>
-                <Card>
-                  <CardContent>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        mb: 3,
-                      }}
-                    >
-                      <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                        Milk Producer Organisations
-                      </Typography>
-                      <Stack direction="row" spacing={2}>
-                        <Button
-                          variant="outlined"
-                          startIcon={<Refresh />}
-                          onClick={fetchOrgServices}
-                          disabled={loading}
-                        >
-                          Refresh
-                        </Button>
-                        <Button
-                          variant="contained"
-                          startIcon={<Add />}
-                          onClick={openCreateDialog}
-                        >
-                          Add New Organisation
-                        </Button>
-                      </Stack>
-                    </Box>
-
-                    {orgServices.map((org, index) => (
-                      <Accordion key={org.id || index} sx={{ mb: 2 }}>
-                        <AccordionSummary expandIcon={<ExpandMore />}>
-                          <Box
-                            sx={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              alignItems: "center",
-                              width: "100%",
-                            }}
-                          >
-                            <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                              {org.Title}
-                            </Typography>
-                            <Stack direction="row" spacing={1}>
-                              <IconButton
-                                size="small"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  openEditDialog(org);
-                                }}
-                              >
-                                <Edit />
-                              </IconButton>
-                              <IconButton
-                                size="small"
-                                color="error"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  deleteOrgService(org.id);
-                                }}
-                              >
-                                <Delete />
-                              </IconButton>
-                            </Stack>
-                          </Box>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                          <Typography
-                            variant="body2"
-                            color="text.secondary"
-                            sx={{ mb: 2 }}
-                          >
-                            Type: {org.Type}
-                          </Typography>
-
-                          {org.states_data?.map((state, stateIndex) => (
-                            <Box
-                              key={stateIndex}
-                              sx={{
-                                mb: 2,
-                                p: 2,
-                                border: 1,
-                                borderColor: "divider",
-                                borderRadius: 1,
-                              }}
-                            >
-                              <Typography
-                                variant="subtitle1"
-                                sx={{ fontWeight: 600, mb: 1 }}
-                              >
-                                {state.name}
-                              </Typography>
-                              <Typography
-                                variant="body2"
-                                color="text.secondary"
-                                sx={{ mb: 2 }}
-                              >
-                                {state.description}
-                              </Typography>
-
-                              <List dense>
-                                {state.links?.map((link, linkIndex) => (
-                                  <ListItem key={linkIndex} sx={{ px: 0 }}>
-                                    <ListItemText
-                                      primary={link.title}
-                                      secondary={
-                                        <a
-                                          href={link.url}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          style={{ color: "inherit" }}
-                                        >
-                                          {link.url}
-                                        </a>
-                                      }
-                                    />
-                                  </ListItem>
-                                ))}
-                              </List>
-                            </Box>
-                          ))}
-                        </AccordionDetails>
-                      </Accordion>
-                    ))}
-                  </CardContent>
-                </Card>
-              </Grid>
+              <MilkProducerOrganisations
+                orgServices={orgServices}
+                loading={loading}
+                fetchOrgServices={fetchOrgServices}
+                openCreateDialog={openCreateDialog}
+                openEditDialog={openEditDialog}
+                deleteOrgService={deleteOrgService}
+              />
             )}
-          </Grid>
+          </Box>
         </Box>
 
         {/* Organisation Dialog */}
-        <Dialog
-          open={orgDialogOpen}
-          onClose={() => setOrgDialogOpen(false)}
-          maxWidth="md"
-          fullWidth
-        >
-          <DialogTitle>
-            {editingOrg
-              ? "Edit Organisation Service"
-              : "Add New Organisation Service"}
-          </DialogTitle>
-          <DialogContent>
-            <Grid container spacing={3} sx={{ mt: 1 }}>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Title"
-                  value={newOrg.Title}
-                  onChange={(e) =>
-                    setNewOrg((prev) => ({ ...prev, Title: e.target.value }))
-                  }
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Type"
-                  value={newOrg.Type}
-                  onChange={(e) =>
-                    setNewOrg((prev) => ({ ...prev, Type: e.target.value }))
-                  }
-                />
-              </Grid>
-
-              {/* States Data Section */}
-              <Grid item xs={12}>
-                <Typography variant="h6" sx={{ mb: 2 }}>
-                  States Data
-                </Typography>
-
-                {newOrg.states_data.map((state, stateIndex) => (
-                  <Accordion key={stateIndex} sx={{ mb: 2 }}>
-                    <AccordionSummary expandIcon={<ExpandMore />}>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          width: "100%",
-                        }}
-                      >
-                        <Typography variant="subtitle1">
-                          {state.name || "New State"}
-                        </Typography>
-                        <IconButton
-                          size="small"
-                          color="error"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            removeStateFromOrg(stateIndex);
-                          }}
-                        >
-                          <RemoveCircle />
-                        </IconButton>
-                      </Box>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
-                          <TextField
-                            fullWidth
-                            label="State Name"
-                            value={state.name}
-                            onChange={(e) => {
-                              const updatedStates = [...newOrg.states_data];
-                              updatedStates[stateIndex].name = e.target.value;
-                              setNewOrg((prev) => ({
-                                ...prev,
-                                states_data: updatedStates,
-                              }));
-                            }}
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                          <TextField
-                            fullWidth
-                            label="Description"
-                            value={state.description}
-                            onChange={(e) => {
-                              const updatedStates = [...newOrg.states_data];
-                              updatedStates[stateIndex].description =
-                                e.target.value;
-                              setNewOrg((prev) => ({
-                                ...prev,
-                                states_data: updatedStates,
-                              }));
-                            }}
-                          />
-                        </Grid>
-
-                        {/* Links Section */}
-                        <Grid item xs={12}>
-                          <Typography variant="subtitle2" sx={{ mb: 1 }}>
-                            Links
-                          </Typography>
-
-                          {state.links?.map((link, linkIndex) => (
-                            <Box
-                              key={linkIndex}
-                              sx={{ display: "flex", gap: 1, mb: 1 }}
-                            >
-                              <TextField
-                                size="small"
-                                label="Title"
-                                value={link.title}
-                                onChange={(e) => {
-                                  const updatedStates = [...newOrg.states_data];
-                                  updatedStates[stateIndex].links[
-                                    linkIndex
-                                  ].title = e.target.value;
-                                  setNewOrg((prev) => ({
-                                    ...prev,
-                                    states_data: updatedStates,
-                                  }));
-                                }}
-                                sx={{ flex: 1 }}
-                              />
-                              <TextField
-                                size="small"
-                                label="URL"
-                                value={link.url}
-                                onChange={(e) => {
-                                  const updatedStates = [...newOrg.states_data];
-                                  updatedStates[stateIndex].links[
-                                    linkIndex
-                                  ].url = e.target.value;
-                                  setNewOrg((prev) => ({
-                                    ...prev,
-                                    states_data: updatedStates,
-                                  }));
-                                }}
-                                sx={{ flex: 1 }}
-                              />
-                              <IconButton
-                                size="small"
-                                color="error"
-                                onClick={() => {
-                                  const updatedStates = [...newOrg.states_data];
-                                  updatedStates[stateIndex].links.splice(
-                                    linkIndex,
-                                    1
-                                  );
-                                  setNewOrg((prev) => ({
-                                    ...prev,
-                                    states_data: updatedStates,
-                                  }));
-                                }}
-                              >
-                                <RemoveCircle />
-                              </IconButton>
-                            </Box>
-                          ))}
-
-                          {/* Add New Link */}
-                          <Box sx={{ display: "flex", gap: 1, mt: 1 }}>
-                            <TextField
-                              size="small"
-                              label="New Link Title"
-                              value={newLink.title}
-                              onChange={(e) =>
-                                setNewLink((prev) => ({
-                                  ...prev,
-                                  title: e.target.value,
-                                }))
-                              }
-                              sx={{ flex: 1 }}
-                            />
-                            <TextField
-                              size="small"
-                              label="New Link URL"
-                              value={newLink.url}
-                              onChange={(e) =>
-                                setNewLink((prev) => ({
-                                  ...prev,
-                                  url: e.target.value,
-                                }))
-                              }
-                              sx={{ flex: 1 }}
-                            />
-                            <IconButton
-                              color="primary"
-                              onClick={() => {
-                                if (newLink.title && newLink.url) {
-                                  const updatedStates = [...newOrg.states_data];
-                                  updatedStates[stateIndex].links = [
-                                    ...(updatedStates[stateIndex].links || []),
-                                    { ...newLink },
-                                  ];
-                                  setNewOrg((prev) => ({
-                                    ...prev,
-                                    states_data: updatedStates,
-                                  }));
-                                  setNewLink({ title: "", url: "" });
-                                }
-                              }}
-                            >
-                              <AddCircle />
-                            </IconButton>
-                          </Box>
-                        </Grid>
-                      </Grid>
-                    </AccordionDetails>
-                  </Accordion>
-                ))}
-
-                {/* Add New State */}
-                <Box sx={{ display: "flex", gap: 1, mt: 2 }}>
-                  <TextField
-                    size="small"
-                    label="New State Name"
-                    value={newStateData.name}
-                    onChange={(e) =>
-                      setNewStateData((prev) => ({
-                        ...prev,
-                        name: e.target.value,
-                      }))
-                    }
-                    sx={{ flex: 1 }}
-                  />
-                  <TextField
-                    size="small"
-                    label="New State Description"
-                    value={newStateData.description}
-                    onChange={(e) =>
-                      setNewStateData((prev) => ({
-                        ...prev,
-                        description: e.target.value,
-                      }))
-                    }
-                    sx={{ flex: 1 }}
-                  />
-                  <IconButton
-                    color="primary"
-                    onClick={() => {
-                      if (newStateData.name && newStateData.description) {
-                        setNewOrg((prev) => ({
-                          ...prev,
-                          states_data: [
-                            ...prev.states_data,
-                            { ...newStateData },
-                          ],
-                        }));
-                        setNewStateData({
-                          name: "",
-                          description: "",
-                          links: [],
-                        });
-                      }
-                    }}
-                  >
-                    <AddCircle />
-                  </IconButton>
-                </Box>
-              </Grid>
-            </Grid>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => setOrgDialogOpen(false)}>Cancel</Button>
-            <Button
-              variant="contained"
-              onClick={() => saveOrgService(newOrg)}
-              disabled={loading}
-            >
-              {loading ? <CircularProgress size={20} /> : "Save"}
-            </Button>
-          </DialogActions>
-        </Dialog>
+        <OrganisationDialog
+          orgDialogOpen={orgDialogOpen}
+          setOrgDialogOpen={setOrgDialogOpen}
+          editingOrg={editingOrg}
+          newOrg={newOrg}
+          setNewOrg={setNewOrg}
+          newStateData={newStateData}
+          setNewStateData={setNewStateData}
+          newLink={newLink}
+          setNewLink={setNewLink}
+          loading={loading}
+          saveOrgService={saveOrgService}
+          removeStateFromOrg={removeStateFromOrg}
+        />
 
         {/* Snackbar */}
         <Snackbar
           open={snackbar.open}
           autoHideDuration={6000}
           onClose={() => setSnackbar({ ...snackbar, open: false })}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
         >
           <Alert
             onClose={() => setSnackbar({ ...snackbar, open: false })}
             severity={snackbar.severity}
-            sx={{ width: "100%" }}
+            sx={{
+              width: "100%",
+              borderRadius: 2,
+              boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
+            }}
           >
             {snackbar.message}
           </Alert>

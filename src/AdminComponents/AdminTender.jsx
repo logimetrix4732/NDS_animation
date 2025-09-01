@@ -166,14 +166,15 @@ export default function AdminTender() {
   const [selectedPriority, setSelectedPriority] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("");
-  const [formOpen, setFormOpen] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const [tenders, setTenders] = useState([]);
   const [fetchLoading, setFetchLoading] = useState(true);
   const [fetchError, setFetchError] = useState("");
   const [documentDialogOpen, setDocumentDialogOpen] = useState(false);
   const [selectedTender, setSelectedTender] = useState(null);
-
+  console.log(selectedTender, "=selectedTender");
+  const [formDialogOpen, setFormDialogOpen] = useState(false);
   const [formData, setFormData] = useState({
     tenderTitle: "",
     referenceNo: "",
@@ -188,94 +189,98 @@ export default function AdminTender() {
     tenderCard: "Active",
     tenderFile: null,
     corrigendumFile: null,
+    tenderFileName: "",
+    corrigendumFileName: "",
     image: null,
   });
-
+  console.log(formData, "=formData");
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
   // Fetch tenders from API
-  useEffect(() => {
-    const fetchTenders = async () => {
-      try {
-        setFetchLoading(true);
-        setFetchError("");
+  const fetchTenders = async () => {
+    try {
+      setFetchLoading(true);
+      setFetchError("");
 
-        const token = localStorage.getItem("token");
-        if (!token) {
-          setFetchError("Please login first. No authentication token found.");
-          setFetchLoading(false);
-          return;
-        }
-
-        const response = await getFetch(
-          `${import.meta.env.VITE_API_BASE_URL}/tenders`
-        );
-
-        console.log("Tenders API Response:", response);
-
-        if (response && response.status === 200) {
-          console.log("Raw API Response Data:", response.data.data);
-
-          // Map the API response to match the expected format
-          const mappedTenders = response.data.data.map((tender) => {
-            console.log("Processing tender:", tender);
-
-            // Try different possible field names for tender file
-            const tenderFile =
-              tender.tenderFile ||
-              tender.tender_file ||
-              tender.file ||
-              tender.document ||
-              tender.pdfFile ||
-              null;
-            console.log("Found tenderFile:", tenderFile);
-
-            return {
-              id: tender.id || tender.referenceNo || `TND-${Date.now()}`,
-              title: tender.tenderTitle || "Untitled Tender",
-              description: tender.description || "No description available",
-              status: "Published", // Default status
-              priority: "Medium", // Default priority
-              startDate:
-                tender.startDate || new Date().toISOString().split("T")[0],
-              estimatedValue: tender.estimatedValues || "$0",
-              location: tender.location || "Not specified",
-              preBidMeeting: tender.preBidMeeting || new Date().toISOString(),
-              lastDateSubmission:
-                tender.lastDateSubmission || new Date().toISOString(),
-              bidOpening:
-                tender.bidOpenning ||
-                tender.bidOpening ||
-                new Date().toISOString(),
-              participants: Math.floor(Math.random() * 50) + 1, // Random participants for now
-              category: "Infrastructure", // Default category
-              tenderCard: tender.tenderCard || "Inactive",
-              tenderFile: tenderFile,
-              image:
-                tender.image ||
-                "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400",
-            };
-          });
-
-          console.log("Mapped Tenders:", mappedTenders);
-          setTenders(mappedTenders);
-        } else {
-          console.error("Failed to fetch tenders:", response);
-          setFetchError("Failed to fetch tenders. Please try again.");
-          setTenders([]);
-        }
-      } catch (error) {
-        console.error("Error fetching tenders:", error);
-        setFetchError("Error fetching tenders. Please try again.");
-        setTenders([]);
-      } finally {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setFetchError("Please login first. No authentication token found.");
         setFetchLoading(false);
+        return;
       }
-    };
 
+      const response = await getFetch(
+        `${import.meta.env.VITE_API_BASE_URL}/tenders`
+      );
+
+      if (response && response.status === 200) {
+        console.log("Raw API Response Data:", response.data.data);
+
+        // Map the API response to match the expected format
+        const mappedTenders = response.data.data.map((tender) => {
+          // Try different possible field names for tender file
+          const tenderFile =
+            tender.tenderFile ||
+            tender.tender_file ||
+            tender.file ||
+            tender.document ||
+            tender.pdfFile ||
+            null;
+          console.log("Found tenderFile:", tenderFile);
+
+          return {
+            id: tender.id || tender.referenceNo || `TND-${Date.now()}`,
+            title: tender.tenderTitle || "Untitled Tender",
+            description: tender.description || "No description available",
+            status: "Published", // Default status
+            priority: "Medium", // Default priority
+            startDate:
+              tender.startDate || new Date().toISOString().split("T")[0],
+            estimatedValue: tender.estimatedValues || "$0",
+            location: tender.location || "Not specified",
+            preBidMeeting: tender.preBidMeeting || new Date().toISOString(),
+            lastDateSubmission:
+              tender.lastDateSubmission || new Date().toISOString(),
+            bidOpening:
+              tender.bidOpenning ||
+              tender.bidOpening ||
+              new Date().toISOString(),
+            participants: Math.floor(Math.random() * 50) + 1, // Random participants for now
+            category: "Infrastructure", // Default category
+            tenderCard: tender.tenderCard || "Inactive",
+            tenderFile: tenderFile,
+            tenderFileName: tender.tenderFileName || "Not specified",
+            tenderFilePath: tender.tenderFilePath || null,
+            referenceNo: tender.referenceNo || "Not specified",
+            image:
+              tender.image ||
+              "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400",
+          };
+        });
+
+        setTenders(mappedTenders);
+      } else {
+        console.error("Failed to fetch tenders:", response);
+        setFetchError("Failed to fetch tenders. Please try again.");
+        setTenders([]);
+      }
+    } catch (error) {
+      console.error("Error fetching tenders:", error);
+      setFetchError("Error fetching tenders. Please try again.");
+      setTenders([]);
+    } finally {
+      setFetchLoading(false);
+    }
+  };
+  useEffect(() => {
     fetchTenders();
   }, []);
 
@@ -312,17 +317,18 @@ export default function AdminTender() {
     selectedCategory,
     selectedLocation,
   ]);
-
   const handleCloseSnackbar = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
+    setSnackbar({ ...snackbar, open: false });
     setSuccessMessage("");
     setErrorMessage("");
   };
 
-  const handleFormOpen = () => {
-    setFormOpen(true);
+  const handleFormClose = () => {
+    setFormDialogOpen(false);
+    // Reset form data when closing
     setFormData({
       tenderTitle: "",
       referenceNo: "",
@@ -334,16 +340,15 @@ export default function AdminTender() {
       lastDateSubmission: "",
       bidOpening: "",
       corrigendum: "Inactive",
-      tenderCard: "Inactive",
+      tenderCard: "Active",
       tenderFile: null,
       corrigendumFile: null,
+      tenderFileName: "",
+      corrigendumFileName: "",
       image: null,
     });
+    setSelectedTender(null);
     setErrors({});
-  };
-
-  const handleFormClose = () => {
-    setFormOpen(false);
   };
 
   const handleChange = (e) => {
@@ -415,17 +420,41 @@ export default function AdminTender() {
         formDataToSend.append("image", formData.image);
       }
 
-      const response = await postFetch(
-        `${import.meta.env.VITE_API_BASE_URL}/tender/create`,
-        formDataToSend
-      );
+      let response;
+      const token = localStorage.getItem("token");
+
+      if (selectedTender && selectedTender.id) {
+        // Update existing tender
+        response = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}/tender/update/${
+            selectedTender.id
+          }`,
+          {
+            method: "PUT",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            body: formDataToSend,
+          }
+        );
+      } else {
+        // Create new tender
+        response = await postFetch(
+          `${import.meta.env.VITE_API_BASE_URL}/tender/create`,
+          formDataToSend
+        );
+      }
 
       console.log("API Response:", response);
 
-      if (response && response.status === 201) {
+      if (response && (response.status === 201 || response.status === 200)) {
         console.log("Success! Closing modal...");
-        setSuccessMessage("Tender created successfully!");
-        setFormOpen(false);
+        setSuccessMessage(
+          selectedTender
+            ? "Tender updated successfully!"
+            : "Tender created successfully!"
+        );
+        setFormDialogOpen(false);
 
         // Reset form
         setFormData({
@@ -439,14 +468,17 @@ export default function AdminTender() {
           lastDateSubmission: "",
           bidOpening: "",
           corrigendum: "Inactive",
-          tenderCard: "Inactive",
+          tenderCard: "Active",
           tenderFile: null,
           corrigendumFile: null,
           image: null,
         });
 
+        // Clear selected tender
+        setSelectedTender(null);
+
         // Refresh the tenders list
-        window.location.reload();
+        fetchTenders();
       } else {
         console.log("Error response:", response);
         if (response && response.status === 401) {
@@ -475,6 +507,181 @@ export default function AdminTender() {
   const handleCloseDocumentDialog = () => {
     setDocumentDialogOpen(false);
     setSelectedTender(null);
+  };
+
+  const handleDownloadTender = async (tender) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setSnackbar({
+          open: true,
+          message: "Please login first. No authentication token found.",
+          severity: "error",
+        });
+        return;
+      }
+
+      if (!tender.tenderFilePath) {
+        setSnackbar({
+          open: true,
+          message: "No file available for download.",
+          severity: "warning",
+        });
+        return;
+      }
+
+      // Create download URL with authentication
+      const downloadUrl = `${import.meta.env.VITE_API_BASE_URL}/download/files${
+        tender.tenderFilePath
+      }`;
+
+      const response = await fetch(downloadUrl, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        // Get the blob from response and set proper MIME type for PDF
+        const blob = new Blob([await response.blob()], {
+          type: "application/pdf",
+        });
+
+        // Create download link
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+
+        // Ensure proper filename with .pdf extension
+        let filename = tender.tenderFileName || "tender-document";
+        if (!filename.toLowerCase().endsWith(".pdf")) {
+          filename += ".pdf";
+        }
+        link.download = filename;
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+
+        setSnackbar({
+          open: true,
+          message: "File downloaded successfully!",
+          severity: "success",
+        });
+      } else {
+        throw new Error("Failed to download file");
+      }
+    } catch (error) {
+      console.error("Error downloading tender:", error);
+      setSnackbar({
+        open: true,
+        message: "Error downloading file. Please try again.",
+        severity: "error",
+      });
+    }
+  };
+
+  const handleEditTender = (tender) => {
+    // Fill form data with tender details for editing
+    console.log(tender, "=tender");
+    setFormData({
+      tenderTitle: tender.tenderTitle || tender.title || "",
+      referenceNo: tender.referenceNo || "",
+      description: tender.description || "",
+      startDate: tender.startDate
+        ? new Date(tender.startDate).toISOString().split("T")[0]
+        : "",
+      estimatedValues: tender.estimatedValues || tender.estimatedValue || "",
+      location: tender.location || "",
+      preBidMeeting: tender.preBidMeeting
+        ? new Date(tender.preBidMeeting).toISOString().slice(0, 16)
+        : "",
+      lastDateSubmission: tender.lastDateSubmission
+        ? new Date(tender.lastDateSubmission).toISOString().slice(0, 16)
+        : "",
+      bidOpening:
+        tender.bidOpening || tender.bidOpenning
+          ? new Date(tender.bidOpening || tender.bidOpenning)
+              .toISOString()
+              .slice(0, 16)
+          : "",
+      corrigendum: tender.corrigendum || "Inactive",
+      tenderCard: tender.tenderCard || "Active",
+      tenderFile: tender.tenderFileName
+        ? { name: tender.tenderFileName }
+        : null,
+      tenderFileName: tender.tenderFileName || "",
+      tenderFilePath: tender.tenderFilePath || "",
+      corrigendumFile: tender.CorrigendumFileName
+        ? { name: tender.CorrigendumFileName }
+        : null,
+      corrigendumFileName: tender.CorrigendumFileName || "",
+      image: null,
+    });
+    setSelectedTender(tender);
+    setFormDialogOpen(true);
+  };
+
+  const handleDeleteTender = async (tenderId) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setSnackbar({
+          open: true,
+          message: "Please login first. No authentication token found.",
+          severity: "error",
+        });
+        return;
+      }
+
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/tender/delete/${tenderId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log("Delete response status:", response.status);
+      console.log("Delete response ok:", response.ok);
+
+      // Check if response is ok (status 200-299) or specifically 200
+      if (response.ok || response.status === 200) {
+        // Try to parse response body if it exists
+        try {
+          const responseData = await response.text();
+          console.log("Delete response body:", responseData);
+        } catch (parseError) {
+          console.log("No response body or parsing error:", parseError);
+        }
+
+        setSnackbar({
+          open: true,
+          message: "Tender deleted successfully!",
+          severity: "success",
+        });
+        fetchTenders(); // Refresh the list
+      } else {
+        const errorData = await response.json().catch(() => ({}));
+        console.error("Delete error response:", errorData);
+        throw new Error(
+          errorData.message ||
+            `Failed to delete tender. Status: ${response.status}`
+        );
+      }
+    } catch (error) {
+      console.error("Error deleting tender:", error);
+      setSnackbar({
+        open: true,
+        message: error.message || "Error deleting tender. Please try again.",
+        severity: "error",
+      });
+    }
   };
 
   return (
@@ -680,7 +887,7 @@ export default function AdminTender() {
                   <Button
                     variant="contained"
                     startIcon={<AddIcon />}
-                    onClick={() => setFormOpen(true)}
+                    onClick={() => setFormDialogOpen(true)}
                     sx={{
                       borderRadius: 3,
                       px: 3,
@@ -792,43 +999,6 @@ export default function AdminTender() {
                     />
                   </Grid>
 
-                  {/* Category Filter */}
-                  <Grid item xs={12} sm={6} md={1.5}>
-                    <FormControl fullWidth size="small">
-                      <Select
-                        value={selectedCategory}
-                        onChange={(e) => setSelectedCategory(e.target.value)}
-                        displayEmpty
-                        sx={{
-                          borderRadius: 1.5,
-                          backgroundColor: (t) =>
-                            t.palette.mode === "dark"
-                              ? "rgba(255,255,255,0.05)"
-                              : "#f9fafb",
-                          "& .MuiOutlinedInput-notchedOutline": {
-                            borderColor: (t) =>
-                              t.palette.mode === "dark"
-                                ? "rgba(255,255,255,0.1)"
-                                : "#e5e7eb",
-                          },
-                          "&:hover .MuiOutlinedInput-notchedOutline": {
-                            borderColor: "primary.main",
-                          },
-                          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                            borderColor: "primary.main",
-                          },
-                        }}
-                      >
-                        <MenuItem value="">All Categories</MenuItem>
-                        <MenuItem value="Infrastructure">
-                          Infrastructure
-                        </MenuItem>
-                        <MenuItem value="Construction">Construction</MenuItem>
-                        <MenuItem value="Technology">Technology</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Grid>
-
                   {/* Status Filter */}
                   <Grid item xs={12} sm={6} md={1.5}>
                     <FormControl fullWidth size="small">
@@ -859,41 +1029,6 @@ export default function AdminTender() {
                         <MenuItem value="">All Status</MenuItem>
                         <MenuItem value="Active">Active</MenuItem>
                         <MenuItem value="Inactive">Inactive</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Grid>
-
-                  {/* Priority Filter */}
-                  <Grid item xs={12} sm={6} md={1.5}>
-                    <FormControl fullWidth size="small">
-                      <Select
-                        value={selectedPriority}
-                        onChange={(e) => setSelectedPriority(e.target.value)}
-                        displayEmpty
-                        sx={{
-                          borderRadius: 1.5,
-                          backgroundColor: (t) =>
-                            t.palette.mode === "dark"
-                              ? "rgba(255,255,255,0.05)"
-                              : "#f9fafb",
-                          "& .MuiOutlinedInput-notchedOutline": {
-                            borderColor: (t) =>
-                              t.palette.mode === "dark"
-                                ? "rgba(255,255,255,0.1)"
-                                : "#e5e7eb",
-                          },
-                          "&:hover .MuiOutlinedInput-notchedOutline": {
-                            borderColor: "primary.main",
-                          },
-                          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                            borderColor: "primary.main",
-                          },
-                        }}
-                      >
-                        <MenuItem value="">All Priorities</MenuItem>
-                        <MenuItem value="High">High Priority</MenuItem>
-                        <MenuItem value="Medium">Medium Priority</MenuItem>
-                        <MenuItem value="Low">Low Priority</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
@@ -1129,6 +1264,9 @@ export default function AdminTender() {
             <TenderCardsList
               filteredTenders={filteredTenders}
               onViewDocument={handleViewDocument}
+              onEditTender={handleEditTender}
+              onDeleteTender={handleDeleteTender}
+              onDownloadTender={handleDownloadTender}
             />
           )}
 
@@ -1269,7 +1407,7 @@ export default function AdminTender() {
                   )}
                   <Button
                     variant="contained"
-                    onClick={() => setFormOpen(true)}
+                    onClick={() => setFormDialogOpen(true)}
                     startIcon={<AddIcon />}
                     sx={{
                       borderRadius: 2,
@@ -1297,13 +1435,14 @@ export default function AdminTender() {
 
       {/* Tender Form Drawer */}
       <AdminTenderForm
-        open={formOpen}
+        open={formDialogOpen}
         onClose={handleFormClose}
         loading={loading}
         formData={formData}
         handleChange={handleChange}
         handleFileChange={handleFileChange}
         handleSubmit={handleSubmit}
+        isEditMode={!!selectedTender}
       />
 
       {/* Document Viewer Dialog */}
@@ -1314,6 +1453,24 @@ export default function AdminTender() {
       />
 
       {/* Snackbar for success/error messages */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbar.severity}
+          sx={{
+            width: "100%",
+            borderRadius: 2,
+            boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
+          }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
       <Snackbar
         open={!!successMessage}
         autoHideDuration={6000}

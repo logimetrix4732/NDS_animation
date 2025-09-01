@@ -31,6 +31,8 @@ const AdminPublicationForm = ({
   handleChange,
   handleFileChange,
   handleSubmit,
+  isEditMode = false,
+  editingPublication = null,
 }) => {
   const isLargeScreen = useMediaQuery("(min-width: 1024px)");
 
@@ -113,6 +115,10 @@ const AdminPublicationForm = ({
                   <Typography color="gray">
                     {formData.thumbnail
                       ? formData.thumbnail.name
+                      : isEditMode && editingPublication?.thumbnail
+                      ? `Current: ${editingPublication.thumbnail
+                          .split("/")
+                          .pop()}`
                       : "Click to Upload Thumbnail (JPG, JPEG, PNG only)"}
                   </Typography>
                 </Box>
@@ -149,6 +155,10 @@ const AdminPublicationForm = ({
                   <Typography color="gray">
                     {formData.pdfFile
                       ? formData.pdfFile.name
+                      : isEditMode && editingPublication?.pdfFile
+                      ? `Current: ${editingPublication.pdfFile
+                          .split("/")
+                          .pop()}`
                       : "Click to Upload Document (PDF only)"}
                   </Typography>
                 </Box>
@@ -279,6 +289,10 @@ const AdminPublicationForm = ({
                   <Typography color="gray">
                     {formData.thumbnail
                       ? formData.thumbnail.name
+                      : isEditMode && editingPublication?.thumbnail
+                      ? `Current: ${editingPublication.thumbnail
+                          .split("/")
+                          .pop()}`
                       : "Click to Upload Thumbnail (JPG, JPEG, PNG only)"}
                   </Typography>
                 </Box>
@@ -315,6 +329,10 @@ const AdminPublicationForm = ({
                   <Typography color="gray">
                     {formData.pdfHindi
                       ? formData.pdfHindi.name
+                      : isEditMode && editingPublication?.pdfHindi
+                      ? `Current: ${editingPublication.pdfHindi
+                          .split("/")
+                          .pop()}`
                       : "Click to Upload Hindi Document (PDF only)"}
                   </Typography>
                 </Box>
@@ -351,6 +369,10 @@ const AdminPublicationForm = ({
                   <Typography color="gray">
                     {formData.pdfEnglish
                       ? formData.pdfEnglish.name
+                      : isEditMode && editingPublication?.pdfEnglish
+                      ? `Current: ${editingPublication.pdfEnglish
+                          .split("/")
+                          .pop()}`
                       : "Click to Upload English Document (PDF only)"}
                   </Typography>
                 </Box>
@@ -461,6 +483,10 @@ const AdminPublicationForm = ({
                   <Typography color="gray">
                     {formData.pdfFile
                       ? formData.pdfFile.name
+                      : isEditMode && editingPublication?.pdfFile
+                      ? `Current: ${editingPublication.pdfFile
+                          .split("/")
+                          .pop()}`
                       : "Click to Upload Policy Document (PDF only)"}
                   </Typography>
                 </Box>
@@ -583,7 +609,7 @@ const AdminPublicationForm = ({
         >
           <KeyboardBackspaceIcon sx={{ mr: 2 }} />
           <Typography variant="h6" fontWeight="bold" sx={{ color: "#141d38" }}>
-            Publication Form
+            {isEditMode ? "Edit Publication" : "Publication Form"}
           </Typography>
         </Box>
         <IconButton onClick={onClose}>
@@ -677,7 +703,13 @@ const AdminPublicationForm = ({
           onClick={handleSubmit}
           disabled={loading}
         >
-          {loading ? "Creating..." : "Create Publication"}
+          {loading
+            ? isEditMode
+              ? "Updating..."
+              : "Creating..."
+            : isEditMode
+            ? "Update Publication"
+            : "Create Publication"}
         </Button>
       </DialogActions>
     </Drawer>

@@ -18,8 +18,12 @@ import {
 } from "@mui/icons-material";
 import { getFetch } from "../Api/Api";
 
-const DocumentViewerDialog = ({ open, onClose, tender }) => {
-  console.log(tender, "=tenderdaskjfhskdjf");
+const PublicationDocumentViewer = ({
+  open,
+  onClose,
+  publication,
+  selectedStatus,
+}) => {
   const [documentUrl, setDocumentUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -28,24 +32,14 @@ const DocumentViewerDialog = ({ open, onClose, tender }) => {
   const [iframeError, setIframeError] = useState(false);
 
   useEffect(() => {
-    if (open && tender) {
+    if (open && publication) {
       fetchDocument();
     }
-  }, [open, tender]);
+  }, [open, publication]);
 
   const fetchDocument = async () => {
-    console.log("=== FETCH DOCUMENT CALLED ===");
-    console.log("Tender object:", tender);
-    console.log("Tender tenderFile:", tender?.tenderFile);
-
-    if (!tender) {
-      setError("No tender data provided");
-      return;
-    }
-
-    if (!tender.tenderFilePath && !tender.tenderFile) {
-      console.log("No tenderFilePath or tenderFile found in tender object");
-      setError("No document available for this tender");
+    if (!publication) {
+      setError("No publication data provided");
       return;
     }
 
@@ -61,11 +55,46 @@ const DocumentViewerDialog = ({ open, onClose, tender }) => {
         return;
       }
 
-      // Construct the document URL based on the tender file path
-      let documentUrl;
+      // Determine which file to show based on publication type and document type
+      let filePath = null;
+      let fileName = "";
 
-      // Use tenderFilePath if available, otherwise fallback to tenderFile
-      const filePath = tender.tenderFilePath || tender.tenderFile;
+      if (selectedStatus === "Annual Reports") {
+        // For Annual Reports, check documentType to show specific file
+        if (publication.documentType === "hindi" && publication.pdfHindi) {
+          filePath = publication.pdfHindi;
+          fileName = "Hindi Annual Report";
+        } else if (
+          publication.documentType === "english" &&
+          publication.pdfEnglish
+        ) {
+          filePath = publication.pdfEnglish;
+          fileName = "English Annual Report";
+        } else {
+          // Fallback: prioritize Hindi over English
+          if (publication.pdfHindi) {
+            filePath = publication.pdfHindi;
+            fileName = "Hindi Annual Report";
+          } else if (publication.pdfEnglish) {
+            filePath = publication.pdfEnglish;
+            fileName = "English Annual Report";
+          }
+        }
+      } else {
+        // For HR Compliances and Policies
+        if (publication.pdfFile) {
+          filePath = publication.pdfFile;
+          fileName = publication.title || "Publication Document";
+        }
+      }
+
+      if (!filePath) {
+        setError("No document available for this publication");
+        return;
+      }
+
+      // Construct the document URL
+      let documentUrl;
 
       // Check if filePath is already a full URL
       if (filePath.startsWith("http://") || filePath.startsWith("https://")) {
@@ -75,13 +104,10 @@ const DocumentViewerDialog = ({ open, onClose, tender }) => {
         documentUrl = `${import.meta.env.VITE_API_BASE_URL}/files${filePath}`;
       }
 
-      console.log("Constructed Document URL:", documentUrl);
-
       // Try to test if the document is accessible, but don't fail if it's not
       try {
         const response = await getFetch(documentUrl);
         if (response && response.status === 200) {
-          console.log("Document is accessible via API");
         }
       } catch (apiError) {
         console.log("API check failed, but will try iframe:", apiError);
@@ -121,6 +147,26 @@ const DocumentViewerDialog = ({ open, onClose, tender }) => {
     onClose();
   };
 
+  const getDocumentTitle = () => {
+    if (selectedStatus === "Annual Reports") {
+      if (publication?.documentType === "hindi") {
+        return "Annual Report (Hindi)";
+      } else if (publication?.documentType === "english") {
+        return "Annual Report (English)";
+      } else {
+        // Fallback
+        if (publication?.pdfHindi && publication?.pdfEnglish) {
+          return "Annual Report (Hindi/English)";
+        } else if (publication?.pdfHindi) {
+          return "Annual Report (Hindi)";
+        } else if (publication?.pdfEnglish) {
+          return "Annual Report (English)";
+        }
+      }
+    }
+    return publication?.title || "Publication Document";
+  };
+
   return (
     <Dialog
       open={open}
@@ -148,7 +194,7 @@ const DocumentViewerDialog = ({ open, onClose, tender }) => {
       >
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           <Typography variant="h6" sx={{ fontWeight: 600, color: "white" }}>
-            {tender?.tenderFileName || "Tender Document"}
+            {getDocumentTitle()}
           </Typography>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -256,7 +302,7 @@ const DocumentViewerDialog = ({ open, onClose, tender }) => {
                 border: "none",
                 borderRadius: "0 0 8px 8px",
               }}
-              title="Tender Document"
+              title="Publication Document"
             />
           </Box>
         )}
@@ -295,4 +341,4 @@ const DocumentViewerDialog = ({ open, onClose, tender }) => {
   );
 };
 
-export default DocumentViewerDialog;
+export default PublicationDocumentViewer;

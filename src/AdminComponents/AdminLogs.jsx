@@ -160,6 +160,8 @@ export default function AdminLogs() {
 
       if (response && response.status === 200) {
         const data = response.data.data;
+        console.log("Setting logs:", data.logs);
+        console.log("Setting total:", data.total);
         setLogs(data.logs || []);
         setTotal(data.total || 0);
         setTotalPages(data.totalPages || 0);
@@ -703,32 +705,15 @@ export default function AdminLogs() {
                             },
                           }}
                         >
-                          <TableCell padding="checkbox" sx={{ pl: 3 }}>
-                            <Checkbox
-                              color="primary"
-                              onChange={(e) => {
-                                if (e.target.checked) {
-                                  setSelectedLogs(logs.map((log) => log.id));
-                                } else {
-                                  setSelectedLogs([]);
-                                }
-                              }}
-                              checked={
-                                selectedLogs.length === logs.length &&
-                                logs.length > 0
-                              }
-                            />
-                          </TableCell>
                           <TableCell>ID</TableCell>
                           <TableCell>Email</TableCell>
                           <TableCell>Status</TableCell>
-                          <TableCell>Timestamp</TableCell>
-                          <TableCell>Tender ID</TableCell>
-                          <TableCell>Created</TableCell>
+                          <TableCell>Message</TableCell>
+                          <TableCell>Created At</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {logs.length === 0 ? (
+                        {!loading && logs.length === 0 ? (
                           <TableRow>
                             <TableCell
                               colSpan={7}
@@ -744,7 +729,7 @@ export default function AdminLogs() {
                             </TableCell>
                           </TableRow>
                         ) : (
-                          logs.map((log) => (
+                          logs.map((log, index) => (
                             <TableRow
                               key={log.id}
                               hover
@@ -775,26 +760,6 @@ export default function AdminLogs() {
                                 },
                               }}
                             >
-                              <TableCell padding="checkbox" sx={{ pl: 3 }}>
-                                <Checkbox
-                                  color="primary"
-                                  checked={selectedLogs.includes(log.id)}
-                                  onChange={(e) => {
-                                    if (e.target.checked) {
-                                      setSelectedLogs([
-                                        ...selectedLogs,
-                                        log.id,
-                                      ]);
-                                    } else {
-                                      setSelectedLogs(
-                                        selectedLogs.filter(
-                                          (id) => id !== log.id
-                                        )
-                                      );
-                                    }
-                                  }}
-                                />
-                              </TableCell>
                               <TableCell>
                                 <Typography
                                   variant="body2"
@@ -805,7 +770,7 @@ export default function AdminLogs() {
                                     color: "primary.main",
                                   }}
                                 >
-                                  #{log.id}
+                                  #{index + 1}
                                 </Typography>
                               </TableCell>
                               <TableCell>
@@ -928,42 +893,18 @@ export default function AdminLogs() {
                                 </Stack>
                               </TableCell>
                               <TableCell>
-                                <Stack
-                                  direction="row"
-                                  alignItems="center"
-                                  spacing={1}
-                                >
-                                  <AccessTime
-                                    sx={{
-                                      fontSize: 16,
-                                      color: "text.secondary",
-                                    }}
-                                  />
-                                  <Typography
-                                    variant="body2"
-                                    sx={{
-                                      fontFamily:
-                                        "'SF Mono', 'Monaco', 'Inconsolata', monospace",
-                                      fontWeight: 500,
-                                    }}
-                                  >
-                                    {formatTimestamp(log.timestamp)}
-                                  </Typography>
-                                </Stack>
-                              </TableCell>
-                              <TableCell>
                                 <Typography
                                   variant="body2"
                                   sx={{
-                                    fontFamily:
-                                      "'SF Mono', 'Monaco', 'Inconsolata', monospace",
                                     fontWeight: 500,
-                                    color: log.tenderId
-                                      ? "primary.main"
-                                      : "text.secondary",
+                                    color: "text.primary",
+                                    maxWidth: 200,
+                                    overflow: "hidden",
+                                    textOverflow: "ellipsis",
+                                    whiteSpace: "nowrap",
                                   }}
                                 >
-                                  {log.tenderId || "N/A"}
+                                  {log.message}
                                 </Typography>
                               </TableCell>
                               <TableCell>

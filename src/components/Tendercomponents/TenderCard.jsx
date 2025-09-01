@@ -145,15 +145,7 @@ const TenderCard = ({
                   >
                     Tender Details
                   </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: 1,
-                      border: "1px solid red",
-                      minWidth: "300px",
-                    }}
-                  >
+                  <Box>
                     <Box
                       sx={{
                         display: "flex",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Chip,
@@ -30,6 +30,7 @@ import {
   Edit as EditIcon,
   Delete as DeleteIcon,
 } from "@mui/icons-material";
+import PublicationDocumentViewer from "./PublicationDocumentViewer";
 
 const getStatusIcon = (status) => {
   switch (status) {
@@ -59,9 +60,22 @@ const PublicationsTable = ({
   handleChangeRowsPerPage,
   isLoading,
   handleDeleteClick,
+  handleEditClick,
   loading,
   selectedStatus,
 }) => {
+  const [documentViewerOpen, setDocumentViewerOpen] = useState(false);
+  const [selectedPublication, setSelectedPublication] = useState(null);
+
+  const handleViewDocument = (publication, documentType = null) => {
+    setSelectedPublication({ ...publication, documentType });
+    setDocumentViewerOpen(true);
+  };
+
+  const handleCloseDocumentViewer = () => {
+    setDocumentViewerOpen(false);
+    setSelectedPublication(null);
+  };
   return (
     <Paper
       sx={{
@@ -238,14 +252,7 @@ const PublicationsTable = ({
                             <IconButton
                               size="small"
                               color="primary"
-                              onClick={() =>
-                                window.open(
-                                  `${import.meta.env.VITE_API_BASE_URL}/${
-                                    pub.pdfHindi
-                                  }`,
-                                  "_blank"
-                                )
-                              }
+                              onClick={() => handleViewDocument(pub, "hindi")}
                               sx={{
                                 background: (t) =>
                                   t.palette.mode === "dark"
@@ -261,14 +268,7 @@ const PublicationsTable = ({
                             <IconButton
                               size="small"
                               color="secondary"
-                              onClick={() =>
-                                window.open(
-                                  `${import.meta.env.VITE_API_BASE_URL}/${
-                                    pub.pdfEnglish
-                                  }`,
-                                  "_blank"
-                                )
-                              }
+                              onClick={() => handleViewDocument(pub, "english")}
                               sx={{
                                 background: (t) =>
                                   t.palette.mode === "dark"
@@ -286,20 +286,14 @@ const PublicationsTable = ({
                         <IconButton
                           size="small"
                           color="primary"
-                          onClick={() =>
-                            window.open(
-                              `${import.meta.env.VITE_API_BASE_URL}/files${
-                                pub.pdfFile
-                              }`,
-                              "_blank"
-                            )
-                          }
+                          onClick={() => handleViewDocument(pub)}
                           sx={{
                             background: (t) =>
                               t.palette.mode === "dark"
                                 ? "rgba(255,255,255,0.05)"
                                 : "rgba(0,0,0,0.02)",
                           }}
+                          title="View PDF"
                         >
                           <RemoveRedEyeIcon fontSize="small" />
                         </IconButton>
@@ -308,12 +302,15 @@ const PublicationsTable = ({
                       <IconButton
                         size="small"
                         color="warning"
+                        onClick={() => handleEditClick(pub)}
+                        disabled={loading}
                         sx={{
                           background: (t) =>
                             t.palette.mode === "dark"
                               ? "rgba(255,255,255,0.05)"
                               : "rgba(0,0,0,0.02)",
                         }}
+                        title="Edit Publication"
                       >
                         <EditIcon fontSize="small" />
                       </IconButton>
@@ -361,6 +358,14 @@ const PublicationsTable = ({
               ? "rgba(255,255,255,0.02)"
               : "rgba(0,0,0,0.01)",
         }}
+      />
+
+      {/* Document Viewer Dialog */}
+      <PublicationDocumentViewer
+        open={documentViewerOpen}
+        onClose={handleCloseDocumentViewer}
+        publication={selectedPublication}
+        selectedStatus={selectedStatus}
       />
     </Paper>
   );

@@ -177,15 +177,7 @@ export default function AdminPage() {
     }));
   }, [dashboardData]);
 
-  const barData = [
-    { name: "A", sales: 4000, profit: 2400 },
-    { name: "B", sales: 3000, profit: 1398 },
-    { name: "C", sales: 2000, profit: 9800 },
-    { name: "D", sales: 2780, profit: 3908 },
-    { name: "E", sales: 1890, profit: 4800 },
-    { name: "F", sales: 2390, profit: 3800 },
-    { name: "G", sales: 3490, profit: 4300 },
-  ];
+  const barData = [];
 
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
@@ -413,7 +405,7 @@ export default function AdminPage() {
               <Card sx={{ height: 360 }}>
                 <CardContent sx={{ height: 320 }}>
                   <Typography variant="h6" gutterBottom>
-                    Sales vs Profit
+                    Publication Chart
                   </Typography>
                   <ResponsiveContainer width="100%" height="85%">
                     <BarChart data={barData}>
@@ -422,8 +414,8 @@ export default function AdminPage() {
                       <YAxis />
                       <ReTooltip />
                       <Legend />
-                      <Bar dataKey="sales" />
-                      <Bar dataKey="profit" />
+                      <Bar dataKey="HR Compliances" />
+                      <Bar dataKey="Annual Reports" />
                     </BarChart>
                   </ResponsiveContainer>
                 </CardContent>
