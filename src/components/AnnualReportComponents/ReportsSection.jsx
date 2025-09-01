@@ -36,7 +36,7 @@ export default function ReportsSection() {
               item.thumbnail !== "null" &&
               item.thumbnail !== "" &&
               item.thumbnail !== null
-                ? `${import.meta.env.VITE_API_BASE_URL}/files/${item.thumbnail}`
+                ? `${import.meta.env.VITE_API_BASE_URL}/files${item.thumbnail}`
                 : "https://images.pexels.com/photos/3184302/pexels-photo-3184302.jpeg",
             pdfHindi: item.pdfHindi,
             pdfEnglish: item.pdfEnglish,
