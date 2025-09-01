@@ -92,6 +92,10 @@ const AdminPublicationForm = ({
                 textAlign: "center",
                 cursor: "pointer",
                 mb: 2,
+                minHeight: "120px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 "&:hover": { backgroundColor: "#e1eaff" },
               }}
             >
@@ -109,10 +113,19 @@ const AdminPublicationForm = ({
                     flexDirection: "column",
                     alignItems: "center",
                     gap: 1,
+                    width: "100%",
                   }}
                 >
                   <CloudUploadIcon color="primary" fontSize="large" />
-                  <Typography color="gray">
+                  <Typography
+                    color="gray"
+                    sx={{
+                      wordBreak: "break-word",
+                      textAlign: "center",
+                      maxWidth: "100%",
+                      lineHeight: 1.4,
+                    }}
+                  >
                     {formData.thumbnail
                       ? formData.thumbnail.name
                       : isEditMode && editingPublication?.thumbnail
@@ -132,6 +145,10 @@ const AdminPublicationForm = ({
                 textAlign: "center",
                 cursor: "pointer",
                 mb: 2,
+                minHeight: "120px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 "&:hover": { backgroundColor: "#e1eaff" },
               }}
             >
@@ -149,10 +166,19 @@ const AdminPublicationForm = ({
                     flexDirection: "column",
                     alignItems: "center",
                     gap: 1,
+                    width: "100%",
                   }}
                 >
                   <CloudUploadIcon color="primary" fontSize="large" />
-                  <Typography color="gray">
+                  <Typography
+                    color="gray"
+                    sx={{
+                      wordBreak: "break-word",
+                      textAlign: "center",
+                      maxWidth: "100%",
+                      lineHeight: 1.4,
+                    }}
+                  >
                     {formData.pdfFile
                       ? formData.pdfFile.name
                       : isEditMode && editingPublication?.pdfFile
@@ -266,6 +292,10 @@ const AdminPublicationForm = ({
                 textAlign: "center",
                 cursor: "pointer",
                 mb: 2,
+                minHeight: "120px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 "&:hover": { backgroundColor: "#e1eaff" },
               }}
             >
@@ -283,10 +313,19 @@ const AdminPublicationForm = ({
                     flexDirection: "column",
                     alignItems: "center",
                     gap: 1,
+                    width: "100%",
                   }}
                 >
                   <CloudUploadIcon color="primary" fontSize="large" />
-                  <Typography color="gray">
+                  <Typography
+                    color="gray"
+                    sx={{
+                      wordBreak: "break-word",
+                      textAlign: "center",
+                      maxWidth: "100%",
+                      lineHeight: 1.4,
+                    }}
+                  >
                     {formData.thumbnail
                       ? formData.thumbnail.name
                       : isEditMode && editingPublication?.thumbnail
@@ -306,6 +345,10 @@ const AdminPublicationForm = ({
                 textAlign: "center",
                 cursor: "pointer",
                 mb: 2,
+                minHeight: "120px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 "&:hover": { backgroundColor: "#e1eaff" },
               }}
             >
@@ -323,10 +366,19 @@ const AdminPublicationForm = ({
                     flexDirection: "column",
                     alignItems: "center",
                     gap: 1,
+                    width: "100%",
                   }}
                 >
                   <CloudUploadIcon color="primary" fontSize="large" />
-                  <Typography color="gray">
+                  <Typography
+                    color="gray"
+                    sx={{
+                      wordBreak: "break-word",
+                      textAlign: "center",
+                      maxWidth: "100%",
+                      lineHeight: 1.4,
+                    }}
+                  >
                     {formData.pdfHindi
                       ? formData.pdfHindi.name
                       : isEditMode && editingPublication?.pdfHindi
@@ -346,6 +398,10 @@ const AdminPublicationForm = ({
                 textAlign: "center",
                 cursor: "pointer",
                 mb: 2,
+                minHeight: "120px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 "&:hover": { backgroundColor: "#e1eaff" },
               }}
             >
@@ -363,10 +419,19 @@ const AdminPublicationForm = ({
                     flexDirection: "column",
                     alignItems: "center",
                     gap: 1,
+                    width: "100%",
                   }}
                 >
                   <CloudUploadIcon color="primary" fontSize="large" />
-                  <Typography color="gray">
+                  <Typography
+                    color="gray"
+                    sx={{
+                      wordBreak: "break-word",
+                      textAlign: "center",
+                      maxWidth: "100%",
+                      lineHeight: 1.4,
+                    }}
+                  >
                     {formData.pdfEnglish
                       ? formData.pdfEnglish.name
                       : isEditMode && editingPublication?.pdfEnglish

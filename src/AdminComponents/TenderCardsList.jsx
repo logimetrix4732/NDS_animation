@@ -14,6 +14,9 @@ import {
   DialogContent,
   DialogActions,
   Alert,
+  Menu,
+  MenuItem,
+  IconButton,
 } from "@mui/material";
 import {
   LocationOn as LocationIcon,
@@ -28,6 +31,7 @@ import {
   Delete as DeleteIcon,
   Visibility as VisibilityIcon,
   Download as DownloadIcon,
+  MoreVert as MoreVertIcon,
 } from "@mui/icons-material";
 
 const TenderCardsList = ({
@@ -36,10 +40,46 @@ const TenderCardsList = ({
   onEditTender,
   onDeleteTender,
   onDownloadTender,
+  onViewCorrigendum,
+  onDownloadCorrigendum,
 }) => {
   const [selectedTender, setSelectedTender] = React.useState(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
   const [deleteLoading, setDeleteLoading] = React.useState(false);
+  const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
+  const [selectedTenderForMenu, setSelectedTenderForMenu] =
+    React.useState(null);
+  const handleMenuOpen = (event, tender) => {
+    setMenuAnchorEl(event.currentTarget);
+    setSelectedTenderForMenu(tender);
+  };
+
+  const handleMenuClose = () => {
+    setMenuAnchorEl(null);
+    setSelectedTenderForMenu(null);
+  };
+
+  const handleMenuAction = (action) => {
+    if (selectedTenderForMenu) {
+      switch (action) {
+        case "view":
+          onViewDocument(selectedTenderForMenu);
+          break;
+        case "download":
+          onDownloadTender(selectedTenderForMenu);
+          break;
+        case "viewCorrigendum":
+          onViewCorrigendum(selectedTenderForMenu);
+          break;
+        case "downloadCorrigendum":
+          onDownloadCorrigendum(selectedTenderForMenu);
+          break;
+        default:
+          break;
+      }
+    }
+    handleMenuClose();
+  };
 
   const confirmDelete = async () => {
     if (selectedTender && onDeleteTender) {
@@ -55,7 +95,7 @@ const TenderCardsList = ({
       }
     }
   };
-
+  console.log("filteredTenders:", filteredTenders);
   return (
     <Stack spacing={3}>
       {filteredTenders.map((tender, index) => (
@@ -381,36 +421,16 @@ const TenderCardsList = ({
               </Grid>
 
               {/* Action Buttons */}
-              <Box sx={{ display: "flex", gap: 2, justifyContent: "flex-end" }}>
-                <Button
-                  variant="outlined"
-                  startIcon={<VisibilityIcon />}
-                  onClick={() => onViewDocument && onViewDocument(tender)}
-                  sx={{
-                    borderRadius: 2,
-                    fontWeight: 600,
-                    textTransform: "none",
-                    px: 3,
-                    py: 1,
-                  }}
-                >
-                  View Document
-                </Button>
-                <Button
-                  variant="outlined"
-                  startIcon={<DownloadIcon />}
-                  onClick={() => onDownloadTender && onDownloadTender(tender)}
-                  disabled={!tender.tenderFilePath}
-                  sx={{
-                    borderRadius: 2,
-                    fontWeight: 600,
-                    textTransform: "none",
-                    px: 3,
-                    py: 1,
-                  }}
-                >
-                  Download
-                </Button>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: 2,
+                  justifyContent: "flex-end",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                }}
+              >
+                {/* Edit Button */}
                 <Button
                   variant="contained"
                   startIcon={<EditIcon />}
@@ -431,6 +451,8 @@ const TenderCardsList = ({
                 >
                   Edit
                 </Button>
+
+                {/* Delete Button */}
                 <Button
                   variant="contained"
                   startIcon={<DeleteIcon />}
@@ -452,6 +474,22 @@ const TenderCardsList = ({
                 >
                   Delete
                 </Button>
+
+                {/* Three-dot Menu Button */}
+                <IconButton
+                  onClick={(event) => handleMenuOpen(event, tender)}
+                  sx={{
+                    borderRadius: 2,
+                    p: 1.5,
+                    border: "1px solid rgba(0,0,0,0.12)",
+                    "&:hover": {
+                      backgroundColor: "rgba(0,0,0,0.04)",
+                      borderColor: "rgba(0,0,0,0.2)",
+                    },
+                  }}
+                >
+                  <MoreVertIcon />
+                </IconButton>
               </Box>
             </CardContent>
           </Card>
@@ -481,7 +519,12 @@ const TenderCardsList = ({
           </Alert>
           {selectedTender && (
             <Typography variant="body2" color="text.secondary">
-              Tender: <strong>{selectedTender.tenderTitle}</strong>
+              Tender:{" "}
+              <strong>
+                {selectedTender.title ||
+                  selectedTender.tenderTitle ||
+                  "Untitled Tender"}
+              </strong>
             </Typography>
           )}
         </DialogContent>
@@ -509,6 +552,244 @@ const TenderCardsList = ({
           </Button>
         </DialogActions>
       </Dialog>
+
+      {/* Three-dot Menu */}
+      <Menu
+        anchorEl={menuAnchorEl}
+        open={Boolean(menuAnchorEl)}
+        onClose={handleMenuClose}
+        PaperProps={{
+          sx: {
+            borderRadius: 3,
+            boxShadow: "0 20px 60px rgba(0,0,0,0.15)",
+            minWidth: 220,
+            background: "linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)",
+            border: "1px solid rgba(0,0,0,0.08)",
+            overflow: "hidden",
+            "& .MuiMenuItem-root": {
+              borderBottom: "1px solid rgba(0,0,0,0.04)",
+              "&:last-child": {
+                borderBottom: "none",
+              },
+            },
+          },
+        }}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+        sx={{
+          "& .MuiPaper-root": {
+            animation: "slideInUp 0.2s ease-out",
+          },
+        }}
+      >
+        {/* Menu Header */}
+        <Box
+          sx={{
+            p: 2,
+            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+            color: "white",
+            textAlign: "center",
+            borderBottom: "1px solid rgba(255,255,255,0.1)",
+          }}
+        >
+          <Typography
+            variant="subtitle2"
+            sx={{ fontWeight: 600, fontSize: "0.85rem", color: "white" }}
+          >
+            Document Actions
+          </Typography>
+        </Box>
+
+        {/* View Tender */}
+        <MenuItem
+          onClick={() => handleMenuAction("view")}
+          sx={{
+            py: 2,
+            px: 2.5,
+            transition: "all 0.2s ease",
+            "&:hover": {
+              background:
+                "linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(99, 102, 241, 0.04) 100%)",
+              transform: "translateX(4px)",
+            },
+          }}
+        >
+          <Box
+            sx={{
+              width: 36,
+              height: 36,
+              borderRadius: "10px",
+              background: "rgba(99, 102, 241, 0.1)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              mr: 2,
+              border: "1px solid rgba(99, 102, 241, 0.2)",
+            }}
+          >
+            <VisibilityIcon sx={{ color: "#6366f1", fontSize: 18 }} />
+          </Box>
+          <Box>
+            <Typography
+              variant="body2"
+              sx={{ fontWeight: 600, color: "#1e293b" }}
+            >
+              View Tender
+            </Typography>
+            <Typography
+              variant="caption"
+              sx={{ color: "#64748b", fontSize: "0.7rem" }}
+            >
+              Open tender document
+            </Typography>
+          </Box>
+        </MenuItem>
+
+        {/* Download Tender */}
+        <MenuItem
+          onClick={() => handleMenuAction("download")}
+          disabled={!selectedTenderForMenu?.tenderFilePath}
+          sx={{
+            py: 2,
+            px: 2.5,
+            transition: "all 0.2s ease",
+            "&:hover": {
+              background:
+                "linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(34, 197, 94, 0.04) 100%)",
+              transform: "translateX(4px)",
+            },
+            "&.Mui-disabled": {
+              opacity: 0.5,
+            },
+          }}
+        >
+          <Box
+            sx={{
+              width: 36,
+              height: 36,
+              borderRadius: "10px",
+              background: "rgba(34, 197, 94, 0.1)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              mr: 2,
+              border: "1px solid rgba(34, 197, 94, 0.2)",
+            }}
+          >
+            <DownloadIcon sx={{ color: "#22c55e", fontSize: 18 }} />
+          </Box>
+          <Box>
+            <Typography
+              variant="body2"
+              sx={{ fontWeight: 600, color: "#1e293b" }}
+            >
+              Download Tender
+            </Typography>
+            <Typography
+              variant="caption"
+              sx={{ color: "#64748b", fontSize: "0.7rem" }}
+            >
+              Save tender file
+            </Typography>
+          </Box>
+        </MenuItem>
+
+        {/* View Corrigendum - Only show when available */}
+        {selectedTenderForMenu?.corrigendum === "Active" &&
+          selectedTenderForMenu?.CorrigendumFilePath && (
+            <MenuItem
+              onClick={() => handleMenuAction("viewCorrigendum")}
+              sx={{
+                py: 2,
+                px: 2.5,
+                transition: "all 0.2s ease",
+                "&:hover": {
+                  background:
+                    "linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.04) 100%)",
+                  transform: "translateX(4px)",
+                },
+              }}
+            >
+              <Box
+                sx={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: "10px",
+                  background: "rgba(16, 185, 129, 0.1)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  mr: 2,
+                  border: "1px solid rgba(16, 185, 129, 0.2)",
+                }}
+              >
+                <VisibilityIcon sx={{ color: "#10b981", fontSize: 18 }} />
+              </Box>
+              <Box>
+                <Typography
+                  variant="body2"
+                  sx={{ fontWeight: 600, color: "#1e293b" }}
+                >
+                  View Corrigendum
+                </Typography>
+                <Typography
+                  variant="caption"
+                  sx={{ color: "#64748b", fontSize: "0.7rem" }}
+                >
+                  Open corrigendum document
+                </Typography>
+              </Box>
+            </MenuItem>
+          )}
+
+        {/* Download Corrigendum - Only show when available */}
+        {selectedTenderForMenu?.corrigendum === "Active" &&
+          selectedTenderForMenu?.CorrigendumFilePath && (
+            <MenuItem
+              onClick={() => handleMenuAction("downloadCorrigendum")}
+              sx={{
+                py: 2,
+                px: 2.5,
+                transition: "all 0.2s ease",
+                "&:hover": {
+                  background:
+                    "linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.04) 100%)",
+                  transform: "translateX(4px)",
+                },
+              }}
+            >
+              <Box
+                sx={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: "10px",
+                  background: "rgba(16, 185, 129, 0.1)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  mr: 2,
+                  border: "1px solid rgba(16, 185, 129, 0.2)",
+                }}
+              >
+                <DownloadIcon sx={{ color: "#10b981", fontSize: 18 }} />
+              </Box>
+              <Box>
+                <Typography
+                  variant="body2"
+                  sx={{ fontWeight: 600, color: "#1e293b" }}
+                >
+                  Download Corrigendum
+                </Typography>
+                <Typography
+                  variant="caption"
+                  sx={{ color: "#64748b", fontSize: "0.7rem" }}
+                >
+                  Save corrigendum file
+                </Typography>
+              </Box>
+            </MenuItem>
+          )}
+      </Menu>
     </Stack>
   );
 };

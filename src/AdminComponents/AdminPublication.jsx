@@ -265,11 +265,11 @@ export default function AdminPublication() {
       [fieldName]: file,
     }));
   };
-
+  const token = localStorage.getItem("token");
+  console.log(token, "tokendsfdfdfd");
   const handleSubmit = async () => {
     try {
       // Check if token exists
-      const token = localStorage.getItem("token");
       if (!token) {
         setErrorMessage("Please login first. No authentication token found.");
         return;

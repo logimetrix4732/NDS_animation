@@ -1,6 +1,5 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-const token = localStorage.getItem("token");
 
 const handleLogout = () => {
   localStorage.removeItem("token");
@@ -8,8 +7,20 @@ const handleLogout = () => {
   toast("Token expired, please login again");
   window.location.href = "/";
 };
+
+// Helper function to get fresh token
+const getToken = () => {
+  return localStorage.getItem("token");
+};
+
 export const getFetch = async (url) => {
   try {
+    const token = getToken();
+    if (!token) {
+      handleLogout();
+      return { status: 401, message: "No token found" };
+    }
+
     const response = await axios({
       method: "get",
       url: `${url}`,
@@ -31,6 +42,12 @@ export const getFetch = async (url) => {
 
 export const getFetchByLimit = async (url, limit, page) => {
   try {
+    const token = getToken();
+    if (!token) {
+      handleLogout();
+      return { status: 401, message: "No token found" };
+    }
+
     const response = await axios({
       method: "GET",
       url: `${url}/${limit}/${page}`,
@@ -53,6 +70,12 @@ export const getFetchByLimit = async (url, limit, page) => {
 
 export const getOneFetch = async (url, id) => {
   try {
+    const token = getToken();
+    if (!token) {
+      handleLogout();
+      return { status: 401, message: "No token found" };
+    }
+
     const response = await axios({
       method: "GET",
       url: `${url}/${id}`,
@@ -76,6 +99,12 @@ export const getOneFetch = async (url, id) => {
 
 export const getOneFetchByUrl = async (url) => {
   try {
+    const token = getToken();
+    if (!token) {
+      handleLogout();
+      return { status: 401, message: "No token found" };
+    }
+
     const response = await axios({
       method: "GET",
       url: `${url}`,
@@ -98,6 +127,12 @@ export const getOneFetchByUrl = async (url) => {
 
 export const postFetch = async (url, data) => {
   try {
+    const token = getToken();
+    if (!token) {
+      handleLogout();
+      return { status: 401, message: "No token found" };
+    }
+
     const response = await axios({
       method: "post",
       url,
@@ -162,6 +197,12 @@ export const postFetchContent = async (url, data) => {
 
 export const patchFetch = async (url, id, data) => {
   try {
+    const token = getToken();
+    if (!token) {
+      handleLogout();
+      return { status: 401, message: "No token found" };
+    }
+
     const response = await axios({
       method: "patch",
       url: `${url}/${id}`,
@@ -185,6 +226,12 @@ export const patchFetch = async (url, id, data) => {
 
 export const putFetch = async (url, data) => {
   try {
+    const token = getToken();
+    if (!token) {
+      handleLogout();
+      return { status: 401, message: "No token found" };
+    }
+
     const response = await axios({
       method: "put",
       url: `${url}`,
@@ -195,6 +242,7 @@ export const putFetch = async (url, data) => {
       },
       data,
     });
+
     if (response.status === 200) {
       return response;
     }
@@ -210,6 +258,12 @@ export const putFetch = async (url, data) => {
 
 export const putFetchById = async (url) => {
   try {
+    const token = getToken();
+    if (!token) {
+      handleLogout();
+      return { status: 401, message: "No token found" };
+    }
+
     const response = await axios({
       method: "put",
       url: `${url}`,
@@ -234,6 +288,12 @@ export const putFetchById = async (url) => {
 
 export const putFetchData = async (url, data) => {
   try {
+    const token = getToken();
+    if (!token) {
+      handleLogout();
+      return { status: 401, message: "No token found" };
+    }
+
     const response = await axios({
       method: "put",
       url: `${url}`,
@@ -258,6 +318,12 @@ export const putFetchData = async (url, data) => {
 
 export const deleteFetch = async (url) => {
   try {
+    const token = getToken();
+    if (!token) {
+      handleLogout();
+      return { status: 401, message: "No token found" };
+    }
+
     const response = await axios({
       method: "delete",
       url: url,
@@ -273,7 +339,6 @@ export const deleteFetch = async (url) => {
     if (error.status === 401) {
       handleLogout();
       toast("Token expired Please Login");
-      // window.location.reload();
     }
     throw error;
   }
@@ -281,12 +346,17 @@ export const deleteFetch = async (url) => {
 
 export const deleteFetchByUrl = async (url) => {
   try {
+    const token = getToken();
+    if (!token) {
+      handleLogout();
+      return { status: 401, message: "No token found" };
+    }
+
     const response = await axios({
       method: "delete",
       url: `${url}`,
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
       },
     });
     if (response.status === 200) {
@@ -296,7 +366,6 @@ export const deleteFetchByUrl = async (url) => {
     if (error.status === 401) {
       handleLogout();
       toast("Token expired Please Login");
-      // window.location.reload();
     }
     throw error;
   }
@@ -304,6 +373,12 @@ export const deleteFetchByUrl = async (url) => {
 
 export const postFetchData = async (url, data) => {
   try {
+    const token = getToken();
+    if (!token) {
+      handleLogout();
+      return { status: 401, message: "No token found" };
+    }
+
     const response = await axios({
       method: "post",
       url: `${url}`,

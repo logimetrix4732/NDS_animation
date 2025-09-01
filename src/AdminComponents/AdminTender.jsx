@@ -56,104 +56,6 @@ import TenderCardsList from "./TenderCardsList";
 import DocumentViewerDialog from "./DocumentViewerDialog";
 import { postFetch, getFetch } from "../Api/Api";
 
-// --------- THEME ---------
-const getDesignTokens = (mode) => ({
-  palette: {
-    mode,
-    primary: {
-      main: mode === "dark" ? "#90caf9" : "#1565c0",
-      light: mode === "dark" ? "#e3f2fd" : "#bbdefb",
-      dark: mode === "dark" ? "#42a5f5" : "#0d47a1",
-    },
-    secondary: {
-      main: mode === "dark" ? "#ffb74d" : "#ef6c00",
-      light: mode === "dark" ? "#ffe0b2" : "#ffcc02",
-      dark: mode === "dark" ? "#f57c00" : "#e65100",
-    },
-    background: {
-      default: mode === "dark" ? "#0b1020" : "#f8fafc",
-      paper: mode === "dark" ? "#0f1629" : "#ffffff",
-    },
-    success: {
-      main: mode === "dark" ? "#66bb6a" : "#2e7d32",
-      light: mode === "dark" ? "#c8e6c9" : "#a5d6a7",
-    },
-    warning: {
-      main: mode === "dark" ? "#ffa726" : "#f57c00",
-      light: mode === "dark" ? "#ffe0b2" : "#ffb74d",
-    },
-    error: {
-      main: mode === "dark" ? "#ef5350" : "#d32f2f",
-      light: mode === "dark" ? "#ffcdd2" : "#f44336",
-    },
-    info: {
-      main: mode === "dark" ? "#42a5f5" : "#1976d2",
-      light: mode === "dark" ? "#bbdefb" : "#64b5f6",
-    },
-  },
-  shape: { borderRadius: 20 },
-  typography: {
-    fontFamily:
-      "Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
-    h4: {
-      fontWeight: 800,
-      background:
-        mode === "dark"
-          ? "linear-gradient(45deg, #90caf9 30%, #42a5f5 90%)"
-          : "linear-gradient(45deg, #1565c0 30%, #42a5f5 90%)",
-      backgroundClip: "text",
-      WebkitBackgroundClip: "text",
-      WebkitTextFillColor: "transparent",
-      textShadow:
-        mode === "dark" ? "0 0 20px rgba(144, 202, 249, 0.3)" : "none",
-    },
-    h6: { fontWeight: 700 },
-    body1: { fontWeight: 500 },
-    body2: { fontWeight: 400 },
-  },
-  components: {
-    MuiCard: {
-      styleOverrides: {
-        root: {
-          overflow: "hidden",
-          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-          "&:hover": {
-            transform: "translateY(-4px)",
-            boxShadow:
-              mode === "dark"
-                ? "0 20px 40px rgba(0, 0, 0, 0.4)"
-                : "0 20px 40px rgba(0, 0, 0, 0.1)",
-          },
-        },
-      },
-    },
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          borderRadius: 12,
-          textTransform: "none",
-          fontWeight: 600,
-          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-          "&:hover": {
-            transform: "translateY(-2px)",
-            boxShadow:
-              mode === "dark"
-                ? "0 8px 25px rgba(0, 0, 0, 0.3)"
-                : "0 8px 25px rgba(0, 0, 0, 0.15)",
-          },
-        },
-      },
-    },
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-        },
-      },
-    },
-  },
-});
-
 // --------- LAYOUT ---------
 const drawerWidth = 260;
 
@@ -173,6 +75,7 @@ export default function AdminTender() {
   const [fetchError, setFetchError] = useState("");
   const [documentDialogOpen, setDocumentDialogOpen] = useState(false);
   const [selectedTender, setSelectedTender] = useState(null);
+  const [documentType, setDocumentType] = useState("tender");
   console.log(selectedTender, "=selectedTender");
   const [formDialogOpen, setFormDialogOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -202,15 +105,14 @@ export default function AdminTender() {
     message: "",
     severity: "success",
   });
-  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
-
+  const token = localStorage.getItem("token");
+  console.log(token, "=token");
   // Fetch tenders from API
   const fetchTenders = async () => {
     try {
       setFetchLoading(true);
       setFetchError("");
 
-      const token = localStorage.getItem("token");
       if (!token) {
         setFetchError("Please login first. No authentication token found.");
         setFetchLoading(false);
@@ -226,6 +128,7 @@ export default function AdminTender() {
 
         // Map the API response to match the expected format
         const mappedTenders = response.data.data.map((tender) => {
+          console.log("Mapping tender:", tender);
           // Try different possible field names for tender file
           const tenderFile =
             tender.tenderFile ||
@@ -260,11 +163,16 @@ export default function AdminTender() {
             tenderFileName: tender.tenderFileName || "Not specified",
             tenderFilePath: tender.tenderFilePath || null,
             referenceNo: tender.referenceNo || "Not specified",
+            corrigendum: tender.corrigendum || "Inactive",
+            CorrigendumFileName: tender.CorrigendumFileName || "",
+            CorrigendumFilePath: tender.CorrigendumFilePath || "",
             image:
               tender.image ||
               "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400",
           };
         });
+
+        console.log("Mapped tenders:", mappedTenders);
 
         setTenders(mappedTenders);
       } else {
@@ -368,10 +276,7 @@ export default function AdminTender() {
   };
 
   const handleSubmit = async () => {
-    console.log("=== HANDLE SUBMIT CALLED ===");
-
     // Check if token exists
-    const token = localStorage.getItem("token");
     if (!token) {
       console.log("No token found, showing error message");
       setErrorMessage("Please login first. No authentication token found.");
@@ -421,7 +326,6 @@ export default function AdminTender() {
       }
 
       let response;
-      const token = localStorage.getItem("token");
 
       if (selectedTender && selectedTender.id) {
         // Update existing tender
@@ -501,6 +405,7 @@ export default function AdminTender() {
 
   const handleViewDocument = (tender) => {
     setSelectedTender(tender);
+    setDocumentType("tender");
     setDocumentDialogOpen(true);
   };
 
@@ -509,9 +414,87 @@ export default function AdminTender() {
     setSelectedTender(null);
   };
 
+  const handleViewCorrigendum = (tender) => {
+    setSelectedTender(tender);
+    setDocumentType("corrigendum");
+    setDocumentDialogOpen(true);
+  };
+
+  const handleDownloadCorrigendum = async (tender) => {
+    try {
+      if (!token) {
+        setSnackbar({
+          open: true,
+          message: "Please login first. No authentication token found.",
+          severity: "error",
+        });
+        return;
+      }
+
+      if (!tender.CorrigendumFilePath) {
+        setSnackbar({
+          open: true,
+          message: "No corrigendum file available for download.",
+          severity: "warning",
+        });
+        return;
+      }
+
+      // Create download URL with authentication
+      const downloadUrl = `${import.meta.env.VITE_API_BASE_URL}/download/files${
+        tender.CorrigendumFilePath
+      }`;
+
+      const response = await fetch(downloadUrl, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        // Get the blob from response and set proper MIME type for PDF
+        const blob = new Blob([await response.blob()], {
+          type: "application/pdf",
+        });
+
+        // Create download link
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+
+        // Ensure proper filename with .pdf extension
+        let filename = tender.CorrigendumFileName || "corrigendum-document";
+        if (!filename.toLowerCase().endsWith(".pdf")) {
+          filename += ".pdf";
+        }
+        link.download = filename;
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+
+        setSnackbar({
+          open: true,
+          message: "Corrigendum file downloaded successfully!",
+          severity: "success",
+        });
+      } else {
+        throw new Error("Failed to download corrigendum file");
+      }
+    } catch (error) {
+      console.error("Error downloading corrigendum:", error);
+      setSnackbar({
+        open: true,
+        message: "Error downloading corrigendum file. Please try again.",
+        severity: "error",
+      });
+    }
+  };
+
   const handleDownloadTender = async (tender) => {
     try {
-      const token = localStorage.getItem("token");
       if (!token) {
         setSnackbar({
           open: true,
@@ -586,6 +569,8 @@ export default function AdminTender() {
   const handleEditTender = (tender) => {
     // Fill form data with tender details for editing
     console.log(tender, "=tender");
+    console.log("Corrigendum value:", tender.corrigendum);
+    console.log("Corrigendum type:", typeof tender.corrigendum);
     setFormData({
       tenderTitle: tender.tenderTitle || tender.title || "",
       referenceNo: tender.referenceNo || "",
@@ -607,7 +592,7 @@ export default function AdminTender() {
               .toISOString()
               .slice(0, 16)
           : "",
-      corrigendum: tender.corrigendum || "Inactive",
+      corrigendum: tender.corrigendum === "Active" ? "Active" : "Inactive",
       tenderCard: tender.tenderCard || "Active",
       tenderFile: tender.tenderFileName
         ? { name: tender.tenderFileName }
@@ -620,13 +605,13 @@ export default function AdminTender() {
       corrigendumFileName: tender.CorrigendumFileName || "",
       image: null,
     });
+    console.log("Form data set:", formData);
     setSelectedTender(tender);
     setFormDialogOpen(true);
   };
 
   const handleDeleteTender = async (tenderId) => {
     try {
-      const token = localStorage.getItem("token");
       if (!token) {
         setSnackbar({
           open: true,
@@ -834,40 +819,68 @@ export default function AdminTender() {
               <Box
                 sx={{
                   display: "flex",
-                  alignItems: "center",
+                  flexDirection: { xs: "column", sm: "row" },
+                  alignItems: { xs: "flex-start", sm: "center" },
                   justifyContent: "space-between",
-                  mb: 2,
+                  mb: { xs: 3, sm: 2 },
                   width: "100%",
+                  gap: { xs: 2, sm: 0 },
                 }}
               >
                 {/* Left Side - Title with Accent Bar */}
-                <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    width: { xs: "100%", sm: "auto" },
+                    justifyContent: { xs: "center", sm: "flex-start" },
+                  }}
+                >
                   <Box
                     sx={{
-                      width: 8,
-                      height: 40,
+                      width: { xs: 6, sm: 8 },
+                      height: { xs: 32, sm: 40 },
                       background:
                         "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                      borderRadius: 4,
-                      mr: 2,
+                      borderRadius: { xs: 3, sm: 4 },
+                      mr: { xs: 1.5, sm: 2 },
                     }}
                   />
-                  <Typography variant="h4" sx={{ fontWeight: 800 }}>
+                  <Typography
+                    variant="h4"
+                    sx={{
+                      fontWeight: 800,
+                      fontSize: {
+                        xs: "1.75rem",
+                        sm: "2.125rem",
+                        md: "2.125rem",
+                      },
+                      textAlign: { xs: "center", sm: "left" },
+                    }}
+                  >
                     Tenders
                   </Typography>
                 </Box>
 
                 {/* Right Side - Action Buttons */}
-                <Stack direction="row" spacing={2}>
+                <Stack
+                  direction={{ xs: "column", sm: "row" }}
+                  spacing={{ xs: 1.5, sm: 2 }}
+                  sx={{
+                    width: { xs: "100%", sm: "auto" },
+                    alignItems: { xs: "stretch", sm: "center" },
+                  }}
+                >
                   <Button
                     variant="outlined"
                     startIcon={<DownloadIcon />}
                     sx={{
                       borderRadius: 3,
-                      px: 3,
-                      py: 1.5,
+                      px: { xs: 2, sm: 3 },
+                      py: { xs: 1.2, sm: 1.5 },
                       borderWidth: 2,
                       fontWeight: 600,
+                      fontSize: { xs: "0.875rem", sm: "1rem" },
                       background: (t) =>
                         t.palette.mode === "dark"
                           ? "rgba(255,255,255,0.05)"
@@ -890,9 +903,10 @@ export default function AdminTender() {
                     onClick={() => setFormDialogOpen(true)}
                     sx={{
                       borderRadius: 3,
-                      px: 3,
-                      py: 1.5,
+                      px: { xs: 2, sm: 3 },
+                      py: { xs: 1.2, sm: 1.5 },
                       fontWeight: 600,
+                      fontSize: { xs: "0.875rem", sm: "1rem" },
                       background:
                         "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                       boxShadow: "0 8px 25px rgba(102, 126, 234, 0.3)",
@@ -913,8 +927,10 @@ export default function AdminTender() {
                 variant="body1"
                 color="text.secondary"
                 sx={{
-                  fontSize: "1.1rem",
+                  fontSize: { xs: "1rem", sm: "1.1rem" },
                   opacity: 0.8,
+                  textAlign: { xs: "center", sm: "left" },
+                  mt: { xs: 1, sm: 0 },
                 }}
               >
                 Here's a comprehensive overview of your tenders for this month!
@@ -1267,6 +1283,8 @@ export default function AdminTender() {
               onEditTender={handleEditTender}
               onDeleteTender={handleDeleteTender}
               onDownloadTender={handleDownloadTender}
+              onViewCorrigendum={handleViewCorrigendum}
+              onDownloadCorrigendum={handleDownloadCorrigendum}
             />
           )}
 
@@ -1450,6 +1468,7 @@ export default function AdminTender() {
         open={documentDialogOpen}
         onClose={handleCloseDocumentDialog}
         tender={selectedTender}
+        documentType={documentType}
       />
 
       {/* Snackbar for success/error messages */}
