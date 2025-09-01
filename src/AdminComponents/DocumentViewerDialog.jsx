@@ -24,8 +24,6 @@ const DocumentViewerDialog = ({
   tender,
   documentType = "tender",
 }) => {
-  console.log(tender, "=tenderdaskjfhskdjf");
-  console.log("Document type:", documentType);
   const [documentUrl, setDocumentUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -40,10 +38,6 @@ const DocumentViewerDialog = ({
   }, [open, tender, documentType]);
 
   const fetchDocument = async () => {
-    console.log("=== FETCH DOCUMENT CALLED ===");
-    console.log("Tender object:", tender);
-    console.log("Document type:", documentType);
-
     if (!tender) {
       setError("No tender data provided");
       return;
@@ -55,19 +49,14 @@ const DocumentViewerDialog = ({
     if (documentType === "corrigendum") {
       filePath = tender.CorrigendumFilePath;
       fileName = tender.CorrigendumFileName;
-      console.log("Corrigendum file path:", filePath);
-      console.log("Corrigendum file name:", fileName);
     } else {
       // Default to tender document
       filePath = tender.tenderFilePath || tender.tenderFile;
       fileName = tender.tenderFileName;
-      console.log("Tender file path:", filePath);
-      console.log("Tender file name:", fileName);
     }
 
     if (!filePath) {
       const docType = documentType === "corrigendum" ? "corrigendum" : "tender";
-      console.log(`No ${docType} file path found in tender object`);
       setError(`No ${docType} document available for this tender`);
       return;
     }
@@ -94,8 +83,6 @@ const DocumentViewerDialog = ({
         // Construct URL using the file path from backend
         documentUrl = `${import.meta.env.VITE_API_BASE_URL}/files${filePath}`;
       }
-
-      console.log("Constructed Document URL:", documentUrl);
 
       // Try to test if the document is accessible, but don't fail if it's not
       try {

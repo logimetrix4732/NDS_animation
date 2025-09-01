@@ -95,7 +95,6 @@ const TenderCardsList = ({
       }
     }
   };
-  console.log("filteredTenders:", filteredTenders);
   return (
     <Stack spacing={3}>
       {filteredTenders.map((tender, index) => (

@@ -156,12 +156,8 @@ export default function AdminLogs() {
         `${import.meta.env.VITE_API_BASE_URL}/tender-logs?${params.toString()}`
       );
 
-      console.log("Tender Logs API Response:", response);
-
       if (response && response.status === 200) {
         const data = response.data.data;
-        console.log("Setting logs:", data.logs);
-        console.log("Setting total:", data.total);
         setLogs(data.logs || []);
         setTotal(data.total || 0);
         setTotalPages(data.totalPages || 0);

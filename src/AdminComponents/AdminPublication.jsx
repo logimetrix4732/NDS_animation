@@ -225,7 +225,6 @@ export default function AdminPublication() {
 
   // Handle edit publication
   const handleEditClick = (publication) => {
-    console.log(publication, "=publication");
     setIsEditMode(true);
     setEditingPublication(publication);
 
@@ -266,7 +265,6 @@ export default function AdminPublication() {
     }));
   };
   const token = localStorage.getItem("token");
-  console.log(token, "tokendsfdfdfd");
   const handleSubmit = async () => {
     try {
       // Check if token exists

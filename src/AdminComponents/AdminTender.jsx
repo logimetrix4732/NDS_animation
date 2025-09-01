@@ -76,7 +76,6 @@ export default function AdminTender() {
   const [documentDialogOpen, setDocumentDialogOpen] = useState(false);
   const [selectedTender, setSelectedTender] = useState(null);
   const [documentType, setDocumentType] = useState("tender");
-  console.log(selectedTender, "=selectedTender");
   const [formDialogOpen, setFormDialogOpen] = useState(false);
   const [formData, setFormData] = useState({
     tenderTitle: "",
@@ -96,7 +95,6 @@ export default function AdminTender() {
     corrigendumFileName: "",
     image: null,
   });
-  console.log(formData, "=formData");
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -106,7 +104,6 @@ export default function AdminTender() {
     severity: "success",
   });
   const token = localStorage.getItem("token");
-  console.log(token, "=token");
   // Fetch tenders from API
   const fetchTenders = async () => {
     try {
@@ -124,11 +121,8 @@ export default function AdminTender() {
       );
 
       if (response && response.status === 200) {
-        console.log("Raw API Response Data:", response.data.data);
-
         // Map the API response to match the expected format
         const mappedTenders = response.data.data.map((tender) => {
-          console.log("Mapping tender:", tender);
           // Try different possible field names for tender file
           const tenderFile =
             tender.tenderFile ||
@@ -137,7 +131,6 @@ export default function AdminTender() {
             tender.document ||
             tender.pdfFile ||
             null;
-          console.log("Found tenderFile:", tenderFile);
 
           return {
             id: tender.id || tender.referenceNo || `TND-${Date.now()}`,
@@ -171,8 +164,6 @@ export default function AdminTender() {
               "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400",
           };
         });
-
-        console.log("Mapped tenders:", mappedTenders);
 
         setTenders(mappedTenders);
       } else {
@@ -278,7 +269,6 @@ export default function AdminTender() {
   const handleSubmit = async () => {
     // Check if token exists
     if (!token) {
-      console.log("No token found, showing error message");
       setErrorMessage("Please login first. No authentication token found.");
       return;
     }
@@ -349,10 +339,7 @@ export default function AdminTender() {
         );
       }
 
-      console.log("API Response:", response);
-
       if (response && (response.status === 201 || response.status === 200)) {
-        console.log("Success! Closing modal...");
         setSuccessMessage(
           selectedTender
             ? "Tender updated successfully!"
@@ -567,10 +554,6 @@ export default function AdminTender() {
   };
 
   const handleEditTender = (tender) => {
-    // Fill form data with tender details for editing
-    console.log(tender, "=tender");
-    console.log("Corrigendum value:", tender.corrigendum);
-    console.log("Corrigendum type:", typeof tender.corrigendum);
     setFormData({
       tenderTitle: tender.tenderTitle || tender.title || "",
       referenceNo: tender.referenceNo || "",
@@ -605,7 +588,6 @@ export default function AdminTender() {
       corrigendumFileName: tender.CorrigendumFileName || "",
       image: null,
     });
-    console.log("Form data set:", formData);
     setSelectedTender(tender);
     setFormDialogOpen(true);
   };
@@ -631,9 +613,6 @@ export default function AdminTender() {
           },
         }
       );
-
-      console.log("Delete response status:", response.status);
-      console.log("Delete response ok:", response.ok);
 
       // Check if response is ok (status 200-299) or specifically 200
       if (response.ok || response.status === 200) {

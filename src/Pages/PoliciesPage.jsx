@@ -15,7 +15,7 @@ import {
 import { Download } from "@mui/icons-material";
 import "./globals.css";
 import CommonBanner from "../components/BannersComponents/CommonBanner";
-import { getFetch } from "../Api/Api";
+// No need to import getFetch for public pages
 
 export default function PoliciesPage() {
   const [loading, setLoading] = useState(true);
@@ -25,26 +25,41 @@ export default function PoliciesPage() {
     const fetchPolicies = async () => {
       try {
         setLoading(true);
-        const response = await getFetch(
+
+        // Use direct fetch for public pages - no authentication required
+        const response = await fetch(
           `${
             import.meta.env.VITE_API_BASE_URL
-          }/getPublication?publicationType=Policies`
+          }/getPublication?publicationType=Policies`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
 
-        if (response?.data?.data) {
-          const mappedData = response.data.data.map((item) => ({
-            id: item.id,
-            name: item.name,
-            date: new Date().toLocaleDateString("en-GB", {
-              day: "2-digit",
-              month: "short",
-              year: "numeric",
-            }),
-            file: item.pdfFile,
-            isActive: item.isActive,
-          }));
-          setDocs(mappedData);
+        if (response.ok) {
+          const data = await response.json();
+
+          if (data?.data) {
+            const mappedData = data.data.map((item) => ({
+              id: item.id,
+              name: item.name,
+              date: new Date().toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              }),
+              file: item.pdfFile,
+              isActive: item.isActive,
+            }));
+            setDocs(mappedData);
+          } else {
+            setDocs([]);
+          }
         } else {
+          console.error("Failed to fetch Policies:", response.status);
           setDocs([]);
         }
       } catch (error) {

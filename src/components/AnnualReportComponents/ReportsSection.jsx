@@ -9,7 +9,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { Download } from "@mui/icons-material";
-import { getFetch } from "../../Api/Api";
+// No need to import getFetch for public pages
 import "./ReportsSection.css";
 
 export default function ReportsSection() {
@@ -20,30 +20,47 @@ export default function ReportsSection() {
     const fetchAnnualReports = async () => {
       try {
         setLoading(true);
-        const response = await getFetch(
+
+        // Use direct fetch for public pages - no authentication required
+        const response = await fetch(
           `${
             import.meta.env.VITE_API_BASE_URL
-          }/getPublication?publicationType=Annual Reports`
+          }/getPublication?publicationType=Annual Reports`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
 
-        if (response?.data?.data) {
-          const mappedData = response.data.data.map((item) => ({
-            id: item.id,
-            title: item.name,
-            year: item.year || "N/A",
-            image:
-              item.thumbnail &&
-              item.thumbnail !== "null" &&
-              item.thumbnail !== "" &&
-              item.thumbnail !== null
-                ? `${import.meta.env.VITE_API_BASE_URL}/files${item.thumbnail}`
-                : "https://images.pexels.com/photos/3184302/pexels-photo-3184302.jpeg",
-            pdfHindi: item.pdfHindi,
-            pdfEnglish: item.pdfEnglish,
-            isActive: item.isActive,
-          }));
-          setReports(mappedData);
+        if (response.ok) {
+          const data = await response.json();
+
+          if (data?.data) {
+            const mappedData = data.data.map((item) => ({
+              id: item.id,
+              title: item.name,
+              year: item.year || "N/A",
+              image:
+                item.thumbnail &&
+                item.thumbnail !== "null" &&
+                item.thumbnail !== "" &&
+                item.thumbnail !== null
+                  ? `${import.meta.env.VITE_API_BASE_URL}/files${
+                      item.thumbnail
+                    }`
+                  : "https://images.pexels.com/photos/3184302/pexels-photo-3184302.jpeg",
+              pdfHindi: item.pdfHindi,
+              pdfEnglish: item.pdfEnglish,
+              isActive: item.isActive,
+            }));
+            setReports(mappedData);
+          } else {
+            setReports([]);
+          }
         } else {
+          console.error("Failed to fetch Annual Reports:", response.status);
           setReports([]);
         }
       } catch (error) {

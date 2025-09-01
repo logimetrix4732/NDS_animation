@@ -110,7 +110,6 @@ export default function AdminPage() {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("Dashboard API Response:", data);
           setDashboardData(data.data);
         } else {
           console.error("Failed to fetch dashboard data");

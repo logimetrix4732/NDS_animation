@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Download, Language } from "@mui/icons-material";
 import CommonBanner from "../components/BannersComponents/CommonBanner";
-import { getFetch } from "../Api/Api";
+// No need to import getFetch for public pages
 
 export default function HRCompliances() {
   const [reports, setReports] = useState([]);
@@ -21,39 +21,56 @@ export default function HRCompliances() {
     const fetchHRCompliances = async () => {
       try {
         setLoading(true);
-        const response = await getFetch(
+
+        // Use direct fetch for public pages - no authentication required
+        const response = await fetch(
           `${
             import.meta.env.VITE_API_BASE_URL
-          }/getPublication?publicationType=HR Compliances`
+          }/getPublication?publicationType=HR Compliances`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
 
-        if (response?.data?.data) {
-          const mappedData = response.data.data.map((item) => {
-            console.log("Raw item:", item);
-            console.log("Thumbnail path:", item.thumbnail);
+        if (response.ok) {
+          const data = await response.json();
 
-            const imageUrl =
-              item.thumbnail &&
-              item.thumbnail !== "null" &&
-              item.thumbnail !== "" &&
-              item.thumbnail !== null
-                ? `${import.meta.env.VITE_API_BASE_URL}/files${item.thumbnail}`
-                : "https://images.pexels.com/photos/3184302/pexels-photo-3184302.jpeg";
+          if (data?.data) {
+            const mappedData = data.data.map((item) => {
+              console.log("Raw item:", item);
+              console.log("Thumbnail path:", item.thumbnail);
 
-            console.log("Final image URL:", imageUrl);
+              const imageUrl =
+                item.thumbnail &&
+                item.thumbnail !== "null" &&
+                item.thumbnail !== "" &&
+                item.thumbnail !== null
+                  ? `${import.meta.env.VITE_API_BASE_URL}/files${
+                      item.thumbnail
+                    }`
+                  : "https://images.pexels.com/photos/3184302/pexels-photo-3184302.jpeg";
 
-            return {
-              id: item.id,
-              title: item.name,
-              description:
-                "HR Compliance document for organizational standards and policies.",
-              image: imageUrl,
-              pdfFile: item.pdfFile,
-              isActive: item.isActive,
-            };
-          });
-          setReports(mappedData);
+              console.log("Final image URL:", imageUrl);
+
+              return {
+                id: item.id,
+                title: item.name,
+                description:
+                  "HR Compliance document for organizational standards and policies.",
+                image: imageUrl,
+                pdfFile: item.pdfFile,
+                isActive: item.isActive,
+              };
+            });
+            setReports(mappedData);
+          } else {
+            setReports([]);
+          }
         } else {
+          console.error("Failed to fetch HR Compliances:", response.status);
           setReports([]);
         }
       } catch (error) {
@@ -74,16 +91,26 @@ export default function HRCompliances() {
   };
 
   return (
-    <>
+    <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <CommonBanner
         title="HR Compliances"
         breadcrumbs={[{ label: "Home", path: "/" }, { label: "About Us" }]}
       />
-      <div
+      <Box
+        component="div"
         id="about-sec"
-        className="about-area position-relative overflow-hidden space"
+        className="about-area position-relative space"
+        sx={{
+          overflow: "visible",
+          flex: 1,
+          minHeight: "auto",
+        }}
       >
-        <div className="container" id="about-sec5">
+        <div
+          className="container"
+          id="about-sec5"
+          style={{ paddingBottom: "100px" }}
+        >
           <Box className="card-container">
             {loading ? (
               <Box
@@ -535,7 +562,7 @@ export default function HRCompliances() {
             )}
           </Box>
         </div>
-      </div>
-    </>
+      </Box>
+    </Box>
   );
 }

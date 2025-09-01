@@ -32,40 +32,8 @@ import Confetti from "react-confetti";
 import LockIcon from "@mui/icons-material/Lock";
 import TenderFilters from "./TenderFilters";
 import TenderCard from "./TenderCard";
-import { getFetch, postFetchContent } from "../../Api/Api";
-
-const mockTenders = [
-  {
-    id: "1",
-    title: "Digital Infrastructure Modernization Project",
-    status: "Active",
-    description:
-      "Comprehensive upgrade of city digital infrastructure including network modernization, cloud migration, and cybersecurity implementation.",
-    startDate: "2024-02-01",
-    endDate: "2024-03-15",
-    lastDate: "2024-03-10",
-    participants: 24,
-    category: "Technology",
-    estimatedValue: "$2,500,000",
-    location: "Reference ID",
-    documentsCount: 8,
-  },
-  {
-    id: "2",
-    title: "City Hall Renovation and Modernization",
-    status: "Active",
-    description:
-      "Complete renovation of the main city hall building including structural improvements and modern facilities.",
-    startDate: "2024-04-22",
-    endDate: "2024-05-16",
-    lastDate: "2024-05-10",
-    participants: 18,
-    category: "Construction",
-    estimatedValue: "$850,000",
-    location: "Reference ID",
-    documentsCount: 5,
-  },
-];
+// No need to import getFetch for public pages
+import { postFetchContent } from "../../Api/Api";
 
 const AvailableTenders = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -105,20 +73,23 @@ const AvailableTenders = () => {
         setLoading(true);
         setError("");
 
-        const response = await getFetch(
-          `${import.meta.env.VITE_API_BASE_URL}/tenders`
+        // Use direct fetch for public pages - no authentication required
+        const response = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}/tenders`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
 
-        console.log("AvailableTenders API Response:", response);
-
-        if (response && response.status === 200) {
-          console.log("Raw API Response Data:", response.data.data);
+        if (response.ok) {
+          const data = await response.json();
 
           // Map the API response to match the expected format
-          const mappedTenders = response.data.data
+          const mappedTenders = data.data
             .map((tender) => {
-              console.log("Processing tender:", tender);
-
               // Try different possible field names for tender file
               const tenderFile =
                 tender.tenderFile ||
@@ -127,7 +98,6 @@ const AvailableTenders = () => {
                 tender.document ||
                 tender.pdfFile ||
                 null;
-              console.log("Found tenderFile:", tenderFile);
 
               // Map priority from API or set default
               const priority =
@@ -168,7 +138,6 @@ const AvailableTenders = () => {
             })
             .filter((tender) => tender.tenderCard === "Active"); // Only show Active tenders
 
-          console.log("Mapped Tenders:", mappedTenders);
           setTenders(mappedTenders);
         } else {
           console.error("Failed to fetch tenders:", response);
@@ -258,14 +227,10 @@ const AvailableTenders = () => {
         tenderId: 5, // Default tender ID as shown in Postman
       };
 
-      console.log("Registering with data:", registerData);
-
       const response = await postFetchContent(
         `${import.meta.env.VITE_API_BASE_URL}/tender-participant/register`,
         registerData
       );
-
-      console.log("Register API Response:", response);
 
       if (response && response.status === 200) {
         setModalLoading(false);
@@ -340,10 +305,6 @@ const AvailableTenders = () => {
     if (!isLoggedIn) {
       setLoginModalOpen(true);
     }
-  };
-
-  const handleLogin = (email, password) => {
-    setIsLoggedIn(true);
   };
 
   const modalVariants = {
