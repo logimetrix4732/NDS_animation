@@ -16,6 +16,7 @@ import CommonBanner from "../components/BannersComponents/CommonBanner";
 export default function HRCompliances() {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
     const fetchHRCompliances = async () => {
@@ -84,9 +85,60 @@ export default function HRCompliances() {
     fetchHRCompliances();
   }, []);
 
-  const handleDownload = (pdfFile) => {
-    if (pdfFile) {
-      window.open(`${import.meta.env.VITE_API_BASE_URL}/${pdfFile}`, "_blank");
+  const handleDownload = async (pdfFile, report) => {
+    try {
+      if (!pdfFile) {
+        console.log("No file available for download.");
+        return;
+      }
+
+      setDownloading(true);
+
+      // Direct download approach for public files
+      const fileUrl = `${import.meta.env.VITE_API_BASE_URL}/files${pdfFile}`;
+
+      if (response.ok) {
+        // Get the blob from response and set proper MIME type for PDF
+        const blob = new Blob([await response.blob()], {
+          type: "application/pdf",
+        });
+
+        // Create download link
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+
+        // Ensure proper filename with .pdf extension
+        let filename = tender.tenderFileName || "tender-document";
+        if (!filename.toLowerCase().endsWith(".pdf")) {
+          filename += ".pdf";
+        }
+        link.download = filename;
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+
+        setSnackbar({
+          open: true,
+          message: "File downloaded successfully!",
+          severity: "success",
+        });
+      } else {
+        throw new Error("Failed to download file");
+      }
+    } catch (error) {
+      console.error("Error downloading file:", error);
+      // Fallback to window.open
+      if (pdfFile) {
+        window.open(
+          `${import.meta.env.VITE_API_BASE_URL}/files${pdfFile}`,
+          "_blank"
+        );
+      }
+    } finally {
+      setDownloading(false);
     }
   };
 
@@ -539,21 +591,39 @@ export default function HRCompliances() {
                     <Box sx={{ display: "flex", gap: 1.5, mt: 2 }}>
                       <Button
                         variant="outlined"
-                        startIcon={<Download />}
-                        onClick={() => handleDownload(report.pdfFile)}
-                        disabled={!report.pdfFile}
+                        startIcon={
+                          downloading ? (
+                            <CircularProgress size={16} color="inherit" />
+                          ) : (
+                            <Download />
+                          )
+                        }
+                        onClick={() => handleDownload(report.pdfFile, report)}
+                        disabled={!report.pdfFile || downloading}
                         sx={{
                           color: "#bd8f59",
                           borderColor: "#bd8f59",
                           textTransform: "none",
                           borderRadius: "8px",
+                          transition: "all 0.3s ease",
                           "&:hover": {
                             borderColor: "#a97b4b",
                             color: "#a97b4b",
+                            transform: "translateY(-2px)",
+                            boxShadow: "0 4px 12px rgba(189,143,89,0.3)",
+                          },
+                          "&:disabled": {
+                            color: "#ccc",
+                            borderColor: "#ccc",
+                            cursor: "not-allowed",
                           },
                         }}
                       >
-                        Download
+                        {downloading
+                          ? "Downloading..."
+                          : report.pdfFile
+                          ? "Download PDF"
+                          : "No PDF Available"}
                       </Button>
                     </Box>
                   </CardContent>

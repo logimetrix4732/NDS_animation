@@ -269,7 +269,7 @@ const TenderCard = ({
               variant="contained"
               size="small"
               startIcon={<Visibility sx={{ fontSize: 16 }} />}
-              onClick={() => onViewDetails(tender)}
+              onClick={(e) => onViewDetails(tender, e)}
               sx={{
                 bgcolor: "#bd8f59",
                 "&:hover": { bgcolor: "#a46c35" },
@@ -287,7 +287,7 @@ const TenderCard = ({
               variant="outlined"
               size="small"
               startIcon={<Download sx={{ fontSize: 16 }} />}
-              onClick={() => onDownloadDocuments(tender)}
+              onClick={(e) => onDownloadDocuments(tender, e)}
               sx={{
                 borderColor: "#bd8f59",
                 color: "#bd8f59",

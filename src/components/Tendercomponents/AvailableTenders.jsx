@@ -47,6 +47,7 @@ const AvailableTenders = () => {
   const [error, setError] = useState("");
 
   const [openIndex, setOpenIndex] = useState(0);
+  const [selectedTenderId, setSelectedTenderId] = useState(null);
 
   // Login Modal States
   const [step, setStep] = useState(1);
@@ -224,7 +225,7 @@ const AvailableTenders = () => {
         emailId: email,
         password: password,
         confirmPassword: confirmPassword,
-        tenderId: 5, // Default tender ID as shown in Postman
+        tenderId: selectedTenderId, // Dynamic tender ID from selected tender
       };
 
       const response = await postFetchContent(
@@ -232,16 +233,11 @@ const AvailableTenders = () => {
         registerData
       );
 
-      if (response && response.status === 200) {
+      if (response && (response.status === 200 || response.status === 201)) {
         setModalLoading(false);
         setStep(2);
-        // You can add OTP functionality here if needed
-        // For now, we'll simulate OTP step
-        setTimeout(() => {
-          setStep(3);
-          setIsLoggedIn(true);
-          setLoginModalOpen(false);
-        }, 2000);
+        // OTP step - user needs to enter OTP
+        console.log("Registration successful, moving to OTP step");
       } else {
         setModalError(
           response?.message || "Registration failed. Please try again."
@@ -258,7 +254,7 @@ const AvailableTenders = () => {
     }
   };
 
-  const handleOtpSubmit = (e) => {
+  const handleOtpSubmit = async (e) => {
     e.preventDefault();
     if (!otp) {
       setModalError("Please enter OTP");
@@ -266,12 +262,29 @@ const AvailableTenders = () => {
     }
     setModalError("");
     setModalLoading(true);
-    setTimeout(() => {
+
+    try {
+      // Here you would typically verify OTP with your API
+      // For now, we'll simulate OTP verification
+      console.log("Verifying OTP:", otp);
+
+      // Simulate API call delay
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // If OTP is correct (you can add actual verification logic here)
       setModalLoading(false);
       setStep(3);
       setIsLoggedIn(true);
-      setLoginModalOpen(false);
-    }, 2000);
+
+      // Close modal after success
+      setTimeout(() => {
+        setLoginModalOpen(false);
+      }, 2000);
+    } catch (error) {
+      console.error("OTP verification error:", error);
+      setModalError("OTP verification failed. Please try again.");
+      setModalLoading(false);
+    }
   };
 
   const handleCloseModal = () => {
@@ -286,6 +299,7 @@ const AvailableTenders = () => {
     setConfirmPassword("");
     setOtp("");
     setConfetti(false);
+    setSelectedTenderId(null); // Reset selected tender ID
   };
 
   useEffect(() => {
@@ -295,14 +309,26 @@ const AvailableTenders = () => {
     }
   }, [step]);
 
-  const handleViewDetails = (tender) => {
+  const handleViewDetails = (tender, event) => {
+    // Prevent accordion from closing
+    if (event) {
+      event.stopPropagation();
+    }
+
     if (!isLoggedIn) {
+      setSelectedTenderId(tender.id); // Store selected tender ID
       setLoginModalOpen(true);
     }
   };
 
-  const handleDownloadDocuments = (tender) => {
+  const handleDownloadDocuments = (tender, event) => {
+    // Prevent accordion from closing
+    if (event) {
+      event.stopPropagation();
+    }
+
     if (!isLoggedIn) {
+      setSelectedTenderId(tender.id); // Store selected tender ID
       setLoginModalOpen(true);
     }
   };
@@ -944,6 +970,15 @@ const AvailableTenders = () => {
                         {modalError}
                       </Alert>
                     )}
+
+                    {/* Success Message */}
+                    <Alert severity="success" sx={{ mb: 3 }}>
+                      <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                        Registration successful! Please check your email for
+                        OTP.
+                      </Typography>
+                    </Alert>
+
                     <TextField
                       fullWidth
                       size="small"
@@ -959,6 +994,7 @@ const AvailableTenders = () => {
                         ),
                       }}
                     />
+
                     <TextField
                       fullWidth
                       size="small"
@@ -966,6 +1002,8 @@ const AvailableTenders = () => {
                       value={otp}
                       onChange={(e) => setOtp(e.target.value)}
                       margin="normal"
+                      placeholder="Enter 6-digit OTP from your email"
+                      inputProps={{ maxLength: 6 }}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
@@ -974,6 +1012,15 @@ const AvailableTenders = () => {
                         ),
                       }}
                     />
+
+                    <Typography
+                      variant="caption"
+                      sx={{ color: "text.secondary", mt: 1, display: "block" }}
+                    >
+                      Didn't receive OTP? Check your spam folder or contact
+                      support.
+                    </Typography>
+
                     <Button
                       type="submit"
                       fullWidth
