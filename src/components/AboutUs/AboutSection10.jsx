@@ -4,7 +4,7 @@ import DrawerModal from "../DrawerModal";
 import { useMediaQuery, useTheme } from "@mui/material";
 import DSC_3601 from "../../Images/NewInitiativeImg/DSC_3601.jpg";
 import FVF02218 from "../../Images/NewInitiativeImg/FVF02218.JPG";
-import FVF02761 from "../../Images/NewInitiativeImg/TAV09973.png";
+import FVF02761 from "../../Images/NewInitiativeImg/TAV0997.png";
 import mangosgrowing from "../../Images/NewInitiativeImg/mangosgrowing.jpg";
 const AboutSection10 = () => {
   const [open, setOpen] = React.useState(false);
