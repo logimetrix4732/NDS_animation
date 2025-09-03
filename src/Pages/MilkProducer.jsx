@@ -46,6 +46,10 @@ const MilkProducer = () => {
         "Bapudham Milk Producer Organisation": "https://www.bapudhammilk.com",
         "Kaushikee Mahila Milk Producer Organisation":
           "https://www.kaushikeemilk.com",
+      },
+    ],
+    "West Bengal": [
+      {
         "Dudhshree Milk Producer Organisation": "https://www.dudhshreemilk.com",
       },
     ],
@@ -91,6 +95,7 @@ const MilkProducer = () => {
     "Maharashtra",
     "Bihar",
     "Andhra Pradesh",
+    "West Bengal",
   ];
   const handleStateClick = (stateName) => {
     if (selectedState === stateName) {

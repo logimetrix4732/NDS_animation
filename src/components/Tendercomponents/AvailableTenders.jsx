@@ -14,6 +14,9 @@ import {
   InputAdornment,
   useMediaQuery,
   useTheme,
+  DialogTitle,
+  DialogActions,
+  Tooltip,
 } from "@mui/material";
 import {
   Close,
@@ -32,6 +35,7 @@ import Confetti from "react-confetti";
 import LockIcon from "@mui/icons-material/Lock";
 import TenderFilters from "./TenderFilters";
 import TenderCard from "./TenderCard";
+import DocumentViewerModal from "./DocumentViewerModal";
 // No need to import getFetch for public pages
 import { postFetchContent } from "../../Api/Api";
 
@@ -49,6 +53,11 @@ const AvailableTenders = () => {
   const [openIndex, setOpenIndex] = useState(0);
   const [selectedTenderId, setSelectedTenderId] = useState(null);
 
+  // Document Viewer Modal States
+  const [documentDialogOpen, setDocumentDialogOpen] = useState(false);
+  const [selectedTender, setSelectedTender] = useState(null);
+  const [documentType, setDocumentType] = useState("tender");
+
   // Login Modal States
   const [step, setStep] = useState(1);
   const [modalLoading, setModalLoading] = useState(false);
@@ -60,7 +69,7 @@ const AvailableTenders = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [otp, setOtp] = useState("");
+  // const [otp, setOtp] = useState(""); // Commented out OTP
   const [modalError, setModalError] = useState("");
   const [confetti, setConfetti] = useState(false);
 
@@ -205,6 +214,64 @@ const AvailableTenders = () => {
     return "";
   };
 
+  // Document Viewer Functions - Now handled by DocumentViewerModal component
+  const handleCloseDocument = () => {
+    setDocumentDialogOpen(false);
+  };
+
+  const handleDownloadDocument = (tender) => {
+    let filePath, fileName;
+
+    if (documentType === "corrigendum") {
+      filePath = tender.CorrigendumFilePath;
+      fileName = tender.CorrigendumFileName;
+    } else {
+      filePath = tender.tenderFilePath || tender.tenderFile;
+      fileName = tender.tenderFileName;
+    }
+
+    if (filePath) {
+      let downloadUrl;
+      if (filePath.startsWith("http://") || filePath.startsWith("https://")) {
+        downloadUrl = filePath;
+      } else {
+        downloadUrl = `${import.meta.env.VITE_API_BASE_URL}/files${filePath}`;
+      }
+
+      const link = document.createElement("a");
+      link.href = downloadUrl;
+      link.download = fileName || "document";
+      link.target = "_blank";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
+  // Save user data to localStorage
+  const saveUserData = () => {
+    const userData = {
+      companyName,
+      gstNumber,
+      panNumber,
+      email,
+      // Don't save password for security reasons
+    };
+    localStorage.setItem("tenderUserData", JSON.stringify(userData));
+  };
+
+  // Clear all saved user data
+  const clearUserData = () => {
+    localStorage.removeItem("tenderUserData");
+    setCompanyName("");
+    setGstNumber("");
+    setPanNumber("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setModalError("");
+  };
+
   // Register API Integration
   const handleSubmitForm = async (e) => {
     e.preventDefault();
@@ -214,6 +281,9 @@ const AvailableTenders = () => {
       setModalError(validationError);
       return;
     }
+
+    // Save user data before submitting
+    saveUserData();
 
     setModalLoading(true);
 
@@ -235,9 +305,38 @@ const AvailableTenders = () => {
 
       if (response && (response.status === 200 || response.status === 201)) {
         setModalLoading(false);
-        setStep(2);
-        // OTP step - user needs to enter OTP
-        console.log("Registration successful, moving to OTP step");
+
+        // Check if company is already registered and get document data
+        if (response.data && response.data.tenderFilePath) {
+          // Company already registered, show document directly
+          const tenderData = {
+            tenderFilePath: response.data.tenderFilePath,
+            tenderFileName: response.data.tenderFileName,
+            CorrigendumFilePath: response.data.CorrigendumFilePath,
+            CorrigendumFileName: response.data.CorrigendumFileName,
+          };
+
+          setSelectedTender(tenderData);
+          setDocumentType("tender");
+          setDocumentDialogOpen(true);
+          // fetchDocument(tenderData); // This function is now handled by DocumentViewerModal
+
+          // Close registration modal
+          setTimeout(() => {
+            setLoginModalOpen(false);
+            setStep(1);
+            handleCloseModal();
+          }, 1000);
+        } else {
+          // New registration successful
+          setStep(2);
+          setIsLoggedIn(true);
+
+          // Close modal after success
+          setTimeout(() => {
+            setLoginModalOpen(false);
+          }, 2000);
+        }
       } else {
         setModalError(
           response?.message || "Registration failed. Please try again."
@@ -254,6 +353,8 @@ const AvailableTenders = () => {
     }
   };
 
+  // OTP step commented out - direct document view after registration
+  /*
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
     if (!otp) {
@@ -286,6 +387,7 @@ const AvailableTenders = () => {
       setModalLoading(false);
     }
   };
+  */
 
   const handleCloseModal = () => {
     setLoginModalOpen(false);
@@ -297,13 +399,30 @@ const AvailableTenders = () => {
     setEmail("");
     setPassword("");
     setConfirmPassword("");
-    setOtp("");
+    // setOtp(""); // Commented out OTP
     setConfetti(false);
     setSelectedTenderId(null); // Reset selected tender ID
   };
 
+  // Load saved user data from localStorage on component mount
   useEffect(() => {
-    if (step === 3) {
+    const savedData = localStorage.getItem("tenderUserData");
+    if (savedData) {
+      try {
+        const parsedData = JSON.parse(savedData);
+        setCompanyName(parsedData.companyName || "");
+        setGstNumber(parsedData.gstNumber || "");
+        setPanNumber(parsedData.panNumber || "");
+        setEmail(parsedData.email || "");
+        // Don't load password for security reasons
+      } catch (error) {
+        console.error("Error loading saved data:", error);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (step === 2) {
       setConfetti(true);
       setTimeout(() => setConfetti(false), 4000);
     }
@@ -318,6 +437,12 @@ const AvailableTenders = () => {
     if (!isLoggedIn) {
       setSelectedTenderId(tender.id); // Store selected tender ID
       setLoginModalOpen(true);
+    } else {
+      // User is logged in, show document directly
+      setSelectedTender(tender);
+      setDocumentType("tender");
+      setDocumentDialogOpen(true);
+      // fetchDocument(tender); // This function is now handled by DocumentViewerModal
     }
   };
 
@@ -330,6 +455,9 @@ const AvailableTenders = () => {
     if (!isLoggedIn) {
       setSelectedTenderId(tender.id); // Store selected tender ID
       setLoginModalOpen(true);
+    } else {
+      // User is logged in, download directly
+      handleDownloadDocument(tender);
     }
   };
 
@@ -786,8 +914,7 @@ const AvailableTenders = () => {
                       sx={{ color: "#ffffff" }}
                     >
                       {step === 1 && "View Tender"}
-                      {step === 2 && "Verify OTP"}
-                      {step === 3 && "Success"}
+                      {step === 2 && "Success"}
                     </Typography>
                     <Typography
                       variant="body2"
@@ -795,16 +922,46 @@ const AvailableTenders = () => {
                     >
                       {step === 1 &&
                         "Please fill the details to access tenders"}
-                      {step === 2 && "Enter the OTP sent to your email"}
-                      {step === 3 && "Successfully registered"}
+                      {step === 2 && "Successfully registered"}
                     </Typography>
                   </Box>
-                  <IconButton
-                    onClick={handleCloseModal}
-                    sx={{ color: "white" }}
-                  >
-                    <Close />
-                  </IconButton>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    {/* Clear Data Button - Only show on step 1 */}
+                    {step === 1 && (
+                      <Tooltip title="Clear All Saved Data">
+                        <IconButton
+                          onClick={clearUserData}
+                          sx={{
+                            color: "white",
+                            background: "rgba(255,255,255,0.1)",
+                            "&:hover": {
+                              background: "rgba(255,255,255,0.2)",
+                              color: "#ff6b6b",
+                            },
+                            transition: "all 0.2s ease",
+                          }}
+                          size="small"
+                        >
+                          <Box
+                            component="span"
+                            sx={{
+                              fontSize: "1.2rem",
+                              fontWeight: "bold",
+                              color: "inherit",
+                            }}
+                          >
+                            🗑️
+                          </Box>
+                        </IconButton>
+                      </Tooltip>
+                    )}
+                    <IconButton
+                      onClick={handleCloseModal}
+                      sx={{ color: "white" }}
+                    >
+                      <Close />
+                    </IconButton>
+                  </Box>
                 </Box>
               </Box>
               <DialogContent sx={{ p: isMobile ? 2 : 3, minHeight: "260px" }}>
@@ -963,85 +1120,8 @@ const AvailableTenders = () => {
                     </Button>
                   </Box>
                 )}
+
                 {step === 2 && (
-                  <Box component="form" onSubmit={handleOtpSubmit}>
-                    {modalError && (
-                      <Alert severity="error" sx={{ mb: 2 }}>
-                        {modalError}
-                      </Alert>
-                    )}
-
-                    {/* Success Message */}
-                    <Alert severity="success" sx={{ mb: 3 }}>
-                      <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                        Registration successful! Please check your email for
-                        OTP.
-                      </Typography>
-                    </Alert>
-
-                    <TextField
-                      fullWidth
-                      size="small"
-                      label="Email"
-                      value={email}
-                      margin="normal"
-                      disabled
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Email sx={{ color: "#bd8f59" }} />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-
-                    <TextField
-                      fullWidth
-                      size="small"
-                      label="Enter OTP"
-                      value={otp}
-                      onChange={(e) => setOtp(e.target.value)}
-                      margin="normal"
-                      placeholder="Enter 6-digit OTP from your email"
-                      inputProps={{ maxLength: 6 }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <LockIcon sx={{ color: "#bd8f59" }} />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-
-                    <Typography
-                      variant="caption"
-                      sx={{ color: "text.secondary", mt: 1, display: "block" }}
-                    >
-                      Didn't receive OTP? Check your spam folder or contact
-                      support.
-                    </Typography>
-
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      disabled={modalLoading}
-                      sx={{
-                        mt: 3,
-                        py: 1.5,
-                        bgcolor: "#bd8f59",
-                        "&:hover": { bgcolor: "#a46c35" },
-                      }}
-                    >
-                      {modalLoading ? (
-                        <CircularProgress size={24} sx={{ color: "white" }} />
-                      ) : (
-                        "Verify OTP"
-                      )}
-                    </Button>
-                  </Box>
-                )}
-                {step === 3 && (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -1071,6 +1151,14 @@ const AvailableTenders = () => {
           </Dialog>
         )}
       </AnimatePresence>
+
+      {/* Document Viewer Modal */}
+      <DocumentViewerModal
+        open={documentDialogOpen}
+        onClose={handleCloseDocument}
+        tender={selectedTender}
+        documentType={documentType}
+      />
     </Box>
   );
 };

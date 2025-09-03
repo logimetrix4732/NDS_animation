@@ -102,11 +102,14 @@ const Footer = () => {
                   <div className="details">
                     <p>
                       <a
-                        href="https://www.google.com/maps/place/NDDB+Dairy+Services/@28.5648486,77.1973818,17z/data=!3m1!4b1!4m6!3m5!1s0x390ce279fa28f713:0xa6914db36a4ac6a6!8m2!3d28.5648439!4d77.1999621!16s%2Fg%2F1hf6ft670?entry=ttu&g_ep=EgoyMDI1MDcyMy4wIKXMDSoASAFQAw%3D%3D"
+                        href="https://www.google.com/maps/place/NDDB+Dairy+Services/"
                         target="_blank"
                       >
-                        NDDB House, Safdarjung Enclave, New Delhi, Southwest
-                        Delhi, Delhi 110029
+                        <span style={{ whiteSpace: "nowrap" }}>
+                          NDDB House, Safdarjung Enclave
+                        </span>
+                        <br />
+                        New Delhi, Southwest Delhi, Delhi 110029
                       </a>
                     </p>
                   </div>
