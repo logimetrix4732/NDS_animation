@@ -65,6 +65,7 @@ const TenderCard = ({
   tender,
   onViewDetails,
   onDownloadDocuments,
+  onViewCorrigendum,
   index,
   isOpen,
   onToggle,
@@ -100,8 +101,9 @@ const TenderCard = ({
                 {tender.title}
               </Typography>
               <Typography variant="body2" sx={{ color: "#666" }}>
-                <Business sx={{ fontSize: 16 }} /> {tender.location} • TND-
-                {String(tender.id).padStart(4, "0")}-001
+                <Business sx={{ fontSize: 16 }} /> {tender.location} •{" "}
+                {tender.referenceNo ||
+                  `TND-${String(tender.id).padStart(4, "0")}-001`}
               </Typography>
             </Box>
             <Box display="flex" alignItems="center" gap={1}>
@@ -264,7 +266,7 @@ const TenderCard = ({
           <Divider sx={{ mb: 2 }} />
 
           {/* Action Buttons */}
-          <Box sx={{ display: "flex", gap: 2 }}>
+          <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
             <Button
               variant="contained"
               size="small"
@@ -304,6 +306,32 @@ const TenderCard = ({
             >
               Download Documents
             </Button>
+            {/* Corrigendum Button - Only show if corrigendum is Active */}
+            {tender.corrigendum === "Active" && tender.CorrigendumFilePath && (
+              <Button
+                variant="outlined"
+                size="small"
+                startIcon={<Visibility sx={{ fontSize: 16 }} />}
+                onClick={(e) =>
+                  onViewCorrigendum && onViewCorrigendum(tender, e)
+                }
+                sx={{
+                  borderColor: "#ff6b35",
+                  color: "#ff6b35",
+                  "&:hover": {
+                    borderColor: "#e55a2b",
+                    bgcolor: "rgba(255, 107, 53, 0.08)",
+                  },
+                  borderRadius: 2,
+                  textTransform: "none",
+                  fontWeight: 500,
+                  px: 2,
+                  py: 0.75,
+                }}
+              >
+                View Corrigendum
+              </Button>
+            )}
             <Typography
               variant="caption"
               sx={{

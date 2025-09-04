@@ -88,17 +88,6 @@ const PrivacyPolicyPage = () => {
                     backdropFilter: "blur(10px)",
                   }}
                 >
-                  <div className="card-header bg-transparent border-0 text-center py-4">
-                    <motion.h5
-                      className="mb-0 fw-bold"
-                      style={{ color: "#bd8f59" }}
-                      initial={{ scale: 0.8 }}
-                      animate={{ scale: 1 }}
-                      transition={{ duration: 0.5, delay: 0.3 }}
-                    >
-                      📋 Table of Contents
-                    </motion.h5>
-                  </div>
                   <div className="card-body p-4">
                     <ul className="nav flex-column">
                       <motion.li
@@ -129,36 +118,6 @@ const PrivacyPolicyPage = () => {
                           <span>Privacy Policy</span>
                         </a>
                       </motion.li>
-
-                      <motion.li
-                        className="nav-item mb-3"
-                        whileHover={{ x: 10 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <a
-                          className={`nav-link d-flex align-items-center p-3 rounded-3 ${
-                            activeSection === "terms-conditions"
-                              ? "text-white fw-bold shadow"
-                              : "text-dark"
-                          }`}
-                          style={{
-                            background:
-                              activeSection === "terms-conditions"
-                                ? "linear-gradient(135deg, #bd8f59 0%, #a67c4a 100%)"
-                                : "transparent",
-                            transition: "all 0.3s ease",
-                          }}
-                          href="#terms-conditions"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleSectionClick("terms-conditions");
-                          }}
-                        >
-                          <i className="bi bi-file-text me-3 fs-5"></i>
-                          <span>Terms & Conditions</span>
-                        </a>
-                      </motion.li>
-
                       <motion.li
                         className="nav-item mb-3"
                         whileHover={{ x: 10 }}
@@ -185,6 +144,34 @@ const PrivacyPolicyPage = () => {
                         >
                           <i className="bi bi-arrow-return-left me-3 fs-5"></i>
                           <span>Return Policy</span>
+                        </a>
+                      </motion.li>
+                      <motion.li
+                        className="nav-item mb-3"
+                        whileHover={{ x: 10 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <a
+                          className={`nav-link d-flex align-items-center p-3 rounded-3 ${
+                            activeSection === "terms-conditions"
+                              ? "text-white fw-bold shadow"
+                              : "text-dark"
+                          }`}
+                          style={{
+                            background:
+                              activeSection === "terms-conditions"
+                                ? "linear-gradient(135deg, #bd8f59 0%, #a67c4a 100%)"
+                                : "transparent",
+                            transition: "all 0.3s ease",
+                          }}
+                          href="#terms-conditions"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleSectionClick("terms-conditions");
+                          }}
+                        >
+                          <i className="bi bi-file-text me-3 fs-5"></i>
+                          <span>Terms & Conditions</span>
                         </a>
                       </motion.li>
                     </ul>
@@ -400,8 +387,8 @@ const PrivacyPolicyPage = () => {
                           transition={{ duration: 0.6, delay: 0.4 }}
                         >
                           <div className="content-card p-4 rounded-4 mb-4">
-                            <h5 className="fw-bold text-primary mb-3">
-                              🎯 General Returns Policy
+                            <h5 className="fw-bold text-gradient mb-3">
+                              General Returns Policy
                             </h5>
                             <p className="lead mb-0">
                               Items that meet the eligibility criteria and
@@ -413,8 +400,8 @@ const PrivacyPolicyPage = () => {
                           </div>
 
                           <div className="content-card p-4 rounded-4 mb-4">
-                            <h5 className="fw-bold text-success mb-3">
-                              ✅ Items eligible for replacement:
+                            <h5 className="fw-bold text-gradient mb-3">
+                              Items eligible for replacement:
                             </h5>
                             <ul className="list-unstyled">
                               <motion.li
@@ -446,8 +433,8 @@ const PrivacyPolicyPage = () => {
                           </div>
 
                           <div className="content-card p-4 rounded-4 mb-4">
-                            <h5 className="fw-bold text-warning mb-3">
-                              ⚠️ Non-eligibility for replacement:
+                            <h5 className="fw-bold text-gradient mb-3">
+                              Non-eligibility for replacement:
                             </h5>
                             <ul className="list-unstyled">
                               <motion.li
@@ -479,8 +466,8 @@ const PrivacyPolicyPage = () => {
                           </div>
 
                           <div className="content-card p-4 rounded-4 mb-4">
-                            <h5 className="fw-bold text-info mb-3">
-                              🔄 Replacement Process:
+                            <h5 className="fw-bold text-gradient mb-3">
+                              Replacement Process:
                             </h5>
                             <ul className="list-unstyled">
                               {[
@@ -508,8 +495,8 @@ const PrivacyPolicyPage = () => {
                           </div>
 
                           <div className="content-card p-4 rounded-4 mb-4">
-                            <h5 className="fw-bold text-primary mb-3">
-                              📞 Contact Information:
+                            <h5 className="fw-bold text-gradient mb-3">
+                              Contact Information:
                             </h5>
                             <div className="d-flex align-items-center">
                               <i className="bi bi-telephone-fill text-primary me-3 fs-4"></i>
@@ -525,8 +512,8 @@ const PrivacyPolicyPage = () => {
                           </div>
 
                           <div className="content-card p-4 rounded-4">
-                            <h5 className="fw-bold text-secondary mb-3">
-                              📝 Policy Updates:
+                            <h5 className="fw-bold text-gradient mb-3">
+                              Policy Updates:
                             </h5>
                             <ul className="list-unstyled">
                               <motion.li

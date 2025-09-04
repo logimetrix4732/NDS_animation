@@ -123,6 +123,7 @@ const AvailableTenders = () => {
               return {
                 id: tender.id || tender.referenceNo || `TND-${Date.now()}`,
                 title: tender.tenderTitle || "Untitled Tender",
+                referenceNo: tender.referenceNo,
                 status: status,
                 description: tender.description || "No description available",
                 startDate:
@@ -141,6 +142,11 @@ const AvailableTenders = () => {
                 priority: priority,
                 tenderCard: tender.tenderCard || "Active",
                 tenderFile: tenderFile,
+                corrigendum: tender.corrigendum || "Inactive",
+                CorrigendumFilePath: tender.CorrigendumFilePath,
+                CorrigendumFileName: tender.CorrigendumFileName,
+                tenderFilePath: tender.tenderFilePath,
+                tenderFileName: tender.tenderFileName,
                 image:
                   tender.image ||
                   "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400",
@@ -332,6 +338,19 @@ const AvailableTenders = () => {
           setStep(2);
           setIsLoggedIn(true);
 
+          // If there was a selected tender for corrigendum, show it after login
+          if (selectedTenderId) {
+            const selectedTender = tenders.find(
+              (t) => t.id === selectedTenderId
+            );
+            if (selectedTender) {
+              setSelectedTender(selectedTender);
+              setDocumentType("corrigendum");
+              setDocumentDialogOpen(true);
+            }
+            setSelectedTenderId(null);
+          }
+
           // Close modal after success
           setTimeout(() => {
             setLoginModalOpen(false);
@@ -376,6 +395,17 @@ const AvailableTenders = () => {
       setModalLoading(false);
       setStep(3);
       setIsLoggedIn(true);
+
+      // If there was a selected tender for corrigendum, show it after login
+      if (selectedTenderId) {
+        const selectedTender = tenders.find(t => t.id === selectedTenderId);
+        if (selectedTender) {
+          setSelectedTender(selectedTender);
+          setDocumentType("corrigendum");
+          setDocumentDialogOpen(true);
+        }
+        setSelectedTenderId(null);
+      }
 
       // Close modal after success
       setTimeout(() => {
@@ -458,6 +488,24 @@ const AvailableTenders = () => {
     } else {
       // User is logged in, download directly
       handleDownloadDocument(tender);
+    }
+  };
+
+  // Handle Corrigendum Document View
+  const handleViewCorrigendum = (tender, event) => {
+    // Prevent accordion from closing
+    if (event) {
+      event.stopPropagation();
+    }
+
+    if (!isLoggedIn) {
+      setSelectedTenderId(tender.id); // Store selected tender ID
+      setLoginModalOpen(true);
+    } else {
+      // User is logged in, show corrigendum document
+      setSelectedTender(tender);
+      setDocumentType("corrigendum");
+      setDocumentDialogOpen(true);
     }
   };
 
@@ -711,6 +759,7 @@ const AvailableTenders = () => {
                   tender={tender}
                   onViewDetails={handleViewDetails}
                   onDownloadDocuments={handleDownloadDocuments}
+                  onViewCorrigendum={handleViewCorrigendum}
                   index={index}
                   isOpen={openIndex === index}
                   onToggle={() => handleToggle(index)}

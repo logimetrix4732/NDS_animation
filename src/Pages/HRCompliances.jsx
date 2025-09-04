@@ -6,12 +6,10 @@ import {
   CardMedia,
   Typography,
   Button,
-  Grid,
   CircularProgress,
 } from "@mui/material";
-import { Download, Language } from "@mui/icons-material";
+import { Download } from "@mui/icons-material";
 import CommonBanner from "../components/BannersComponents/CommonBanner";
-// No need to import getFetch for public pages
 
 export default function HRCompliances() {
   const [reports, setReports] = useState([]);
@@ -23,7 +21,6 @@ export default function HRCompliances() {
       try {
         setLoading(true);
 
-        // Use direct fetch for public pages - no authentication required
         const response = await fetch(
           `${
             import.meta.env.VITE_API_BASE_URL
@@ -41,9 +38,6 @@ export default function HRCompliances() {
 
           if (data?.data) {
             const mappedData = data.data.map((item) => {
-              console.log("Raw item:", item);
-              console.log("Thumbnail path:", item.thumbnail);
-
               const imageUrl =
                 item.thumbnail &&
                 item.thumbnail !== "null" &&
@@ -53,8 +47,6 @@ export default function HRCompliances() {
                       item.thumbnail
                     }`
                   : "https://images.pexels.com/photos/3184302/pexels-photo-3184302.jpeg";
-
-              console.log("Final image URL:", imageUrl);
 
               return {
                 id: item.id,
@@ -94,21 +86,17 @@ export default function HRCompliances() {
 
       setDownloading(true);
 
-      // Direct download approach for public files
       const fileUrl = `${import.meta.env.VITE_API_BASE_URL}/files${pdfFile}`;
 
       if (response.ok) {
-        // Get the blob from response and set proper MIME type for PDF
         const blob = new Blob([await response.blob()], {
           type: "application/pdf",
         });
 
-        // Create download link
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
 
-        // Ensure proper filename with .pdf extension
         let filename = tender.tenderFileName || "tender-document";
         if (!filename.toLowerCase().endsWith(".pdf")) {
           filename += ".pdf";
@@ -130,7 +118,6 @@ export default function HRCompliances() {
       }
     } catch (error) {
       console.error("Error downloading file:", error);
-      // Fallback to window.open
       if (pdfFile) {
         window.open(
           `${import.meta.env.VITE_API_BASE_URL}/files${pdfFile}`,
