@@ -386,7 +386,6 @@ const AvailableTenders = () => {
     try {
       // Here you would typically verify OTP with your API
       // For now, we'll simulate OTP verification
-      console.log("Verifying OTP:", otp);
 
       // Simulate API call delay
       await new Promise((resolve) => setTimeout(resolve, 1000));

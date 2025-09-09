@@ -201,7 +201,7 @@ const OurExperties7 = () => {
                         </a>
                       </div>
                       <div className="service-content">
-                        <h3 class="box-title ellipsis-1">{item.title}</h3>
+                        <h3 className="box-title ellipsis-1">{item.title}</h3>
                         <Typography
                           variant="subtitle1"
                           sx={{
@@ -225,7 +225,7 @@ const OurExperties7 = () => {
                           disabled={expandedIndex !== null}
                         >
                           Learn More{" "}
-                          <i class="fa-light fa-arrow-right-long"></i>
+                          <i className="fa-light fa-arrow-right-long"></i>
                         </button>
                       </div>
                     </div>

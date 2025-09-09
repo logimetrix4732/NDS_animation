@@ -1,0 +1,190 @@
+/* Mobile Responsive Styles for Home Page */
+
+/* Hide drag cursor on mobile devices */
+@media (max-width: 767px) {
+  .slider-drag-cursor {
+    display: none !important;
+  }
+}
+
+/* SDG Section Mobile Responsive */
+@media (max-width: 768px) {
+  .about-area {
+    padding: 20px 0 !important;
+  }
+
+  .title-area {
+    padding: 0 10px !important;
+  }
+
+  .sub-title {
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+}
+
+/* Tablet Responsive */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .about-area {
+    padding: 30px 0 !important;
+  }
+
+  .title-area {
+    padding: 0 20px !important;
+  }
+}
+
+/* Large Mobile Devices */
+@media (max-width: 480px) {
+  .about-area {
+    padding: 15px 0 !important;
+  }
+
+  .container {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .title-area {
+    padding: 0 5px !important;
+  }
+
+  .sub-title {
+    line-height: 1.2 !important;
+    margin-bottom: 10px !important;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 360px) {
+  .about-area {
+    padding: 10px 0 !important;
+  }
+
+  .container {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+
+  .title-area {
+    padding: 0 !important;
+  }
+}
+
+/* Image Responsive */
+@media (max-width: 768px) {
+  .about-area img {
+    padding: 0 10px !important;
+    margin-top: 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-area img {
+    padding: 0 5px !important;
+    margin-top: 15px !important;
+  }
+}
+
+/* Text Responsive Adjustments */
+@media (max-width: 768px) {
+  .text-anime-style-2 {
+    text-align: center !important;
+    word-break: break-word !important;
+  }
+}
+
+/* Container Responsive */
+@media (max-width: 1200px) {
+  .container {
+    max-width: 100% !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+}
+
+/* Row and Column Responsive */
+@media (max-width: 768px) {
+  .row {
+    margin-left: -5px !important;
+    margin-right: -5px !important;
+  }
+
+  .col-lg-12,
+  .col-xl-12 {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+}
+
+/* Animation Responsive */
+@media (max-width: 768px) {
+  .wow {
+    animation-duration: 0.6s !important;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .slider-drag-cursor {
+    display: none !important;
+  }
+
+  .about-area {
+    touch-action: pan-y !important;
+  }
+}
+
+/* High DPI Display Optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .about-area img {
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: crisp-edges !important;
+  }
+}
+
+/* Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .about-area {
+    padding: 10px 0 !important;
+  }
+
+  .title-area {
+    padding: 0 15px !important;
+  }
+
+  .sub-title {
+    font-size: clamp(14px, 3vw, 18px) !important;
+    line-height: 1.2 !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .slider-drag-cursor {
+    display: none !important;
+  }
+
+  .about-area {
+    background: white !important;
+    color: black !important;
+  }
+
+  .sub-title {
+    color: #333 !important;
+  }
+}

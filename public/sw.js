@@ -39,31 +39,24 @@ const CRITICAL_IMAGES = [
 
 // Install event - pre-cache critical assets
 self.addEventListener("install", (event) => {
-  console.log("Service Worker installing...");
   self.skipWaiting();
 
   event.waitUntil(
     Promise.all([
       // Cache static assets
       caches.open(STATIC_CACHE).then((cache) => {
-        console.log("Caching static assets...");
         return cache.addAll(STATIC_ASSETS);
       }),
       // Cache critical images
       caches.open(IMAGE_CACHE).then((cache) => {
-        console.log("Caching critical images...");
         return cache.addAll(CRITICAL_IMAGES);
       }),
-    ]).catch((err) => {
-      console.log("Pre-caching failed:", err);
-    })
+    ]).catch((err) => {})
   );
 });
 
 // Activate event - clean up old caches
 self.addEventListener("activate", (event) => {
-  console.log("Service Worker activating...");
-
   event.waitUntil(
     Promise.all([
       // Clean up old caches
@@ -71,7 +64,6 @@ self.addEventListener("activate", (event) => {
         return Promise.all(
           cacheNames.map((cacheName) => {
             if (!cacheName.includes(CACHE_VERSION)) {
-              console.log("Deleting old cache:", cacheName);
               return caches.delete(cacheName);
             }
           })
@@ -92,7 +84,6 @@ async function trimCache(cacheName, maxEntries) {
     // Delete oldest entries (first in array)
     const keysToDelete = keys.slice(0, keys.length - maxEntries);
     await Promise.all(keysToDelete.map((key) => cache.delete(key)));
-    console.log(`Trimmed ${cacheName}: removed ${keysToDelete.length} entries`);
   }
 }
 
@@ -157,13 +148,11 @@ self.addEventListener("fetch", (event) => {
       const cachedResponse = await cache.match(request);
 
       if (cachedResponse) {
-        console.log("Serving from cache:", request.url);
         return cachedResponse;
       }
 
       // If not in cache, fetch from network
       try {
-        console.log("Fetching from network:", request.url);
         const networkResponse = await fetch(request);
 
         // Only cache successful responses
@@ -189,8 +178,6 @@ self.addEventListener("fetch", (event) => {
 
         return networkResponse;
       } catch (error) {
-        console.log("Network fetch failed:", request.url, error);
-
         // Return fallback for images
         if (cacheName === IMAGE_CACHE) {
           const fallbackResponse = await cache.match(
@@ -230,8 +217,6 @@ async function cleanupOldCaches() {
   const oldCaches = cacheNames.filter((name) => !currentCaches.includes(name));
 
   await Promise.all(oldCaches.map((name) => caches.delete(name)));
-
-  console.log("Cleaned up old caches:", oldCaches);
 }
 
 // Message handling for cache management

@@ -105,8 +105,6 @@ export default function PoliciesPage() {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-
-      console.log("File download initiated successfully!");
     } catch (error) {
       console.error("Error downloading file:", error);
       // Fallback to direct download

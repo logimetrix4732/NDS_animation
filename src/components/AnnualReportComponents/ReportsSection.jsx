@@ -114,7 +114,6 @@ export default function ReportsSection() {
       link.click();
       document.body.removeChild(link);
 
-      console.log("File download initiated successfully!");
       return false; // Prevent any default behavior
     } catch (error) {
       console.error("Error downloading file:", error);

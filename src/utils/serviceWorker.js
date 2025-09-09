@@ -8,18 +8,13 @@ class ServiceWorkerManager {
   // Register service worker
   async register() {
     if (!this.isSupported) {
-      console.log("Service Worker not supported in this browser");
       return false;
     }
 
     try {
-      console.log("Registering Service Worker...");
-
       this.registration = await navigator.serviceWorker.register("/sw.js", {
         scope: "/",
       });
-
-      console.log("Service Worker registered successfully:", this.registration);
 
       // Handle updates
       this.registration.addEventListener("updatefound", () => {
@@ -68,7 +63,6 @@ class ServiceWorkerManager {
   // Clear all caches
   async clearCache() {
     if (!this.isSupported) {
-      console.log("Service Worker not supported");
       return false;
     }
 
@@ -79,10 +73,8 @@ class ServiceWorkerManager {
         return new Promise((resolve) => {
           messageChannel.port1.onmessage = (event) => {
             if (event.data.success) {
-              console.log("Cache cleared successfully");
               resolve(true);
             } else {
-              console.log("Failed to clear cache");
               resolve(false);
             }
           };
@@ -156,11 +148,8 @@ class ServiceWorkerManager {
             const response = await fetch(imageUrl);
             if (response.ok) {
               await imageCache.put(imageUrl, response);
-              console.log("Preloaded:", imageUrl);
             }
-          } catch (error) {
-            console.log("Failed to preload:", imageUrl, error);
-          }
+          } catch (error) {}
         })
       );
 

@@ -3,7 +3,7 @@ import React from "react";
 const AboutSection15 = () => {
   return (
     <div
-      class="about-area position-relative overflow-hidden space"
+      className="about-area position-relative overflow-hidden space"
       id="about-sec"
     >
       <div className="container">

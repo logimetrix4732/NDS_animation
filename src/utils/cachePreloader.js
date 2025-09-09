@@ -35,7 +35,6 @@ class CachePreloader {
       "/assets/img/dashboard4.jpeg",
     ];
 
-    console.log("Preloading critical images...");
     await this.preloadResources(criticalImages);
   }
 
@@ -63,7 +62,6 @@ class CachePreloader {
 
     const images = pageImages[pageName] || [];
     if (images.length > 0) {
-      console.log(`Preloading ${pageName} page images...`);
       await this.preloadResources(images);
     }
   }
@@ -76,7 +74,6 @@ class CachePreloader {
       "/assets/img/Videos/video3.mp4",
     ];
 
-    console.log("Preloading videos...");
     await this.preloadResources(videos);
   }
 
@@ -100,7 +97,6 @@ class CachePreloader {
     if (this.isPreloading) return;
 
     this.isPreloading = true;
-    console.log("Starting cache preloading...");
 
     while (
       this.preloadQueue.length > 0 &&
@@ -116,7 +112,6 @@ class CachePreloader {
     }
 
     this.isPreloading = false;
-    console.log("Cache preloading completed!");
   }
 
   // Preload single resource
@@ -137,7 +132,6 @@ class CachePreloader {
         await this.preloadStaticAsset(resource);
       }
     } catch (error) {
-      console.log(`Failed to preload ${resource}:`, error);
     } finally {
       this.currentPreloads--;
 
@@ -157,11 +151,9 @@ class CachePreloader {
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.onload = () => {
-        console.log(`Image preloaded: ${src}`);
         resolve();
       };
       img.onerror = () => {
-        console.log(`Failed to preload image: ${src}`);
         reject(new Error(`Failed to load image: ${src}`));
       };
       img.src = src;
@@ -174,11 +166,9 @@ class CachePreloader {
       const video = document.createElement("video");
       video.preload = "metadata";
       video.onloadedmetadata = () => {
-        console.log(`Video preloaded: ${src}`);
         resolve();
       };
       video.onerror = () => {
-        console.log(`Failed to preload video: ${src}`);
         reject(new Error(`Failed to load video: ${src}`));
       };
       video.src = src;
@@ -190,12 +180,10 @@ class CachePreloader {
     try {
       const response = await fetch(src);
       if (response.ok) {
-        console.log(`Static asset preloaded: ${src}`);
       } else {
         throw new Error(`HTTP ${response.status}`);
       }
     } catch (error) {
-      console.log(`Failed to preload static asset: ${src}`, error);
       throw error;
     }
   }
@@ -226,7 +214,6 @@ class CachePreloader {
   // Clear preload queue
   clearQueue() {
     this.preloadQueue = [];
-    console.log("Preload queue cleared");
   }
 
   // Preload based on current page

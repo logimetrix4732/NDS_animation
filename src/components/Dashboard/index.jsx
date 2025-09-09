@@ -58,6 +58,7 @@ const Dashboard = () => {
           width: "100%",
           height: "100%",
           objectFit: "cover",
+          objectPosition: "center top",
           top: 0,
           left: 0,
           zIndex: -1,
@@ -170,9 +171,9 @@ const Dashboard = () => {
                           More
                         </Link>
                         <ul className="sub-menu">
-                          <li class="menu-item-has-children">
+                          <li className="menu-item-has-children">
                             <a href="#">Publications</a>
-                            <ul class="sub-menu">
+                            <ul className="sub-menu">
                               <li>
                                 <Link to="/HR">HR Compliances</Link>
                               </li>

@@ -88,11 +88,11 @@ const BlogAndArticle1 = () => {
                   and general trade channels, NDS ensures that quality inputs
                   like cattle feed and mineral mixture.
                 </p>
-                <div class="about-feature-wrap">
-                  <div class="about-feature-list">
+                <div className="about-feature-wrap">
+                  <div className="about-feature-list">
                     <ul>
-                      <li class="wow fadeInUp" data-wow-delay=".4s">
-                        <span class="about-feature-icon">
+                      <li className="wow fadeInUp" data-wow-delay=".4s">
+                        <span className="about-feature-icon">
                           <img
                             src={checkMarkIcon}
                             alt=""
@@ -107,8 +107,8 @@ const BlogAndArticle1 = () => {
                           Heat stress mitigation techniques during summer
                         </p>
                       </li>
-                      <li class="wow fadeInUp" data-wow-delay=".5s">
-                        <span class="about-feature-icon">
+                      <li className="wow fadeInUp" data-wow-delay=".5s">
+                        <span className="about-feature-icon">
                           <img
                             src={checkMarkIcon}
                             alt=""
@@ -123,8 +123,8 @@ const BlogAndArticle1 = () => {
                           Mastitis prevention and udder hygiene practices
                         </p>
                       </li>
-                      <li class="wow fadeInUp" data-wow-delay=".5s">
-                        <span class="about-feature-icon">
+                      <li className="wow fadeInUp" data-wow-delay=".5s">
+                        <span className="about-feature-icon">
                           <img
                             src={checkMarkIcon}
                             alt=""
@@ -139,8 +139,8 @@ const BlogAndArticle1 = () => {
                           Calf and heifer management for future productivity
                         </p>
                       </li>
-                      <li class="wow fadeInUp" data-wow-delay=".5s">
-                        <span class="about-feature-icon">
+                      <li className="wow fadeInUp" data-wow-delay=".5s">
+                        <span className="about-feature-icon">
                           <img
                             src={checkMarkIcon}
                             alt=""

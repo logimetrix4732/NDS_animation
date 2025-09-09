@@ -237,10 +237,8 @@ export default function AdminLogs() {
   // Handle bulk actions
   const handleBulkAction = (action) => {
     if (action === "export") {
-      console.log("Exporting logs:", selectedLogs);
       // Implement export functionality
     } else if (action === "delete") {
-      console.log("Deleting logs:", selectedLogs);
       // Implement delete functionality
     }
   };

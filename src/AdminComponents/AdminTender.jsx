@@ -371,7 +371,6 @@ export default function AdminTender() {
         // Refresh the tenders list
         fetchTenders();
       } else {
-        console.log("Error response:", response);
         if (response && response.status === 401) {
           setErrorMessage("Authentication failed. Please login again.");
         } else {
@@ -379,7 +378,6 @@ export default function AdminTender() {
         }
       }
     } catch (error) {
-      console.error("Error:", error);
       if (error.status === 401) {
         setErrorMessage("Authentication failed. Please login again.");
       } else {
@@ -619,7 +617,6 @@ export default function AdminTender() {
         // Try to parse response body if it exists
         try {
           const responseData = await response.text();
-          console.log("Delete response body:", responseData);
         } catch (parseError) {
           console.log("No response body or parsing error:", parseError);
         }

@@ -97,11 +97,6 @@ const DocumentViewerModal = ({
         docUrl = `${import.meta.env.VITE_API_BASE_URL}/files${filePath}`;
       }
 
-      console.log("Document URL constructed:", docUrl);
-      console.log("Original filePath:", filePath);
-
-      // First try the direct URL
-      console.log("Setting document URL to:", docUrl);
       setDocumentUrl(docUrl);
 
       // Prepare Google Docs Viewer as fallback for PDFs
@@ -109,11 +104,9 @@ const DocumentViewerModal = ({
         const googleDocsUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(
           docUrl
         )}&embedded=true`;
-        console.log("Google Docs fallback URL prepared:", googleDocsUrl);
         setFallbackUrl(googleDocsUrl);
       }
     } catch (error) {
-      console.error("Error setting up document:", error);
       setError("Failed to set up document viewer. Please try again.");
     } finally {
       setLoading(false);
@@ -131,10 +124,6 @@ const DocumentViewerModal = ({
 
     // Try Google Docs Viewer as fallback if available and not already using it
     if (fallbackUrl && !documentUrl.includes("docs.google.com")) {
-      console.log(
-        "Direct file failed, trying Google Docs Viewer:",
-        fallbackUrl
-      );
       setDocumentUrl(fallbackUrl);
       setIframeLoading(true);
       setIframeError(false);
@@ -746,9 +735,6 @@ const DocumentViewerModal = ({
                           fallbackUrl &&
                           !documentUrl.includes("docs.google.com")
                         ) {
-                          console.log(
-                            "User clicked Try Alternative Viewer, switching to Google Docs Viewer"
-                          );
                           setDocumentUrl(fallbackUrl);
                         }
                       }}

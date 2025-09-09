@@ -121,11 +121,11 @@ const AboutSection7 = () => {
                 </span>
               </p>
 
-              <div class="about-feature-wrap">
-                <div class="about-feature-list">
+              <div className="about-feature-wrap">
+                <div className="about-feature-list">
                   <ul>
-                    <li class="wow fadeInUp" data-wow-delay=".4s">
-                      <span class="about-feature-icon">
+                    <li className="wow fadeInUp" data-wow-delay=".4s">
+                      <span className="about-feature-icon">
                         <img
                           src={checkMarkIcon}
                           alt=""
@@ -142,8 +142,8 @@ const AboutSection7 = () => {
                         Pedigree Selection programs.
                       </p>
                     </li>
-                    <li class="wow fadeInUp" data-wow-delay=".5s">
-                      <span class="about-feature-icon">
+                    <li className="wow fadeInUp" data-wow-delay=".5s">
+                      <span className="about-feature-icon">
                         <img
                           src={checkMarkIcon}
                           alt=""
@@ -157,8 +157,8 @@ const AboutSection7 = () => {
                         practices. 
                       </p>
                     </li>
-                    <li class="wow fadeInUp" data-wow-delay=".5s">
-                      <span class="about-feature-icon">
+                    <li className="wow fadeInUp" data-wow-delay=".5s">
+                      <span className="about-feature-icon">
                         <img
                           src={checkMarkIcon}
                           alt=""
@@ -171,8 +171,8 @@ const AboutSection7 = () => {
                         semen inventory, traceability and performance tracking. 
                       </p>
                     </li>
-                    <li class="wow fadeInUp" data-wow-delay=".5s">
-                      <span class="about-feature-icon">
+                    <li className="wow fadeInUp" data-wow-delay=".5s">
+                      <span className="about-feature-icon">
                         <img
                           src={checkMarkIcon}
                           alt=""
