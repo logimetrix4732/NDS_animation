@@ -50,7 +50,7 @@ const PrivacyPolicyPage = () => {
       transition: { duration: 0.3 },
     },
   };
-
+  console.log("nddb");
   return (
     <div className="privacy-policy-page py-5">
       <CommonBanner
