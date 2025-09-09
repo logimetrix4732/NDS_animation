@@ -149,22 +149,26 @@ const PublicationDocumentViewer = ({
 
   const getDocumentTitle = () => {
     if (selectedStatus === "Annual Reports") {
+      // For Annual Reports, show document name with language suffix
+      const baseName =
+        publication?.name || publication?.title || "Annual Report";
       if (publication?.documentType === "hindi") {
-        return "Annual Report (Hindi)";
+        return `${baseName} (Hindi)`;
       } else if (publication?.documentType === "english") {
-        return "Annual Report (English)";
+        return `${baseName} (English)`;
       } else {
         // Fallback
         if (publication?.pdfHindi && publication?.pdfEnglish) {
-          return "Annual Report (Hindi/English)";
+          return `${baseName} (Hindi/English)`;
         } else if (publication?.pdfHindi) {
-          return "Annual Report (Hindi)";
+          return `${baseName} (Hindi)`;
         } else if (publication?.pdfEnglish) {
-          return "Annual Report (English)";
+          return `${baseName} (English)`;
         }
       }
     }
-    return publication?.title || "Publication Document";
+    // For other publication types, show the actual document name
+    return publication?.name || publication?.title || "Publication Document";
   };
 
   return (

@@ -28,6 +28,7 @@ import AdminPublication from "./AdminComponents/AdminPublication";
 import AdminLogs from "./AdminComponents/AdminLogs";
 import PrivacyPage from "./Pages/PrivacyPolicyPage";
 import DynamicData from "./AdminComponents/DynamicData";
+import AdminCache from "./Pages/AdminCache";
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -75,6 +76,7 @@ const App = () => {
     "/AdminPublication",
     "/AdminLogs",
     "/dynamicData",
+    "/AdminCache",
   ];
   const isAdminRoute = adminRoutes.includes(location.pathname);
 
@@ -148,6 +150,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <AdminLogs />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/AdminCache"
+          element={
+            <ProtectedRoute>
+              <AdminCache />
             </ProtectedRoute>
           }
         />

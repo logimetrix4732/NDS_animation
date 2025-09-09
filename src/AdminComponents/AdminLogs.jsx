@@ -187,7 +187,9 @@ export default function AdminLogs() {
 
   // Get status color
   const getStatusColor = (status) => {
-    switch (status) {
+    if (!status) return "primary";
+
+    switch (status.toUpperCase()) {
       case "CREATE":
         return "success";
       case "UPDATE":
@@ -197,13 +199,15 @@ export default function AdminLogs() {
       case "VIEW":
         return "warning";
       default:
-        return "default";
+        return "primary";
     }
   };
 
   // Get status icon
   const getStatusIcon = (status) => {
-    switch (status) {
+    if (!status) return <Info />;
+
+    switch (status.toUpperCase()) {
       case "CREATE":
         return <Add />;
       case "UPDATE":

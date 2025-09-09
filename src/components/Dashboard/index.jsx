@@ -51,7 +51,8 @@ const Dashboard = () => {
         loop
         muted
         playsInline
-        preload="none"
+        preload="metadata"
+        poster="/thumbnail.jpg"
         style={{
           position: "absolute",
           width: "100%",
@@ -62,6 +63,7 @@ const Dashboard = () => {
           zIndex: -1,
         }}
       />
+
       <header
         className="th-header header-layout1 header-layout2"
         style={{

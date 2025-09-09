@@ -51,8 +51,7 @@ export default function HRCompliances() {
               return {
                 id: item.id,
                 title: item.name,
-                description:
-                  "HR Compliance document for organizational standards and policies.",
+                description: item.description,
                 image: imageUrl,
                 pdfFile: item.pdfFile,
                 isActive: item.isActive,
@@ -535,10 +534,13 @@ export default function HRCompliances() {
                     image={report.image}
                     alt={report.title}
                     sx={{
-                      height: 220,
+                      height: 350,
                       width: "100%",
                       objectFit: "cover",
+                      objectPosition: "center",
                       backgroundColor: "#f5f5f5",
+                      minHeight: 350,
+                      maxHeight: 350,
                     }}
                     onError={(e) => {
                       console.log("Image failed to load:", report.image);

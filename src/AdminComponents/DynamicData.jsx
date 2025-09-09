@@ -119,6 +119,7 @@ export default function DynamicData() {
     villages_reached: "",
     associated_farmers: "",
   });
+
   const [homeStatsId, setHomeStatsId] = useState(null);
 
   // Milk Producer Organisations State
@@ -452,7 +453,6 @@ export default function DynamicData() {
                     Dynamic Data Management
                   </Typography>
                 </Box>
-
                 {/* Right Side - Action Buttons */}
                 <Stack direction="row" spacing={2}>
                   <Button
@@ -481,7 +481,6 @@ export default function DynamicData() {
                   >
                     Refresh Data
                   </Button>
-
                   <Button
                     variant="contained"
                     startIcon={<Add />}

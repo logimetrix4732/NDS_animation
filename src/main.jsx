@@ -2,6 +2,8 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
+import "./utils/serviceWorker.js"; // Import service worker manager
+import "./utils/cachePreloader.js"; // Import cache preloader
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
