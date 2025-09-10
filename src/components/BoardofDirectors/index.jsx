@@ -16,7 +16,7 @@ import { ArrowForward, Close } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 import ChairmanSir from "../../Images/BoardofDirectorsImg/Chairman-Sir-01.png";
 import ChairmanSir1 from "../../Images/BoardofDirectorsImg/Chairman-Sir-02.png";
-import AbhijitSir from "../../Images/BoardofDirectorsImg/Abhijit-sir-1.png";
+import AbhijitSir from "../../Images/BoardofDirectorsImg/RajeshKumar.png";
 import DevanandSir from "../../Images/BoardofDirectorsImg/Devanand-sir.png";
 import AlkaMaam from "../../Images/BoardofDirectorsImg/Dr-Alka-Mahajan-003.png";
 import TrivediSir from "../../Images/BoardofDirectorsImg/K.R.Trivedi.png";
@@ -89,14 +89,12 @@ const directors = [
   },
   {
     id: 5,
-    name: "Shri Abhijeet Bhattacharjee",
+    name: "Shri. Rajesh Kumar",
     title: "Senior General Manager",
     image: AbhijitSir,
     fullImage: AbhijitSir,
     bio: [
-      "Shri Abhijeet Bhattacharjee is a seasoned professional with a rich background in Rural Management, Law and Science. With over three decades of experience at NDDB, he has been instrumental in driving initiatives in advocacy, corporate communication, public relations and the promotion of cooperative institutions.",
-      "Currently, he leads the Cooperative Services Group, focusing on strengthening dairy cooperatives and facilitating the growth of FPOs in sectors such as honey, manure and solar cooperatives.",
-      "Shri Bhattacharjee also serves on the boards of several prominent dairy organizations, including the West Assam Milk Union, Jharkhand Milk Federation and Panchmahal Milk Union, contributing his expertise to their strategic development.",
+      "Shri Rajesh Kumar is a dairy and rural development professional with over 17 years at the National Dairy Development Board (NDDB). An Economics graduate from St. Xavier’s College, Ranchi, and a PGDRM from IRMA, he has led initiatives in strategic planning, cooperative services, and government liaison. As Regional Head – Northern Region, he drives NDDB’s collaboration with State Governments and milk federations to advance sustainable dairy development.",
     ],
     experience: "40+ years in Pharmaceuticals & Finance",
     education: "Bachelor of Science, Sydenham College",

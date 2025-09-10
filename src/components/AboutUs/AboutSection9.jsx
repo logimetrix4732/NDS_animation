@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import DrawerModal from "../DrawerModal";
 import { useMediaQuery, useTheme } from "@mui/material";
@@ -7,7 +7,7 @@ import ClimateSustainabilityImg from "../../Images/OurExpertiesImg/ClimateSustai
 import finalcover from "../../Images/OurExpertiesImg/DSC_9992.JPG";
 import DSC_2582 from "../../Images/OurExpertiesImg/DSC_9845.JPG";
 const AboutSection9 = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);

@@ -29,6 +29,7 @@ import AdminLogs from "./AdminComponents/AdminLogs";
 import PrivacyPage from "./Pages/PrivacyPolicyPage";
 import DynamicData from "./AdminComponents/DynamicData";
 import AdminCache from "./Pages/AdminCache";
+import WhatsAppChatbox from "./components/WhatsAppChatbox";
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -165,6 +166,7 @@ const App = () => {
         <Route path="*" element={<Errors />} />
       </Routes>
       {!isAdminRoute && <Footer />}
+      {!isAdminRoute && <WhatsAppChatbox />}
       {!isAdminRoute && (
         <div className="scroll-top">
           <svg
