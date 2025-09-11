@@ -16,7 +16,7 @@ import { ArrowForward, Close } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 import ChairmanSir from "../../Images/BoardofDirectorsImg/Chairman-Sir-01.png";
 import ChairmanSir1 from "../../Images/BoardofDirectorsImg/Chairman-Sir-02.png";
-import AbhijitSir from "../../Images/BoardofDirectorsImg/RajeshKumar.png";
+import AbhijitSir from "../../Images/BoardofDirectorsImg/RajeevKrishnan.png";
 import DevanandSir from "../../Images/BoardofDirectorsImg/Devanand-sir.png";
 import AlkaMaam from "../../Images/BoardofDirectorsImg/Dr-Alka-Mahajan-003.png";
 import TrivediSir from "../../Images/BoardofDirectorsImg/K.R.Trivedi.png";
@@ -152,7 +152,7 @@ const directors = [
   {
     id: 5,
     name: "Shri Durga Shanker Mishra",
-    title: "",
+    title: "Retd IAS",
     image: BDN2025,
     fullImage: BDN2025,
     bio: [

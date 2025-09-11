@@ -1,17 +1,17 @@
 /* WhatsApp Chat Button */
 .whatsapp-chat-button {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 30px;
+  right: 30px;
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #bd8f59 0%, #a46c35 100%);
+  background: linear-gradient(135deg, #25d366 0%, #25d366 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 6px 20px rgba(189, 143, 89, 0.4);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
   z-index: 1000;
   transition: all 0.3s ease;
   animation: pulse 3s infinite;
@@ -22,7 +22,7 @@
 
 .whatsapp-chat-button:hover {
   transform: scale(1.1);
-  box-shadow: 0 8px 25px rgba(189, 143, 89, 0.6);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
   border-color: rgba(255, 255, 255, 0.4);
 }
 
@@ -34,13 +34,13 @@
 /* Pulse Animation */
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(189, 143, 89, 0.7);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
   }
   70% {
-    box-shadow: 0 0 0 15px rgba(189, 143, 89, 0);
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(189, 143, 89, 0);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
   }
 }
 
@@ -58,15 +58,15 @@
 /* Chat Popup */
 .whatsapp-chat-popup {
   position: fixed;
-  bottom: 90px;
-  right: 20px;
+  bottom: 110px;
+  right: 40px;
   width: 350px;
   background: white;
   border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(189, 143, 89, 0.3);
+  box-shadow: 0 20px 60px rgba(37, 211, 102, 0.3);
   z-index: 1001;
   animation: slideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 2px solid rgba(189, 143, 89, 0.1);
+  border: 2px solid rgba(37, 211, 102, 0.1);
   overflow: hidden;
   backdrop-filter: blur(10px);
 }
@@ -84,7 +84,7 @@
 
 /* Chat Header */
 .whatsapp-chat-header {
-  background: linear-gradient(135deg, #bd8f59 0%, #a46c35 100%);
+  background: linear-gradient(135deg, #25d366 0%, #25d366 100%);
   color: white;
   padding: 15px 20px;
   border-radius: 20px 20px 0 0;
@@ -177,12 +177,12 @@
   padding: 16px;
   background: white;
   border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(189, 143, 89, 0.12);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.12);
   transition: all 0.3s ease;
   animation: infoSlide 0.4s ease-out;
   position: relative;
   z-index: 1;
-  border: 1px solid rgba(189, 143, 89, 0.08);
+  border: 1px solid rgba(37, 211, 102, 0.08);
 }
 
 @keyframes infoSlide {
@@ -203,7 +203,7 @@
 .whatsapp-avatar-circle {
   width: 62px;
   height: 62px;
-  background: linear-gradient(135deg, #bd8f59 0%, #a46c35 100%);
+  background: linear-gradient(135deg, #25d366 0%, #25d366 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -211,7 +211,7 @@
   color: white;
   font-weight: bold;
   font-size: 16px;
-  box-shadow: 0 8px 25px rgba(189, 143, 89, 0.4);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
   transition: all 0.3s ease;
   animation: avatarPulse 2s ease-in-out infinite;
   border: 2px solid rgba(255, 255, 255, 0.2);
@@ -251,11 +251,11 @@
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 16px;
-  box-shadow: 0 6px 20px rgba(189, 143, 89, 0.15);
-  border-left: 6px solid #bd8f59;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.15);
+  border-left: 6px solid #25d366;
   transition: all 0.3s ease;
   animation: messageSlide 0.6s ease-out;
-  border: 1px solid rgba(189, 143, 89, 0.08);
+  border: 1px solid rgba(37, 211, 102, 0.08);
   position: relative;
 }
 
@@ -279,14 +279,14 @@
 }
 
 .whatsapp-chat-message a {
-  color: #bd8f59;
+  color: #25d366;
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .whatsapp-chat-message a:hover {
-  color: #a46c35;
+  color: #25d366;
   text-decoration: underline;
   transform: scale(1.02);
 }
@@ -300,8 +300,8 @@
   border-radius: 16px;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 2px solid rgba(189, 143, 89, 0.15);
-  box-shadow: 0 6px 20px rgba(189, 143, 89, 0.12);
+  border: 2px solid rgba(37, 211, 102, 0.15);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.12);
   animation: optionSlide 0.8s ease-out;
   position: relative;
 }
@@ -320,20 +320,20 @@
 .whatsapp-chat-option:hover {
   background: linear-gradient(135deg, #f8f5f0 0%, #f0ebe5 100%);
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(189, 143, 89, 0.3);
-  border-color: #bd8f59;
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+  border-color: #25d366;
 }
 
 .whatsapp-chat-icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #bd8f59 0%, #a46c35 100%);
+  background: linear-gradient(135deg, #25d366 0%, #25d366 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 14px;
-  box-shadow: 0 8px 25px rgba(189, 143, 89, 0.4);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
   transition: all 0.3s ease;
   border: 2px solid rgba(255, 255, 255, 0.2);
 }
@@ -346,7 +346,7 @@
 
 .whatsapp-chat-option:hover .whatsapp-chat-icon {
   transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 8px 25px rgba(189, 143, 89, 0.5);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
 }
 
 .whatsapp-chat-option:hover .whatsapp-chat-icon i {
@@ -377,13 +377,13 @@
 @media (max-width: 768px) {
   .whatsapp-chat-popup {
     width: 320px;
-    right: 10px;
-    bottom: 80px;
+    right: 30px;
+    bottom: 100px;
   }
 
   .whatsapp-chat-button {
-    right: 15px;
-    bottom: 15px;
+    right: 35px;
+    bottom: 35px;
     width: 55px;
     height: 55px;
     /* Disable animations on mobile for better performance */
