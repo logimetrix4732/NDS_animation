@@ -9,8 +9,8 @@ const AboutSection3 = () => {
     <section className="choose-6-area space-bottom">
       <div className="container">
         <div className="row gy-4 align-items-start">
-          <div className="col-xl-5 order-1 order-xl-0 mt-50">
-            <div className="title-area mb-20 pe-xl-5">
+          <div className="col-xl-5 order-1 order-xl-0 mt-30">
+            <div className="title-area mb-10 pe-xl-5">
               <AnimatedText
                 text="Animal Productivity Enhancement Services"
                 tag="h2"
@@ -18,21 +18,28 @@ const AboutSection3 = () => {
                 width="100%"
               />
             </div>
-            <p className="sec-text mb-10 wow fadeInUp">
+            <p className="sec-text mb-0 wow fadeInUp">
               Improving animal productivity and advancing breed quality is a key
-              objective of NDS. We own and manage the four major semen stations
-              in the country – Sabarmati Ashram Gaushala in Bidaj (Gujarat);
-              Animal Breeding Centre, Salon (Uttar Pradesh); Alamadhi Semen
-              Station (Tamil Nadu); and Rahuri Semen Station (Maharashtra), that
-              produce and supply high-quality bovine semen under the ‘SAG’
-              (Superior Animal Genetics) brand, to promote genetic improvement
-              in milch animals. Collectively catering over 35% of the country’s
-              semen dose requirement, these stations form the backbone of our
+              objective of NDS. We own/manage the four major semen stations in
+              the country – Sabarmati Ashram Gaushala in Bidaj (Gujarat); Animal
+              Breeding Centre, Salon (Uttar Pradesh); Alamadhi Semen Station
+              (Tamil Nadu); and Rahuri Semen Station (Maharashtra), that produce
+              and supply high-quality bovine semen under the SAG (Superior
+              Animal Genetics) brand, to promote genetic improvement in milch
+              animals. All these stations are graded ‘A’ by the Central
+              Monitoring Unit and adhere to rigorous scientific protocols for
+              bull selection, semen processing, and disease control.
+              <br />
+              Together, these semen stations meet over 35% of the nation's total
+              requirement for semen doses, producing and distributing nearly 50
+              million doses each year. The widespread use of SAG frozen semen
+              doses results in the birth of a high genetic merit calf every two
+              seconds across India. These stations form the backbone of our
               genetic improvement programmes with a strong focus on enhancing
-              productivity, fertility, and overall profitability in the dairy
+              productivity, fertility and overall profitability in the dairy
               sector.
             </p>
-            <div className="mt-30 wow fadeInUp" data-wow-delay=".4s">
+            <div className="mt-10 wow fadeInUp" data-wow-delay=".4s">
               <Link to="/animalProductivity" className="th-btn th-icon">
                 Learn more <i className="fa-light fa-arrow-right-long" />
               </Link>
