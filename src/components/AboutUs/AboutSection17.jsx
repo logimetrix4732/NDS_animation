@@ -1,6 +1,6 @@
 import React from "react";
 import AnimatedText from "../AnimatedText";
-import GroupPhoto from "../../Images/AnimalProductivityImg/DSC_0266.jpg";
+import GroupPhoto from "../../Images/AnimalProductivityImg/saglive.jpeg";
 const AboutSection17 = () => {
   return (
     <div
