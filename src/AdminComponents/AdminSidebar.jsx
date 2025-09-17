@@ -21,7 +21,6 @@ import {
   Logout as LogoutIcon,
   History as HistoryIcon,
   DataObject as DataObjectIcon,
-  Storage as StorageIcon,
 } from "@mui/icons-material";
 import nds_logo from "../assets/img/nds_logo.png";
 import ReportIcon from "@mui/icons-material/Report";
@@ -58,11 +57,6 @@ const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
       text: "Dynamic Data",
       icon: <DataObjectIcon />,
       path: "/dynamicData",
-    },
-    {
-      text: "Cache Management",
-      icon: <StorageIcon />,
-      path: "/AdminCache",
     },
   ];
 

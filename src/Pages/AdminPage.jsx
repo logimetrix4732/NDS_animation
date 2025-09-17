@@ -233,19 +233,40 @@ export default function AdminPage() {
           borderColor: "divider",
         }}
       >
-        <Toolbar sx={{ minHeight: { xs: 64, md: 89 } }}>
+        <Toolbar
+          sx={{
+            minHeight: { xs: 56, sm: 64, md: 89 },
+            px: { xs: 1, sm: 2, md: 3 },
+          }}
+        >
           <IconButton
             edge="start"
             onClick={() => setMobileOpen(!mobileOpen)}
-            sx={{ mr: 1 }}
+            sx={{
+              mr: { xs: 0.5, sm: 1 },
+              display: { md: "none" },
+            }}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700 }}>
+          <Typography
+            variant="h6"
+            sx={{
+              flexGrow: 1,
+              fontWeight: 700,
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
             <img
               src={nds_logo}
               alt="NDDB"
-              style={{ width: "138px", height: "55px" }}
+              style={{
+                width: "clamp(100px, 15vw, 138px)",
+                height: "clamp(40px, 6vw, 55px)",
+                maxWidth: "138px",
+                maxHeight: "55px",
+              }}
               loading="lazy"
             />
           </Typography>
@@ -254,31 +275,40 @@ export default function AdminPage() {
             component="form"
             onSubmit={(e) => e.preventDefault()}
             sx={{
-              display: { xs: "none", md: "flex" },
+              display: { xs: "none", sm: "flex" },
               alignItems: "center",
-              px: 1,
+              px: { sm: 1, md: 1.5 },
               py: 0.5,
-              mr: 2,
-              width: 360,
+              mr: { sm: 1, md: 2 },
+              width: { sm: 280, md: 360 },
+              minWidth: 200,
             }}
             elevation={0}
           >
-            <IconButton>
+            <IconButton size="small">
               <SearchIcon />
             </IconButton>
             <TextField
               variant="standard"
-              placeholder="Search tenders, reference, location, status…"
+              placeholder="Search tenders..."
               fullWidth
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              InputProps={{ disableUnderline: true }}
+              InputProps={{
+                disableUnderline: true,
+                sx: { fontSize: { xs: "0.875rem", sm: "1rem" } },
+              }}
             />
           </Paper>
 
-          <Stack direction="row" spacing={1} alignItems="center">
+          <Stack
+            direction="row"
+            spacing={{ xs: 0.5, sm: 1 }}
+            alignItems="center"
+          >
             <Tooltip title="Toggle theme">
               <IconButton
+                size="small"
                 onClick={() =>
                   setMode((m) => (m === "light" ? "dark" : "light"))
                 }
@@ -286,10 +316,18 @@ export default function AdminPage() {
                 {mode === "light" ? <DarkMode /> : <LightMode />}
               </IconButton>
             </Tooltip>
-            <IconButton>
+            <IconButton size="small">
               <Notifications />
             </IconButton>
-            <Avatar sx={{ width: 34, height: 34 }}>AS</Avatar>
+            <Avatar
+              sx={{
+                width: { xs: 28, sm: 32, md: 34 },
+                height: { xs: 28, sm: 32, md: 34 },
+                fontSize: { xs: "0.75rem", sm: "0.875rem" },
+              }}
+            >
+              AS
+            </Avatar>
           </Stack>
         </Toolbar>
       </AppBar>
@@ -298,35 +336,74 @@ export default function AdminPage() {
         component="main"
         sx={{
           flexGrow: 1,
-          p: { xs: 2, md: 3 },
+          p: { xs: 1, sm: 2, md: 3 },
           ml: { md: `${drawerWidth}px` },
+          width: { md: `calc(100% - ${drawerWidth}px)` },
+          minHeight: "100vh",
         }}
       >
-        <Toolbar />
-        <Stack spacing={2} mt={2}>
+        <Toolbar sx={{ minHeight: { xs: 56, sm: 64, md: 89 } }} />
+        <Stack
+          spacing={{ xs: 1.5, sm: 2, md: 3 }}
+          sx={{ mt: { xs: 1, sm: 2 } }}
+        >
           {/* KPIs */}
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 1.5, sm: 2, md: 2 }}>
             {kpis.map((k) => (
-              <Grid key={k.label} size={{ xs: 12, sm: 6, md: 3 }}>
-                <Card sx={{ position: "relative" }}>
-                  <CardContent>
+              <Grid key={k.label} size={{ xs: 12, sm: 6, lg: 3 }}>
+                <Card
+                  sx={{
+                    position: "relative",
+                    height: "100%",
+                    minHeight: { xs: 140, sm: 160, md: 180 },
+                  }}
+                >
+                  <CardContent
+                    sx={{
+                      p: { xs: 2, sm: 2.5, md: 3 },
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                    }}
+                  >
                     <Stack
                       direction="row"
                       justifyContent="space-between"
                       alignItems="flex-start"
+                      sx={{ mb: 2 }}
                     >
-                      <Box>
-                        <Typography variant="overline" color="text.secondary">
+                      <Box sx={{ flex: 1, minWidth: 0 }}>
+                        <Typography
+                          variant="overline"
+                          color="text.secondary"
+                          sx={{
+                            fontSize: { xs: "0.7rem", sm: "0.75rem" },
+                            lineHeight: 1.2,
+                          }}
+                        >
                           {k.label}
                         </Typography>
-                        <Typography variant="h4" sx={{ mt: 0.5 }}>
+                        <Typography
+                          variant="h4"
+                          sx={{
+                            mt: 0.5,
+                            fontSize: {
+                              xs: "1.5rem",
+                              sm: "1.75rem",
+                              md: "2rem",
+                            },
+                            fontWeight: 700,
+                            lineHeight: 1.2,
+                          }}
+                        >
                           {k.value}
                         </Typography>
                         <Stack
                           direction="row"
                           spacing={0.5}
                           alignItems="center"
-                          sx={{ mt: 1 }}
+                          sx={{ mt: 1, flexWrap: "wrap" }}
                         >
                           {k.up ? (
                             <ArrowUpward fontSize="small" color="success" />
@@ -336,10 +413,18 @@ export default function AdminPage() {
                           <Typography
                             variant="body2"
                             color={k.up ? "success.main" : "error.main"}
+                            sx={{ fontSize: { xs: "0.75rem", sm: "0.875rem" } }}
                           >
                             {k.delta}
                           </Typography>
-                          <Typography variant="caption" color="text.secondary">
+                          <Typography
+                            variant="caption"
+                            color="text.secondary"
+                            sx={{
+                              fontSize: { xs: "0.65rem", sm: "0.75rem" },
+                              display: { xs: "none", sm: "inline" },
+                            }}
+                          >
                             vs last period
                           </Typography>
                         </Stack>
@@ -349,12 +434,23 @@ export default function AdminPage() {
                         label="Healthy"
                         color={k.up ? "success" : "default"}
                         size="small"
+                        sx={{
+                          fontSize: { xs: "0.65rem", sm: "0.75rem" },
+                          height: { xs: 20, sm: 24 },
+                          "& .MuiChip-icon": {
+                            fontSize: { xs: "0.75rem", sm: "1rem" },
+                          },
+                        }}
                       />
                     </Stack>
                     <LinearProgress
                       variant="determinate"
                       value={k.up ? 70 : 35}
-                      sx={{ mt: 2 }}
+                      sx={{
+                        mt: "auto",
+                        height: { xs: 4, sm: 6 },
+                        borderRadius: 1,
+                      }}
                     />
                   </CardContent>
                 </Card>
@@ -363,89 +459,208 @@ export default function AdminPage() {
           </Grid>
 
           {/* Charts */}
-          <Grid container spacing={2}>
-            <Grid size={{ xs: 12, md: 7 }}>
-              <Card sx={{ height: 360 }}>
-                <CardContent sx={{ height: 320 }}>
-                  <Typography variant="h6" gutterBottom>
+          <Grid container spacing={{ xs: 1.5, sm: 2, md: 2 }}>
+            <Grid size={{ xs: 12, lg: 7 }}>
+              <Card
+                sx={{
+                  height: { xs: 300, sm: 360, md: 400 },
+                  minHeight: 300,
+                }}
+              >
+                <CardContent
+                  sx={{
+                    height: "100%",
+                    p: { xs: 2, sm: 2.5, md: 3 },
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <Typography
+                    variant="h6"
+                    gutterBottom
+                    sx={{
+                      fontSize: { xs: "1rem", sm: "1.1rem", md: "1.25rem" },
+                      mb: { xs: 1, sm: 2 },
+                    }}
+                  >
                     Monthly Tenders Count
                   </Typography>
-                  <ResponsiveContainer width="100%" height="85%">
-                    <LineChart
-                      data={lineData}
-                      margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
-                    >
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="month" />
-                      <YAxis yAxisId="left" orientation="left" />
-                      <YAxis yAxisId="right" orientation="right" />
-                      <ReTooltip />
-                      <Legend />
-                      <Line
-                        yAxisId="left"
-                        type="monotone"
-                        dataKey=""
-                        strokeWidth={2}
-                        dot={false}
-                      />
-                      <Line
-                        yAxisId="right"
-                        type="monotone"
-                        dataKey=""
-                        strokeWidth={2}
-                        dot={false}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
+                  <Box sx={{ flex: 1, minHeight: 0 }}>
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart
+                        data={lineData}
+                        margin={{
+                          top: 10,
+                          right: { xs: 10, sm: 20 },
+                          left: { xs: 0, sm: 10 },
+                          bottom: 0,
+                        }}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis
+                          dataKey="month"
+                          fontSize={{ xs: 10, sm: 12 }}
+                          tick={{ fontSize: { xs: 10, sm: 12 } }}
+                        />
+                        <YAxis
+                          yAxisId="left"
+                          orientation="left"
+                          fontSize={{ xs: 10, sm: 12 }}
+                          tick={{ fontSize: { xs: 10, sm: 12 } }}
+                        />
+                        <YAxis
+                          yAxisId="right"
+                          orientation="right"
+                          fontSize={{ xs: 10, sm: 12 }}
+                          tick={{ fontSize: { xs: 10, sm: 12 } }}
+                        />
+                        <ReTooltip
+                          contentStyle={{
+                            fontSize: { xs: "0.75rem", sm: "0.875rem" },
+                          }}
+                        />
+                        <Legend
+                          wrapperStyle={{
+                            fontSize: { xs: "0.75rem", sm: "0.875rem" },
+                          }}
+                        />
+                        <Line
+                          yAxisId="left"
+                          type="monotone"
+                          dataKey="revenue"
+                          stroke="#8884d8"
+                          strokeWidth={2}
+                          dot={false}
+                        />
+                        <Line
+                          yAxisId="right"
+                          type="monotone"
+                          dataKey="users"
+                          stroke="#82ca9d"
+                          strokeWidth={2}
+                          dot={false}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </Box>
                 </CardContent>
               </Card>
             </Grid>
-            <Grid size={{ xs: 12, md: 5 }}>
-              <Card sx={{ height: 360 }}>
-                <CardContent sx={{ height: 320 }}>
-                  <Typography variant="h6" gutterBottom>
+            <Grid size={{ xs: 12, lg: 5 }}>
+              <Card
+                sx={{
+                  height: { xs: 300, sm: 360, md: 400 },
+                  minHeight: 300,
+                }}
+              >
+                <CardContent
+                  sx={{
+                    height: "100%",
+                    p: { xs: 2, sm: 2.5, md: 3 },
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <Typography
+                    variant="h6"
+                    gutterBottom
+                    sx={{
+                      fontSize: { xs: "1rem", sm: "1.1rem", md: "1.25rem" },
+                      mb: { xs: 1, sm: 2 },
+                    }}
+                  >
                     Publication Chart
                   </Typography>
-                  <ResponsiveContainer width="100%" height="85%">
-                    <BarChart data={barData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="name" />
-                      <YAxis />
-                      <ReTooltip />
-                      <Legend />
-                      <Bar dataKey="HR Compliances" />
-                      <Bar dataKey="Annual Reports" />
-                    </BarChart>
-                  </ResponsiveContainer>
+                  <Box sx={{ flex: 1, minHeight: 0 }}>
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={barData}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis
+                          dataKey="name"
+                          fontSize={{ xs: 10, sm: 12 }}
+                          tick={{ fontSize: { xs: 10, sm: 12 } }}
+                        />
+                        <YAxis
+                          fontSize={{ xs: 10, sm: 12 }}
+                          tick={{ fontSize: { xs: 10, sm: 12 } }}
+                        />
+                        <ReTooltip
+                          contentStyle={{
+                            fontSize: { xs: "0.75rem", sm: "0.875rem" },
+                          }}
+                        />
+                        <Legend
+                          wrapperStyle={{
+                            fontSize: { xs: "0.75rem", sm: "0.875rem" },
+                          }}
+                        />
+                        <Bar dataKey="HR Compliances" fill="#8884d8" />
+                        <Bar dataKey="Annual Reports" fill="#82ca9d" />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </Box>
                 </CardContent>
               </Card>
             </Grid>
           </Grid>
 
           {/* Table */}
-          <Card>
-            <CardContent>
+          <Card sx={{ width: "100%" }}>
+            <CardContent
+              sx={{
+                p: { xs: 2, sm: 2.5, md: 3 },
+                "&:last-child": { pb: { xs: 2, sm: 2.5, md: 3 } },
+              }}
+            >
               <Stack
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
-                sx={{ mb: 1 }}
+                sx={{ mb: { xs: 1.5, sm: 2 } }}
               >
-                <Typography variant="h6">Latest Tenders</Typography>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontSize: { xs: "1rem", sm: "1.1rem", md: "1.25rem" },
+                  }}
+                >
+                  Latest Tenders
+                </Typography>
               </Stack>
-              <div style={{ width: "100%", height: 420 }}>
+              <Box
+                sx={{
+                  width: "100%",
+                  height: { xs: 350, sm: 400, md: 420 },
+                  minHeight: 300,
+                  "& .MuiDataGrid-root": {
+                    fontSize: { xs: "0.75rem", sm: "0.875rem" },
+                  },
+                  "& .MuiDataGrid-columnHeaders": {
+                    fontSize: { xs: "0.75rem", sm: "0.875rem" },
+                  },
+                  "& .MuiDataGrid-cell": {
+                    fontSize: { xs: "0.75rem", sm: "0.875rem" },
+                  },
+                }}
+              >
                 <DataGrid
                   rows={filteredRows}
                   columns={columns}
-                  pageSizeOptions={[5, 10]}
+                  pageSizeOptions={[5, 10, 25]}
                   loading={loading}
                   initialState={{
                     pagination: {
                       paginationModel: { page: 0, pageSize: 10 },
                     },
                   }}
+                  sx={{
+                    "& .MuiDataGrid-toolbarContainer": {
+                      flexDirection: { xs: "column", sm: "row" },
+                      gap: { xs: 1, sm: 0 },
+                    },
+                  }}
                 />
-              </div>
+              </Box>
             </CardContent>
           </Card>
         </Stack>

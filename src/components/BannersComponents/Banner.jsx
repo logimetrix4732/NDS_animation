@@ -42,7 +42,7 @@ const highlights = [
     icon: indianwoman,
   },
   {
-    text: "18 out of 23 MPOs led by women",
+    text: "18 out of 24 MPOs led by women",
     icon: violenceagainst,
   },
   {
