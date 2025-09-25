@@ -22,9 +22,9 @@ const AboutSection4 = () => {
     title: "NDDB Dairy Services",
     content: [
       "A Section 8 company registered under the Companies Act, 2013. It is a wholly-owned subsidiary of the National Dairy Development Board (NDDB), and plays a pivotal role in strengthening the dairy sector in India through innovative, sustainable, and inclusive development models.",
-      "Established to operationalize NDDB’s vision of creating a vibrant rural dairying ecosystem, NDS, since its inception has been assisting dairy farmers with a range of initiatives throughout the dairy value chain. Our comprehensive approach, aimed at improving breed quality and boosting animal productivity, has resulted in the increase of the surplus and marketable milk available with farmers.  ",
+      "Established to operationalise NDDB’s vision of creating a vibrant rural dairying ecosystem, NDS, since its inception has been assisting dairy farmers with a range of initiatives throughout the dairy value chain. Our comprehensive approach, aimed at improving breed quality and boosting animal productivity, has resulted in the increase of the surplus and marketable milk available with farmers.  ",
       "By facilitating the establishment of Milk Producer Organisations (MPOs) and thereafter providing them technical support and an assured market for their surplus produce in the form of strong forward institutional linkages, dairy farmers benefit with improved livelihoods through fair and transparent pricing and direct payments into their bank accounts.",
-      "For long-term sustainability, NDS prioritises training and capacity building for dairy farmers to ensure they can manage these (producer owned) organizations effectively. Gender inclusion remains a key focal area, hence our interventions provide a platform to women dairy farmers, empowering them to excel in the remotest regions of India and make significant contributions to the dairy sector of the country.",
+      "For long-term sustainability, NDS prioritises training and capacity building for dairy farmers to ensure they can manage these (producer owned) organisations effectively. Gender inclusion remains a key focal area, hence our interventions provide a platform to women dairy farmers, empowering them to excel in the remotest regions of India and make significant contributions to the dairy sector of the country.",
     ],
   };
   return (
@@ -87,7 +87,7 @@ const AboutSection4 = () => {
                 dairy sector through innovative, sustainable, and inclusive
                 development models.
                 <br />
-                Established to operationalize NDDB’s vision of creating a
+                Established to operationalise NDDB’s vision of creating a
                 vibrant rural dairying ecosystem, NDS, since its inception has
                 been assisting dairy farmers with a range of initiatives
                 throughout the dairy value chain. Our comprehensive approach,

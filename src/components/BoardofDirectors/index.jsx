@@ -90,7 +90,7 @@ const directors = [
   {
     id: 5,
     name: "Shri. Rajesh Kumar",
-    title: "Senior General Manager",
+    title: "Senior Manager, NDDB",
     image: AbhijitSir,
     fullImage: AbhijitSir,
     bio: [
@@ -131,7 +131,7 @@ const directors = [
   {
     id: 5,
     name: "Shri T.M. Vijay Bhaskar",
-    title: "Retired IAS",
+    title: "Retd. IAS",
     image: VijaySir,
     fullImage: VijaySir,
     bio: [
@@ -152,7 +152,7 @@ const directors = [
   {
     id: 5,
     name: "Shri Durga Shanker Mishra",
-    title: "Retd IAS",
+    title: "Retd. IAS",
     image: BDN2025,
     fullImage: BDN2025,
     bio: [

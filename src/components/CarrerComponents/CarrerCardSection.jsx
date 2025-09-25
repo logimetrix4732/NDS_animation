@@ -17,7 +17,7 @@ const Card = () => {
           <br />
           <div className="name">
             Our Human Resource approach is grounded in the belief that when
-            individuals grow, the organization thrives. We don’t just manage
+            individuals grow, the organisation thrives. We don’t just manage
             talent — we enable and empower it.
           </div>
         </div>

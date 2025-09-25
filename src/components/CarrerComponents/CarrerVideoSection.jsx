@@ -82,7 +82,7 @@ const CarrerVideoSection = () => {
         <Box sx={{ zIndex: 2, maxWidth: "800px", px: 2 }}>
           <Typography variant="h5" color="white" fontWeight={600}>
             <strong> People at the Core of Our Purpose</strong> <br /> At NDDB
-            Dairy Services (NDS), people are not just part of the organization —
+            Dairy Services (NDS), people are not just part of the organisation —
             they are the driving force behind everything we do. They embody our
             mission, fuel innovation, and enable us to make a lasting impact on
             India’s dairy sector.

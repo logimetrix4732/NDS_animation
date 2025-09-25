@@ -95,7 +95,7 @@ const AboutSection4 = () => {
                   >
                     To ensure long-term sustainability, NDS prioritises training
                     and capacity building for dairy farmers to ensure they can
-                    manage these organizations effectively. Gender inclusion
+                    manage these organisations effectively. Gender inclusion
                     remains a key focal area, hence our interventions provide a
                     platform to women dairy farmers, empowering them to excel in
                     the remotest regions of India and make significant

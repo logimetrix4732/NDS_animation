@@ -68,9 +68,9 @@ const strategies = [
     title: "Digital Efficiency",
     title1: "Driving Efficiency through Automation and Digital Tools",
     subtitle: "Automation and Digitalisation",
-    desc: "Information and Communication Technology ensures transparent, real-time milk data tracking, automated member payments and centralized...",
+    desc: "Information and Communication Technology ensures transparent, real-time milk data tracking, automated member payments and centralised...",
     mainDesc:
-      "Information and Communication Technology ensures transparent, real-time milk data tracking, automated member payments and centralized updates. MPOs use SAP-based ERP systems for efficient management of finance, HR, production and quality, enabling timely decisions, cost optimization and better returns for farmer members. We embed digital systems from the beginning of operations such as automated milk testing, cloud-based MIS, mobile application to facilitate VCG meetings and direct bank payment solutions. These tools bring efficiency, transparency and traceability, while also building data-driven decision-making capability within the MPO.",
+      "Information and Communication Technology ensures transparent, real-time milk data tracking, automated member payments and centralised updates. MPOs use SAP-based ERP systems for efficient management of finance, HR, production and quality, enabling timely decisions, cost optimization and better returns for farmer members. We embed digital systems from the beginning of operations such as automated milk testing, cloud-based MIS, mobile application to facilitate VCG meetings and direct bank payment solutions. These tools bring efficiency, transparency and traceability, while also building data-driven decision-making capability within the MPO.",
     img: DrivingEfficiency,
   },
 ];
@@ -185,7 +185,14 @@ const OurExperties7 = () => {
                       overflow: "visible",
                     }}
                   >
-                    <div className="service-box service-style-1 gsap-cursor">
+                    <div
+                      className="service-box service-style-1 gsap-cursor"
+                      style={{
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                    >
                       <div className="service-img">
                         <a href="#">
                           <img
@@ -193,40 +200,65 @@ const OurExperties7 = () => {
                             alt={item.title}
                             loading="lazy"
                             style={{
-                              width: "400px",
+                              width: "100%",
                               height: "307.69px",
                               objectFit: "cover",
                             }}
                           />
                         </a>
                       </div>
-                      <div className="service-content">
-                        <h3 className="box-title ellipsis-1">{item.title}</h3>
+                      <div
+                        className="service-content"
+                        style={{
+                          height: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
+                      >
+                        <h3
+                          className="box-title"
+                          style={{
+                            whiteSpace: "normal",
+                            wordWrap: "break-word",
+                            lineHeight: "1.3",
+                            minHeight: "2.6em",
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                        >
+                          {item.title}
+                        </h3>
                         <Typography
                           variant="subtitle1"
                           sx={{
                             color: "grey", // a green tone that matches the theme
                             fontWeight: 600,
                             fontSize: "1rem",
-                            mb: 1,
-                            mt: 1,
+                            minHeight: "1.2em",
+                            display: "flex",
+                            alignItems: "center",
                           }}
                         >
                           {item.subtitle}
                         </Typography>
 
-                        <p className="service-box_text wow fadeInUp ellipsis-3">
+                        <p
+                          className="service-box_text wow fadeInUp ellipsis-3"
+                          style={{ flex: 1 }}
+                        >
                           {item.desc}
                         </p>
 
-                        <button
-                          className="th-btn style4"
-                          onClick={() => handleReadMore(index)}
-                          disabled={expandedIndex !== null}
-                        >
-                          Learn More{" "}
-                          <i className="fa-light fa-arrow-right-long"></i>
-                        </button>
+                        <div style={{ marginTop: "auto" }}>
+                          <button
+                            className="th-btn style4"
+                            onClick={() => handleReadMore(index)}
+                            disabled={expandedIndex !== null}
+                          >
+                            Learn More{" "}
+                            <i className="fa-light fa-arrow-right-long"></i>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>

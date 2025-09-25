@@ -25,8 +25,8 @@ class ServiceWorkerManager {
             newWorker.state === "installed" &&
             navigator.serviceWorker.controller
           ) {
-            // New content is available, show update notification
-            this.showUpdateNotification();
+            // New content is available, auto update without notification
+            this.updateServiceWorker();
           }
         });
       });
@@ -35,17 +35,6 @@ class ServiceWorkerManager {
     } catch (error) {
       console.error("Service Worker registration failed:", error);
       return false;
-    }
-  }
-
-  // Show update notification
-  showUpdateNotification() {
-    if (
-      confirm(
-        "Website ka naya version available hai! Refresh karna chahte hain?"
-      )
-    ) {
-      this.updateServiceWorker();
     }
   }
 
@@ -122,7 +111,7 @@ class ServiceWorkerManager {
     }
   }
 
-  // Preload critical resources
+  // Preload critical resources - sirf images
   async preloadCriticalResources() {
     if (!this.isSupported) {
       return false;

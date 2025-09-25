@@ -36,6 +36,7 @@ const DocumentViewerModal = ({
   onClose,
   tender,
   documentType = "tender",
+  showDownloadButton = false,
 }) => {
   const [documentUrl, setDocumentUrl] = useState("");
   const [fallbackUrl, setFallbackUrl] = useState("");
@@ -44,7 +45,7 @@ const DocumentViewerModal = ({
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [iframeLoading, setIframeLoading] = useState(true);
   const [iframeError, setIframeError] = useState(false);
-  const [zoomLevel, setZoomLevel] = useState(100);
+  const [zoomLevel, setZoomLevel] = useState(90);
   const [rotation, setRotation] = useState(0);
 
   const theme = useTheme();
@@ -140,7 +141,7 @@ const DocumentViewerModal = ({
     setIsFullscreen(false);
     setIframeLoading(true);
     setIframeError(false);
-    setZoomLevel(100);
+    setZoomLevel(90);
     setRotation(0);
     onClose();
   };
@@ -215,11 +216,11 @@ const DocumentViewerModal = ({
   };
 
   const handleZoomIn = () => {
-    setZoomLevel((prev) => Math.min(prev + 25, 200));
+    setZoomLevel((prev) => Math.min(prev + 25, 300));
   };
 
   const handleZoomOut = () => {
-    setZoomLevel((prev) => Math.max(prev - 25, 50));
+    setZoomLevel((prev) => Math.max(prev - 25, 75));
   };
 
   const handleRotate = () => {
@@ -227,7 +228,7 @@ const DocumentViewerModal = ({
   };
 
   const resetView = () => {
-    setZoomLevel(100);
+    setZoomLevel(90);
     setRotation(0);
   };
 
@@ -769,22 +770,35 @@ const DocumentViewerModal = ({
               </Box>
             )}
 
-            <iframe
-              src={`${documentUrl}#toolbar=0&navpanes=0&scrollbar=0&zoom=${
-                zoomLevel / 100
-              }`}
-              onLoad={handleIframeLoad}
-              onError={handleIframeError}
-              style={{
+            <Box
+              sx={{
                 width: "100%",
                 height: "100%",
-                border: "none",
-                borderRadius: "8px",
+                overflow: "auto",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
                 transform: `rotate(${rotation}deg)`,
                 transition: "transform 0.3s ease",
               }}
-              title="Tender Document"
-            />
+            >
+              <iframe
+                src={`${documentUrl}#toolbar=0&navpanes=0&scrollbar=1&zoom=${
+                  zoomLevel / 100
+                }&view=FitH`}
+                onLoad={handleIframeLoad}
+                onError={handleIframeError}
+                style={{
+                  width: `${zoomLevel}%`,
+                  height: `${zoomLevel}%`,
+                  border: "none",
+                  borderRadius: "8px",
+                  transform: "scale(1)",
+                  transformOrigin: "center",
+                }}
+                title="Tender Document"
+              />
+            </Box>
           </Box>
         )}
       </DialogContent>
@@ -842,24 +856,27 @@ const DocumentViewerModal = ({
             >
               Close
             </Button>
-            <Button
-              variant="contained"
-              onClick={handleDownloadDocument}
-              startIcon={<DownloadIcon />}
-              sx={{
-                borderRadius: 2,
-                fontWeight: 600,
-                textTransform: "none",
-                background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                "&:hover": {
+            {showDownloadButton && (
+              <Button
+                variant="contained"
+                onClick={handleDownloadDocument}
+                startIcon={<DownloadIcon />}
+                sx={{
+                  borderRadius: 2,
+                  fontWeight: 600,
+                  textTransform: "none",
                   background:
-                    "linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%)",
-                },
-                boxShadow: "0 4px 15px rgba(102, 126, 234, 0.3)",
-              }}
-            >
-              Download Document
-            </Button>
+                    "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                  "&:hover": {
+                    background:
+                      "linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%)",
+                  },
+                  boxShadow: "0 4px 15px rgba(102, 126, 234, 0.3)",
+                }}
+              >
+                Download Document
+              </Button>
+            )}
           </Box>
         </DialogActions>
       )}

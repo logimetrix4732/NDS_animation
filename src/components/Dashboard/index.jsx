@@ -4,6 +4,7 @@ import SideMenu from "../SideMenu";
 import nds_logo from "../../assets/img/nds_logo.png";
 import { Link, useLocation } from "react-router-dom";
 import "./dashboard.css";
+import useHRCompliances from "../../hooks/useHRCompliances";
 
 const Dashboard = () => {
   const [openRight, setOpenRight] = useState(false);
@@ -14,6 +15,7 @@ const Dashboard = () => {
   const [showDesktopMenu, setShowDesktopMenu] = useState(
     window.innerWidth > 1417
   );
+  const { hasHRCompliances } = useHRCompliances();
 
   useEffect(() => {
     const handleResize = () => {
@@ -38,6 +40,39 @@ const Dashboard = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Video autoplay fix for mobile devices
+  useEffect(() => {
+    const video = document.querySelector("video");
+    if (!video) return;
+
+    const playVideo = () => {
+      video.play().catch((error) => {
+        console.log("Autoplay failed:", error);
+      });
+    };
+
+    // Try to play immediately
+    playVideo();
+
+    // Add event listeners for user interaction
+    const handleUserInteraction = () => {
+      playVideo();
+      // Remove listeners after first interaction
+      document.removeEventListener("touchstart", handleUserInteraction);
+      document.removeEventListener("click", handleUserInteraction);
+    };
+
+    document.addEventListener("touchstart", handleUserInteraction, {
+      once: true,
+    });
+    document.addEventListener("click", handleUserInteraction, { once: true });
+
+    return () => {
+      document.removeEventListener("touchstart", handleUserInteraction);
+      document.removeEventListener("click", handleUserInteraction);
+    };
+  }, []);
+
   const currentPath = location.pathname;
   return (
     <div
@@ -51,8 +86,13 @@ const Dashboard = () => {
         loop
         muted
         playsInline
-        preload="metadata"
+        preload="auto"
         poster="/thumbnail.jpg"
+        webkit-playsinline="true"
+        x5-playsinline="true"
+        x5-video-player-type="h5"
+        x5-video-player-fullscreen="true"
+        x5-video-orientation="portraint"
         style={{
           position: "absolute",
           width: "100%",
@@ -62,6 +102,18 @@ const Dashboard = () => {
           top: 0,
           left: 0,
           zIndex: -1,
+        }}
+        onLoadedData={(e) => {
+          e.target.play().catch(() => {
+            // Fallback for autoplay restrictions
+            console.log("Autoplay blocked, will play on user interaction");
+          });
+        }}
+        onCanPlay={(e) => {
+          e.target.play().catch(() => {
+            // Fallback for autoplay restrictions
+            console.log("Autoplay blocked, will play on user interaction");
+          });
         }}
       />
 
@@ -174,9 +226,11 @@ const Dashboard = () => {
                           <li className="menu-item-has-children">
                             <a href="#">Publications</a>
                             <ul className="sub-menu">
-                              <li>
-                                <Link to="/HR">HR Compliances</Link>
-                              </li>
+                              {hasHRCompliances && (
+                                <li>
+                                  <Link to="/HR">HR Compliances</Link>
+                                </li>
+                              )}
                               <li>
                                 <Link to="/annualReport">Annual Reports</Link>
                               </li>
@@ -186,7 +240,7 @@ const Dashboard = () => {
                             </ul>
                           </li>
                           <li>
-                            <Link to="/carrer">Careers</Link>
+                            <Link to="/career">Careers</Link>
                           </li>
                           <li>
                             <Link to="/tender">Tenders</Link>

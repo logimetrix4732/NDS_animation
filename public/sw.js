@@ -1,30 +1,14 @@
-// Cache configuration
+// Cache configuration - sirf images aur videos ka cache
 const CACHE_VERSION = "v2.0";
-const STATIC_CACHE = `static-cache-${CACHE_VERSION}`;
 const IMAGE_CACHE = `image-cache-${CACHE_VERSION}`;
 const VIDEO_CACHE = `video-cache-${CACHE_VERSION}`;
-const DYNAMIC_CACHE = `dynamic-cache-${CACHE_VERSION}`;
 
-// Cache limits
+// Cache limits - sirf images aur videos ke liye
 const MAX_IMAGE_ENTRIES = 100;
 const MAX_VIDEO_ENTRIES = 20;
-const MAX_DYNAMIC_ENTRIES = 50;
 
-// Static assets to pre-cache
-const STATIC_ASSETS = [
-  "/",
-  "/index.html",
-  "/offline.html",
-  "/assets/css/bootstrap.min.css",
-  "/assets/css/fontawesome.min.css",
-  "/assets/css/style.css",
-  "/assets/css/swiper-bundle.min.css",
-  "/assets/js/bootstrap.bundle.min.js",
-  "/assets/js/jquery.min.js",
-  "/assets/js/swiper-bundle.min.js",
-  "/assets/js/wow.min.js",
-  "/assets/js/main.js",
-];
+// Sirf offline page pre-cache karenge
+const OFFLINE_ASSETS = ["/offline.html"];
 
 // Critical images to pre-cache
 const CRITICAL_IMAGES = [
@@ -37,15 +21,15 @@ const CRITICAL_IMAGES = [
   "/assets/img/banner5.png",
 ];
 
-// Install event - pre-cache critical assets
+// Install event - sirf critical images aur offline page pre-cache karenge
 self.addEventListener("install", (event) => {
   self.skipWaiting();
 
   event.waitUntil(
     Promise.all([
-      // Cache static assets
-      caches.open(STATIC_CACHE).then((cache) => {
-        return cache.addAll(STATIC_ASSETS);
+      // Cache offline page
+      caches.open(IMAGE_CACHE).then((cache) => {
+        return cache.addAll(OFFLINE_ASSETS);
       }),
       // Cache critical images
       caches.open(IMAGE_CACHE).then((cache) => {
@@ -87,7 +71,7 @@ async function trimCache(cacheName, maxEntries) {
   }
 }
 
-// Helper function to get cache name based on request type
+// Helper function to get cache name based on request type - sirf images aur videos
 function getCacheName(request) {
   const url = new URL(request.url);
   const pathname = url.pathname;
@@ -108,19 +92,11 @@ function getCacheName(request) {
     return VIDEO_CACHE;
   }
 
-  // Check if it's a static asset
-  if (
-    pathname.startsWith("/assets/") ||
-    pathname.startsWith("/static/") ||
-    /\.(css|js|woff|woff2|ttf|eot)$/i.test(pathname)
-  ) {
-    return STATIC_CACHE;
-  }
-
-  return DYNAMIC_CACHE;
+  // Baki sab requests ko cache nahi karenge
+  return null;
 }
 
-// Fetch event - implement caching strategy
+// Fetch event - sirf images aur videos ka cache karenge
 self.addEventListener("fetch", (event) => {
   const request = event.request;
   const url = new URL(request.url);
@@ -141,6 +117,12 @@ self.addEventListener("fetch", (event) => {
   }
 
   const cacheName = getCacheName(request);
+
+  // Agar cache name null hai to sirf network se fetch karenge
+  if (!cacheName) {
+    event.respondWith(fetch(request));
+    return;
+  }
 
   event.respondWith(
     caches.open(cacheName).then(async (cache) => {
@@ -165,13 +147,7 @@ self.addEventListener("fetch", (event) => {
 
           // Trim cache if it exceeds limits
           const maxEntries =
-            cacheName === IMAGE_CACHE
-              ? MAX_IMAGE_ENTRIES
-              : cacheName === VIDEO_CACHE
-              ? MAX_VIDEO_ENTRIES
-              : cacheName === DYNAMIC_CACHE
-              ? MAX_DYNAMIC_ENTRIES
-              : 100;
+            cacheName === IMAGE_CACHE ? MAX_IMAGE_ENTRIES : MAX_VIDEO_ENTRIES;
 
           await trimCache(cacheName, maxEntries);
         }
@@ -212,7 +188,7 @@ self.addEventListener("sync", (event) => {
 // Cleanup function for old caches
 async function cleanupOldCaches() {
   const cacheNames = await caches.keys();
-  const currentCaches = [STATIC_CACHE, IMAGE_CACHE, VIDEO_CACHE, DYNAMIC_CACHE];
+  const currentCaches = [IMAGE_CACHE, VIDEO_CACHE];
 
   const oldCaches = cacheNames.filter((name) => !currentCaches.includes(name));
 

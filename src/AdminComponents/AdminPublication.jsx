@@ -273,8 +273,11 @@ export default function AdminPublication() {
         return;
       }
 
-      // Simple validation
-      if (!formData.name.trim()) {
+      // Simple validation - Name is required for all publication types except Annual Reports
+      if (
+        formData.publicationType !== "Annual Reports" &&
+        !formData.name.trim()
+      ) {
         setErrorMessage("Name is required");
         return;
       }

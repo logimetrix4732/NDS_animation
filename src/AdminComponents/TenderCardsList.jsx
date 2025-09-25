@@ -34,6 +34,48 @@ import {
   MoreVert as MoreVertIcon,
 } from "@mui/icons-material";
 
+// Date formatting functions
+const formatDate = (dateString) => {
+  if (!dateString) return "N/A";
+
+  // Handle the format "2025-09-25,5:30 AM"
+  if (dateString.includes(",")) {
+    const [datePart] = dateString.split(",");
+    const date = new Date(datePart);
+    return date.toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+  }
+
+  // Handle other date formats
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-GB", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+};
+
+const formatTime = (dateString) => {
+  if (!dateString) return "N/A";
+
+  // Handle the format "2025-09-25,5:30 AM"
+  if (dateString.includes(",")) {
+    const [, timePart] = dateString.split(",");
+    return timePart ? timePart.trim() : "N/A";
+  }
+
+  // Handle other date formats
+  const date = new Date(dateString + "T10:00:00");
+  return date.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+};
+
 const TenderCardsList = ({
   filteredTenders,
   onViewDocument,
@@ -177,7 +219,7 @@ const TenderCardsList = ({
                         variant="h6"
                         sx={{ fontWeight: 600, color: "white" }}
                       >
-                        ₹{tender.estimatedValue}
+                        ₹{tender.estimatedValues}
                       </Typography>
                     </Box>
                   </Box>
@@ -263,7 +305,7 @@ const TenderCardsList = ({
                       Start Date
                     </Typography>
                     <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                      {new Date(tender.startDate).toLocaleDateString()}
+                      {formatDate(tender.startDate)}
                     </Typography>
                   </Box>
                 </Grid>
@@ -291,7 +333,8 @@ const TenderCardsList = ({
                       Pre-Bid Meeting
                     </Typography>
                     <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                      {new Date(tender.preBidMeeting).toLocaleString()}
+                      {formatDate(tender.preBidMeeting)}{" "}
+                      {formatTime(tender.preBidMeeting)}
                     </Typography>
                   </Box>
                 </Grid>
@@ -319,7 +362,8 @@ const TenderCardsList = ({
                       Submission Deadline
                     </Typography>
                     <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                      {new Date(tender.lastDateSubmission).toLocaleString()}
+                      {formatDate(tender.lastDateSubmission)}{" "}
+                      {formatTime(tender.lastDateSubmission)}
                     </Typography>
                   </Box>
                 </Grid>
@@ -347,7 +391,8 @@ const TenderCardsList = ({
                       Bid Opening
                     </Typography>
                     <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                      {new Date(tender.bidOpening).toLocaleString()}
+                      {formatDate(tender.bidOpening)}{" "}
+                      {formatTime(tender.bidOpening)}
                     </Typography>
                   </Box>
                 </Grid>
@@ -450,7 +495,6 @@ const TenderCardsList = ({
                 >
                   Edit
                 </Button>
-
                 {/* Delete Button */}
                 <Button
                   variant="contained"
@@ -473,7 +517,6 @@ const TenderCardsList = ({
                 >
                   Delete
                 </Button>
-
                 {/* Three-dot Menu Button */}
                 <IconButton
                   onClick={(event) => handleMenuOpen(event, tender)}
@@ -520,8 +563,8 @@ const TenderCardsList = ({
             <Typography variant="body2" color="text.secondary">
               Tender:{" "}
               <strong>
-                {selectedTender.title ||
-                  selectedTender.tenderTitle ||
+                {selectedTender.tenderTitle ||
+                  selectedTender.title ||
                   "Untitled Tender"}
               </strong>
             </Typography>

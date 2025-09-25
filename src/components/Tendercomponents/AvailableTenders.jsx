@@ -57,6 +57,7 @@ const AvailableTenders = () => {
   const [documentDialogOpen, setDocumentDialogOpen] = useState(false);
   const [selectedTender, setSelectedTender] = useState(null);
   const [documentType, setDocumentType] = useState("tender");
+  const [showDownloadButton, setShowDownloadButton] = useState(false);
 
   // Login Modal States
   const [step, setStep] = useState(1);
@@ -119,7 +120,7 @@ const AvailableTenders = () => {
 
               // Map status from API or set default
               const status = tender.status || "Active";
-
+              console.log(tender);
               return {
                 id: tender.id || tender.referenceNo || `TND-${Date.now()}`,
                 title: tender.tenderTitle || "Untitled Tender",
@@ -134,7 +135,15 @@ const AvailableTenders = () => {
                 lastDate:
                   tender.lastDateSubmission ||
                   new Date().toISOString().split("T")[0],
-                participants: Math.floor(Math.random() * 50) + 1, // Random participants for now
+                // Add proper date fields for admin portal compatibility
+                preBidMeeting:
+                  tender.preBidMeeting ||
+                  tender.startDate ||
+                  new Date().toISOString(),
+                submissionDeadline:
+                  tender.lastDateSubmission || new Date().toISOString(),
+                bidOpening: tender.bidOpenning || new Date().toISOString(),
+                participants: tender.participants, // Random participants for now
                 category: category,
                 estimatedValue: tender.estimatedValues || "$0",
                 location: tender.location || "Not specified",
@@ -189,14 +198,7 @@ const AvailableTenders = () => {
 
   // Login Modal Validation
   const validateForm = () => {
-    if (
-      !companyName ||
-      !gstNumber ||
-      !panNumber ||
-      !email ||
-      !password ||
-      !confirmPassword
-    ) {
+    if (!companyName || !gstNumber || !panNumber || !email) {
       return "Please fill in all fields";
     }
     if (!/^[a-zA-Z\s]+$/.test(companyName)) {
@@ -211,18 +213,13 @@ const AvailableTenders = () => {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return "Please enter a valid email address";
     }
-    if (password.length < 6) {
-      return "Password must be at least 6 characters long";
-    }
-    if (password !== confirmPassword) {
-      return "Passwords do not match";
-    }
     return "";
   };
 
   // Document Viewer Functions - Now handled by DocumentViewerModal component
   const handleCloseDocument = () => {
     setDocumentDialogOpen(false);
+    setShowDownloadButton(false);
   };
 
   const handleDownloadDocument = (tender) => {
@@ -273,8 +270,7 @@ const AvailableTenders = () => {
     setGstNumber("");
     setPanNumber("");
     setEmail("");
-    setPassword("");
-    setConfirmPassword("");
+    // Password fields are hidden, so no need to clear them
     setModalError("");
   };
 
@@ -299,8 +295,8 @@ const AvailableTenders = () => {
         GSTnumber: gstNumber.toUpperCase(),
         PanNumber: panNumber.toUpperCase(),
         emailId: email,
-        password: password,
-        confirmPassword: confirmPassword,
+        password: "123456", // Hardcoded password as requested (6+ characters)
+        confirmPassword: "123456", // Hardcoded confirm password as requested (6+ characters)
         tenderId: selectedTenderId, // Dynamic tender ID from selected tender
       };
 
@@ -426,8 +422,7 @@ const AvailableTenders = () => {
     setGstNumber("");
     setPanNumber("");
     setEmail("");
-    setPassword("");
-    setConfirmPassword("");
+    // Password fields are hidden, so no need to clear them
     // setOtp(""); // Commented out OTP
     setConfetti(false);
     setSelectedTenderId(null); // Reset selected tender ID
@@ -467,15 +462,16 @@ const AvailableTenders = () => {
       setSelectedTenderId(tender.id); // Store selected tender ID
       setLoginModalOpen(true);
     } else {
-      // User is logged in, show document directly
+      // User is logged in, show document without download button
+      setShowDownloadButton(false);
       setSelectedTender(tender);
       setDocumentType("tender");
       setDocumentDialogOpen(true);
-      // fetchDocument(tender); // This function is now handled by DocumentViewerModal
     }
   };
 
   const handleDownloadDocuments = (tender, event) => {
+    setShowDownloadButton(true);
     // Prevent accordion from closing
     if (event) {
       event.stopPropagation();
@@ -485,8 +481,10 @@ const AvailableTenders = () => {
       setSelectedTenderId(tender.id); // Store selected tender ID
       setLoginModalOpen(true);
     } else {
-      // User is logged in, download directly
-      handleDownloadDocument(tender);
+      // User is logged in, show document with download button
+      setSelectedTender(tender);
+      setDocumentType("tender");
+      setDocumentDialogOpen(true);
     }
   };
 
@@ -501,7 +499,8 @@ const AvailableTenders = () => {
       setSelectedTenderId(tender.id); // Store selected tender ID
       setLoginModalOpen(true);
     } else {
-      // User is logged in, show corrigendum document
+      // User is logged in, show corrigendum document without download button
+      setShowDownloadButton(false);
       setSelectedTender(tender);
       setDocumentType("corrigendum");
       setDocumentDialogOpen(true);
@@ -932,14 +931,17 @@ const AvailableTenders = () => {
             onClose={handleCloseModal}
             fullWidth
             maxWidth="sm"
+            fullScreen={isMobile}
             PaperProps={{
               sx: {
-                borderRadius: 2,
+                borderRadius: isMobile ? 0 : 2,
                 background: "white",
                 boxShadow: "0 10px 40px rgba(0,0,0,0.15)",
                 overflow: "hidden",
-                mx: isMobile ? 2 : "auto",
-                my: isMobile ? 2 : 4,
+                mx: isMobile ? 0 : "auto",
+                my: isMobile ? 0 : 4,
+                height: isMobile ? "100vh" : "auto",
+                maxHeight: isMobile ? "100vh" : "90vh",
               },
             }}
           >
@@ -1012,7 +1014,28 @@ const AvailableTenders = () => {
                   </Box>
                 </Box>
               </Box>
-              <DialogContent sx={{ p: isMobile ? 2 : 3, minHeight: "260px" }}>
+              <DialogContent
+                sx={{
+                  p: isMobile ? 2 : 3,
+                  minHeight: "260px",
+                  maxHeight: "70vh",
+                  overflow: "auto",
+                  "&::-webkit-scrollbar": {
+                    width: "6px",
+                  },
+                  "&::-webkit-scrollbar-track": {
+                    background: "#f1f1f1",
+                    borderRadius: "3px",
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    background: "#bd8f59",
+                    borderRadius: "3px",
+                  },
+                  "&::-webkit-scrollbar-thumb:hover": {
+                    background: "#a46c35",
+                  },
+                }}
+              >
                 {step === 1 && (
                   <Box component="form" onSubmit={handleSubmitForm}>
                     {modalError && (
@@ -1087,66 +1110,9 @@ const AvailableTenders = () => {
                         ),
                       }}
                     />
-                    <TextField
-                      fullWidth
-                      size="small"
-                      label="Password"
-                      type={showPassword ? "text" : "password"}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      margin="normal"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Lock sx={{ color: "#bd8f59" }} />
-                          </InputAdornment>
-                        ),
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton
-                              onClick={() => setShowPassword(!showPassword)}
-                            >
-                              {showPassword ? (
-                                <VisibilityOff sx={{ color: "#bd8f59" }} />
-                              ) : (
-                                <Visibility sx={{ color: "#bd8f59" }} />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    <TextField
-                      fullWidth
-                      size="small"
-                      label="Confirm Password"
-                      type={showConfirmPassword ? "text" : "password"}
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      margin="normal"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Lock sx={{ color: "#bd8f59" }} />
-                          </InputAdornment>
-                        ),
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton
-                              onClick={() =>
-                                setShowConfirmPassword(!showConfirmPassword)
-                              }
-                            >
-                              {showConfirmPassword ? (
-                                <VisibilityOff sx={{ color: "#bd8f59" }} />
-                              ) : (
-                                <Visibility sx={{ color: "#bd8f59" }} />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
+                    {/* Hidden password fields - will send 123456 to backend */}
+                    <input type="hidden" value="123456" onChange={() => {}} />
+                    <input type="hidden" value="123456" onChange={() => {}} />
                     <Button
                       type="submit"
                       fullWidth
@@ -1155,9 +1121,13 @@ const AvailableTenders = () => {
                       endIcon={!modalLoading && <ArrowForward />}
                       sx={{
                         mt: 3,
+                        mb: 2,
                         py: 1.5,
                         bgcolor: "#bd8f59",
                         "&:hover": { bgcolor: "#a46c35" },
+                        position: "sticky",
+                        bottom: 0,
+                        zIndex: 1,
                       }}
                     >
                       {modalLoading ? (
@@ -1206,6 +1176,7 @@ const AvailableTenders = () => {
         onClose={handleCloseDocument}
         tender={selectedTender}
         documentType={documentType}
+        showDownloadButton={showDownloadButton}
       />
     </Box>
   );

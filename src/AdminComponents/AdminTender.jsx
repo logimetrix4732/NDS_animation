@@ -145,11 +145,8 @@ export default function AdminTender() {
             preBidMeeting: tender.preBidMeeting || new Date().toISOString(),
             lastDateSubmission:
               tender.lastDateSubmission || new Date().toISOString(),
-            bidOpening:
-              tender.bidOpenning ||
-              tender.bidOpening ||
-              new Date().toISOString(),
-            participants: Math.floor(Math.random() * 50) + 1, // Random participants for now
+            bidOpening: tender.bidOpenning || new Date().toISOString(),
+            participants: tender.participants || 0,
             category: "Infrastructure", // Default category
             tenderCard: tender.tenderCard || "Inactive",
             tenderFile: tenderFile,
@@ -162,6 +159,11 @@ export default function AdminTender() {
             image:
               tender.image ||
               "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400",
+            // Keep original fields for edit functionality
+            tenderTitle: tender.tenderTitle,
+            estimatedValues: tender.estimatedValues,
+            bidOpenning: tender.bidOpenning,
+            createdAt: tender.createdAt,
           };
         });
 
@@ -269,18 +271,30 @@ export default function AdminTender() {
   const handleSubmit = async () => {
     // Check if token exists
     if (!token) {
-      setErrorMessage("Please login first. No authentication token found.");
+      setSnackbar({
+        open: true,
+        message: "Please login first. No authentication token found.",
+        severity: "error",
+      });
       return;
     }
 
     // Simple validation
     if (!formData.tenderTitle.trim()) {
-      setErrorMessage("Tender title is required");
+      setSnackbar({
+        open: true,
+        message: "Tender title is required",
+        severity: "error",
+      });
       return;
     }
 
     if (!formData.referenceNo.trim()) {
-      setErrorMessage("Reference number is required");
+      setSnackbar({
+        open: true,
+        message: "Reference number is required",
+        severity: "error",
+      });
       return;
     }
 
@@ -340,11 +354,13 @@ export default function AdminTender() {
       }
 
       if (response && (response.status === 201 || response.status === 200)) {
-        setSuccessMessage(
-          selectedTender
+        setSnackbar({
+          open: true,
+          message: selectedTender
             ? "Tender updated successfully!"
-            : "Tender created successfully!"
-        );
+            : "Tender created successfully!",
+          severity: "success",
+        });
         setFormDialogOpen(false);
 
         // Reset form
@@ -367,21 +383,45 @@ export default function AdminTender() {
 
         // Clear selected tender
         setSelectedTender(null);
-
         // Refresh the tenders list
         fetchTenders();
       } else {
         if (response && response.status === 401) {
-          setErrorMessage("Authentication failed. Please login again.");
+          setSnackbar({
+            open: true,
+            message: "Authentication failed. Please login again.",
+            severity: "error",
+          });
         } else {
-          setErrorMessage("Error creating tender. Please try again.");
+          // Get error message from response
+          const errorMsg =
+            response.response.data.message ||
+            "Error creating tender. Please try again.";
+          setSnackbar({
+            open: true,
+            message: errorMsg,
+            severity: "error",
+          });
         }
       }
     } catch (error) {
       if (error.status === 401) {
-        setErrorMessage("Authentication failed. Please login again.");
+        setSnackbar({
+          open: true,
+          message: "Authentication failed. Please login again.",
+          severity: "error",
+        });
       } else {
-        setErrorMessage("Error creating tender. Please try again.");
+        // Get error message from error response
+        const errorMsg =
+          error?.response?.data?.message ||
+          error?.message ||
+          "Error creating tender. Please try again.";
+        setSnackbar({
+          open: true,
+          message: errorMsg,
+          severity: "error",
+        });
       }
     } finally {
       setLoading(false);
@@ -552,27 +592,66 @@ export default function AdminTender() {
   };
 
   const handleEditTender = (tender) => {
+    // Helper function to parse date with custom format
+    const parseCustomDate = (dateString) => {
+      if (!dateString) return "";
+
+      try {
+        // Handle format like "2025-09-25,5:30 AM"
+        if (dateString.includes(",")) {
+          const [datePart, timePart] = dateString.split(",");
+          const [year, month, day] = datePart.split("-");
+          const [time, period] = timePart.trim().split(" ");
+          const [hours, minutes] = time.split(":");
+
+          let hour24 = parseInt(hours);
+          if (period === "PM" && hour24 !== 12) {
+            hour24 += 12;
+          } else if (period === "AM" && hour24 === 12) {
+            hour24 = 0;
+          }
+
+          const date = new Date(year, month - 1, day, hour24, minutes);
+          return date.toISOString().slice(0, 16);
+        }
+
+        // Handle ISO format
+        return new Date(dateString).toISOString().slice(0, 16);
+      } catch (error) {
+        console.error("Error parsing date:", dateString, error);
+        return "";
+      }
+    };
+
+    // Helper function to parse date for date input (YYYY-MM-DD)
+    const parseDateForInput = (dateString) => {
+      if (!dateString) return "";
+
+      try {
+        // Handle format like "2025-09-25,5:30 AM"
+        if (dateString.includes(",")) {
+          const [datePart] = dateString.split(",");
+          return datePart; // Already in YYYY-MM-DD format
+        }
+
+        // Handle ISO format
+        return new Date(dateString).toISOString().split("T")[0];
+      } catch (error) {
+        console.error("Error parsing date for input:", dateString, error);
+        return "";
+      }
+    };
+
     setFormData({
       tenderTitle: tender.tenderTitle || tender.title || "",
       referenceNo: tender.referenceNo || "",
       description: tender.description || "",
-      startDate: tender.startDate
-        ? new Date(tender.startDate).toISOString().split("T")[0]
-        : "",
+      startDate: parseDateForInput(tender.startDate),
       estimatedValues: tender.estimatedValues || tender.estimatedValue || "",
       location: tender.location || "",
-      preBidMeeting: tender.preBidMeeting
-        ? new Date(tender.preBidMeeting).toISOString().slice(0, 16)
-        : "",
-      lastDateSubmission: tender.lastDateSubmission
-        ? new Date(tender.lastDateSubmission).toISOString().slice(0, 16)
-        : "",
-      bidOpening:
-        tender.bidOpening || tender.bidOpenning
-          ? new Date(tender.bidOpening || tender.bidOpenning)
-              .toISOString()
-              .slice(0, 16)
-          : "",
+      preBidMeeting: parseCustomDate(tender.preBidMeeting),
+      lastDateSubmission: parseCustomDate(tender.lastDateSubmission),
+      bidOpening: parseCustomDate(tender.bidOpenning || tender.bidOpening),
       corrigendum: tender.corrigendum === "Active" ? "Active" : "Inactive",
       tenderCard: tender.tenderCard || "Active",
       tenderFile: tender.tenderFileName

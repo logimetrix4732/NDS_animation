@@ -114,7 +114,7 @@ class CachePreloader {
     this.isPreloading = false;
   }
 
-  // Preload single resource
+  // Preload single resource - sirf images aur videos
   async preloadSingleResource(resource) {
     this.currentPreloads++;
 
@@ -127,10 +127,7 @@ class CachePreloader {
       else if (this.isVideo(resource)) {
         await this.preloadVideo(resource);
       }
-      // Check if it's a CSS/JS file
-      else if (this.isStaticAsset(resource)) {
-        await this.preloadStaticAsset(resource);
-      }
+      // Static assets ko skip karenge
     } catch (error) {
     } finally {
       this.currentPreloads--;
@@ -175,17 +172,10 @@ class CachePreloader {
     });
   }
 
-  // Preload static asset (CSS, JS)
+  // Static assets ko preload nahi karenge ab
   async preloadStaticAsset(src) {
-    try {
-      const response = await fetch(src);
-      if (response.ok) {
-      } else {
-        throw new Error(`HTTP ${response.status}`);
-      }
-    } catch (error) {
-      throw error;
-    }
+    // Static assets preloading disabled - sirf images aur videos
+    return Promise.resolve();
   }
 
   // Helper functions to check resource types

@@ -3,6 +3,7 @@ import SideMenu from "../SideMenu";
 import nds_logo from "../../assets/img/nds_logo.png";
 import { Link, useLocation } from "react-router-dom";
 import "./Header.css";
+import useHRCompliances from "../../hooks/useHRCompliances";
 
 const Header = () => {
   const [openRight, setOpenRight] = useState(false);
@@ -13,6 +14,7 @@ const Header = () => {
   const [showDesktopMenu, setShowDesktopMenu] = useState(
     window.innerWidth > 1417
   );
+  const { hasHRCompliances } = useHRCompliances();
 
   useEffect(() => {
     const handleResize = () => {
@@ -118,9 +120,11 @@ const Header = () => {
                           <li className="menu-item-has-children">
                             <a href="#">Publications</a>
                             <ul className="sub-menu">
-                              <li>
-                                <Link to="/HR">HR Compliances</Link>
-                              </li>
+                              {hasHRCompliances && (
+                                <li>
+                                  <Link to="/HR">HR Compliances</Link>
+                                </li>
+                              )}
                               <li>
                                 <Link to="/annualReport">Annual Reports</Link>
                               </li>
@@ -130,7 +134,7 @@ const Header = () => {
                             </ul>
                           </li>
                           <li>
-                            <Link to="/carrer">Careers</Link>
+                            <Link to="/career">Careers</Link>
                           </li>
                           <li>
                             <Link to="/tender">Tenders</Link>

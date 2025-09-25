@@ -312,22 +312,17 @@ const CacheManagement = () => {
         </h3>
         <div style={{ fontSize: "14px", lineHeight: "1.6", color: "#6c757d" }}>
           <p>
-            <strong>Static Cache:</strong> CSS, JS, fonts aur other static files
-          </p>
-          <p>
             <strong>Image Cache:</strong> All images (max 100 entries)
           </p>
           <p>
             <strong>Video Cache:</strong> All videos (max 20 entries)
           </p>
-          <p>
-            <strong>Dynamic Cache:</strong> Other dynamic content (max 50
-            entries)
-          </p>
           <br />
           <p>
-            <strong>Note:</strong> Cache automatically manage hota hai. Old
-            entries remove ho jate hain jab limit exceed ho jaye.
+            <strong>Note:</strong> Sirf images aur videos ka cache hota hai.
+            CSS, JS aur other static files cache nahi hote. Cache automatically
+            manage hota hai. Old entries remove ho jate hain jab limit exceed ho
+            jaye.
           </p>
         </div>
       </div>

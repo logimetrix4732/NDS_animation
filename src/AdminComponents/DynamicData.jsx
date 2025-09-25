@@ -453,56 +453,6 @@ export default function DynamicData() {
                     Dynamic Data Management
                   </Typography>
                 </Box>
-                {/* Right Side - Action Buttons */}
-                <Stack direction="row" spacing={2}>
-                  <Button
-                    variant="outlined"
-                    startIcon={<Refresh />}
-                    onClick={fetchHomeStats}
-                    disabled={loading}
-                    sx={{
-                      borderRadius: 3,
-                      px: 3,
-                      py: 1.5,
-                      borderWidth: 2,
-                      fontWeight: 600,
-                      background: (t) =>
-                        t.palette.mode === "dark"
-                          ? "rgba(255,255,255,0.05)"
-                          : "rgba(0,0,0,0.02)",
-                      "&:hover": {
-                        borderWidth: 2,
-                        background: (t) =>
-                          t.palette.mode === "dark"
-                            ? "rgba(255,255,255,0.1)"
-                            : "rgba(0,0,0,0.05)",
-                      },
-                    }}
-                  >
-                    Refresh Data
-                  </Button>
-                  <Button
-                    variant="contained"
-                    startIcon={<Add />}
-                    onClick={openCreateDialog}
-                    sx={{
-                      borderRadius: 3,
-                      px: 3,
-                      py: 1.5,
-                      fontWeight: 600,
-                      background:
-                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                      boxShadow: "0 8px 25px rgba(102, 126, 234, 0.3)",
-                      "&:hover": {
-                        background:
-                          "linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%)",
-                        boxShadow: "0 12px 35px rgba(102, 126, 234, 0.4)",
-                      },
-                    }}
-                  >
-                    Add Organisation
-                  </Button>
-                </Stack>
               </Box>
 
               {/* Bottom Row - Subtitle */}

@@ -1,11 +1,5 @@
 import React from "react";
-import DSC_2158 from "../../Images/CarrerImg/DSC_2158.JPG";
-import IMG_4070 from "../../Images/CarrerImg/IMG_4070.JPG";
-import IMG_4071 from "../../Images/CarrerImg/IMG_4071.JPG";
-import IMG_4072 from "../../Images/CarrerImg/IMG_4072.JPG";
-import IMG_4073 from "../../Images/CarrerImg/IMG_4073.JPG";
-import IMG_4074 from "../../Images/CarrerImg/IMG_4074.JPG";
-import IMG_4075 from "../../Images/CarrerImg/IMG_4075.JPG";
+
 const CarrerGallery = () => {
   return (
     <>

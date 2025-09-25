@@ -38,7 +38,7 @@ const CarrerPage = () => {
 
           <div className="mt-35 wow fadeInUp" data-wow-delay=".5s">
             <Link
-              to="/carrer"
+              to="/career"
               className="th-btn th-icon"
               style={{ width: "200px", height: "60px" }}
             >

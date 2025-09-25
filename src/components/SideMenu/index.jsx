@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   List,
@@ -7,6 +7,7 @@ import {
   IconButton,
   Typography,
   ListItemText,
+  Collapse,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
@@ -19,19 +20,50 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import useHRCompliances from "../../hooks/useHRCompliances";
 const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
-  const menuItems = [
-    { text: "Home", to: "/" },
-    { text: "About Us", to: "/aboutUs" },
-    { text: "Our Experties", to: "/ourExperties" },
-    { text: "Milk Producer Organisation", to: "/milkproducer" },
-    { text: "Animal Productivity Services", to: "/animalProductivity" },
-    { text: "New Initiatives", to: "/newInitiative" },
-    { text: "Publications", to: "/publications" },
-    { text: "Careers", to: "/carrer" },
-    { text: "Tenders", to: "/tender" },
-    { text: "Contact Us", to: "/contactUs" },
-  ];
+  const [expandedMenus, setExpandedMenus] = useState({});
+  const { hasHRCompliances } = useHRCompliances();
+
+  const getMenuItems = () => {
+    const baseSubmenuItems = [
+      { text: "Annual Reports", to: "/annualReport" },
+      { text: "Policies", to: "/policies" },
+    ];
+
+    if (hasHRCompliances) {
+      baseSubmenuItems.unshift({ text: "HR Compliances", to: "/HR" });
+    }
+
+    return [
+      { text: "Home", to: "/" },
+      { text: "About Us", to: "/aboutUs" },
+      { text: "Our Experties", to: "/ourExperties" },
+      { text: "Milk Producer Organisation", to: "/milkproducer" },
+      { text: "Animal Productivity Services", to: "/animalProductivity" },
+      { text: "New Initiatives", to: "/newInitiative" },
+      {
+        text: "Publications",
+        to: "",
+        hasSubmenu: true,
+        submenuItems: baseSubmenuItems,
+      },
+      { text: "Careers", to: "/career" },
+      { text: "Tenders", to: "/tender" },
+      { text: "Contact Us", to: "/contactUs" },
+    ];
+  };
+
+  const menuItems = getMenuItems();
+
+  const handleMenuToggle = (menuText) => {
+    setExpandedMenus((prev) => ({
+      ...prev,
+      [menuText]: !prev[menuText],
+    }));
+  };
 
   const contactInfo = (
     <Box
@@ -188,35 +220,122 @@ const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
 
       <List>
         {menuItems.map((item, index) => (
-          <ListItem
-            button
-            key={index}
-            sx={{
-              borderBottom: "1px solid #eee",
-              "&:hover": { bgcolor: "#f0f0f0" },
-              p: 0,
-            }}
-          >
-            <Link
-              to={item.to}
-              onClick={() => setOpenLeft(false)}
-              style={{
-                display: "block",
-                width: "100%",
-                padding: "6px 16px",
-                textDecoration: "none",
+          <React.Fragment key={index}>
+            <ListItem
+              button
+              sx={{
+                borderBottom: "1px solid #eee",
+                "&:hover": { bgcolor: "#f0f0f0" },
+                p: 0,
               }}
             >
-              <ListItemText
-                primary={item.text}
-                primaryTypographyProps={{
-                  fontWeight: 500,
-                  fontSize: "16px",
-                  color: "#222",
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  width: "100%",
+                  padding: "6px 16px",
                 }}
-              />
-            </Link>
-          </ListItem>
+              >
+                {item.hasSubmenu ? (
+                  <Box
+                    sx={{
+                      flex: 1,
+                      cursor: "pointer",
+                      "&:hover": { color: "#bd8f59" },
+                    }}
+                    onClick={() => handleMenuToggle(item.text)}
+                  >
+                    <ListItemText
+                      primary={item.text}
+                      primaryTypographyProps={{
+                        fontWeight: 500,
+                        fontSize: "16px",
+                        color: "#222",
+                      }}
+                    />
+                  </Box>
+                ) : (
+                  <Link
+                    to={item.to}
+                    onClick={() => setOpenLeft(false)}
+                    style={{
+                      flex: 1,
+                      textDecoration: "none",
+                      color: "#222",
+                    }}
+                  >
+                    <ListItemText
+                      primary={item.text}
+                      primaryTypographyProps={{
+                        fontWeight: 500,
+                        fontSize: "16px",
+                        color: "#222",
+                      }}
+                    />
+                  </Link>
+                )}
+                {item.hasSubmenu && (
+                  <Box
+                    sx={{
+                      ml: 1,
+                      color: "#666",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    {expandedMenus[item.text] ? (
+                      <ExpandLessIcon sx={{ fontSize: "20px" }} />
+                    ) : (
+                      <ExpandMoreIcon sx={{ fontSize: "20px" }} />
+                    )}
+                  </Box>
+                )}
+              </Box>
+            </ListItem>
+
+            {item.hasSubmenu && (
+              <Collapse
+                in={expandedMenus[item.text]}
+                timeout="auto"
+                unmountOnExit
+              >
+                <List component="div" disablePadding>
+                  {item.submenuItems.map((subItem, subIndex) => (
+                    <ListItem
+                      key={subIndex}
+                      sx={{
+                        pl: 4,
+                        borderBottom: "1px solid #f0f0f0",
+                        "&:hover": { bgcolor: "#f8f8f8" },
+                        p: 0,
+                      }}
+                    >
+                      <Link
+                        to={subItem.to}
+                        onClick={() => setOpenLeft(false)}
+                        style={{
+                          display: "block",
+                          width: "100%",
+                          padding: "6px 16px",
+                          textDecoration: "none",
+                        }}
+                      >
+                        <ListItemText
+                          primary={subItem.text}
+                          primaryTypographyProps={{
+                            fontWeight: 400,
+                            fontSize: "14px",
+                            color: "#555",
+                          }}
+                        />
+                      </Link>
+                    </ListItem>
+                  ))}
+                </List>
+              </Collapse>
+            )}
+          </React.Fragment>
         ))}
       </List>
     </Box>

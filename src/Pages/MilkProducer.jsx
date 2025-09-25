@@ -91,7 +91,7 @@ const MilkProducer = () => {
     ],
     Odisha: [
       {
-        "VANAMRITA Milk Producer Organisation": "",
+        "Vanamrita Milk Producer Organisation": "",
       },
     ],
   };
