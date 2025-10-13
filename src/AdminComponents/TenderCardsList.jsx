@@ -36,44 +36,109 @@ import {
 
 // Date formatting functions
 const formatDate = (dateString) => {
-  if (!dateString) return "N/A";
+  if (
+    !dateString ||
+    dateString === null ||
+    dateString === "null" ||
+    dateString === "N/A"
+  )
+    return "N/A";
 
-  // Handle the format "2025-09-25,5:30 AM"
-  if (dateString.includes(",")) {
-    const [datePart] = dateString.split(",");
-    const date = new Date(datePart);
+  try {
+    // Handle the format "2025-09-25,5:30 AM"
+    if (dateString.includes(",")) {
+      const [datePart] = dateString.split(",");
+      const date = new Date(datePart);
+      if (isNaN(date.getTime())) return "N/A";
+      return date.toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      });
+    }
+
+    // Handle other date formats
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return "N/A";
     return date.toLocaleDateString("en-GB", {
       year: "numeric",
       month: "2-digit",
       day: "2-digit",
     });
+  } catch (error) {
+    return "N/A";
   }
-
-  // Handle other date formats
-  const date = new Date(dateString);
-  return date.toLocaleDateString("en-GB", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
 };
 
 const formatTime = (dateString) => {
-  if (!dateString) return "N/A";
+  if (
+    !dateString ||
+    dateString === null ||
+    dateString === "null" ||
+    dateString === "N/A"
+  )
+    return "N/A";
 
-  // Handle the format "2025-09-25,5:30 AM"
-  if (dateString.includes(",")) {
-    const [, timePart] = dateString.split(",");
-    return timePart ? timePart.trim() : "N/A";
+  try {
+    // Handle the format "2025-09-25,5:30 AM"
+    if (dateString.includes(",")) {
+      const [, timePart] = dateString.split(",");
+      return timePart ? timePart.trim() : "N/A";
+    }
+
+    // Handle other date formats
+    const date = new Date(dateString + "T10:00:00");
+    if (isNaN(date.getTime())) return "N/A";
+    return date.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+  } catch (error) {
+    return "N/A";
   }
+};
 
-  // Handle other date formats
-  const date = new Date(dateString + "T10:00:00");
-  return date.toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  });
+// Combined date and time formatter to avoid double N/A
+const formatDateTime = (dateString) => {
+  if (
+    !dateString ||
+    dateString === null ||
+    dateString === "null" ||
+    dateString === "N/A"
+  )
+    return "N/A";
+
+  try {
+    // Handle the format "2025-09-25,5:30 AM"
+    if (dateString.includes(",")) {
+      const [datePart, timePart] = dateString.split(",");
+      const date = new Date(datePart);
+      if (isNaN(date.getTime())) return "N/A";
+
+      const formattedDate = date.toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      });
+
+      const formattedTime = timePart ? timePart.trim() : "";
+      return formattedTime
+        ? `${formattedDate} ${formattedTime}`
+        : formattedDate;
+    }
+
+    // Handle other date formats
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return "N/A";
+    return date.toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+  } catch (error) {
+    return "N/A";
+  }
 };
 
 const TenderCardsList = ({
@@ -333,8 +398,7 @@ const TenderCardsList = ({
                       Pre-Bid Meeting
                     </Typography>
                     <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                      {formatDate(tender.preBidMeeting)}{" "}
-                      {formatTime(tender.preBidMeeting)}
+                      {formatDateTime(tender.preBidMeeting)}
                     </Typography>
                   </Box>
                 </Grid>
@@ -362,8 +426,7 @@ const TenderCardsList = ({
                       Submission Deadline
                     </Typography>
                     <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                      {formatDate(tender.lastDateSubmission)}{" "}
-                      {formatTime(tender.lastDateSubmission)}
+                      {formatDateTime(tender.lastDateSubmission)}
                     </Typography>
                   </Box>
                 </Grid>
@@ -391,8 +454,7 @@ const TenderCardsList = ({
                       Bid Opening
                     </Typography>
                     <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                      {formatDate(tender.bidOpening)}{" "}
-                      {formatTime(tender.bidOpening)}
+                      {formatDateTime(tender.bidOpening)}
                     </Typography>
                   </Box>
                 </Grid>
@@ -478,7 +540,7 @@ const TenderCardsList = ({
                 <Button
                   variant="contained"
                   startIcon={<EditIcon />}
-                  onClick={() => onEditTender && onEditTender(tender)}
+                  onClick={() => onEditTender(tender)}
                   sx={{
                     borderRadius: 2,
                     fontWeight: 600,

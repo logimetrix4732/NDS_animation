@@ -38,6 +38,8 @@ const DocumentViewerModal = ({
   documentType = "tender",
   showDownloadButton = false,
 }) => {
+  console.log(tender, "tender");
+  console.log(documentType, "documentType");
   const [documentUrl, setDocumentUrl] = useState("");
   const [fallbackUrl, setFallbackUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -856,27 +858,25 @@ const DocumentViewerModal = ({
             >
               Close
             </Button>
-            {showDownloadButton && (
-              <Button
-                variant="contained"
-                onClick={handleDownloadDocument}
-                startIcon={<DownloadIcon />}
-                sx={{
-                  borderRadius: 2,
-                  fontWeight: 600,
-                  textTransform: "none",
+
+            <Button
+              variant="contained"
+              onClick={handleDownloadDocument}
+              startIcon={<DownloadIcon />}
+              sx={{
+                borderRadius: 2,
+                fontWeight: 600,
+                textTransform: "none",
+                background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                "&:hover": {
                   background:
-                    "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                  "&:hover": {
-                    background:
-                      "linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%)",
-                  },
-                  boxShadow: "0 4px 15px rgba(102, 126, 234, 0.3)",
-                }}
-              >
-                Download Document
-              </Button>
-            )}
+                    "linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%)",
+                },
+                boxShadow: "0 4px 15px rgba(102, 126, 234, 0.3)",
+              }}
+            >
+              Download Document
+            </Button>
           </Box>
         </DialogActions>
       )}

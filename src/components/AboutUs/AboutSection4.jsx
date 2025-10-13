@@ -72,11 +72,11 @@ const AboutSection4 = () => {
           </div>
           <div className="col-xl-6 col-xxl-5">
             <div className="">
-              <div className="title-area about4-titlebox mb-20">
+              <div className="title-area about4-titlebox mb-10">
                 <AnimatedText
                   text="NDDB Dairy Services"
                   tag="h2"
-                  className="sec-title mb-10 heading text-anime-style-3"
+                  className="sec-title mb-3 heading text-anime-style-3"
                   width="100%"
                 />
               </div>

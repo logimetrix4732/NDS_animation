@@ -518,7 +518,13 @@ const AdminTenderForm = ({
           }}
           disabled={loading}
         >
-          {loading ? "Creating..." : "Create Tender"}
+          {loading
+            ? isEditMode
+              ? "Updating..."
+              : "Creating..."
+            : isEditMode
+            ? "Update Tender"
+            : "Create Tender"}
         </Button>
       </DialogActions>
     </Drawer>

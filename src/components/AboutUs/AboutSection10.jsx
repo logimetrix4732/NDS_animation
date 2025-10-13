@@ -54,7 +54,7 @@ const AboutSection10 = () => {
                 livelihoods of the producer members of the MPOs supported by us.
                 <br />
                 <br />
-                This initiatives aims to unlock additional income opportunities
+                This initiative aims to unlock additional income opportunities
                 by linking farmers to better markets and value-added processing.
                 In the initial phase, NDS has launched value chain development
                 projects for mango, tomato and sunflower seeds in Andhra

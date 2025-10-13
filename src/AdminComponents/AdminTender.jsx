@@ -138,14 +138,12 @@ export default function AdminTender() {
             description: tender.description || "No description available",
             status: "Published", // Default status
             priority: "Medium", // Default priority
-            startDate:
-              tender.startDate || new Date().toISOString().split("T")[0],
-            estimatedValue: tender.estimatedValues || "$0",
+            startDate: tender.startDate || "N/A",
+            estimatedValue: tender.estimatedValues || "0",
             location: tender.location || "Not specified",
-            preBidMeeting: tender.preBidMeeting || new Date().toISOString(),
-            lastDateSubmission:
-              tender.lastDateSubmission || new Date().toISOString(),
-            bidOpening: tender.bidOpenning || new Date().toISOString(),
+            preBidMeeting: tender.preBidMeeting || "N/A",
+            lastDateSubmission: tender.lastDateSubmission || "N/A",
+            bidOpening: tender.bidOpenning || "N/A",
             participants: tender.participants || 0,
             category: "Infrastructure", // Default category
             tenderCard: tender.tenderCard || "Inactive",
@@ -162,7 +160,6 @@ export default function AdminTender() {
             // Keep original fields for edit functionality
             tenderTitle: tender.tenderTitle,
             estimatedValues: tender.estimatedValues,
-            bidOpenning: tender.bidOpenning,
             createdAt: tender.createdAt,
           };
         });
@@ -592,6 +589,7 @@ export default function AdminTender() {
   };
 
   const handleEditTender = (tender) => {
+    console.log(tender, "tender");
     // Helper function to parse date with custom format
     const parseCustomDate = (dateString) => {
       if (!dateString) return "";
@@ -611,12 +609,25 @@ export default function AdminTender() {
             hour24 = 0;
           }
 
-          const date = new Date(year, month - 1, day, hour24, minutes);
-          return date.toISOString().slice(0, 16);
+          // Format as YYYY-MM-DDTHH:mm for datetime-local input
+          const formattedDate = `${year}-${month.padStart(
+            2,
+            "0"
+          )}-${day.padStart(2, "0")}T${hour24
+            .toString()
+            .padStart(2, "0")}:${minutes}`;
+          return formattedDate;
         }
 
         // Handle ISO format
-        return new Date(dateString).toISOString().slice(0, 16);
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, "0");
+        const day = date.getDate().toString().padStart(2, "0");
+        const hours = date.getHours().toString().padStart(2, "0");
+        const minutes = date.getMinutes().toString().padStart(2, "0");
+
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
       } catch (error) {
         console.error("Error parsing date:", dateString, error);
         return "";
@@ -641,7 +652,8 @@ export default function AdminTender() {
         return "";
       }
     };
-
+    console.log(parseCustomDate(tender.preBidMeeting), "tender111111");
+    console.log(parseCustomDate(tender.lastDateSubmission), "tender222222");
     setFormData({
       tenderTitle: tender.tenderTitle || tender.title || "",
       referenceNo: tender.referenceNo || "",

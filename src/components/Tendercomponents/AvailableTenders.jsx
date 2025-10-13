@@ -58,6 +58,7 @@ const AvailableTenders = () => {
   const [selectedTender, setSelectedTender] = useState(null);
   const [documentType, setDocumentType] = useState("tender");
   const [showDownloadButton, setShowDownloadButton] = useState(false);
+  const [modalAction, setModalAction] = useState("view"); // Track which button was clicked
 
   // Login Modal States
   const [step, setStep] = useState(1);
@@ -142,7 +143,10 @@ const AvailableTenders = () => {
                   new Date().toISOString(),
                 submissionDeadline:
                   tender.lastDateSubmission || new Date().toISOString(),
-                bidOpening: tender.bidOpenning || new Date().toISOString(),
+                bidOpening:
+                  tender.bidOpenning ||
+                  tender.bidOpening ||
+                  new Date().toISOString(),
                 participants: tender.participants, // Random participants for now
                 category: category,
                 estimatedValue: tender.estimatedValues || "$0",
@@ -222,35 +226,6 @@ const AvailableTenders = () => {
     setShowDownloadButton(false);
   };
 
-  const handleDownloadDocument = (tender) => {
-    let filePath, fileName;
-
-    if (documentType === "corrigendum") {
-      filePath = tender.CorrigendumFilePath;
-      fileName = tender.CorrigendumFileName;
-    } else {
-      filePath = tender.tenderFilePath || tender.tenderFile;
-      fileName = tender.tenderFileName;
-    }
-
-    if (filePath) {
-      let downloadUrl;
-      if (filePath.startsWith("http://") || filePath.startsWith("https://")) {
-        downloadUrl = filePath;
-      } else {
-        downloadUrl = `${import.meta.env.VITE_API_BASE_URL}/files${filePath}`;
-      }
-
-      const link = document.createElement("a");
-      link.href = downloadUrl;
-      link.download = fileName || "document";
-      link.target = "_blank";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  };
-
   // Save user data to localStorage
   const saveUserData = () => {
     const userData = {
@@ -319,7 +294,7 @@ const AvailableTenders = () => {
           };
 
           setSelectedTender(tenderData);
-          setDocumentType("tender");
+          // setDocumentType("tender");
           setDocumentDialogOpen(true);
           // fetchDocument(tenderData); // This function is now handled by DocumentViewerModal
 
@@ -341,7 +316,7 @@ const AvailableTenders = () => {
             );
             if (selectedTender) {
               setSelectedTender(selectedTender);
-              setDocumentType("corrigendum");
+              // setDocumentType("corrigendum");
               setDocumentDialogOpen(true);
             }
             setSelectedTenderId(null);
@@ -418,32 +393,57 @@ const AvailableTenders = () => {
     setLoginModalOpen(false);
     setStep(1);
     setModalError("");
-    setCompanyName("");
-    setGstNumber("");
-    setPanNumber("");
-    setEmail("");
+    // Don't clear form data - keep it for next time
+    // setCompanyName("");
+    // setGstNumber("");
+    // setPanNumber("");
+    // setEmail("");
     // Password fields are hidden, so no need to clear them
     // setOtp(""); // Commented out OTP
     setConfetti(false);
     setSelectedTenderId(null); // Reset selected tender ID
+    setModalAction("view"); // Reset modal action
   };
 
-  // Load saved user data from localStorage on component mount
+  // Load saved user data from localStorage on component mount and when modal opens
   useEffect(() => {
-    const savedData = localStorage.getItem("tenderUserData");
-    if (savedData) {
-      try {
-        const parsedData = JSON.parse(savedData);
-        setCompanyName(parsedData.companyName || "");
-        setGstNumber(parsedData.gstNumber || "");
-        setPanNumber(parsedData.panNumber || "");
-        setEmail(parsedData.email || "");
-        // Don't load password for security reasons
-      } catch (error) {
-        console.error("Error loading saved data:", error);
+    const loadSavedData = () => {
+      const savedData = localStorage.getItem("tenderUserData");
+      if (savedData) {
+        try {
+          const parsedData = JSON.parse(savedData);
+          setCompanyName(parsedData.companyName || "");
+          setGstNumber(parsedData.gstNumber || "");
+          setPanNumber(parsedData.panNumber || "");
+          setEmail(parsedData.email || "");
+          // Don't load password for security reasons
+        } catch (error) {
+          console.error("Error loading saved data:", error);
+        }
+      }
+    };
+
+    // Load data on component mount
+    loadSavedData();
+  }, []);
+
+  // Load saved data when modal opens
+  useEffect(() => {
+    if (loginModalOpen) {
+      const savedData = localStorage.getItem("tenderUserData");
+      if (savedData) {
+        try {
+          const parsedData = JSON.parse(savedData);
+          setCompanyName(parsedData.companyName || "");
+          setGstNumber(parsedData.gstNumber || "");
+          setPanNumber(parsedData.panNumber || "");
+          setEmail(parsedData.email || "");
+        } catch (error) {
+          console.error("Error loading saved data:", error);
+        }
       }
     }
-  }, []);
+  }, [loginModalOpen]);
 
   useEffect(() => {
     if (step === 2) {
@@ -453,12 +453,17 @@ const AvailableTenders = () => {
   }, [step]);
 
   const handleViewDetails = (tender, event) => {
+    console.log("handleViewDetails");
+
     // Prevent accordion from closing
     if (event) {
       event.stopPropagation();
     }
 
+    setModalAction("view"); // Set action type
+
     if (!isLoggedIn) {
+      setDocumentType("tender");
       setSelectedTenderId(tender.id); // Store selected tender ID
       setLoginModalOpen(true);
     } else {
@@ -472,12 +477,14 @@ const AvailableTenders = () => {
 
   const handleDownloadDocuments = (tender, event) => {
     setShowDownloadButton(true);
+    setModalAction("download"); // Set action type
     // Prevent accordion from closing
     if (event) {
       event.stopPropagation();
     }
 
     if (!isLoggedIn) {
+      setDocumentType("tender");
       setSelectedTenderId(tender.id); // Store selected tender ID
       setLoginModalOpen(true);
     } else {
@@ -490,14 +497,19 @@ const AvailableTenders = () => {
 
   // Handle Corrigendum Document View
   const handleViewCorrigendum = (tender, event) => {
+    console.log(tender);
+
     // Prevent accordion from closing
     if (event) {
       event.stopPropagation();
     }
 
+    setModalAction("corrigendum"); // Set action type
+
     if (!isLoggedIn) {
       setSelectedTenderId(tender.id); // Store selected tender ID
       setLoginModalOpen(true);
+      setDocumentType("corrigendum");
     } else {
       // User is logged in, show corrigendum document without download button
       setShowDownloadButton(false);
@@ -963,7 +975,15 @@ const AvailableTenders = () => {
                       fontWeight={700}
                       sx={{ color: "#ffffff" }}
                     >
-                      {step === 1 && "View Tender"}
+                      {step === 1 &&
+                        modalAction === "view" &&
+                        "View Tender Details"}
+                      {step === 1 &&
+                        modalAction === "download" &&
+                        "Download Tender Document"}
+                      {step === 1 &&
+                        modalAction === "corrigendum" &&
+                        "View Corrigendum"}
                       {step === 2 && "Success"}
                     </Typography>
                     <Typography
@@ -971,7 +991,14 @@ const AvailableTenders = () => {
                       sx={{ opacity: 0.9, color: "#ffffff" }}
                     >
                       {step === 1 &&
-                        "Please fill the details to access tenders"}
+                        modalAction === "view" &&
+                        "Please fill the details to view tender details"}
+                      {step === 1 &&
+                        modalAction === "download" &&
+                        "Please fill the details to download tender document"}
+                      {step === 1 &&
+                        modalAction === "corrigendum" &&
+                        "Please fill the details to view corrigendum"}
                       {step === 2 && "Successfully registered"}
                     </Typography>
                   </Box>
@@ -1132,6 +1159,12 @@ const AvailableTenders = () => {
                     >
                       {modalLoading ? (
                         <CircularProgress size={24} sx={{ color: "white" }} />
+                      ) : modalAction === "view" ? (
+                        "Register & View Details"
+                      ) : modalAction === "download" ? (
+                        "Register & Download Document"
+                      ) : modalAction === "corrigendum" ? (
+                        "Register & View Corrigendum"
                       ) : (
                         "Register & View Tender"
                       )}
