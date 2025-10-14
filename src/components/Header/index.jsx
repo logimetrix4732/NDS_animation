@@ -136,6 +136,9 @@ const Header = () => {
                             <Link to="/tender">Tenders</Link>
                           </li>
                           <li>
+                            <Link to="/gallery">Gallery</Link>
+                          </li>
+                          <li>
                             <Link to="/contactUs">Contact Us</Link>
                           </li>
                         </ul>
