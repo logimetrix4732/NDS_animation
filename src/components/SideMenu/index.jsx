@@ -29,6 +29,7 @@ const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
     { text: "New Initiatives", to: "/newInitiative" },
     { text: "Publications", to: "/publications" },
     { text: "Careers", to: "/carrer" },
+    { text: "Gallery", to: "/gallery" },
     { text: "Tenders", to: "/tender" },
     { text: "Contact Us", to: "/contactUs" },
   ];
