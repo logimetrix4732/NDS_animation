@@ -24,6 +24,21 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import useHRCompliances from "../../hooks/useHRCompliances";
 const SideMenu = ({ openRight, openLeft, setOpenRight, setOpenLeft }) => {
+
+  const menuItems = [
+    { text: "Home", to: "/" },
+    { text: "About Us", to: "/aboutUs" },
+    { text: "Our Experties", to: "/ourExperties" },
+    { text: "Milk Producer Organisation", to: "/milkproducer" },
+    { text: "Animal Productivity Services", to: "/animalProductivity" },
+    { text: "New Initiatives", to: "/newInitiative" },
+    { text: "Publications", to: "/publications" },
+    { text: "Careers", to: "/carrer" },
+    { text: "Gallery", to: "/gallery" },
+    { text: "Tenders", to: "/tender" },
+    { text: "Contact Us", to: "/contactUs" },
+  ];
+=======
   const [expandedMenus, setExpandedMenus] = useState({});
   const { hasHRCompliances } = useHRCompliances();
 
