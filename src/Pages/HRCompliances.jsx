@@ -6,54 +6,63 @@ import {
   CardMedia,
   Typography,
   Button,
-  Grid,
   CircularProgress,
 } from "@mui/material";
-import { Download, Language } from "@mui/icons-material";
+import { Download } from "@mui/icons-material";
 import CommonBanner from "../components/BannersComponents/CommonBanner";
-import { getFetch } from "../Api/Api";
 
 export default function HRCompliances() {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
     const fetchHRCompliances = async () => {
       try {
         setLoading(true);
-        const response = await getFetch(
+
+        const response = await fetch(
           `${
             import.meta.env.VITE_API_BASE_URL
-          }/getPublication?publicationType=HR Compliances`
+          }/getPublication?publicationType=HR Compliances`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
 
-        if (response?.data?.data) {
-          const mappedData = response.data.data.map((item) => {
-            console.log("Raw item:", item);
-            console.log("Thumbnail path:", item.thumbnail);
+        if (response.ok) {
+          const data = await response.json();
 
-            const imageUrl =
-              item.thumbnail &&
-              item.thumbnail !== "null" &&
-              item.thumbnail !== "" &&
-              item.thumbnail !== null
-                ? `${import.meta.env.VITE_API_BASE_URL}/${item.thumbnail}`
-                : "https://images.pexels.com/photos/3184302/pexels-photo-3184302.jpeg";
+          if (data?.data) {
+            const mappedData = data.data.map((item) => {
+              const imageUrl =
+                item.thumbnail &&
+                item.thumbnail !== "null" &&
+                item.thumbnail !== "" &&
+                item.thumbnail !== null
+                  ? `${import.meta.env.VITE_API_BASE_URL}/files${
+                      item.thumbnail
+                    }`
+                  : "https://images.pexels.com/photos/3184302/pexels-photo-3184302.jpeg";
 
-            console.log("Final image URL:", imageUrl);
-
-            return {
-              id: item.id,
-              title: item.name,
-              description:
-                "HR Compliance document for organizational standards and policies.",
-              image: imageUrl,
-              pdfFile: item.pdfFile,
-              isActive: item.isActive,
-            };
-          });
-          setReports(mappedData);
+              return {
+                id: item.id,
+                title: item.name,
+                description: item.description,
+                image: imageUrl,
+                pdfFile: item.pdfFile,
+                isActive: item.isActive,
+              };
+            });
+            setReports(mappedData);
+          } else {
+            setReports([]);
+          }
         } else {
+          console.error("Failed to fetch HR Compliances:", response.status);
           setReports([]);
         }
       } catch (error) {
@@ -67,23 +76,79 @@ export default function HRCompliances() {
     fetchHRCompliances();
   }, []);
 
-  const handleDownload = (pdfFile) => {
-    if (pdfFile) {
-      window.open(`${import.meta.env.VITE_API_BASE_URL}/${pdfFile}`, "_blank");
+  const handleDownload = async (pdfFile, report) => {
+    try {
+      if (!pdfFile) {
+        console.log("No file available for download.");
+        return;
+      }
+
+      setDownloading(true);
+
+      const fileUrl = `${import.meta.env.VITE_API_BASE_URL}/files${pdfFile}`;
+
+      if (response.ok) {
+        const blob = new Blob([await response.blob()], {
+          type: "application/pdf",
+        });
+
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+
+        let filename = tender.tenderFileName || "tender-document";
+        if (!filename.toLowerCase().endsWith(".pdf")) {
+          filename += ".pdf";
+        }
+        link.download = filename;
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+
+        setSnackbar({
+          open: true,
+          message: "File downloaded successfully!",
+          severity: "success",
+        });
+      } else {
+        throw new Error("Failed to download file");
+      }
+    } catch (error) {
+      console.error("Error downloading file:", error);
+      if (pdfFile) {
+        window.open(
+          `${import.meta.env.VITE_API_BASE_URL}/files${pdfFile}`,
+          "_blank"
+        );
+      }
+    } finally {
+      setDownloading(false);
     }
   };
 
   return (
-    <>
+    <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <CommonBanner
         title="HR Compliances"
         breadcrumbs={[{ label: "Home", path: "/" }, { label: "About Us" }]}
       />
-      <div
+      <Box
+        component="div"
         id="about-sec"
-        className="about-area position-relative overflow-hidden space"
+        className="about-area position-relative space"
+        sx={{
+          overflow: "visible",
+          flex: 1,
+          minHeight: "auto",
+        }}
       >
-        <div className="container" id="about-sec5">
+        <div
+          className="container"
+          id="about-sec5"
+          style={{ paddingBottom: "100px" }}
+        >
           <Box className="card-container">
             {loading ? (
               <Box
@@ -469,10 +534,13 @@ export default function HRCompliances() {
                     image={report.image}
                     alt={report.title}
                     sx={{
-                      height: 220,
+                      height: 350,
                       width: "100%",
                       objectFit: "cover",
+                      objectPosition: "center",
                       backgroundColor: "#f5f5f5",
+                      minHeight: 350,
+                      maxHeight: 350,
                     }}
                     onError={(e) => {
                       console.log("Image failed to load:", report.image);
@@ -512,21 +580,39 @@ export default function HRCompliances() {
                     <Box sx={{ display: "flex", gap: 1.5, mt: 2 }}>
                       <Button
                         variant="outlined"
-                        startIcon={<Download />}
-                        onClick={() => handleDownload(report.pdfFile)}
-                        disabled={!report.pdfFile}
+                        startIcon={
+                          downloading ? (
+                            <CircularProgress size={16} color="inherit" />
+                          ) : (
+                            <Download />
+                          )
+                        }
+                        onClick={() => handleDownload(report.pdfFile, report)}
+                        disabled={!report.pdfFile || downloading}
                         sx={{
                           color: "#bd8f59",
                           borderColor: "#bd8f59",
                           textTransform: "none",
                           borderRadius: "8px",
+                          transition: "all 0.3s ease",
                           "&:hover": {
                             borderColor: "#a97b4b",
                             color: "#a97b4b",
+                            transform: "translateY(-2px)",
+                            boxShadow: "0 4px 12px rgba(189,143,89,0.3)",
+                          },
+                          "&:disabled": {
+                            color: "#ccc",
+                            borderColor: "#ccc",
+                            cursor: "not-allowed",
                           },
                         }}
                       >
-                        Download
+                        {downloading
+                          ? "Downloading..."
+                          : report.pdfFile
+                          ? "Download PDF"
+                          : "No PDF Available"}
                       </Button>
                     </Box>
                   </CardContent>
@@ -535,7 +621,7 @@ export default function HRCompliances() {
             )}
           </Box>
         </div>
-      </div>
-    </>
+      </Box>
+    </Box>
   );
 }

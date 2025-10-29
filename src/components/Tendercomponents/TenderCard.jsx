@@ -45,8 +45,22 @@ const getStatusColor = (status) => {
 };
 
 const formatDate = (dateString) => {
+  if (!dateString) return "N/A";
+
+  // Handle the format "2025-09-25,5:30 AM"
+  if (dateString.includes(",")) {
+    const [datePart] = dateString.split(",");
+    const date = new Date(datePart);
+    return date.toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+  }
+
+  // Handle other date formats
   const date = new Date(dateString);
-  return date.toLocaleDateString("en-US", {
+  return date.toLocaleDateString("en-GB", {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
@@ -54,6 +68,15 @@ const formatDate = (dateString) => {
 };
 
 const formatTime = (dateString) => {
+  if (!dateString) return "N/A";
+
+  // Handle the format "2025-09-25,5:30 AM"
+  if (dateString.includes(",")) {
+    const [, timePart] = dateString.split(",");
+    return timePart ? timePart.trim() : "N/A";
+  }
+
+  // Handle other date formats
   const date = new Date(dateString + "T10:00:00");
   return date.toLocaleTimeString("en-US", {
     hour: "2-digit",
@@ -65,6 +88,7 @@ const TenderCard = ({
   tender,
   onViewDetails,
   onDownloadDocuments,
+  onViewCorrigendum,
   index,
   isOpen,
   onToggle,
@@ -100,8 +124,9 @@ const TenderCard = ({
                 {tender.title}
               </Typography>
               <Typography variant="body2" sx={{ color: "#666" }}>
-                <Business sx={{ fontSize: 16 }} /> {tender.location} • TND-
-                {String(tender.id).padStart(4, "0")}-001
+                <Business sx={{ fontSize: 16 }} /> {tender.location} •{" "}
+                {tender.referenceNo ||
+                  `TND-${String(tender.id).padStart(4, "0")}-001`}
               </Typography>
             </Box>
             <Box display="flex" alignItems="center" gap={1}>
@@ -145,11 +170,14 @@ const TenderCard = ({
                   >
                     Tender Details
                   </Typography>
-                  <Box
-                    sx={{ display: "flex", flexDirection: "column", gap: 1, border: "1px solid red", minWidth: "300px" }}
-                  >
+                  <Box>
                     <Box
-                      sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        width: "100%",
+                      }}
                     >
                       <Typography variant="body2" color="text.secondary">
                         Start Date:
@@ -159,7 +187,12 @@ const TenderCard = ({
                       </Typography>
                     </Box>
                     <Box
-                      sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        width: "100%",
+                      }}
                     >
                       <Typography variant="body2" color="text.secondary">
                         Estimated Value:
@@ -169,7 +202,12 @@ const TenderCard = ({
                       </Typography>
                     </Box>
                     <Box
-                      sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        width: "100%",
+                      }}
                     >
                       <Typography variant="body2" color="text.secondary">
                         Location:
@@ -216,8 +254,8 @@ const TenderCard = ({
                         variant="body2"
                         sx={{ fontWeight: 500, color: "#f57c00" }}
                       >
-                        {formatDate(tender.startDate)}{" "}
-                        {formatTime(tender.startDate)}
+                        {formatDate(tender.preBidMeeting)}{" "}
+                        {formatTime(tender.preBidMeeting)}
                       </Typography>
                     </Box>
                     <Box
@@ -230,7 +268,8 @@ const TenderCard = ({
                         variant="body2"
                         sx={{ fontWeight: 500, color: "#f57c00" }}
                       >
-                        {formatDate(tender.endDate)} 17:00
+                        {formatDate(tender.submissionDeadline)}{" "}
+                        {formatTime(tender.submissionDeadline)}
                       </Typography>
                     </Box>
                     <Box
@@ -240,7 +279,8 @@ const TenderCard = ({
                         Bid Opening:
                       </Typography>
                       <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                        {formatDate(tender.endDate)} 18:00
+                        {formatDate(tender.bidOpening)}{" "}
+                        {formatTime(tender.bidOpening)}
                       </Typography>
                     </Box>
                   </Box>
@@ -251,12 +291,12 @@ const TenderCard = ({
           <Divider sx={{ mb: 2 }} />
 
           {/* Action Buttons */}
-          <Box sx={{ display: "flex", gap: 2 }}>
+          <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
             <Button
               variant="contained"
               size="small"
               startIcon={<Visibility sx={{ fontSize: 16 }} />}
-              onClick={() => onViewDetails(tender)}
+              onClick={(e) => onViewDetails(tender, e)}
               sx={{
                 bgcolor: "#bd8f59",
                 "&:hover": { bgcolor: "#a46c35" },
@@ -274,7 +314,7 @@ const TenderCard = ({
               variant="outlined"
               size="small"
               startIcon={<Download sx={{ fontSize: 16 }} />}
-              onClick={() => onDownloadDocuments(tender)}
+              onClick={(e) => onDownloadDocuments(tender, e)}
               sx={{
                 borderColor: "#bd8f59",
                 color: "#bd8f59",
@@ -291,6 +331,32 @@ const TenderCard = ({
             >
               Download Documents
             </Button>
+            {/* Corrigendum Button - Only show if corrigendum is Active */}
+            {tender.corrigendum === "Active" && tender.CorrigendumFilePath && (
+              <Button
+                variant="outlined"
+                size="small"
+                startIcon={<Visibility sx={{ fontSize: 16 }} />}
+                onClick={(e) =>
+                  onViewCorrigendum && onViewCorrigendum(tender, e)
+                }
+                sx={{
+                  borderColor: "#ff6b35",
+                  color: "#ff6b35",
+                  "&:hover": {
+                    borderColor: "#e55a2b",
+                    bgcolor: "rgba(255, 107, 53, 0.08)",
+                  },
+                  borderRadius: 2,
+                  textTransform: "none",
+                  fontWeight: 500,
+                  px: 2,
+                  py: 0.75,
+                }}
+              >
+                View Corrigendum
+              </Button>
+            )}
             <Typography
               variant="caption"
               sx={{

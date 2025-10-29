@@ -38,7 +38,7 @@ import {
   Description as DescriptionIcon,
   Article as ArticleIcon,
 } from "@mui/icons-material";
-import { postFetch, getFetch, deleteFetch } from "../Api/Api";
+import { postFetch, getFetch, deleteFetch, putFetch } from "../Api/Api";
 import nds_logo from "../assets/img/nds_logo.png";
 import AdminSidebar from "../AdminComponents/AdminSidebar";
 import AdminPublicationForm from "./AdminPublicationForm";
@@ -62,8 +62,9 @@ export default function AdminPublication() {
   const [formOpen, setFormOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [publications, setPublications] = useState([]);
-  console.log(publications, "=publications");
   const [isLoading, setIsLoading] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editingPublication, setEditingPublication] = useState(null);
 
   // Fetch publications data
   const fetchPublications = async () => {
@@ -74,7 +75,6 @@ export default function AdminPublication() {
           import.meta.env.VITE_API_BASE_URL
         }/getPublication?publicationType=${selectedStatus}`
       );
-      console.log("API Response:", response);
 
       if (response?.data?.data) {
         const sortedData = response.data.data.sort((a, b) => b.id - a.id);
@@ -89,12 +89,11 @@ export default function AdminPublication() {
           pdfHindi: pub.pdfHindi,
           pdfEnglish: pub.pdfEnglish,
           year: pub.year,
+          description: pub.description,
           createdBy: pub.createdBy,
         }));
-        console.log("Mapped Data:", mappedData);
         setPublications(mappedData);
       } else {
-        console.log("No data in response");
         setPublications([]);
       }
     } catch (error) {
@@ -169,6 +168,8 @@ export default function AdminPublication() {
 
   const handleFormClose = () => {
     setFormOpen(false);
+    setIsEditMode(false);
+    setEditingPublication(null);
   };
 
   // Handle tab change
@@ -222,6 +223,32 @@ export default function AdminPublication() {
     }
   };
 
+  // Handle edit publication
+  const handleEditClick = (publication) => {
+    setIsEditMode(true);
+    setEditingPublication(publication);
+
+    // Set form data for editing
+    setFormData({
+      name: publication.title || "",
+      publicationType: publication.type || selectedStatus,
+      year: publication.year || "",
+      description: publication.description || "",
+      pdfFile: null, // Will be handled separately
+      thumbnail: null, // Will be handled separately
+      pdfHindi: null, // Will be handled separately
+      pdfEnglish: null, // Will be handled separately
+      isActive: publication.status === "Published",
+      // Add existing file names for display
+      existingPdfFile: publication.pdfFile,
+      existingThumbnail: publication.thumbnail,
+      existingPdfHindi: publication.pdfHindi,
+      existingPdfEnglish: publication.pdfEnglish,
+    });
+
+    setFormOpen(true);
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -237,36 +264,41 @@ export default function AdminPublication() {
       [fieldName]: file,
     }));
   };
-
+  const token = localStorage.getItem("token");
   const handleSubmit = async () => {
     try {
       // Check if token exists
-      const token = localStorage.getItem("token");
       if (!token) {
         setErrorMessage("Please login first. No authentication token found.");
         return;
       }
 
-      // Simple validation
-      if (!formData.name.trim()) {
+      // Simple validation - Name is required for all publication types except Annual Reports
+      if (
+        formData.publicationType !== "Annual Reports" &&
+        !formData.name.trim()
+      ) {
         setErrorMessage("Name is required");
         return;
       }
 
-      // Check for PDF files based on publication type
-      if (formData.publicationType === "Annual Reports") {
-        // For Annual Reports, check if either pdfHindi or pdfEnglish is uploaded
-        if (!formData.pdfHindi && !formData.pdfEnglish) {
-          setErrorMessage(
-            "At least one PDF file (Hindi or English) is required for Annual Reports"
-          );
-          return;
-        }
-      } else {
-        // For other publication types, check for pdfFile
-        if (!formData.pdfFile) {
-          setErrorMessage("PDF file is required");
-          return;
+      // For edit mode, don't require new files if they're not being changed
+      if (!isEditMode) {
+        // Check for PDF files based on publication type
+        if (formData.publicationType === "Annual Reports") {
+          // For Annual Reports, check if either pdfHindi or pdfEnglish is uploaded
+          if (!formData.pdfHindi && !formData.pdfEnglish) {
+            setErrorMessage(
+              "At least one PDF file (Hindi or English) is required for Annual Reports"
+            );
+            return;
+          }
+        } else {
+          // For other publication types, check for pdfFile
+          if (!formData.pdfFile) {
+            setErrorMessage("PDF file is required");
+            return;
+          }
         }
       }
 
@@ -308,28 +340,32 @@ export default function AdminPublication() {
         formDataToSend.append("thumbnail", formData.thumbnail);
       }
 
-      console.log("Sending form data:", {
-        name: formData.name,
-        publicationType: formData.publicationType,
-        isActive: formData.isActive,
-        year: formData.year,
-        description: formData.description,
-        hasPdfFile: !!formData.pdfFile,
-        hasPdfHindi: !!formData.pdfHindi,
-        hasPdfEnglish: !!formData.pdfEnglish,
-        hasThumbnail: !!formData.thumbnail,
-      });
+      let response;
+      if (isEditMode && editingPublication) {
+        // Update existing publication
+        response = await putFetch(
+          `${import.meta.env.VITE_API_BASE_URL}/publication/update/${
+            editingPublication.id
+          }`,
+          formDataToSend
+        );
+      } else {
+        // Create new publication
+        response = await postFetch(
+          `${import.meta.env.VITE_API_BASE_URL}/createPublications`,
+          formDataToSend
+        );
+      }
 
-      const response = await postFetch(
-        `${import.meta.env.VITE_API_BASE_URL}/createPublications`,
-        formDataToSend
-      );
-
-      console.log("API Response:", response);
-
-      if (response && response.status === 201) {
-        setSuccessMessage("Publication created successfully!");
+      if (response && (response.status === 201 || response.status === 200)) {
+        setSuccessMessage(
+          isEditMode
+            ? "Publication updated successfully!"
+            : "Publication created successfully!"
+        );
         setFormOpen(false);
+        setIsEditMode(false);
+        setEditingPublication(null);
 
         // Refresh publications list
         await fetchPublications();
@@ -353,7 +389,11 @@ export default function AdminPublication() {
         } else if (response && response.data && response.data.message) {
           setErrorMessage(response.data.message);
         } else {
-          setErrorMessage("Error creating publication. Please try again.");
+          setErrorMessage(
+            isEditMode
+              ? "Error updating publication. Please try again."
+              : "Error creating publication. Please try again."
+          );
         }
       }
     } catch (error) {
@@ -363,7 +403,11 @@ export default function AdminPublication() {
       } else if (error.message) {
         setErrorMessage(error.message);
       } else {
-        setErrorMessage("Error creating publication. Please try again.");
+        setErrorMessage(
+          isEditMode
+            ? "Error updating publication. Please try again."
+            : "Error creating publication. Please try again."
+        );
       }
     } finally {
       setLoading(false);
@@ -717,6 +761,7 @@ export default function AdminPublication() {
             handleChangeRowsPerPage={handleChangeRowsPerPage}
             isLoading={isLoading}
             handleDeleteClick={handleDeleteClick}
+            handleEditClick={handleEditClick}
             loading={loading}
             selectedStatus={selectedStatus}
           />
@@ -732,6 +777,8 @@ export default function AdminPublication() {
         handleChange={handleChange}
         handleFileChange={handleFileChange}
         handleSubmit={handleSubmit}
+        isEditMode={isEditMode}
+        editingPublication={editingPublication}
       />
 
       {/* Snackbar for success/error messages */}

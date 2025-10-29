@@ -56,104 +56,6 @@ import TenderCardsList from "./TenderCardsList";
 import DocumentViewerDialog from "./DocumentViewerDialog";
 import { postFetch, getFetch } from "../Api/Api";
 
-// --------- THEME ---------
-const getDesignTokens = (mode) => ({
-  palette: {
-    mode,
-    primary: {
-      main: mode === "dark" ? "#90caf9" : "#1565c0",
-      light: mode === "dark" ? "#e3f2fd" : "#bbdefb",
-      dark: mode === "dark" ? "#42a5f5" : "#0d47a1",
-    },
-    secondary: {
-      main: mode === "dark" ? "#ffb74d" : "#ef6c00",
-      light: mode === "dark" ? "#ffe0b2" : "#ffcc02",
-      dark: mode === "dark" ? "#f57c00" : "#e65100",
-    },
-    background: {
-      default: mode === "dark" ? "#0b1020" : "#f8fafc",
-      paper: mode === "dark" ? "#0f1629" : "#ffffff",
-    },
-    success: {
-      main: mode === "dark" ? "#66bb6a" : "#2e7d32",
-      light: mode === "dark" ? "#c8e6c9" : "#a5d6a7",
-    },
-    warning: {
-      main: mode === "dark" ? "#ffa726" : "#f57c00",
-      light: mode === "dark" ? "#ffe0b2" : "#ffb74d",
-    },
-    error: {
-      main: mode === "dark" ? "#ef5350" : "#d32f2f",
-      light: mode === "dark" ? "#ffcdd2" : "#f44336",
-    },
-    info: {
-      main: mode === "dark" ? "#42a5f5" : "#1976d2",
-      light: mode === "dark" ? "#bbdefb" : "#64b5f6",
-    },
-  },
-  shape: { borderRadius: 20 },
-  typography: {
-    fontFamily:
-      "Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
-    h4: {
-      fontWeight: 800,
-      background:
-        mode === "dark"
-          ? "linear-gradient(45deg, #90caf9 30%, #42a5f5 90%)"
-          : "linear-gradient(45deg, #1565c0 30%, #42a5f5 90%)",
-      backgroundClip: "text",
-      WebkitBackgroundClip: "text",
-      WebkitTextFillColor: "transparent",
-      textShadow:
-        mode === "dark" ? "0 0 20px rgba(144, 202, 249, 0.3)" : "none",
-    },
-    h6: { fontWeight: 700 },
-    body1: { fontWeight: 500 },
-    body2: { fontWeight: 400 },
-  },
-  components: {
-    MuiCard: {
-      styleOverrides: {
-        root: {
-          overflow: "hidden",
-          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-          "&:hover": {
-            transform: "translateY(-4px)",
-            boxShadow:
-              mode === "dark"
-                ? "0 20px 40px rgba(0, 0, 0, 0.4)"
-                : "0 20px 40px rgba(0, 0, 0, 0.1)",
-          },
-        },
-      },
-    },
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          borderRadius: 12,
-          textTransform: "none",
-          fontWeight: 600,
-          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-          "&:hover": {
-            transform: "translateY(-2px)",
-            boxShadow:
-              mode === "dark"
-                ? "0 8px 25px rgba(0, 0, 0, 0.3)"
-                : "0 8px 25px rgba(0, 0, 0, 0.15)",
-          },
-        },
-      },
-    },
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-        },
-      },
-    },
-  },
-});
-
 // --------- LAYOUT ---------
 const drawerWidth = 260;
 
@@ -166,14 +68,15 @@ export default function AdminTender() {
   const [selectedPriority, setSelectedPriority] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("");
-  const [formOpen, setFormOpen] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const [tenders, setTenders] = useState([]);
   const [fetchLoading, setFetchLoading] = useState(true);
   const [fetchError, setFetchError] = useState("");
   const [documentDialogOpen, setDocumentDialogOpen] = useState(false);
   const [selectedTender, setSelectedTender] = useState(null);
-
+  const [documentType, setDocumentType] = useState("tender");
+  const [formDialogOpen, setFormDialogOpen] = useState(false);
   const [formData, setFormData] = useState({
     tenderTitle: "",
     referenceNo: "",
@@ -188,81 +91,94 @@ export default function AdminTender() {
     tenderCard: "Active",
     tenderFile: null,
     corrigendumFile: null,
+    tenderFileName: "",
+    corrigendumFileName: "",
     image: null,
   });
-
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
-
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
+  const token = localStorage.getItem("token");
   // Fetch tenders from API
-  useEffect(() => {
-    const fetchTenders = async () => {
-      try {
-        setFetchLoading(true);
-        setFetchError("");
+  const fetchTenders = async () => {
+    try {
+      setFetchLoading(true);
+      setFetchError("");
 
-        const token = localStorage.getItem("token");
-        if (!token) {
-          setFetchError("Please login first. No authentication token found.");
-          setFetchLoading(false);
-          return;
-        }
-
-        const response = await getFetch(
-          `${import.meta.env.VITE_API_BASE_URL}/tenders`
-        );
-
-        console.log("Tenders API Response:", response);
-
-        if (response && response.status === 200) {
-          console.log("Raw API Response Data:", response.data.data);
-
-          // Map the API response to match the expected format
-          const mappedTenders = response.data.data.map((tender) => {
-            console.log("Processing tender:", tender);
-
-            // Try different possible field names for tender file
-            const tenderFile = tender.tenderFile || tender.tender_file || tender.file || tender.document || tender.pdfFile || null;
-            console.log("Found tenderFile:", tenderFile);
-
-            return {
-              id: tender.id || tender.referenceNo || `TND-${Date.now()}`,
-              title: tender.tenderTitle || "Untitled Tender",
-              description: tender.description || "No description available",
-              status: "Published", // Default status
-              priority: "Medium", // Default priority
-              startDate: tender.startDate || new Date().toISOString().split('T')[0],
-              estimatedValue: tender.estimatedValues || "$0",
-              location: tender.location || "Not specified",
-              preBidMeeting: tender.preBidMeeting || new Date().toISOString(),
-              lastDateSubmission: tender.lastDateSubmission || new Date().toISOString(),
-              bidOpening: tender.bidOpenning || tender.bidOpening || new Date().toISOString(),
-              participants: Math.floor(Math.random() * 50) + 1, // Random participants for now
-              category: "Infrastructure", // Default category
-              tenderCard: tender.tenderCard || "Inactive",
-              tenderFile: tenderFile,
-              image: tender.image || "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400",
-            };
-          });
-
-          console.log("Mapped Tenders:", mappedTenders);
-          setTenders(mappedTenders);
-        } else {
-          console.error("Failed to fetch tenders:", response);
-          setFetchError("Failed to fetch tenders. Please try again.");
-          setTenders([]);
-        }
-      } catch (error) {
-        console.error("Error fetching tenders:", error);
-        setFetchError("Error fetching tenders. Please try again.");
-        setTenders([]);
-      } finally {
+      if (!token) {
+        setFetchError("Please login first. No authentication token found.");
         setFetchLoading(false);
+        return;
       }
-    };
 
+      const response = await getFetch(
+        `${import.meta.env.VITE_API_BASE_URL}/tenders`
+      );
+
+      if (response && response.status === 200) {
+        // Map the API response to match the expected format
+        const mappedTenders = response.data.data.map((tender) => {
+          // Try different possible field names for tender file
+          const tenderFile =
+            tender.tenderFile ||
+            tender.tender_file ||
+            tender.file ||
+            tender.document ||
+            tender.pdfFile ||
+            null;
+
+          return {
+            id: tender.id || tender.referenceNo || `TND-${Date.now()}`,
+            title: tender.tenderTitle || "Untitled Tender",
+            description: tender.description || "No description available",
+            status: "Published", // Default status
+            priority: "Medium", // Default priority
+            startDate: tender.startDate || "N/A",
+            estimatedValue: tender.estimatedValues || "0",
+            location: tender.location || "Not specified",
+            preBidMeeting: tender.preBidMeeting || "N/A",
+            lastDateSubmission: tender.lastDateSubmission || "N/A",
+            bidOpening: tender.bidOpenning || "N/A",
+            participants: tender.participants || 0,
+            category: "Infrastructure", // Default category
+            tenderCard: tender.tenderCard || "Inactive",
+            tenderFile: tenderFile,
+            tenderFileName: tender.tenderFileName || "Not specified",
+            tenderFilePath: tender.tenderFilePath || null,
+            referenceNo: tender.referenceNo || "Not specified",
+            corrigendum: tender.corrigendum || "Inactive",
+            CorrigendumFileName: tender.CorrigendumFileName || "",
+            CorrigendumFilePath: tender.CorrigendumFilePath || "",
+            image:
+              tender.image ||
+              "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400",
+            // Keep original fields for edit functionality
+            tenderTitle: tender.tenderTitle,
+            estimatedValues: tender.estimatedValues,
+            createdAt: tender.createdAt,
+          };
+        });
+
+        setTenders(mappedTenders);
+      } else {
+        console.error("Failed to fetch tenders:", response);
+        setFetchError("Failed to fetch tenders. Please try again.");
+        setTenders([]);
+      }
+    } catch (error) {
+      console.error("Error fetching tenders:", error);
+      setFetchError("Error fetching tenders. Please try again.");
+      setTenders([]);
+    } finally {
+      setFetchLoading(false);
+    }
+  };
+  useEffect(() => {
     fetchTenders();
   }, []);
 
@@ -273,26 +189,44 @@ export default function AdminTender() {
         tender.title.toLowerCase().includes(search.toLowerCase()) ||
         tender.location.toLowerCase().includes(search.toLowerCase());
 
-      const matchesStatus = selectedStatus === "" || tender.tenderCard === selectedStatus;
-      const matchesPriority = selectedPriority === "" || tender.priority === selectedPriority;
-      const matchesCategory = selectedCategory === "" || tender.category === selectedCategory;
-      const matchesLocation = selectedLocation === "" || tender.location === selectedLocation;
+      const matchesStatus =
+        selectedStatus === "" || tender.tenderCard === selectedStatus;
+      const matchesPriority =
+        selectedPriority === "" || tender.priority === selectedPriority;
+      const matchesCategory =
+        selectedCategory === "" || tender.category === selectedCategory;
+      const matchesLocation =
+        selectedLocation === "" || tender.location === selectedLocation;
 
-      return matchesSearch && matchesStatus && matchesPriority && matchesCategory && matchesLocation;
+      return (
+        matchesSearch &&
+        matchesStatus &&
+        matchesPriority &&
+        matchesCategory &&
+        matchesLocation
+      );
     });
     return filtered;
-  }, [tenders, search, selectedStatus, selectedPriority, selectedCategory, selectedLocation]);
-
+  }, [
+    tenders,
+    search,
+    selectedStatus,
+    selectedPriority,
+    selectedCategory,
+    selectedLocation,
+  ]);
   const handleCloseSnackbar = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
+    setSnackbar({ ...snackbar, open: false });
     setSuccessMessage("");
     setErrorMessage("");
   };
 
-  const handleFormOpen = () => {
-    setFormOpen(true);
+  const handleFormClose = () => {
+    setFormDialogOpen(false);
+    // Reset form data when closing
     setFormData({
       tenderTitle: "",
       referenceNo: "",
@@ -304,16 +238,15 @@ export default function AdminTender() {
       lastDateSubmission: "",
       bidOpening: "",
       corrigendum: "Inactive",
-      tenderCard: "Inactive",
+      tenderCard: "Active",
       tenderFile: null,
       corrigendumFile: null,
+      tenderFileName: "",
+      corrigendumFileName: "",
       image: null,
     });
+    setSelectedTender(null);
     setErrors({});
-  };
-
-  const handleFormClose = () => {
-    setFormOpen(false);
   };
 
   const handleChange = (e) => {
@@ -333,24 +266,32 @@ export default function AdminTender() {
   };
 
   const handleSubmit = async () => {
-    console.log("=== HANDLE SUBMIT CALLED ===");
-
     // Check if token exists
-    const token = localStorage.getItem("token");
     if (!token) {
-      console.log("No token found, showing error message");
-      setErrorMessage("Please login first. No authentication token found.");
+      setSnackbar({
+        open: true,
+        message: "Please login first. No authentication token found.",
+        severity: "error",
+      });
       return;
     }
 
     // Simple validation
     if (!formData.tenderTitle.trim()) {
-      setErrorMessage("Tender title is required");
+      setSnackbar({
+        open: true,
+        message: "Tender title is required",
+        severity: "error",
+      });
       return;
     }
 
     if (!formData.referenceNo.trim()) {
-      setErrorMessage("Reference number is required");
+      setSnackbar({
+        open: true,
+        message: "Reference number is required",
+        severity: "error",
+      });
       return;
     }
 
@@ -385,17 +326,39 @@ export default function AdminTender() {
         formDataToSend.append("image", formData.image);
       }
 
-      const response = await postFetch(
-        `${import.meta.env.VITE_API_BASE_URL}/tender/create`,
-        formDataToSend
-      );
+      let response;
 
-      console.log("API Response:", response);
+      if (selectedTender && selectedTender.id) {
+        // Update existing tender
+        response = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}/tender/update/${
+            selectedTender.id
+          }`,
+          {
+            method: "PUT",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            body: formDataToSend,
+          }
+        );
+      } else {
+        // Create new tender
+        response = await postFetch(
+          `${import.meta.env.VITE_API_BASE_URL}/tender/create`,
+          formDataToSend
+        );
+      }
 
-      if (response && response.status === 201) {
-        console.log("Success! Closing modal...");
-        setSuccessMessage("Tender created successfully!");
-        setFormOpen(false);
+      if (response && (response.status === 201 || response.status === 200)) {
+        setSnackbar({
+          open: true,
+          message: selectedTender
+            ? "Tender updated successfully!"
+            : "Tender created successfully!",
+          severity: "success",
+        });
+        setFormDialogOpen(false);
 
         // Reset form
         setFormData({
@@ -409,28 +372,53 @@ export default function AdminTender() {
           lastDateSubmission: "",
           bidOpening: "",
           corrigendum: "Inactive",
-          tenderCard: "Inactive",
+          tenderCard: "Active",
           tenderFile: null,
           corrigendumFile: null,
           image: null,
         });
 
+        // Clear selected tender
+        setSelectedTender(null);
         // Refresh the tenders list
-        window.location.reload();
+        fetchTenders();
       } else {
-        console.log("Error response:", response);
         if (response && response.status === 401) {
-          setErrorMessage("Authentication failed. Please login again.");
+          setSnackbar({
+            open: true,
+            message: "Authentication failed. Please login again.",
+            severity: "error",
+          });
         } else {
-          setErrorMessage("Error creating tender. Please try again.");
+          // Get error message from response
+          const errorMsg =
+            response.response.data.message ||
+            "Error creating tender. Please try again.";
+          setSnackbar({
+            open: true,
+            message: errorMsg,
+            severity: "error",
+          });
         }
       }
     } catch (error) {
-      console.error("Error:", error);
       if (error.status === 401) {
-        setErrorMessage("Authentication failed. Please login again.");
+        setSnackbar({
+          open: true,
+          message: "Authentication failed. Please login again.",
+          severity: "error",
+        });
       } else {
-        setErrorMessage("Error creating tender. Please try again.");
+        // Get error message from error response
+        const errorMsg =
+          error?.response?.data?.message ||
+          error?.message ||
+          "Error creating tender. Please try again.";
+        setSnackbar({
+          open: true,
+          message: errorMsg,
+          severity: "error",
+        });
       }
     } finally {
       setLoading(false);
@@ -439,6 +427,7 @@ export default function AdminTender() {
 
   const handleViewDocument = (tender) => {
     setSelectedTender(tender);
+    setDocumentType("tender");
     setDocumentDialogOpen(true);
   };
 
@@ -447,29 +436,304 @@ export default function AdminTender() {
     setSelectedTender(null);
   };
 
-  // Test function to add a sample tender with document for testing
-  const addTestTender = () => {
-    const testTender = {
-      id: "TEST-001",
-      title: "Test Tender with Document",
-      description: "This is a test tender to verify document viewing functionality",
-      status: "Published",
-      priority: "High",
-      startDate: "2024-01-15",
-      estimatedValue: "$1,000,000",
-      location: "Delhi",
-      preBidMeeting: "2024-01-20T10:00",
-      lastDateSubmission: "2024-02-15T17:00",
-      bidOpening: "2024-02-16T10:00",
-      participants: 15,
-      category: "Technology",
-      tenderCard: "Active",
-      tenderFile: "NDDB_1755844357952_0lw7wt.pdf", // Sample filename from your image
-      image: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400",
+  const handleViewCorrigendum = (tender) => {
+    setSelectedTender(tender);
+    setDocumentType("corrigendum");
+    setDocumentDialogOpen(true);
+  };
+
+  const handleDownloadCorrigendum = async (tender) => {
+    try {
+      if (!token) {
+        setSnackbar({
+          open: true,
+          message: "Please login first. No authentication token found.",
+          severity: "error",
+        });
+        return;
+      }
+
+      if (!tender.CorrigendumFilePath) {
+        setSnackbar({
+          open: true,
+          message: "No corrigendum file available for download.",
+          severity: "warning",
+        });
+        return;
+      }
+
+      // Create download URL with authentication
+      const downloadUrl = `${import.meta.env.VITE_API_BASE_URL}/download/files${
+        tender.CorrigendumFilePath
+      }`;
+
+      const response = await fetch(downloadUrl, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        // Get the blob from response and set proper MIME type for PDF
+        const blob = new Blob([await response.blob()], {
+          type: "application/pdf",
+        });
+
+        // Create download link
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+
+        // Ensure proper filename with .pdf extension
+        let filename = tender.CorrigendumFileName || "corrigendum-document";
+        if (!filename.toLowerCase().endsWith(".pdf")) {
+          filename += ".pdf";
+        }
+        link.download = filename;
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+
+        setSnackbar({
+          open: true,
+          message: "Corrigendum file downloaded successfully!",
+          severity: "success",
+        });
+      } else {
+        throw new Error("Failed to download corrigendum file");
+      }
+    } catch (error) {
+      console.error("Error downloading corrigendum:", error);
+      setSnackbar({
+        open: true,
+        message: "Error downloading corrigendum file. Please try again.",
+        severity: "error",
+      });
+    }
+  };
+
+  const handleDownloadTender = async (tender) => {
+    try {
+      if (!token) {
+        setSnackbar({
+          open: true,
+          message: "Please login first. No authentication token found.",
+          severity: "error",
+        });
+        return;
+      }
+
+      if (!tender.tenderFilePath) {
+        setSnackbar({
+          open: true,
+          message: "No file available for download.",
+          severity: "warning",
+        });
+        return;
+      }
+
+      // Create download URL with authentication
+      const downloadUrl = `${import.meta.env.VITE_API_BASE_URL}/download/files${
+        tender.tenderFilePath
+      }`;
+
+      const response = await fetch(downloadUrl, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        // Get the blob from response and set proper MIME type for PDF
+        const blob = new Blob([await response.blob()], {
+          type: "application/pdf",
+        });
+
+        // Create download link
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+
+        // Ensure proper filename with .pdf extension
+        let filename = tender.tenderFileName || "tender-document";
+        if (!filename.toLowerCase().endsWith(".pdf")) {
+          filename += ".pdf";
+        }
+        link.download = filename;
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+
+        setSnackbar({
+          open: true,
+          message: "File downloaded successfully!",
+          severity: "success",
+        });
+      } else {
+        throw new Error("Failed to download file");
+      }
+    } catch (error) {
+      console.error("Error downloading tender:", error);
+      setSnackbar({
+        open: true,
+        message: "Error downloading file. Please try again.",
+        severity: "error",
+      });
+    }
+  };
+
+  const handleEditTender = (tender) => {
+    console.log(tender, "tender");
+    // Helper function to parse date with custom format
+    const parseCustomDate = (dateString) => {
+      if (!dateString) return "";
+
+      try {
+        // Handle format like "2025-09-25,5:30 AM"
+        if (dateString.includes(",")) {
+          const [datePart, timePart] = dateString.split(",");
+          const [year, month, day] = datePart.split("-");
+          const [time, period] = timePart.trim().split(" ");
+          const [hours, minutes] = time.split(":");
+
+          let hour24 = parseInt(hours);
+          if (period === "PM" && hour24 !== 12) {
+            hour24 += 12;
+          } else if (period === "AM" && hour24 === 12) {
+            hour24 = 0;
+          }
+
+          // Format as YYYY-MM-DDTHH:mm for datetime-local input
+          const formattedDate = `${year}-${month.padStart(
+            2,
+            "0"
+          )}-${day.padStart(2, "0")}T${hour24
+            .toString()
+            .padStart(2, "0")}:${minutes}`;
+          return formattedDate;
+        }
+
+        // Handle ISO format
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, "0");
+        const day = date.getDate().toString().padStart(2, "0");
+        const hours = date.getHours().toString().padStart(2, "0");
+        const minutes = date.getMinutes().toString().padStart(2, "0");
+
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+      } catch (error) {
+        console.error("Error parsing date:", dateString, error);
+        return "";
+      }
     };
 
-    setTenders(prev => [testTender, ...prev]);
-    console.log("Added test tender:", testTender);
+    // Helper function to parse date for date input (YYYY-MM-DD)
+    const parseDateForInput = (dateString) => {
+      if (!dateString) return "";
+
+      try {
+        // Handle format like "2025-09-25,5:30 AM"
+        if (dateString.includes(",")) {
+          const [datePart] = dateString.split(",");
+          return datePart; // Already in YYYY-MM-DD format
+        }
+
+        // Handle ISO format
+        return new Date(dateString).toISOString().split("T")[0];
+      } catch (error) {
+        console.error("Error parsing date for input:", dateString, error);
+        return "";
+      }
+    };
+    console.log(parseCustomDate(tender.preBidMeeting), "tender111111");
+    console.log(parseCustomDate(tender.lastDateSubmission), "tender222222");
+    setFormData({
+      tenderTitle: tender.tenderTitle || tender.title || "",
+      referenceNo: tender.referenceNo || "",
+      description: tender.description || "",
+      startDate: parseDateForInput(tender.startDate),
+      estimatedValues: tender.estimatedValues || tender.estimatedValue || "",
+      location: tender.location || "",
+      preBidMeeting: parseCustomDate(tender.preBidMeeting),
+      lastDateSubmission: parseCustomDate(tender.lastDateSubmission),
+      bidOpening: parseCustomDate(tender.bidOpenning || tender.bidOpening),
+      corrigendum: tender.corrigendum === "Active" ? "Active" : "Inactive",
+      tenderCard: tender.tenderCard || "Active",
+      tenderFile: tender.tenderFileName
+        ? { name: tender.tenderFileName }
+        : null,
+      tenderFileName: tender.tenderFileName || "",
+      tenderFilePath: tender.tenderFilePath || "",
+      corrigendumFile: tender.CorrigendumFileName
+        ? { name: tender.CorrigendumFileName }
+        : null,
+      corrigendumFileName: tender.CorrigendumFileName || "",
+      image: null,
+    });
+    setSelectedTender(tender);
+    setFormDialogOpen(true);
+  };
+
+  const handleDeleteTender = async (tenderId) => {
+    try {
+      if (!token) {
+        setSnackbar({
+          open: true,
+          message: "Please login first. No authentication token found.",
+          severity: "error",
+        });
+        return;
+      }
+
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/tender/delete/${tenderId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // Check if response is ok (status 200-299) or specifically 200
+      if (response.ok || response.status === 200) {
+        // Try to parse response body if it exists
+        try {
+          const responseData = await response.text();
+        } catch (parseError) {
+          console.log("No response body or parsing error:", parseError);
+        }
+
+        setSnackbar({
+          open: true,
+          message: "Tender deleted successfully!",
+          severity: "success",
+        });
+        fetchTenders(); // Refresh the list
+      } else {
+        const errorData = await response.json().catch(() => ({}));
+        console.error("Delete error response:", errorData);
+        throw new Error(
+          errorData.message ||
+            `Failed to delete tender. Status: ${response.status}`
+        );
+      }
+    } catch (error) {
+      console.error("Error deleting tender:", error);
+      setSnackbar({
+        open: true,
+        message: error.message || "Error deleting tender. Please try again.",
+        severity: "error",
+      });
+    }
   };
 
   return (
@@ -622,40 +886,68 @@ export default function AdminTender() {
               <Box
                 sx={{
                   display: "flex",
-                  alignItems: "center",
+                  flexDirection: { xs: "column", sm: "row" },
+                  alignItems: { xs: "flex-start", sm: "center" },
                   justifyContent: "space-between",
-                  mb: 2,
+                  mb: { xs: 3, sm: 2 },
                   width: "100%",
+                  gap: { xs: 2, sm: 0 },
                 }}
               >
                 {/* Left Side - Title with Accent Bar */}
-                <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    width: { xs: "100%", sm: "auto" },
+                    justifyContent: { xs: "center", sm: "flex-start" },
+                  }}
+                >
                   <Box
                     sx={{
-                      width: 8,
-                      height: 40,
+                      width: { xs: 6, sm: 8 },
+                      height: { xs: 32, sm: 40 },
                       background:
                         "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                      borderRadius: 4,
-                      mr: 2,
+                      borderRadius: { xs: 3, sm: 4 },
+                      mr: { xs: 1.5, sm: 2 },
                     }}
                   />
-                  <Typography variant="h4" sx={{ fontWeight: 800 }}>
+                  <Typography
+                    variant="h4"
+                    sx={{
+                      fontWeight: 800,
+                      fontSize: {
+                        xs: "1.75rem",
+                        sm: "2.125rem",
+                        md: "2.125rem",
+                      },
+                      textAlign: { xs: "center", sm: "left" },
+                    }}
+                  >
                     Tenders
                   </Typography>
                 </Box>
 
                 {/* Right Side - Action Buttons */}
-                <Stack direction="row" spacing={2}>
+                <Stack
+                  direction={{ xs: "column", sm: "row" }}
+                  spacing={{ xs: 1.5, sm: 2 }}
+                  sx={{
+                    width: { xs: "100%", sm: "auto" },
+                    alignItems: { xs: "stretch", sm: "center" },
+                  }}
+                >
                   <Button
                     variant="outlined"
                     startIcon={<DownloadIcon />}
                     sx={{
                       borderRadius: 3,
-                      px: 3,
-                      py: 1.5,
+                      px: { xs: 2, sm: 3 },
+                      py: { xs: 1.2, sm: 1.5 },
                       borderWidth: 2,
                       fontWeight: 600,
+                      fontSize: { xs: "0.875rem", sm: "1rem" },
                       background: (t) =>
                         t.palette.mode === "dark"
                           ? "rgba(255,255,255,0.05)"
@@ -671,39 +963,17 @@ export default function AdminTender() {
                   >
                     Import
                   </Button>
-                  <Button
-                    variant="outlined"
-                    onClick={addTestTender}
-                    sx={{
-                      borderRadius: 3,
-                      px: 3,
-                      py: 1.5,
-                      borderWidth: 2,
-                      fontWeight: 600,
-                      background: (t) =>
-                        t.palette.mode === "dark"
-                          ? "rgba(255,255,255,0.05)"
-                          : "rgba(0,0,0,0.02)",
-                      "&:hover": {
-                        borderWidth: 2,
-                        background: (t) =>
-                          t.palette.mode === "dark"
-                            ? "rgba(255,255,255,0.1)"
-                            : "rgba(0,0,0,0.05)",
-                      },
-                    }}
-                  >
-                    Add Test Tender
-                  </Button>
+
                   <Button
                     variant="contained"
                     startIcon={<AddIcon />}
-                    onClick={() => setFormOpen(true)}
+                    onClick={() => setFormDialogOpen(true)}
                     sx={{
                       borderRadius: 3,
-                      px: 3,
-                      py: 1.5,
+                      px: { xs: 2, sm: 3 },
+                      py: { xs: 1.2, sm: 1.5 },
                       fontWeight: 600,
+                      fontSize: { xs: "0.875rem", sm: "1rem" },
                       background:
                         "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                       boxShadow: "0 8px 25px rgba(102, 126, 234, 0.3)",
@@ -724,8 +994,10 @@ export default function AdminTender() {
                 variant="body1"
                 color="text.secondary"
                 sx={{
-                  fontSize: "1.1rem",
+                  fontSize: { xs: "1rem", sm: "1.1rem" },
                   opacity: 0.8,
+                  textAlign: { xs: "center", sm: "left" },
+                  mt: { xs: 1, sm: 0 },
                 }}
               >
                 Here's a comprehensive overview of your tenders for this month!
@@ -740,21 +1012,31 @@ export default function AdminTender() {
                 sx={{
                   p: 3,
                   borderRadius: 2,
-                  background: (t) => t.palette.mode === "dark"
-                    ? "linear-gradient(135deg, #1e293b 0%, #334155 100%)"
-                    : "#ffffff",
-                  border: (t) => t.palette.mode === "dark"
-                    ? "1px solid rgba(255,255,255,0.1)"
-                    : "1px solid #e5e7eb",
-                  boxShadow: (t) => t.palette.mode === "dark"
-                    ? "0 4px 20px rgba(0, 0, 0, 0.3)"
-                    : "0 1px 3px rgba(0, 0, 0, 0.1)",
+                  background: (t) =>
+                    t.palette.mode === "dark"
+                      ? "linear-gradient(135deg, #1e293b 0%, #334155 100%)"
+                      : "#ffffff",
+                  border: (t) =>
+                    t.palette.mode === "dark"
+                      ? "1px solid rgba(255,255,255,0.1)"
+                      : "1px solid #e5e7eb",
+                  boxShadow: (t) =>
+                    t.palette.mode === "dark"
+                      ? "0 4px 20px rgba(0, 0, 0, 0.3)"
+                      : "0 1px 3px rgba(0, 0, 0, 0.1)",
                 }}
               >
                 {/* Header */}
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 3 }}>
-                  <FilterListIcon sx={{ color: "primary.main", fontSize: 20 }} />
-                  <Typography variant="h6" sx={{ fontWeight: 600, color: "primary.main" }}>
+                <Box
+                  sx={{ display: "flex", alignItems: "center", gap: 1, mb: 3 }}
+                >
+                  <FilterListIcon
+                    sx={{ color: "primary.main", fontSize: 20 }}
+                  />
+                  <Typography
+                    variant="h6"
+                    sx={{ fontWeight: 600, color: "primary.main" }}
+                  >
                     Filter & Search
                   </Typography>
                 </Box>
@@ -770,52 +1052,34 @@ export default function AdminTender() {
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
                       InputProps={{
-                        startAdornment: <SearchIcon sx={{ color: "#9ca3af", mr: 1, fontSize: 20 }} />,
+                        startAdornment: (
+                          <SearchIcon
+                            sx={{ color: "#9ca3af", mr: 1, fontSize: 20 }}
+                          />
+                        ),
                       }}
                       sx={{
                         "& .MuiOutlinedInput-root": {
                           borderRadius: 1.5,
-                          backgroundColor: (t) => t.palette.mode === "dark" ? "rgba(255,255,255,0.05)" : "#f9fafb",
-                          border: (t) => t.palette.mode === "dark" ? "1px solid rgba(255,255,255,0.1)" : "1px solid #e5e7eb",
+                          backgroundColor: (t) =>
+                            t.palette.mode === "dark"
+                              ? "rgba(255,255,255,0.05)"
+                              : "#f9fafb",
+                          border: (t) =>
+                            t.palette.mode === "dark"
+                              ? "1px solid rgba(255,255,255,0.1)"
+                              : "1px solid #e5e7eb",
                           "&:hover": {
                             borderColor: "primary.main",
                           },
                           "&.Mui-focused": {
                             borderColor: "primary.main",
-                            boxShadow: (t) => `0 0 0 2px ${t.palette.primary.main}20`,
+                            boxShadow: (t) =>
+                              `0 0 0 2px ${t.palette.primary.main}20`,
                           },
                         },
                       }}
                     />
-                  </Grid>
-
-                  {/* Category Filter */}
-                  <Grid item xs={12} sm={6} md={1.5}>
-                    <FormControl fullWidth size="small">
-                      <Select
-                        value={selectedCategory}
-                        onChange={(e) => setSelectedCategory(e.target.value)}
-                        displayEmpty
-                        sx={{
-                          borderRadius: 1.5,
-                          backgroundColor: (t) => t.palette.mode === "dark" ? "rgba(255,255,255,0.05)" : "#f9fafb",
-                          "& .MuiOutlinedInput-notchedOutline": {
-                            borderColor: (t) => t.palette.mode === "dark" ? "rgba(255,255,255,0.1)" : "#e5e7eb",
-                          },
-                          "&:hover .MuiOutlinedInput-notchedOutline": {
-                            borderColor: "primary.main",
-                          },
-                          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                            borderColor: "primary.main",
-                          },
-                        }}
-                      >
-                        <MenuItem value="">All Categories</MenuItem>
-                        <MenuItem value="Infrastructure">Infrastructure</MenuItem>
-                        <MenuItem value="Construction">Construction</MenuItem>
-                        <MenuItem value="Technology">Technology</MenuItem>
-                      </Select>
-                    </FormControl>
                   </Grid>
 
                   {/* Status Filter */}
@@ -827,9 +1091,15 @@ export default function AdminTender() {
                         displayEmpty
                         sx={{
                           borderRadius: 1.5,
-                          backgroundColor: (t) => t.palette.mode === "dark" ? "rgba(255,255,255,0.05)" : "#f9fafb",
+                          backgroundColor: (t) =>
+                            t.palette.mode === "dark"
+                              ? "rgba(255,255,255,0.05)"
+                              : "#f9fafb",
                           "& .MuiOutlinedInput-notchedOutline": {
-                            borderColor: (t) => t.palette.mode === "dark" ? "rgba(255,255,255,0.1)" : "#e5e7eb",
+                            borderColor: (t) =>
+                              t.palette.mode === "dark"
+                                ? "rgba(255,255,255,0.1)"
+                                : "#e5e7eb",
                           },
                           "&:hover .MuiOutlinedInput-notchedOutline": {
                             borderColor: "primary.main",
@@ -846,35 +1116,6 @@ export default function AdminTender() {
                     </FormControl>
                   </Grid>
 
-                  {/* Priority Filter */}
-                  <Grid item xs={12} sm={6} md={1.5}>
-                    <FormControl fullWidth size="small">
-                      <Select
-                        value={selectedPriority}
-                        onChange={(e) => setSelectedPriority(e.target.value)}
-                        displayEmpty
-                        sx={{
-                          borderRadius: 1.5,
-                          backgroundColor: (t) => t.palette.mode === "dark" ? "rgba(255,255,255,0.05)" : "#f9fafb",
-                          "& .MuiOutlinedInput-notchedOutline": {
-                            borderColor: (t) => t.palette.mode === "dark" ? "rgba(255,255,255,0.1)" : "#e5e7eb",
-                          },
-                          "&:hover .MuiOutlinedInput-notchedOutline": {
-                            borderColor: "primary.main",
-                          },
-                          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                            borderColor: "primary.main",
-                          },
-                        }}
-                      >
-                        <MenuItem value="">All Priorities</MenuItem>
-                        <MenuItem value="High">High Priority</MenuItem>
-                        <MenuItem value="Medium">Medium Priority</MenuItem>
-                        <MenuItem value="Low">Low Priority</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Grid>
-
                   {/* Location Filter */}
                   <Grid item xs={12} sm={6} md={1.5}>
                     <FormControl fullWidth size="small">
@@ -884,9 +1125,15 @@ export default function AdminTender() {
                         displayEmpty
                         sx={{
                           borderRadius: 1.5,
-                          backgroundColor: (t) => t.palette.mode === "dark" ? "rgba(255,255,255,0.05)" : "#f9fafb",
+                          backgroundColor: (t) =>
+                            t.palette.mode === "dark"
+                              ? "rgba(255,255,255,0.05)"
+                              : "#f9fafb",
                           "& .MuiOutlinedInput-notchedOutline": {
-                            borderColor: (t) => t.palette.mode === "dark" ? "rgba(255,255,255,0.1)" : "#e5e7eb",
+                            borderColor: (t) =>
+                              t.palette.mode === "dark"
+                                ? "rgba(255,255,255,0.1)"
+                                : "#e5e7eb",
                           },
                           "&:hover .MuiOutlinedInput-notchedOutline": {
                             borderColor: "primary.main",
@@ -907,8 +1154,18 @@ export default function AdminTender() {
 
                   {/* View Mode Buttons */}
                   <Grid item xs={12} md={1.5}>
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 1, justifyContent: "flex-end" }}>
-                      <Typography variant="body2" sx={{ color: "#6b7280", fontWeight: 500, mr: 1 }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
+                        justifyContent: "flex-end",
+                      }}
+                    >
+                      <Typography
+                        variant="body2"
+                        sx={{ color: "#6b7280", fontWeight: 500, mr: 1 }}
+                      >
                         View Mode:
                       </Typography>
                       <Button
@@ -958,10 +1215,123 @@ export default function AdminTender() {
           {/* Loading State */}
           {fetchLoading && (
             <Box sx={{ width: "100%", mb: 3 }}>
-              <LinearProgress sx={{ borderRadius: 2, height: 6 }} />
-              <Typography variant="body2" sx={{ mt: 1, textAlign: "center", color: "text.secondary" }}>
-                Loading tenders...
-              </Typography>
+              <Paper
+                sx={{
+                  p: 4,
+                  borderRadius: 3,
+                  background: (t) =>
+                    t.palette.mode === "dark"
+                      ? "linear-gradient(135deg, #1e293b 0%, #334155 100%)"
+                      : "#ffffff",
+                  border: (t) =>
+                    t.palette.mode === "dark"
+                      ? "1px solid rgba(255,255,255,0.1)"
+                      : "1px solid #e5e7eb",
+                  boxShadow: (t) =>
+                    t.palette.mode === "dark"
+                      ? "0 4px 20px rgba(0, 0, 0, 0.3)"
+                      : "0 1px 3px rgba(0, 0, 0, 0.1)",
+                }}
+              >
+                <Box sx={{ textAlign: "center" }}>
+                  {/* Animated Loading Icon */}
+                  <Box
+                    sx={{
+                      width: 80,
+                      height: 80,
+                      margin: "0 auto 2rem",
+                      borderRadius: "50%",
+                      background:
+                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      position: "relative",
+                      "&::before": {
+                        content: '""',
+                        position: "absolute",
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: "50%",
+                        background:
+                          "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                        animation: "pulse 2s infinite",
+                        opacity: 0.3,
+                      },
+                      "@keyframes pulse": {
+                        "0%": {
+                          transform: "scale(1)",
+                          opacity: 0.3,
+                        },
+                        "50%": {
+                          transform: "scale(1.2)",
+                          opacity: 0.1,
+                        },
+                        "100%": {
+                          transform: "scale(1)",
+                          opacity: 0.3,
+                        },
+                      },
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: "50%",
+                        border: "3px solid transparent",
+                        borderTop: "3px solid white",
+                        animation: "spin 1s linear infinite",
+                        "@keyframes spin": {
+                          "0%": { transform: "rotate(0deg)" },
+                          "100%": { transform: "rotate(360deg)" },
+                        },
+                      }}
+                    />
+                  </Box>
+
+                  {/* Loading Text */}
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontWeight: 600,
+                      mb: 1,
+                      background:
+                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                      backgroundClip: "text",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                  >
+                    Loading Tenders
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{ color: "text.secondary", mb: 3 }}
+                  >
+                    Please wait while we fetch your tender data...
+                  </Typography>
+
+                  {/* Progress Bar */}
+                  <Box sx={{ width: "100%", maxWidth: 400, mx: "auto" }}>
+                    <LinearProgress
+                      sx={{
+                        height: 8,
+                        borderRadius: 4,
+                        backgroundColor: (t) =>
+                          t.palette.mode === "dark"
+                            ? "rgba(255,255,255,0.1)"
+                            : "rgba(0,0,0,0.1)",
+                        "& .MuiLinearProgress-bar": {
+                          borderRadius: 4,
+                          background:
+                            "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                        },
+                      }}
+                    />
+                  </Box>
+                </Box>
+              </Paper>
             </Box>
           )}
 
@@ -977,20 +1347,172 @@ export default function AdminTender() {
             <TenderCardsList
               filteredTenders={filteredTenders}
               onViewDocument={handleViewDocument}
+              onEditTender={handleEditTender}
+              onDeleteTender={handleDeleteTender}
+              onDownloadTender={handleDownloadTender}
+              onViewCorrigendum={handleViewCorrigendum}
+              onDownloadCorrigendum={handleDownloadCorrigendum}
             />
           )}
 
           {/* No Data State */}
           {!fetchLoading && !fetchError && filteredTenders.length === 0 && (
             <Box sx={{ textAlign: "center", py: 8 }}>
-              <Typography variant="h6" color="text.secondary" sx={{ mb: 2 }}>
-                No tenders found
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {search || selectedStatus || selectedPriority || selectedCategory || selectedLocation
-                  ? "Try adjusting your filters"
-                  : "Create your first tender to get started"}
-              </Typography>
+              <Paper
+                sx={{
+                  p: 6,
+                  borderRadius: 3,
+                  maxWidth: 600,
+                  mx: "auto",
+                  background: (t) =>
+                    t.palette.mode === "dark"
+                      ? "linear-gradient(135deg, #1e293b 0%, #334155 100%)"
+                      : "#ffffff",
+                  border: (t) =>
+                    t.palette.mode === "dark"
+                      ? "1px solid rgba(255,255,255,0.1)"
+                      : "1px solid #e5e7eb",
+                  boxShadow: (t) =>
+                    t.palette.mode === "dark"
+                      ? "0 4px 20px rgba(0, 0, 0, 0.3)"
+                      : "0 1px 3px rgba(0, 0, 0, 0.1)",
+                }}
+              >
+                {/* Empty State Icon */}
+                <Box
+                  sx={{
+                    width: 120,
+                    height: 120,
+                    margin: "0 auto 2rem",
+                    borderRadius: "50%",
+                    background: (t) =>
+                      t.palette.mode === "dark"
+                        ? "linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)"
+                        : "linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: (t) =>
+                      t.palette.mode === "dark"
+                        ? "2px dashed rgba(102, 126, 234, 0.3)"
+                        : "2px dashed rgba(102, 126, 234, 0.2)",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      fontSize: 48,
+                      color: (t) =>
+                        t.palette.mode === "dark"
+                          ? "rgba(102, 126, 234, 0.6)"
+                          : "rgba(102, 126, 234, 0.4)",
+                      fontWeight: 300,
+                    }}
+                  >
+                    📋
+                  </Box>
+                </Box>
+
+                {/* Main Message */}
+                <Typography
+                  variant="h5"
+                  sx={{
+                    fontWeight: 700,
+                    mb: 2,
+                    background:
+                      "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                    backgroundClip: "text",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  {search ||
+                  selectedStatus ||
+                  selectedPriority ||
+                  selectedCategory ||
+                  selectedLocation
+                    ? "No matching tenders found"
+                    : "No tenders available yet"}
+                </Typography>
+
+                {/* Subtitle */}
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: "text.secondary",
+                    mb: 4,
+                    maxWidth: 400,
+                    mx: "auto",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {search ||
+                  selectedStatus ||
+                  selectedPriority ||
+                  selectedCategory ||
+                  selectedLocation
+                    ? "Try adjusting your search criteria or filters to find what you're looking for."
+                    : "Get started by creating your first tender. It only takes a few minutes to set up."}
+                </Typography>
+
+                {/* Action Buttons */}
+                <Stack
+                  direction={{ xs: "column", sm: "row" }}
+                  spacing={2}
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  {(search ||
+                    selectedStatus ||
+                    selectedPriority ||
+                    selectedCategory ||
+                    selectedLocation) && (
+                    <Button
+                      variant="outlined"
+                      onClick={() => {
+                        setSearch("");
+                        setSelectedStatus("");
+                        setSelectedPriority("");
+                        setSelectedCategory("");
+                        setSelectedLocation("");
+                      }}
+                      startIcon={<ClearIcon />}
+                      sx={{
+                        borderRadius: 2,
+                        px: 3,
+                        py: 1.5,
+                        borderWidth: 2,
+                        fontWeight: 600,
+                        "&:hover": {
+                          borderWidth: 2,
+                        },
+                      }}
+                    >
+                      Clear All Filters
+                    </Button>
+                  )}
+                  <Button
+                    variant="contained"
+                    onClick={() => setFormDialogOpen(true)}
+                    startIcon={<AddIcon />}
+                    sx={{
+                      borderRadius: 2,
+                      px: 3,
+                      py: 1.5,
+                      fontWeight: 600,
+                      background:
+                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                      boxShadow: "0 8px 25px rgba(102, 126, 234, 0.3)",
+                      "&:hover": {
+                        background:
+                          "linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%)",
+                        boxShadow: "0 12px 35px rgba(102, 126, 234, 0.4)",
+                      },
+                    }}
+                  >
+                    Create New Tender
+                  </Button>
+                </Stack>
+              </Paper>
             </Box>
           )}
         </Box>
@@ -998,13 +1520,14 @@ export default function AdminTender() {
 
       {/* Tender Form Drawer */}
       <AdminTenderForm
-        open={formOpen}
+        open={formDialogOpen}
         onClose={handleFormClose}
         loading={loading}
         formData={formData}
         handleChange={handleChange}
         handleFileChange={handleFileChange}
         handleSubmit={handleSubmit}
+        isEditMode={!!selectedTender}
       />
 
       {/* Document Viewer Dialog */}
@@ -1012,9 +1535,28 @@ export default function AdminTender() {
         open={documentDialogOpen}
         onClose={handleCloseDocumentDialog}
         tender={selectedTender}
+        documentType={documentType}
       />
 
       {/* Snackbar for success/error messages */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbar.severity}
+          sx={{
+            width: "100%",
+            borderRadius: 2,
+            boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
+          }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
       <Snackbar
         open={!!successMessage}
         autoHideDuration={6000}

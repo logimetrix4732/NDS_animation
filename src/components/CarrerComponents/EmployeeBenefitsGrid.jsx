@@ -1,7 +1,7 @@
 import React from "react";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import TrackChangesIcon from "@mui/icons-material/TrackChanges";
-import ElderlyIcon from "@mui/icons-material/Elderly";
+import careerpromotion from "../../Images/CarrerImg/careerpromotion.png";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import HouseIcon from "@mui/icons-material/House";
@@ -25,7 +25,7 @@ const services = [
     icon: <TrackChangesIcon sx={{ fontSize: 80, color: "#a46c35ff" }} />,
     title: "Leading with Impact",
     description:
-      "The Leap Forward program supports senior leaders through personalized coaching and focused development plans. It enhances strategic thinking, nurtures innovation, and strengthens leadership capabilities to help build high-performing teams and deliver lasting impact.",
+      "The Leap Forward program supports senior leaders through personalised coaching and focused development plans. It enhances strategic thinking, nurtures innovation, and strengthens leadership capabilities to help build high-performing teams and deliver lasting impact.",
   },
   {
     icon: <SchoolOutlinedIcon sx={{ fontSize: 80, color: "#a46c35ff" }} />,
@@ -34,27 +34,33 @@ const services = [
       "Our Education Assistance Scheme offers financial support to employees pursuing higher studies. This initiative encourages continuous learning, helping individuals enhance their skills and advance in their careers while working with NDS.",
   },
   {
-    icon: <ElderlyIcon sx={{ fontSize: 80, color: "#a46c35ff" }} />,
+    icon: (
+      <img
+        src={careerpromotion}
+        alt="Career Promotion"
+        style={{ width: 80, height: 80, objectFit: "contain" }}
+      />
+    ),
     title: "Guided Beginnings",
     description:
       "Udaan is a structured mentorship programme that connects new employees with seasoned team members. It helps foster cultural understanding, smooth onboarding, and provides career guidance for a confident and informed start at NDS.",
   },
-  {
-    icon: (
-      <VolunteerActivismOutlinedIcon
-        sx={{ fontSize: 80, color: "#a46c35ff" }}
-      />
-    ),
-    title: "Tying the Knot Token",
-    description:
-      "We celebrate the joyous occasion of your marriage with a special gift. It’s our way of acknowledging this important milestone and sharing in your happiness as you begin a new chapter in life.",
-  },
-  {
-    icon: <PhoneIphoneIcon sx={{ fontSize: 80, color: "#a46c35ff" }} />,
-    title: "Stay Connected Always",
-    description:
-      "We support your need to stay connected by providing a mobile handset and monthly reimbursements. This ensures smooth, uninterrupted communication for both personal and professional use, no matter where you are.",
-  },
+  // {
+  //   icon: (
+  //     <VolunteerActivismOutlinedIcon
+  //       sx={{ fontSize: 80, color: "#a46c35ff" }}
+  //     />
+  //   ),
+  //   title: "Tying the Knot Token",
+  //   description:
+  //     "We celebrate the joyous occasion of your marriage with a special gift. It’s our way of acknowledging this important milestone and sharing in your happiness as you begin a new chapter in life.",
+  // },
+  // {
+  //   icon: <PhoneIphoneIcon sx={{ fontSize: 80, color: "#a46c35ff" }} />,
+  //   title: "Stay Connected Always",
+  //   description:
+  //     "We support your need to stay connected by providing a mobile handset and monthly reimbursements. This ensures smooth, uninterrupted communication for both personal and professional use, no matter where you are.",
+  // },
   {
     icon: <HouseOutlinedIcon sx={{ fontSize: 80, color: "#a46c35ff" }} />,
     title: "Aarambh: Your NDS Welcome",

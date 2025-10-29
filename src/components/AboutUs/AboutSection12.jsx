@@ -19,17 +19,17 @@ const AboutSection12 = () => {
                   width="100%"
                 />
                 <p className="wow fadeInUp">
-                  At NDDB Dairy Services, we specialise in establishing
-                  sustainable and professionally managed Milk Producer
-                  Organisations (MPOs). These farmers owned institutions drive
-                  sustainable income, self-reliance and rural resilience. Our
-                  end-to-end approach focuses on empowering dairy farmers
-                  through structured processes, scalable systems and an assured
-                  market access. The goal is to transition rural dairy farmers
-                  from informal milk suppliers to organised and empowered
-                  stakeholders in the mainstream economy through structured and
-                  value-driven enterprises that strengthen the cooperative
-                  movement across the country. 
+                  At NDDB Dairy Services, we specialise in facilitating the
+                  establishment of sustainable and professionally managed Milk
+                  Producer Organisations (MPOs). These farmers owned
+                  institutions drive sustainable income, self-reliance and rural
+                  resilience. Our end-to-end approach focuses on empowering
+                  dairy farmers through structured processes, scalable systems
+                  and an assured market access. The goal is to transition rural
+                  dairy farmers from informal milk suppliers to organised and
+                  empowered stakeholders in the mainstream economy through
+                  structured and value-driven enterprises that strengthen the
+                  cooperative movement across the country. 
                 </p>
               </div>
               <div className="mt-30 wow fadeInUp" data-wow-delay=".4s">

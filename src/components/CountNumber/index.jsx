@@ -5,7 +5,7 @@ import "./CountNumber.css";
 
 const countData = [
   {
-    number: 11,
+    number: 12,
     suffix: "",
     title: "States Covered",
     description:

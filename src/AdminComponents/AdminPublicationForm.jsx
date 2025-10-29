@@ -31,6 +31,8 @@ const AdminPublicationForm = ({
   handleChange,
   handleFileChange,
   handleSubmit,
+  isEditMode = false,
+  editingPublication = null,
 }) => {
   const isLargeScreen = useMediaQuery("(min-width: 1024px)");
 
@@ -90,6 +92,10 @@ const AdminPublicationForm = ({
                 textAlign: "center",
                 cursor: "pointer",
                 mb: 2,
+                minHeight: "120px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 "&:hover": { backgroundColor: "#e1eaff" },
               }}
             >
@@ -107,12 +113,25 @@ const AdminPublicationForm = ({
                     flexDirection: "column",
                     alignItems: "center",
                     gap: 1,
+                    width: "100%",
                   }}
                 >
                   <CloudUploadIcon color="primary" fontSize="large" />
-                  <Typography color="gray">
+                  <Typography
+                    color="gray"
+                    sx={{
+                      wordBreak: "break-word",
+                      textAlign: "center",
+                      maxWidth: "100%",
+                      lineHeight: 1.4,
+                    }}
+                  >
                     {formData.thumbnail
                       ? formData.thumbnail.name
+                      : isEditMode && editingPublication?.thumbnail
+                      ? `Current: ${editingPublication.thumbnail
+                          .split("/")
+                          .pop()}`
                       : "Click to Upload Thumbnail (JPG, JPEG, PNG only)"}
                   </Typography>
                 </Box>
@@ -126,6 +145,10 @@ const AdminPublicationForm = ({
                 textAlign: "center",
                 cursor: "pointer",
                 mb: 2,
+                minHeight: "120px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 "&:hover": { backgroundColor: "#e1eaff" },
               }}
             >
@@ -143,12 +166,25 @@ const AdminPublicationForm = ({
                     flexDirection: "column",
                     alignItems: "center",
                     gap: 1,
+                    width: "100%",
                   }}
                 >
                   <CloudUploadIcon color="primary" fontSize="large" />
-                  <Typography color="gray">
+                  <Typography
+                    color="gray"
+                    sx={{
+                      wordBreak: "break-word",
+                      textAlign: "center",
+                      maxWidth: "100%",
+                      lineHeight: 1.4,
+                    }}
+                  >
                     {formData.pdfFile
                       ? formData.pdfFile.name
+                      : isEditMode && editingPublication?.pdfFile
+                      ? `Current: ${editingPublication.pdfFile
+                          .split("/")
+                          .pop()}`
                       : "Click to Upload Document (PDF only)"}
                   </Typography>
                 </Box>
@@ -256,6 +292,10 @@ const AdminPublicationForm = ({
                 textAlign: "center",
                 cursor: "pointer",
                 mb: 2,
+                minHeight: "120px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 "&:hover": { backgroundColor: "#e1eaff" },
               }}
             >
@@ -273,12 +313,25 @@ const AdminPublicationForm = ({
                     flexDirection: "column",
                     alignItems: "center",
                     gap: 1,
+                    width: "100%",
                   }}
                 >
                   <CloudUploadIcon color="primary" fontSize="large" />
-                  <Typography color="gray">
+                  <Typography
+                    color="gray"
+                    sx={{
+                      wordBreak: "break-word",
+                      textAlign: "center",
+                      maxWidth: "100%",
+                      lineHeight: 1.4,
+                    }}
+                  >
                     {formData.thumbnail
                       ? formData.thumbnail.name
+                      : isEditMode && editingPublication?.thumbnail
+                      ? `Current: ${editingPublication.thumbnail
+                          .split("/")
+                          .pop()}`
                       : "Click to Upload Thumbnail (JPG, JPEG, PNG only)"}
                   </Typography>
                 </Box>
@@ -292,6 +345,10 @@ const AdminPublicationForm = ({
                 textAlign: "center",
                 cursor: "pointer",
                 mb: 2,
+                minHeight: "120px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 "&:hover": { backgroundColor: "#e1eaff" },
               }}
             >
@@ -309,12 +366,25 @@ const AdminPublicationForm = ({
                     flexDirection: "column",
                     alignItems: "center",
                     gap: 1,
+                    width: "100%",
                   }}
                 >
                   <CloudUploadIcon color="primary" fontSize="large" />
-                  <Typography color="gray">
+                  <Typography
+                    color="gray"
+                    sx={{
+                      wordBreak: "break-word",
+                      textAlign: "center",
+                      maxWidth: "100%",
+                      lineHeight: 1.4,
+                    }}
+                  >
                     {formData.pdfHindi
                       ? formData.pdfHindi.name
+                      : isEditMode && editingPublication?.pdfHindi
+                      ? `Current: ${editingPublication.pdfHindi
+                          .split("/")
+                          .pop()}`
                       : "Click to Upload Hindi Document (PDF only)"}
                   </Typography>
                 </Box>
@@ -328,6 +398,10 @@ const AdminPublicationForm = ({
                 textAlign: "center",
                 cursor: "pointer",
                 mb: 2,
+                minHeight: "120px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 "&:hover": { backgroundColor: "#e1eaff" },
               }}
             >
@@ -345,12 +419,25 @@ const AdminPublicationForm = ({
                     flexDirection: "column",
                     alignItems: "center",
                     gap: 1,
+                    width: "100%",
                   }}
                 >
                   <CloudUploadIcon color="primary" fontSize="large" />
-                  <Typography color="gray">
+                  <Typography
+                    color="gray"
+                    sx={{
+                      wordBreak: "break-word",
+                      textAlign: "center",
+                      maxWidth: "100%",
+                      lineHeight: 1.4,
+                    }}
+                  >
                     {formData.pdfEnglish
                       ? formData.pdfEnglish.name
+                      : isEditMode && editingPublication?.pdfEnglish
+                      ? `Current: ${editingPublication.pdfEnglish
+                          .split("/")
+                          .pop()}`
                       : "Click to Upload English Document (PDF only)"}
                   </Typography>
                 </Box>
@@ -461,6 +548,10 @@ const AdminPublicationForm = ({
                   <Typography color="gray">
                     {formData.pdfFile
                       ? formData.pdfFile.name
+                      : isEditMode && editingPublication?.pdfFile
+                      ? `Current: ${editingPublication.pdfFile
+                          .split("/")
+                          .pop()}`
                       : "Click to Upload Policy Document (PDF only)"}
                   </Typography>
                 </Box>
@@ -583,7 +674,7 @@ const AdminPublicationForm = ({
         >
           <KeyboardBackspaceIcon sx={{ mr: 2 }} />
           <Typography variant="h6" fontWeight="bold" sx={{ color: "#141d38" }}>
-            Publication Form
+            {isEditMode ? "Edit Publication" : "Publication Form"}
           </Typography>
         </Box>
         <IconButton onClick={onClose}>
@@ -677,7 +768,13 @@ const AdminPublicationForm = ({
           onClick={handleSubmit}
           disabled={loading}
         >
-          {loading ? "Creating..." : "Create Publication"}
+          {loading
+            ? isEditMode
+              ? "Updating..."
+              : "Creating..."
+            : isEditMode
+            ? "Update Publication"
+            : "Create Publication"}
         </Button>
       </DialogActions>
     </Drawer>

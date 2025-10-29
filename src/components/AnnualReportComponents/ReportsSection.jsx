@@ -9,7 +9,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { Download } from "@mui/icons-material";
-import { getFetch } from "../../Api/Api";
+// No need to import getFetch for public pages
 import "./ReportsSection.css";
 
 export default function ReportsSection() {
@@ -20,30 +20,47 @@ export default function ReportsSection() {
     const fetchAnnualReports = async () => {
       try {
         setLoading(true);
-        const response = await getFetch(
+
+        // Use direct fetch for public pages - no authentication required
+        const response = await fetch(
           `${
             import.meta.env.VITE_API_BASE_URL
-          }/getPublication?publicationType=Annual Reports`
+          }/getPublication?publicationType=Annual Reports`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
 
-        if (response?.data?.data) {
-          const mappedData = response.data.data.map((item) => ({
-            id: item.id,
-            title: item.name,
-            year: item.year || "N/A",
-            image:
-              item.thumbnail &&
-              item.thumbnail !== "null" &&
-              item.thumbnail !== "" &&
-              item.thumbnail !== null
-                ? `${import.meta.env.VITE_API_BASE_URL}/files/${item.thumbnail}`
-                : "https://images.pexels.com/photos/3184302/pexels-photo-3184302.jpeg",
-            pdfHindi: item.pdfHindi,
-            pdfEnglish: item.pdfEnglish,
-            isActive: item.isActive,
-          }));
-          setReports(mappedData);
+        if (response.ok) {
+          const data = await response.json();
+
+          if (data?.data) {
+            const mappedData = data.data.map((item) => ({
+              id: item.id,
+              title: item.name,
+              year: item.year || "N/A",
+              image:
+                item.thumbnail &&
+                item.thumbnail !== "null" &&
+                item.thumbnail !== "" &&
+                item.thumbnail !== null
+                  ? `${import.meta.env.VITE_API_BASE_URL}/files${
+                      item.thumbnail
+                    }`
+                  : "https://images.pexels.com/photos/3184302/pexels-photo-3184302.jpeg",
+              pdfHindi: item.pdfHindi,
+              pdfEnglish: item.pdfEnglish,
+              isActive: item.isActive,
+            }));
+            setReports(mappedData);
+          } else {
+            setReports([]);
+          }
         } else {
+          console.error("Failed to fetch Annual Reports:", response.status);
           setReports([]);
         }
       } catch (error) {
@@ -57,9 +74,66 @@ export default function ReportsSection() {
     fetchAnnualReports();
   }, []);
 
-  const handleDownload = (pdfFile, language) => {
-    if (pdfFile) {
-      window.open(`${import.meta.env.VITE_API_BASE_URL}/${pdfFile}`, "_blank");
+  const [downloading, setDownloading] = useState(false);
+
+  const handleDownload = async (pdfFile, language, event) => {
+    // Prevent default behavior and event bubbling
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    try {
+      if (!pdfFile) {
+        console.log("No file available for download.");
+        return;
+      }
+
+      setDownloading(true);
+
+      // Direct download approach for public files
+      const fileUrl = `${import.meta.env.VITE_API_BASE_URL}/files${pdfFile}`;
+
+      // Create download link with proper filename
+      let filename = `annual-report-${language.toLowerCase()}`;
+      if (!filename.toLowerCase().endsWith(".pdf")) {
+        filename += ".pdf";
+      }
+      // Clean filename for download
+      filename = filename.replace(/[^a-zA-Z0-9._-]/g, "_");
+
+      // Create temporary link and trigger download
+      const link = document.createElement("a");
+      link.href = fileUrl;
+      link.download = filename;
+      link.style.display = "none"; // Hide the link
+      link.setAttribute("download", filename); // Force download attribute
+      link.target = "_blank"; // Open in new tab
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      return false; // Prevent any default behavior
+    } catch (error) {
+      console.error("Error downloading file:", error);
+      // Fallback to direct download
+      if (pdfFile) {
+        const fallbackFilename = `annual-report-${language.toLowerCase()}.pdf`;
+        const fallbackLink = document.createElement("a");
+        fallbackLink.href = `${
+          import.meta.env.VITE_API_BASE_URL
+        }/files${pdfFile}`;
+        fallbackLink.download = fallbackFilename;
+        fallbackLink.style.display = "none";
+        fallbackLink.target = "_blank"; // Open in new tab
+
+        document.body.appendChild(fallbackLink);
+        fallbackLink.click();
+        document.body.removeChild(fallbackLink);
+      }
+    } finally {
+      setDownloading(false);
     }
   };
 
@@ -435,17 +509,40 @@ export default function ReportsSection() {
           ) : (
             reports.map((report, index) => (
               <Card
+                key={report.id}
                 sx={{
                   display: "flex",
                   flexDirection: "column",
                   height: "100%",
-                  borderRadius: "16px",
+                  borderRadius: "20px",
                   overflow: "hidden",
-                  boxShadow: "0px 4px 20px rgba(0,0,0,0.05)",
-                  transition: "transform 0.3s, box-shadow 0.3s",
+                  background:
+                    "linear-gradient(135deg, #ffffff 0%, #fafafa 100%)",
+                  boxShadow: "0px 8px 32px rgba(189, 143, 89, 0.1)",
+                  border: "1px solid rgba(189, 143, 89, 0.1)",
+                  transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                  animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
+                  "@keyframes fadeInUp": {
+                    "0%": {
+                      opacity: 0,
+                      transform: "translateY(30px) scale(0.95)",
+                    },
+                    "100%": {
+                      opacity: 1,
+                      transform: "translateY(0) scale(1)",
+                    },
+                  },
                   "&:hover": {
-                    transform: "translateY(-8px)",
-                    boxShadow: "0px 8px 30px rgba(0,0,0,0.15)",
+                    transform: "translateY(-12px) scale(1.02)",
+                    boxShadow: "0px 20px 60px rgba(189, 143, 89, 0.25)",
+                    borderColor: "rgba(189, 143, 89, 0.3)",
+                    "& .card-image": {
+                      transform: "scale(1.05)",
+                    },
+                    "& .card-content": {
+                      background:
+                        "linear-gradient(135deg, #ffffff 0%, #f8f6f3 100%)",
+                    },
                   },
                 }}
               >
@@ -453,34 +550,79 @@ export default function ReportsSection() {
                   component="img"
                   image={report.image}
                   alt={report.title}
+                  className="card-image"
                   sx={{
-                    height: 220,
+                    height: 240,
                     width: "100%",
                     objectFit: "cover",
+                    transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                    position: "relative",
+                    "&::before": {
+                      content: '""',
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      background:
+                        "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.1) 100%)",
+                      zIndex: 1,
+                    },
                   }}
                 />
 
                 <CardContent
+                  className="card-content"
                   sx={{
-                    p: 2.5,
+                    p: 3,
                     display: "flex",
                     flexDirection: "column",
                     flexGrow: 1,
                     justifyContent: "space-between",
+                    transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                    position: "relative",
+                    "&::before": {
+                      content: '""',
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: "3px",
+                      background:
+                        "linear-gradient(90deg, #bd8f59 0%, #a97b4b 100%)",
+                      transform: "scaleX(0)",
+                      transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                    },
+                    "&:hover::before": {
+                      transform: "scaleX(1)",
+                    },
                   }}
                 >
                   <Box>
                     <Typography
                       variant="body2"
                       sx={{
-                        backgroundColor: "#a97b4b",
+                        background:
+                          "linear-gradient(135deg, #bd8f59 0%, #a97b4b 100%)",
                         display: "inline-block",
-                        px: 1.5,
-                        py: 0.5,
-                        borderRadius: "6px",
-                        fontWeight: 500,
+                        px: 2,
+                        py: 0.8,
+                        borderRadius: "12px",
+                        fontWeight: 600,
                         fontSize: "0.8rem",
                         color: "#fff",
+                        boxShadow: "0 2px 8px rgba(189, 143, 89, 0.3)",
+                        animation: "slideInLeft 0.6s ease-out 0.3s both",
+                        "@keyframes slideInLeft": {
+                          "0%": {
+                            opacity: 0,
+                            transform: "translateX(-20px)",
+                          },
+                          "100%": {
+                            opacity: 1,
+                            transform: "translateX(0)",
+                          },
+                        },
                       }}
                     >
                       Annual Report {report.year}
@@ -488,7 +630,24 @@ export default function ReportsSection() {
 
                     <Typography
                       variant="h6"
-                      sx={{ mt: 1.5, fontWeight: "bold", color: "#8B5E34" }}
+                      sx={{
+                        mt: 2,
+                        fontWeight: 700,
+                        color: "#8B5E34",
+                        fontSize: "1.1rem",
+                        lineHeight: 1.3,
+                        animation: "slideInUp 0.6s ease-out 0.4s both",
+                        "@keyframes slideInUp": {
+                          "0%": {
+                            opacity: 0,
+                            transform: "translateY(20px)",
+                          },
+                          "100%": {
+                            opacity: 1,
+                            transform: "translateY(0)",
+                          },
+                        },
+                      }}
                     >
                       {report.title}
                     </Typography>
@@ -497,35 +656,69 @@ export default function ReportsSection() {
                   <Box sx={{ display: "flex", gap: 1.5, mt: 2 }}>
                     <Button
                       variant="contained"
-                      startIcon={<Download />}
-                      onClick={() => handleDownload(report.pdfHindi, "Hindi")}
-                      disabled={!report.pdfHindi}
+                      startIcon={
+                        downloading ? (
+                          <CircularProgress size={16} color="inherit" />
+                        ) : (
+                          <Download />
+                        )
+                      }
+                      onClick={(e) =>
+                        handleDownload(report.pdfHindi, "Hindi", e)
+                      }
+                      disabled={!report.pdfHindi || downloading}
                       sx={{
                         backgroundColor: "#bd8f59",
                         color: "#fff",
                         textTransform: "none",
                         borderRadius: "8px",
-                        "&:hover": { backgroundColor: "#a97b4b" },
+                        transition: "all 0.3s ease",
+                        "&:hover": {
+                          backgroundColor: "#a97b4b",
+                          transform: "translateY(-2px)",
+                          boxShadow: "0 4px 12px rgba(189, 143, 89, 0.3)",
+                        },
+                        "&:disabled": {
+                          backgroundColor: "#ccc",
+                          cursor: "not-allowed",
+                        },
                       }}
                     >
-                      हिंदी
+                      {downloading ? "Downloading..." : "हिंदी"}
                     </Button>
                     <Button
                       variant="outlined"
-                      startIcon={<Download />}
-                      onClick={() =>
-                        handleDownload(report.pdfEnglish, "English")
+                      startIcon={
+                        downloading ? (
+                          <CircularProgress size={16} color="inherit" />
+                        ) : (
+                          <Download />
+                        )
                       }
-                      disabled={!report.pdfEnglish}
+                      onClick={(e) =>
+                        handleDownload(report.pdfEnglish, "English", e)
+                      }
+                      disabled={!report.pdfEnglish || downloading}
                       sx={{
                         color: "#bd8f59",
                         borderColor: "#bd8f59",
                         textTransform: "none",
                         borderRadius: "8px",
-                        "&:hover": { borderColor: "#a97b4b", color: "#a97b4b" },
+                        transition: "all 0.3s ease",
+                        "&:hover": {
+                          borderColor: "#a97b4b",
+                          color: "#a97b4b",
+                          transform: "translateY(-2px)",
+                          boxShadow: "0 4px 12px rgba(189, 143, 89, 0.3)",
+                        },
+                        "&:disabled": {
+                          color: "#ccc",
+                          borderColor: "#ccc",
+                          cursor: "not-allowed",
+                        },
                       }}
                     >
-                      English
+                      {downloading ? "Downloading..." : "English"}
                     </Button>
                   </Box>
                 </CardContent>

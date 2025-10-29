@@ -25,18 +25,11 @@ const Footer = () => {
                 </p>
                 <div className="th-social">
                   <a
-                    href="https://www.facebook.com/SuperiorAnimalGenetics"
+                    href="https://www.youtube.com/@nddbdairyservices6754"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className="fab fa-facebook-f" />
-                  </a>
-                  <a
-                    href="https://mobile.twitter.com/NDDBDairyServ"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="ri-twitter-x-fill" />
+                    <i className="fab fa-youtube" />
                   </a>
                   <a
                     href="https://www.linkedin.com/company/nddb-dairy-services/"
@@ -46,14 +39,22 @@ const Footer = () => {
                     <i className="fab fa-linkedin-in" />
                   </a>
                   <a
-                    href="https://www.youtube.com/@nddbdairyservices6754"
+                    href="https://mobile.twitter.com/NDDBDairyServ"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className="fab fa-youtube" />
+                    <i className="ri-twitter-x-fill" />
                   </a>
                   <a
-                    href="https://www.youtube.com/@nddbdairyservices6754"
+                    href="https://www.facebook.com/SuperiorAnimalGenetics"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-facebook-f" />
+                  </a>
+
+                  <a
+                    href="https://www.instagram.com/sag_superioranimalgenetics/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -73,8 +74,8 @@ const Footer = () => {
                   </div>
                   <div className="details">
                     <p>
-                      <a href="tel:+9170929224210" className="info-box_link">
-                        +91 7092922421
+                      <a href="tel:01149883000" className="info-box_link">
+                        011-49883000 / 49883088
                       </a>
                     </p>
                   </div>
@@ -101,11 +102,14 @@ const Footer = () => {
                   <div className="details">
                     <p>
                       <a
-                        href="https://www.google.com/maps/place/NDDB+Dairy+Services/@28.5648486,77.1973818,17z/data=!3m1!4b1!4m6!3m5!1s0x390ce279fa28f713:0xa6914db36a4ac6a6!8m2!3d28.5648439!4d77.1999621!16s%2Fg%2F1hf6ft670?entry=ttu&g_ep=EgoyMDI1MDcyMy4wIKXMDSoASAFQAw%3D%3D"
+                        href="https://www.google.com/maps/place/NDDB+Dairy+Services/"
                         target="_blank"
                       >
-                        NDDB House, Safdarjung Enclave, New Delhi, Southwest
-                        Delhi, Delhi 110029
+                        <span style={{ whiteSpace: "nowrap" }}>
+                          NDDB House, Safdarjung Enclave
+                        </span>
+                        <br />
+                        New Delhi, Southwest Delhi, Delhi 110029
                       </a>
                     </p>
                   </div>
@@ -126,7 +130,7 @@ const Footer = () => {
                 >
                   <li>
                     <Link
-                      to="/"
+                      to="/privacyPage"
                       style={{ color: "white", textDecoration: "none" }}
                     >
                       Privacy Policy
@@ -134,7 +138,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <Link
-                      to="/"
+                      to="/privacyPage"
                       style={{ color: "white", textDecoration: "none" }}
                     >
                       Return Policy
@@ -142,7 +146,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <Link
-                      to="/"
+                      to="/privacyPage"
                       style={{ color: "white", textDecoration: "none" }}
                     >
                       Terms &amp; Conditions

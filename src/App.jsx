@@ -26,6 +26,10 @@ import AdminTender from "./AdminComponents/AdminTender";
 import AdminCareer from "./AdminComponents/AdminCareer";
 import AdminPublication from "./AdminComponents/AdminPublication";
 import AdminLogs from "./AdminComponents/AdminLogs";
+import PrivacyPage from "./Pages/PrivacyPolicyPage";
+import DynamicData from "./AdminComponents/DynamicData";
+import AdminCache from "./Pages/AdminCache";
+import WhatsAppChatbox from "./components/WhatsAppChatbox";
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -72,6 +76,8 @@ const App = () => {
     "/AdminTender",
     "/AdminPublication",
     "/AdminLogs",
+    "/dynamicData",
+    "/AdminCache",
   ];
   const isAdminRoute = adminRoutes.includes(location.pathname);
 
@@ -86,7 +92,7 @@ const App = () => {
         <Route path="/ourExperties" element={<OurExperties />} />
         <Route path="/milkproducer" element={<MilkProducer />} />
         <Route path="/ourExperties1" element={<OurExperties1 />} />
-        <Route path="/carrer" element={<CarrerPage />} />
+        <Route path="/career" element={<CarrerPage />} />
         <Route path="/carrerDetail" element={<CarrerDetailPage />} />
         <Route path="/animalProductivity" element={<SemenStations />} />
         <Route path="/newInitiative" element={<NewInitiative />} />
@@ -96,6 +102,8 @@ const App = () => {
         <Route path="/annualReport" element={<AnnualReport />} />
         <Route path="/HR" element={<HRCompliances />} />
         <Route path="/policies" element={<PoliciesPage />} />
+        <Route path="/privacyPage" element={<PrivacyPage />} />
+        <Route path="/dynamicData" element={<DynamicData />} />
 
         {/* Admin Routes - Protected */}
         <Route
@@ -146,10 +154,19 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/AdminCache"
+          element={
+            <ProtectedRoute>
+              <AdminCache />
+            </ProtectedRoute>
+          }
+        />
 
         <Route path="*" element={<Errors />} />
       </Routes>
       {!isAdminRoute && <Footer />}
+      {!isAdminRoute && <WhatsAppChatbox />}
       {!isAdminRoute && (
         <div className="scroll-top">
           <svg

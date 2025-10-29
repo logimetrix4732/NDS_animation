@@ -46,6 +46,10 @@ const MilkProducer = () => {
         "Bapudham Milk Producer Organisation": "https://www.bapudhammilk.com",
         "Kaushikee Mahila Milk Producer Organisation":
           "https://www.kaushikeemilk.com",
+      },
+    ],
+    "West Bengal": [
+      {
         "Dudhshree Milk Producer Organisation": "https://www.dudhshreemilk.com",
       },
     ],
@@ -80,6 +84,16 @@ const MilkProducer = () => {
         "Ruhaanii Milk Producer Organisation": "https://www.ruhaaniimilk.com",
       },
     ],
+    Chhattisgarh: [
+      {
+        "Asmitaa Milk Producer Organisation": "",
+      },
+    ],
+    Odisha: [
+      {
+        "Vanamrita Milk Producer Organisation": "",
+      },
+    ],
   };
   const coveredStates = [
     "Punjab",
@@ -91,6 +105,9 @@ const MilkProducer = () => {
     "Maharashtra",
     "Bihar",
     "Andhra Pradesh",
+    "West Bengal",
+    "Chhattisgarh",
+    "Odisha",
   ];
   const handleStateClick = (stateName) => {
     if (selectedState === stateName) {
@@ -221,128 +238,165 @@ const MilkProducer = () => {
                             marginTop: "8px",
                           }}
                         >
-                          Milk Producer Organisations
+                          {dummyCompanyData[currentState] &&
+                          Object.keys(dummyCompanyData[currentState][0])
+                            .length === 1
+                            ? "Milk Producer Organisation"
+                            : "Milk Producer Organisations"}
                         </Typography>
                       </Box>
 
                       {dummyCompanyData[currentState] &&
                         Object.entries(dummyCompanyData[currentState][0]).map(
-                          ([name, link], idx) => (
-                            <Fade in timeout={800 + idx * 100} key={idx}>
-                              <Box
-                                sx={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  padding: "18px 15px",
-                                  margin: "8px 0",
-                                  borderRadius: "12px",
-                                  border: "1px solid #e8e8e8",
-                                  background:
-                                    "linear-gradient(145deg, #ffffff 0%, #fafafa 100%)",
-                                  transition: "all 0.3s ease",
-                                  cursor: "pointer",
-                                  "&:hover": {
-                                    background:
-                                      "linear-gradient(145deg, #f8f9fa 0%, #e9ecef 100%)",
-                                    transform: "translateX(5px)",
-                                    boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-                                    borderColor: "var(--title-color)",
-                                  },
-                                }}
-                              >
-                                {/* Animated Orange circle icon */}
+                          ([name, link], idx) => {
+                            const hasLink = link && link.trim() !== "";
+                            return (
+                              <Fade in timeout={800 + idx * 100} key={idx}>
                                 <Box
                                   sx={{
-                                    width: "14px",
-                                    height: "14px",
-                                    borderRadius: "50%",
-                                    background:
-                                      "linear-gradient(145deg, var(--title-color) 0%, var(--primary-color) 100%)",
-                                    marginRight: "18px",
-                                    flexShrink: 0,
-                                    boxShadow:
-                                      "0 4px 8px rgba(164, 108, 53, 0.3)",
-                                    animation: "pulse 2s infinite",
-                                    "@keyframes pulse": {
-                                      "0%": {
-                                        transform: "scale(1)",
-                                        opacity: 1,
-                                      },
-                                      "50%": {
-                                        transform: "scale(1.1)",
-                                        opacity: 0.8,
-                                      },
-                                      "100%": {
-                                        transform: "scale(1)",
-                                        opacity: 1,
-                                      },
-                                    },
-                                  }}
-                                />
-
-                                {/* Company name */}
-                                <Typography
-                                  variant="body1"
-                                  sx={{
-                                    flex: 1,
-                                    color: "#2c3e50",
-                                    fontWeight: 600,
-                                    fontSize: "15px",
-                                    lineHeight: 1.4,
-                                    transition: "color 0.3s ease",
-                                  }}
-                                >
-                                  {name}
-                                </Typography>
-
-                                {/* Read More link */}
-                                <a
-                                  href={link}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  style={{
-                                    color: "white",
-                                    textDecoration: "none",
-                                    fontSize: "13px",
-                                    fontWeight: 600,
                                     display: "flex",
                                     alignItems: "center",
-                                    padding: "8px 12px",
-                                    borderRadius: "8px",
+                                    padding: "18px 15px",
+                                    margin: "8px 0",
+                                    borderRadius: "12px",
+                                    border: "1px solid #e8e8e8",
                                     background:
-                                      "linear-gradient(145deg, var(--primary-color) 0%, var(--title-color) 100%)",
+                                      "linear-gradient(145deg, #ffffff 0%, #fafafa 100%)",
                                     transition: "all 0.3s ease",
-                                  }}
-                                  onMouseOver={(e) => {
-                                    e.currentTarget.style.background =
-                                      "linear-gradient(145deg, var(--title-color) 0%, var(--primary-color) 100%)";
-                                    e.currentTarget.style.transform =
-                                      "scale(1.05)";
-                                    e.currentTarget.style.boxShadow =
-                                      "0 4px 12px rgba(164, 108, 53, 0.4)";
-                                  }}
-                                  onMouseOut={(e) => {
-                                    e.currentTarget.style.background =
-                                      "linear-gradient(145deg, var(--primary-color) 0%, var(--title-color) 100%)";
-                                    e.currentTarget.style.transform =
-                                      "scale(1)";
-                                    e.currentTarget.style.boxShadow = "none";
+                                    cursor: "pointer",
+                                    "&:hover": {
+                                      background:
+                                        "linear-gradient(145deg, #f8f9fa 0%, #e9ecef 100%)",
+                                      transform: "translateX(5px)",
+                                      boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
+                                      borderColor: "var(--title-color)",
+                                    },
                                   }}
                                 >
-                                  Read More
-                                  <span
-                                    style={{
-                                      marginLeft: "6px",
-                                      fontSize: "14px",
-                                      fontWeight: "bold",
+                                  {/* Animated Orange circle icon */}
+                                  <Box
+                                    sx={{
+                                      width: "14px",
+                                      height: "14px",
+                                      borderRadius: "50%",
+                                      background:
+                                        "linear-gradient(145deg, var(--title-color) 0%, var(--primary-color) 100%)",
+                                      marginRight: "18px",
+                                      flexShrink: 0,
+                                      boxShadow:
+                                        "0 4px 8px rgba(164, 108, 53, 0.3)",
+                                      animation: "pulse 2s infinite",
+                                      "@keyframes pulse": {
+                                        "0%": {
+                                          transform: "scale(1)",
+                                          opacity: 1,
+                                        },
+                                        "50%": {
+                                          transform: "scale(1.1)",
+                                          opacity: 0.8,
+                                        },
+                                        "100%": {
+                                          transform: "scale(1)",
+                                          opacity: 1,
+                                        },
+                                      },
+                                    }}
+                                  />
+
+                                  {/* Company name */}
+                                  <Typography
+                                    variant="body1"
+                                    sx={{
+                                      flex: 1,
+                                      color: "#2c3e50",
+                                      fontWeight: 600,
+                                      fontSize: "15px",
+                                      lineHeight: 1.4,
+                                      transition: "color 0.3s ease",
                                     }}
                                   >
-                                    →
-                                  </span>
-                                </a>
-                              </Box>
-                            </Fade>
-                          )
+                                    {name}
+                                  </Typography>
+
+                                  {/* Read More link */}
+                                  {hasLink ? (
+                                    <a
+                                      href={link}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      style={{
+                                        color: "white",
+                                        textDecoration: "none",
+                                        fontSize: "13px",
+                                        fontWeight: 600,
+                                        display: "flex",
+                                        alignItems: "center",
+                                        padding: "8px 12px",
+                                        borderRadius: "8px",
+                                        background:
+                                          "linear-gradient(145deg, var(--primary-color) 0%, var(--title-color) 100%)",
+                                        transition: "all 0.3s ease",
+                                      }}
+                                      onMouseOver={(e) => {
+                                        e.currentTarget.style.background =
+                                          "linear-gradient(145deg, var(--title-color) 0%, var(--primary-color) 100%)";
+                                        e.currentTarget.style.transform =
+                                          "scale(1.05)";
+                                        e.currentTarget.style.boxShadow =
+                                          "0 4px 12px rgba(164, 108, 53, 0.4)";
+                                      }}
+                                      onMouseOut={(e) => {
+                                        e.currentTarget.style.background =
+                                          "linear-gradient(145deg, var(--primary-color) 0%, var(--title-color) 100%)";
+                                        e.currentTarget.style.transform =
+                                          "scale(1)";
+                                        e.currentTarget.style.boxShadow =
+                                          "none";
+                                      }}
+                                    >
+                                      Read More
+                                      <span
+                                        style={{
+                                          marginLeft: "6px",
+                                          fontSize: "14px",
+                                          fontWeight: "bold",
+                                        }}
+                                      >
+                                        →
+                                      </span>
+                                    </a>
+                                  ) : (
+                                    <Box
+                                      sx={{
+                                        color: "#999999",
+                                        fontSize: "13px",
+                                        fontWeight: 600,
+                                        display: "flex",
+                                        alignItems: "center",
+                                        padding: "8px 12px",
+                                        borderRadius: "8px",
+                                        background:
+                                          "linear-gradient(145deg, #f5f5f5 0%, #e8e8e8 100%)",
+                                        border: "1px solid #ddd",
+                                        cursor: "not-allowed",
+                                      }}
+                                    >
+                                      Coming Soon
+                                      <span
+                                        style={{
+                                          marginLeft: "6px",
+                                          fontSize: "14px",
+                                          fontWeight: "bold",
+                                        }}
+                                      >
+                                        ⏳
+                                      </span>
+                                    </Box>
+                                  )}
+                                </Box>
+                              </Fade>
+                            );
+                          }
                         )}
                     </Box>
                   </Fade>

@@ -48,11 +48,6 @@ const AdminLogin = () => {
     }
 
     try {
-      console.log("=== LOGIN ATTEMPT ===");
-      console.log("Email:", data.email);
-      console.log("Password:", data.password);
-      console.log("API URL:", `${import.meta.env.VITE_API_BASE_URL}/login`);
-
       const response = await fetch(
         `${import.meta.env.VITE_API_BASE_URL}/login`,
         {
@@ -67,30 +62,17 @@ const AdminLogin = () => {
         }
       );
 
-      console.log("Response status:", response.status);
       const responseData = await response.json();
-      console.log("=== BACKEND RESPONSE ===");
-      console.log("Full response:", responseData);
-      console.log("Status:", responseData.status);
-      console.log("Message:", responseData.message);
-      console.log("Data object:", responseData.data);
-      console.log("Token:", responseData.data?.token);
-      console.log("User Role:", responseData.data?.user_role);
-      console.log("========================");
-
       if (response.ok) {
         // Success
-        console.log("Login successful!");
 
         // Store token and user data based on actual backend response structure
         if (responseData.data && responseData.data.token) {
           localStorage.setItem("token", responseData.data.token);
-          console.log("Token stored:", responseData.data.token);
         }
 
         if (responseData.data && responseData.data.user_role) {
           localStorage.setItem("user_role", responseData.data.user_role);
-          console.log("User role stored:", responseData.data.user_role);
         }
 
         // Show success message

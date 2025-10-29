@@ -4,7 +4,7 @@ import DrawerModal from "../DrawerModal";
 import { useMediaQuery, useTheme } from "@mui/material";
 import DSC_3601 from "../../Images/NewInitiativeImg/DSC_3601.jpg";
 import FVF02218 from "../../Images/NewInitiativeImg/FVF02218.JPG";
-import FVF02761 from "../../Images/NewInitiativeImg/FVF02761.JPG";
+import FVF02761 from "../../Images/NewInitiativeImg/TAV0997.png";
 import mangosgrowing from "../../Images/NewInitiativeImg/mangosgrowing.jpg";
 const AboutSection10 = () => {
   const [open, setOpen] = React.useState(false);
@@ -54,13 +54,13 @@ const AboutSection10 = () => {
                 livelihoods of the producer members of the MPOs supported by us.
                 <br />
                 <br />
-                This initiatives aims to unlock additional income opportunities
+                This initiative aims to unlock additional income opportunities
                 by linking farmers to better markets and value-added processing.
                 In the initial phase, NDS has launched value chain development
-                projects for mango and sunflower seeds in Andhra Pradesh,
-                mustard in Rajasthan and maize in Bihar. These commodities have
-                been identified based on local agricultural practices, farmer
-                capabilities and market potential.
+                projects for mango, tomato and sunflower seeds in Andhra
+                Pradesh, mustard in Rajasthan and maize in Bihar. These
+                commodities have been identified based on local agricultural
+                practices, farmer capabilities and market potential.
                 <br />
                 <br />
                 The approach involves integrating farmers into a more structured

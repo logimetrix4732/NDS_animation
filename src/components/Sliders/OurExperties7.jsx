@@ -10,6 +10,9 @@ import Governancethat from "../../Images/MilkProducerImg/Governancethat.jpg";
 import PeopleFirst from "../../Images/MilkProducerImg/PeopleFirst.jpg";
 import StrongRoots from "../../Images/MilkProducerImg/StrongRoots.JPG";
 import DrivingEfficiency from "../../Images/MilkProducerImg/DrivingEfficiency1.jpg";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import AnimatedText from "../AnimatedText";
@@ -65,9 +68,9 @@ const strategies = [
     title: "Digital Efficiency",
     title1: "Driving Efficiency through Automation and Digital Tools",
     subtitle: "Automation and Digitalisation",
-    desc: "Information and Communication Technology ensures transparent, real-time milk data tracking, automated member payments and centralized...",
+    desc: "Information and Communication Technology ensures transparent, real-time milk data tracking, automated member payments and centralised...",
     mainDesc:
-      "Information and Communication Technology ensures transparent, real-time milk data tracking, automated member payments and centralized updates. MPOs use SAP-based ERP systems for efficient management of finance, HR, production and quality, enabling timely decisions, cost optimization and better returns for farmer members. We embed digital systems from the beginning of operations such as automated milk testing, cloud-based MIS, mobile application to facilitate VCG meetings and direct bank payment solutions. These tools bring efficiency, transparency and traceability, while also building data-driven decision-making capability within the MPO.",
+      "Information and Communication Technology ensures transparent, real-time milk data tracking, automated member payments and centralised updates. MPOs use SAP-based ERP systems for efficient management of finance, HR, production and quality, enabling timely decisions, cost optimization and better returns for farmer members. We embed digital systems from the beginning of operations such as automated milk testing, cloud-based MIS, mobile application to facilitate VCG meetings and direct bank payment solutions. These tools bring efficiency, transparency and traceability, while also building data-driven decision-making capability within the MPO.",
     img: DrivingEfficiency,
   },
 ];
@@ -141,11 +144,14 @@ const OurExperties7 = () => {
           <Swiper
             modules={[Navigation, Autoplay]}
             spaceBetween={30}
-            navigation={false}
             loop={true}
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,
+            }}
+            navigation={{
+              prevEl: ".custom-prev",
+              nextEl: ".custom-next",
             }}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
@@ -179,7 +185,14 @@ const OurExperties7 = () => {
                       overflow: "visible",
                     }}
                   >
-                    <div className="service-box service-style-1 gsap-cursor">
+                    <div
+                      className="service-box service-style-1 gsap-cursor"
+                      style={{
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                    >
                       <div className="service-img">
                         <a href="#">
                           <img
@@ -187,40 +200,65 @@ const OurExperties7 = () => {
                             alt={item.title}
                             loading="lazy"
                             style={{
-                              width: "400px",
+                              width: "100%",
                               height: "307.69px",
                               objectFit: "cover",
                             }}
                           />
                         </a>
                       </div>
-                      <div className="service-content">
-                        <h3 class="box-title ellipsis-1">{item.title}</h3>
+                      <div
+                        className="service-content"
+                        style={{
+                          height: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
+                      >
+                        <h3
+                          className="box-title"
+                          style={{
+                            whiteSpace: "normal",
+                            wordWrap: "break-word",
+                            lineHeight: "1.3",
+                            minHeight: "2.6em",
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                        >
+                          {item.title}
+                        </h3>
                         <Typography
                           variant="subtitle1"
                           sx={{
                             color: "grey", // a green tone that matches the theme
                             fontWeight: 600,
                             fontSize: "1rem",
-                            mb: 1,
-                            mt: 1,
+                            minHeight: "1.2em",
+                            display: "flex",
+                            alignItems: "center",
                           }}
                         >
                           {item.subtitle}
                         </Typography>
 
-                        <p className="service-box_text wow fadeInUp ellipsis-3">
+                        <p
+                          className="service-box_text wow fadeInUp ellipsis-3"
+                          style={{ flex: 1 }}
+                        >
                           {item.desc}
                         </p>
 
-                        <button
-                          className="th-btn style4"
-                          onClick={() => handleReadMore(index)}
-                          disabled={expandedIndex !== null}
-                        >
-                          Learn More{" "}
-                          <i class="fa-light fa-arrow-right-long"></i>
-                        </button>
+                        <div style={{ marginTop: "auto" }}>
+                          <button
+                            className="th-btn style4"
+                            onClick={() => handleReadMore(index)}
+                            disabled={expandedIndex !== null}
+                          >
+                            Learn More{" "}
+                            <i className="fa-light fa-arrow-right-long"></i>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -370,6 +408,57 @@ const OurExperties7 = () => {
               </SwiperSlide>
             ))}
           </Swiper>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              position: "absolute",
+              top: "53%",
+              left: "-60px",
+              right: "-60px",
+              transform: "translateY(-50%)",
+              pointerEvents: "none",
+              zIndex: 10,
+            }}
+          >
+            <IconButton
+              className="custom-prev"
+              sx={{
+                backgroundColor: "rgba(255,255,255,0.9)",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                pointerEvents: "auto",
+                "&:hover": {
+                  backgroundColor: "rgba(255,255,255,1)",
+                  transform: "scale(1.1)",
+                  boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
+                },
+                transition: "all 0.3s ease",
+                width: "60px",
+                height: "60px",
+              }}
+            >
+              <ArrowBackIcon sx={{ color: "#a46c35" }} />
+            </IconButton>
+            <IconButton
+              className="custom-next"
+              sx={{
+                backgroundColor: "rgba(255,255,255,0.9)",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                pointerEvents: "auto",
+                "&:hover": {
+                  backgroundColor: "rgba(255,255,255,1)",
+                  transform: "scale(1.1)",
+                  boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
+                },
+                transition: "all 0.3s ease",
+                width: "60px",
+                height: "60px",
+              }}
+            >
+              <ArrowForwardIcon sx={{ color: "#a46c35" }} />
+            </IconButton>
+          </Box>
         </div>
       </div>
     </section>

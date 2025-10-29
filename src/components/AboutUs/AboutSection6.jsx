@@ -55,7 +55,7 @@ const AboutSection6 = () => {
                         “Cybersecurity is more critical than ever in a world
                         increasingly reliant on digital technologies. By
                         investing in robust cybersecurity measures, individuals
-                        and organizations can protect themselves from threats
+                        and organisations can protect themselves from threats
                         and secure their digital assets for the future.”
                       </p>
                       <h6 className="box-title">{name}</h6>

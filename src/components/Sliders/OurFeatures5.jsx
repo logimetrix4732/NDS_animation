@@ -87,7 +87,7 @@ function OurFeatures5() {
                           width: 56,
                           height: 56,
                           transform:
-                            hoveredCard === "mission"
+                            hoveredCard === "Vision"
                               ? "scale(1.1)"
                               : "scale(1)",
                           transition: "transform 0.3s ease",
@@ -96,7 +96,7 @@ function OurFeatures5() {
                         <TrackChangesIcon sx={{ fontSize: 28 }} />
                       </Avatar>
                       <Typography variant="h2" sx={{ color: "white" }}>
-                        Our Mission
+                        Our Vision
                       </Typography>
                     </Box>
 
@@ -111,8 +111,7 @@ function OurFeatures5() {
                     >
                       Building pathways to prosperity in rural India through
                       scientific methods, fairness, empowerment, sustainability,
-                      innovation, inclusion, resilience, transparency, and
-                      collaboration.
+                      innovation and inclusion.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </Typography>
                   </CardContent>
                 </Card>
@@ -175,7 +174,7 @@ function OurFeatures5() {
                           width: 56,
                           height: 56,
                           transform:
-                            hoveredCard === "vision"
+                            hoveredCard === "Mission"
                               ? "scale(1.1)"
                               : "scale(1)",
                           transition: "transform 0.3s ease",
@@ -184,7 +183,7 @@ function OurFeatures5() {
                         <FlagIcon sx={{ fontSize: 28 }} />
                       </Avatar>
                       <Typography variant="h2" sx={{ color: "white" }}>
-                        Our Vision
+                        Our Mission
                       </Typography>
                     </Box>
 

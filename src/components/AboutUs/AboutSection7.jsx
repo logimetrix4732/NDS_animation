@@ -93,9 +93,6 @@ const AboutSection7 = () => {
           <div className="col-xl-5">
             <div className="ps-xxl-2">
               <div className="title-area about-3-titlebox mb-20 pe-xxl-1 me-xxl-1">
-                <span className="sub-title style1 text-anime-style-2 wow fadeInLeft">
-                  Importance and Impact of Semen Stations
-                </span>
                 <AnimatedText
                   text="Semen Stations"
                   tag="h2"
@@ -124,11 +121,11 @@ const AboutSection7 = () => {
                 </span>
               </p>
 
-              <div class="about-feature-wrap">
-                <div class="about-feature-list">
+              <div className="about-feature-wrap">
+                <div className="about-feature-list">
                   <ul>
-                    <li class="wow fadeInUp" data-wow-delay=".4s">
-                      <span class="about-feature-icon">
+                    <li className="wow fadeInUp" data-wow-delay=".4s">
+                      <span className="about-feature-icon">
                         <img
                           src={checkMarkIcon}
                           alt=""
@@ -145,8 +142,8 @@ const AboutSection7 = () => {
                         Pedigree Selection programs.
                       </p>
                     </li>
-                    <li class="wow fadeInUp" data-wow-delay=".5s">
-                      <span class="about-feature-icon">
+                    <li className="wow fadeInUp" data-wow-delay=".5s">
+                      <span className="about-feature-icon">
                         <img
                           src={checkMarkIcon}
                           alt=""
@@ -160,8 +157,8 @@ const AboutSection7 = () => {
                         practices. 
                       </p>
                     </li>
-                    <li class="wow fadeInUp" data-wow-delay=".5s">
-                      <span class="about-feature-icon">
+                    <li className="wow fadeInUp" data-wow-delay=".5s">
+                      <span className="about-feature-icon">
                         <img
                           src={checkMarkIcon}
                           alt=""
@@ -174,8 +171,8 @@ const AboutSection7 = () => {
                         semen inventory, traceability and performance tracking. 
                       </p>
                     </li>
-                    <li class="wow fadeInUp" data-wow-delay=".5s">
-                      <span class="about-feature-icon">
+                    <li className="wow fadeInUp" data-wow-delay=".5s">
+                      <span className="about-feature-icon">
                         <img
                           src={checkMarkIcon}
                           alt=""
